@@ -1,0 +1,49 @@
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.page-title {
+  height: 75px;
+  width: 100%;
+}
+
+.side-panel {
+  height: calc(100% - 75px);
+  width: 250px;
+}
+
+.sub-panel {
+  height: calc(100% - 75px);
+  width: 250px;
+}
+
+.template-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 75px);
+  width: calc(100% - 500px);
+}
+
+.template-toolbar {
+  height: 75px;
+  width: 100%;
+}
+
+.template-toolbar {
+  height: 75px;
+  width: 100%;
+}
