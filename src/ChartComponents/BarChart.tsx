@@ -1,9 +1,9 @@
 import React from 'react';
 import * as d3 from 'd3';
-import DataLabel from './util/Datalabel.tsx'; 
-import CategoryLabel from './util/CategoryLabel.tsx'; 
-import XAxisTitle from './util/XAxisTitle.tsx'; 
-import YAxisTitle from './util/YAxisTitle.tsx'; 
+import DataLabel from '../components/Datalabel.tsx'; 
+import CategoryLabel from '../components/CategoryLabel.tsx'; 
+import XAxisTitle from '../components/XAxisTitle.tsx'; 
+import YAxisTitle from '../components/YAxisTitle.tsx'; 
 
 interface BarChartProps {
   data: number[];

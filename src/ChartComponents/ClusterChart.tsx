@@ -1,11 +1,11 @@
 import React from 'react';
 import * as d3 from 'd3';
-import DataLabel from './util/Datalabel.tsx';
-import YAxis from './util/YAxis.tsx';
-import MonthLabels from './util/MonthLabels.tsx';
-import XAxisLine from './util/XAxisLine.tsx'; // Import the new component
-import XAxisTitle from './util/XAxisTitle.tsx'; // Import the new component
-import YAxisTitle from './util/YAxisTitle.tsx'; // Import the new component
+import DataLabel from '../components/Datalabel.tsx';
+import YAxis from '../components/YAxis.tsx';
+import MonthLabels from '../components/MonthLabels.tsx';
+import XAxisLine from '../components/XAxisLine.tsx'; // Import the new component
+import XAxisTitle from '../components//XAxisTitle.tsx'; // Import the new component
+import YAxisTitle from '../components/YAxisTitle.tsx'; // Import the new component
 
 const ClusteredChart = ({ datasets, width, height }) => {
   const margin = { top: 100, right: 100, bottom: 40, left: 40 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import * as d3 from 'd3';
 //import XAxisTitle from './util/XAxisTitle.tsx'; 
-import YAxisTitle from './util/YAxisTitle.tsx'; 
+import YAxisTitle from '../components/YAxisTitle.tsx'; 
 
 const WaterfallChart = ({ data, categories, width, height }) => {
   // Calculate total sum of data
