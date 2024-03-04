@@ -1,10 +1,10 @@
 import React from "react";
 import * as d3 from "d3";
-import XAxis from "./Axis/xAxis.tsx";
-import YAxis from "./Axis/yAxis.tsx";
-import XTicks from "./Ticks/xTicks.tsx";
-import YTicks from "./Ticks/yTicks.tsx";
-
+import XAxis from "../components/Axis/xAxis.tsx";
+import YAxis from "../components/Axis/yAxis.tsx";
+import XTicks from "../components/Ticks/xTicks.tsx";
+import YTicks from "../components/Ticks/yTicks.tsx";
+import TextValues from "../components/DataValues/TextValues.tsx";
 interface BarChartProps {
   data: { name: string; value: number }[];
   width: number;
@@ -45,26 +45,24 @@ const BarChart: React.FC<BarChartProps> = ({ data, width, height }) => {
         fill={d.value >= 0 ? "#4f45bd" : "orange"}
       />
       {/* Text for positive values */}
-      {d.value >= 0 && (
-        <text
-          x={xScale(d.name)! + xScale.bandwidth() / 2}
+      {d.value >= 0 ? (
+        <TextValues
+          x={xScale(d.name)! + 20}
           y={yScale(d.value)! - 5}
-          textAnchor="middle"
-          dominantBaseline="baseline"
-        >
-          {d.value}
-        </text>
-      )}
-      {/* Text for negative values */}
-      {d.value < 0 && (
-        <text
-          x={xScale(d.name)! + xScale.bandwidth() / 2}
+          value={d.value}
+          xScale={xScale}
+          yScale={yScale}
+          // bandwidth={xScale.bandwidth()}
+        />
+      ) : (
+        <TextValues
+          x={xScale(d.name)! + 40}
           y={yScale(d.value)!}
-          textAnchor="middle"
-          dominantBaseline="hanging"
-        >
-          {d.value}
-        </text>
+          value={d.value}
+          xScale={xScale}
+          yScale={yScale}
+          // bandwidth={xScale.bandwidth()}
+        />
       )}
     </g>
   ));

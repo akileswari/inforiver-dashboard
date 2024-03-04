@@ -1,9 +1,10 @@
 import React from "react";
 import * as d3 from "d3";
-import XTicks from "./Ticks/xTicks.tsx";
-import YTicks from "./Ticks/yTicks.tsx";
-import XAxis from "./Axis/xAxis.tsx";
-import YAxis from "./Axis/yAxis.tsx";
+import XAxis from "../components/Axis/xAxis.tsx";
+import YAxis from "../components/Axis/yAxis.tsx";
+import XTicks from "../components/Ticks/xTicks.tsx";
+import YTicks from "../components/Ticks/yTicks.tsx";
+import TextValues from "../components/DataValues/TextValues.tsx";
 
 interface LineChartProps {
   data: { name: string; value: number }[];
@@ -45,22 +46,24 @@ const LineChart: React.FC<LineChartProps> = ({ data, width, height }) => {
   const highestValueData = data[highestValueIndex];
 
   return (
-    <svg width={width} height={height}>
+    <g width={`${width}px`} height={`${height}px`}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         {/* <line x1={0} y1={0} x2={0} y2={innerHeight} stroke="black" /> */}
-        <XAxis innerHeight={innerHeight} />
+        <XAxis innerHeight={innerHeight} xScale={xScale} data={data} />
 
         {data.map((d, i) => {
           if (i < data.length - 1) {
             return (
               <g key={i}>
-                <line
-                  x1={xScale(data[i].name)! + xScale.bandwidth() / 2}
-                  y1={yScale(data[i].value)}
-                  x2={xScale(data[i + 1].name)! + xScale.bandwidth() / 2}
-                  y2={yScale(data[i + 1].value)}
+                <path
+                  d={`M${
+                    xScale(data[i].name)! + xScale.bandwidth() / 2
+                  },${yScale(data[i].value)} L${
+                    xScale(data[i + 1].name)! + xScale.bandwidth() / 2
+                  },${yScale(data[i + 1].value)}`}
                   stroke="#cc936b"
                   strokeWidth={2}
+                  fill="none"
                 />
                 <circle
                   cx={xScale(data[0].name)! + xScale.bandwidth() / 2}
@@ -157,19 +160,30 @@ const LineChart: React.FC<LineChartProps> = ({ data, width, height }) => {
       </text>
 
       {/*data values at the end of each bar */}
-      {data.map((d, i) => (
+      {/* {data.map((d, i) => (
         <text
           key={i}
           x={xScale(d.name)! + xScale.bandwidth()}
           y={yScale(d.value)}
           dx={39} // offset position for visibility
-          dy={"0.32em"} // vertically center text on data point
+          dy={"0.32em"} 
           textAnchor="start"
         >
           {d.value}
         </text>
+      ))} */}
+
+      {data.map((d, i) => (
+        <TextValues
+          key={i}
+          x={xScale(d.name)! + xScale.bandwidth() + 50} // Add 39 for offset
+          y={yScale(d.value)}
+          value={d.value}
+          xScale={xScale}
+          yScale={yScale}
+        />
       ))}
-    </svg>
+    </g>
   );
 };
 

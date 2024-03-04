@@ -1,9 +1,9 @@
 import React from "react";
 import * as d3 from "d3";
-import XTicks from "./Ticks/xTicks.tsx";
-import YTicks from "./Ticks/yTicks.tsx";
-import XAxis from "./Axis/xAxis.tsx";
-import YAxis from "./Axis/yAxis.tsx";
+// import XTicks from "./Ticks/xTicks.tsx";
+// import YTicks from "./Ticks/yTicks.tsx";
+import XAxis from "../components/Axis/xAxis.tsx";
+import YAxis from "../components/Axis/yAxis.tsx";
 interface AreaChartProps {
   data: { name: string; value: number }[];
   width: number;
@@ -55,9 +55,9 @@ const AreaChart: React.FC<AreaChartProps> = ({ data, width, height }) => {
   )}`;
 
   return (
-    <svg width={width} height={height}>
+    <g width={width} height={height}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
-        <XAxis innerHeight={innerHeight} />
+        <XAxis innerHeight={innerHeight} data={data} xScale={xScale} />
         {/* stroke */}
         <path d={strokePath} fill="none" stroke="#1e97d9" strokeWidth="2" />
 
@@ -153,7 +153,7 @@ const AreaChart: React.FC<AreaChartProps> = ({ data, width, height }) => {
           {d.value}
         </text>
       ))}
-    </svg>
+    </g>
   );
 };
 

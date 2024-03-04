@@ -1,10 +1,10 @@
 import React from "react";
 import * as d3 from "d3";
 // import XTicks from "./Ticks/xTicks.tsx";
-import YTicks from "./Ticks/yTicks.tsx";
-import XAxis from "./Axis/xAxis.tsx";
-import YAxis from "./Axis/yAxis.tsx";
-
+import YTicks from "../components/Ticks/yTicks.tsx";
+import XAxis from "../components/Axis/xAxis.tsx";
+import YAxis from "../components/Axis/yAxis.tsx";
+import TextValues from "../components/DataValues/TextValues.tsx";
 interface ClusterChartProps {
   data: { name: string[]; values: number[] }[];
   width: number;
@@ -50,9 +50,9 @@ const ClusterLineChart: React.FC<ClusterChartProps> = ({
   };
 
   return (
-    <svg width={width} height={height}>
+    <g width={width} height={height}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
-        <XAxis innerHeight={innerHeight} />
+        <XAxis innerHeight={innerHeight} xScale={xScale} data={data} />
         {data.map((dataset, i) => (
           <React.Fragment key={i}>
             <path
@@ -69,7 +69,7 @@ const ClusterLineChart: React.FC<ClusterChartProps> = ({
                   r={4} // Radius of the circle
                   fill="#cc936b"
                 />
-                <text
+                {/* <text
                   x={xScale(dataset.name[j])! + xScale.bandwidth() / 2}
                   y={yScale(value)}
                   dy={-10} // Adjust the vertical position of the label
@@ -77,7 +77,16 @@ const ClusterLineChart: React.FC<ClusterChartProps> = ({
                   fontSize={12}
                 >
                   {value}
-                </text>
+                </text> */}
+
+                <TextValues
+                  key={j}
+                  x={xScale(dataset.name[j])! + xScale.bandwidth() / 2 - 10}
+                  y={yScale(value) - 10}
+                  value={value}
+                  xScale={xScale}
+                  yScale={yScale}
+                />
               </React.Fragment>
             ))}
           </React.Fragment>
@@ -86,7 +95,6 @@ const ClusterLineChart: React.FC<ClusterChartProps> = ({
         {/* <XTicks data={data} xScale={xScale} innerHeight={innerHeight} /> */}
         {/* Rendering YAxis component */}
         <YTicks yScale={yScale} />
-        console.log(data[0].name+"hii");
         {/* x-axis */}
         <g transform={`translate(0, ${innerHeight})`} className="axis axis--x">
           {data[0].name.map((name, i) => (
@@ -146,7 +154,7 @@ const ClusterLineChart: React.FC<ClusterChartProps> = ({
           Sales
         </text>
       </g>
-    </svg>
+    </g>
   );
 };
 

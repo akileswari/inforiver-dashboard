@@ -1,10 +1,9 @@
 import React from "react";
 import * as d3 from "d3";
-import XAxis from "./Axis/xAxis.tsx";
-import YAxis from "./Axis/yAxis.tsx";
+import XAxis from "../components/Axis/xAxis.tsx";
+import YAxis from "../components/Axis/yAxis.tsx";
 // import XTicks from "./Ticks/xTicks.tsx";
-import YTicks from "./Ticks/yTicks.tsx";
-
+import YTicks from "../components/Ticks/yTicks.tsx";
 interface LineChartProps {
   data: { name: string[]; values: number[] }[];
   width: number;
@@ -67,11 +66,9 @@ const StackedLineChart: React.FC<LineChartProps> = ({
   );
 
   return (
-    <svg width={width} height={height}>
+    <g width={width} height={height}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
-        {/* Lines for y-axis */}
-        {/* <line x1={0} y1={0} x2={0} y2={innerHeight} stroke="black" /> */}
-        <XAxis innerHeight={innerHeight} />
+        <XAxis innerHeight={innerHeight} data={data} xScale={xScale} />
 
         {/* Line for first dataset */}
         <path d={path1.join(" ")} fill="none" stroke="blue" strokeWidth={1} />
@@ -207,7 +204,7 @@ const StackedLineChart: React.FC<LineChartProps> = ({
           Sales
         </text>
       </g>
-    </svg>
+    </g>
   );
 };
 
