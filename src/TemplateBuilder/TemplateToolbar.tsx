@@ -1,7 +1,15 @@
+// TemplateToolbar.tsx
 import React from "react";
 
-const TemplateToolbar = () => {
-  return <div className="template-toolbar">Template toolbar</div>;
+const TemplateToolbar: React.FC = () => {
+  
+  const toolbarHeight = 75; 
+
+  return (
+    <div className="template-toolbar" style={{ height: toolbarHeight }}>
+     TemplatePreviewProps
+    </div>
+  );
 };
 
 export default TemplateToolbar;

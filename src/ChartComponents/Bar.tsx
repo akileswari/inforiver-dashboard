@@ -1,10 +1,18 @@
 import React from "react";
+import BarChart from "../ChartComponents/BarChart"; 
 
-const Bar = () => {
+const Bar: React.FC = () => {
+ 
+
   return (
-    <g>
-      <rect x={100} y={100} width={100} height={100} style={{ fill: "#ffff00" }} />
-    </g>
+    <div className="App">
+      
+       
+        <g>
+        
+        </g>
+     
+    </div>
   );
 };
 

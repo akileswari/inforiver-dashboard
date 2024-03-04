@@ -3,7 +3,14 @@ import * as d3 from 'd3';
 //import XAxisTitle from './util/XAxisTitle.tsx'; 
 import YAxisTitle from '../components/YAxisTitle.tsx'; 
 
-const WaterfallChart = ({ data, categories, width, height }) => {
+interface WaterfallChartProps {
+  data: number[]; // Assuming data is an array of numbers
+  categories: string[]; // Assuming categories is an array of strings
+  width: number;
+  height: number;
+}
+
+const WaterfallChart: React.FC<WaterfallChartProps> = ({ data, categories, width, height }) => {
   // Calculate total sum of data
   const total = data.reduce((cur, value) => cur + value, 0);
 
@@ -38,24 +45,22 @@ const WaterfallChart = ({ data, categories, width, height }) => {
     cumulativeSum += value;
 
     // for connector lines
-    // for connector lines
-const connectorLineStartX = xScale(categories[index]) + xScale.bandwidth() / 2;
-const connectorLineEndX = index < data.length - 1 ? xScale(categories[index + 1]) + xScale.bandwidth() / 2 : xScale(categories[index]) + xScale.bandwidth() / 2;
-const connectorLineY = yScale(cumulativeSum);
+    const connectorLineStartX = xScale(categories[index]) + xScale.bandwidth() / 2;
+    const connectorLineEndX = index < data.length - 1 ? xScale(categories[index + 1]) + xScale.bandwidth() / 2 : xScale(categories[index]) + xScale.bandwidth() / 2;
+    const connectorLineY = yScale(cumulativeSum);
 
-// last bar
-const connectorLine = index !== data.length - 1 ? (
-  <line
-    key={`connector-line-${index}`}
-    x1={connectorLineStartX}
-    y1={connectorLineY}
-    x2={connectorLineEndX}
-    y2={connectorLineY} 
-    stroke="gray"
-    strokeWidth={1}
-  />
-) : null;
-
+    // last bar
+    const connectorLine = index !== data.length - 1 ? (
+      <line
+        key={`connector-line-${index}`}
+        x1={connectorLineStartX}
+        y1={connectorLineY}
+        x2={connectorLineEndX}
+        y2={connectorLineY} 
+        stroke="gray"
+        strokeWidth={1}
+      />
+    ) : null;
 
     const cumulativeText = index > 0 ? (
       <text
@@ -119,17 +124,17 @@ const connectorLine = index !== data.length - 1 ? (
   // X-axis title
   const xAxisTitleY = innerHeight + margin.bottom / 2;
 
-// X-axis title
-const xAxisTitle = (
-  <text
-    x={innerWidth / 2}
-    y={xAxisTitleY}
-    fontSize="14px"
-    textAnchor="middle"
-  >
-    X-Axis
-  </text>
-);
+  const xAxisTitle = (
+    <text
+      x={innerWidth / 2}
+      y={xAxisTitleY}
+      fontSize="14px"
+      textAnchor="middle"
+    >
+      X-Axis
+    </text>
+  );
+  
   // Y-axis title
   const yAxisTitle = (
     <YAxisTitle x={-margin.left / 2} y={innerHeight / 2} text="Y-Axis" />

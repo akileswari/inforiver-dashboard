@@ -1,11 +1,9 @@
 import React from 'react';
-import * as d3 from 'd3';
 
-const XAxis = ({ xScale, innerHeight }) => {
-  const xAxis = d3.axisBottom(xScale);
+const XAxis = ({ innerHeight }) => {
   return (
     <g transform={`translate(0, ${innerHeight})`}>
-      <g ref={node => d3.select(node).call(xAxis)} />
+      <line x1={0} y1={0} x2={innerHeight} y2={0} stroke="black" />
     </g>
   );
 };
