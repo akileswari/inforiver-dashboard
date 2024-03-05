@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import XAxis from "../components/Axis/xAxis.tsx";
 import YAxis from "../components/Axis/yAxis.tsx";
 // import XTicks from "./Ticks/xTicks.tsx";
-import YTicks from "../components/Ticks/yTicks.tsx";
+// import YTicks from "../compon/ents/Ticks/yTicks.tsx";
 interface LineChartProps {
   data: { name: string[]; values: number[] }[];
   width: number;
@@ -173,7 +173,7 @@ const StackedLineChart: React.FC<LineChartProps> = ({
             </g>
           ))}
         </g> */}
-        <YTicks yScale={yScale} />
+        {/* <YTicks yScale={yScale} /> */}
 
         {/* line to join axes */}
         {/* <line

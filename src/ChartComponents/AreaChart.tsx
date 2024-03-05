@@ -1,7 +1,5 @@
 import React from "react";
 import * as d3 from "d3";
-// import XTicks from "./Ticks/xTicks.tsx";
-// import YTicks from "./Ticks/yTicks.tsx";
 import XAxis from "../components/Axis/xAxis.tsx";
 import YAxis from "../components/Axis/yAxis.tsx";
 interface AreaChartProps {
@@ -74,10 +72,7 @@ const AreaChart: React.FC<AreaChartProps> = ({ data, width, height }) => {
             fill="steelblue"
           />
         ))}
-        <XTicks data={data} xScale={xScale} innerHeight={innerHeight} />
 
-        {/* Rendering YAxis component */}
-        <YTicks yScale={yScale} />
         {/* x-axis  */}
         {/* <g transform={`translate(0, ${innerHeight})`} className="axis axis--x">
           {data.map((d, i) => (

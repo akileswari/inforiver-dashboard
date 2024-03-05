@@ -1,8 +1,8 @@
 import React from "react";
-import LineChart from "../ChartComponents/LineChart";
+// import LineChart from "../ChartComponents/LineChart";
 // import BarChart from "../ChartComponents/Bar.tsx";
 // import ClusterLineChart from "../ChartComponents/ClusttereLine";
-// import StackedLineChart from "../ChartComponents/StackedLineChart";
+import StackedLineChart from "../ChartComponents/StackedLineChart";
 
 interface IProps {
   height: number;
@@ -10,9 +10,6 @@ interface IProps {
 }
 const TemplatePreview = (prop: IProps) => {
   const { height, width } = prop;
-  // const element = document.getElementsByClassName("template-toolbar")[0];
-  // const eHeight = element.clientHeight;
-  // const eWidth = element.clientWidth;
 
   const lineData = [
     { name: "Detergent", value: 50 },
@@ -21,16 +18,16 @@ const TemplatePreview = (prop: IProps) => {
     { name: "Oil", value: 55 },
     { name: "Face Wash", value: -10 },
   ];
-  // const datasets = [
-  //   {
-  //     name: ["January", "February", "March", "April", "May"],
-  //     values: [10, 20, 15, 25, 30],
-  //   },
-  //   {
-  //     name: ["January", "February", "March", "April", "May"],
-  //     values: [15, 25, 20, 30, 35],
-  //   },
-  // ];
+  const datasets = [
+    {
+      name: ["January", "February", "March", "April", "May"],
+      values: [10, 20, 15, 25, 30],
+    },
+    {
+      name: ["January", "February", "March", "April", "May"],
+      values: [15, 25, 20, 30, 35],
+    },
+  ];
 
   return (
     <div
@@ -38,11 +35,11 @@ const TemplatePreview = (prop: IProps) => {
       style={{ width: `${width}px`, height: `${height}px` }}
     >
       <svg style={{ width: `${width}px`, height: `${height}px` }}>
-        <LineChart data={lineData} width={width} height={height} />
+        {/* <LineChart data={lineData} width={width} height={height} /> */}
 
         {/* <BarChart data={lineData} height={height} width={width} /> */}
         {/* <ClusterLineChart data={datasets} height={height} width={width} /> */}
-        {/* <StackedLineChart data={datasets} height={height} width={width} /> */}
+        <StackedLineChart data={datasets} height={height} width={width} />
       </svg>
     </div>
   );

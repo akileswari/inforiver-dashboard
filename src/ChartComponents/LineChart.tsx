@@ -92,10 +92,10 @@ const LineChart: React.FC<LineChartProps> = ({ data, width, height }) => {
           }
         })}
         {/* Rendering XAxis component */}
-        <XTicks data={data} xScale={xScale} innerHeight={innerHeight} />
+        {/* <XTicks data={data} xScale={xScale} innerHeight={innerHeight} /> */}
 
         {/* Rendering YAxis component */}
-        <YTicks yScale={yScale} />
+        {/* <YTicks yScale={yScale} /> */}
 
         <YAxis margin={margin} width={width} yScale={yScale} />
 

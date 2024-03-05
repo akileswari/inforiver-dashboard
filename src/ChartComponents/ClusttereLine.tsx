@@ -1,7 +1,6 @@
 import React from "react";
 import * as d3 from "d3";
 // import XTicks from "./Ticks/xTicks.tsx";
-import YTicks from "../components/Ticks/yTicks.tsx";
 import XAxis from "../components/Axis/xAxis.tsx";
 import YAxis from "../components/Axis/yAxis.tsx";
 import TextValues from "../components/DataValues/TextValues.tsx";
@@ -94,7 +93,7 @@ const ClusterLineChart: React.FC<ClusterChartProps> = ({
         {/* Rendering XAxis component */}
         {/* <XTicks data={data} xScale={xScale} innerHeight={innerHeight} /> */}
         {/* Rendering YAxis component */}
-        <YTicks yScale={yScale} />
+        {/* <YTicks yScale={yScale} /> */}
         {/* x-axis */}
         <g transform={`translate(0, ${innerHeight})`} className="axis axis--x">
           {data[0].name.map((name, i) => (

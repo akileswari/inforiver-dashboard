@@ -2,8 +2,6 @@ import React from "react";
 import * as d3 from "d3";
 import XAxis from "../components/Axis/xAxis.tsx";
 import YAxis from "../components/Axis/yAxis.tsx";
-import XTicks from "../components/Ticks/xTicks.tsx";
-import YTicks from "../components/Ticks/yTicks.tsx";
 import TextValues from "../components/DataValues/TextValues.tsx";
 interface BarChartProps {
   data: { name: string; value: number }[];
@@ -68,13 +66,11 @@ const BarChart: React.FC<BarChartProps> = ({ data, width, height }) => {
   ));
 
   return (
-    <svg width={width} height={height}>
+    <g width={width} height={height}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         {bars}
-        <XAxis innerHeight={innerHeight} />
+        <XAxis innerHeight={innerHeight} xScale={xScale} data={data} />
         <YAxis margin={margin} width={innerWidth} yScale={yScale} />
-        <XTicks data={data} xScale={xScale} innerHeight={innerHeight} />
-        <YTicks yScale={yScale} />
       </g>
       {/* Add labels for x and y axes */}
       <text
@@ -96,7 +92,7 @@ const BarChart: React.FC<BarChartProps> = ({ data, width, height }) => {
       >
         Sales
       </text>
-    </svg>
+    </g>
   );
 };
 
