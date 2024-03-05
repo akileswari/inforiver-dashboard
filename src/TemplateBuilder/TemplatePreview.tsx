@@ -1,6 +1,7 @@
 //TemplatePreview.tsx
 import React from "react";
 import BarChart from "../ChartComponents/BarChart";
+import WaterfallChart from "../ChartComponents/WaterfallChart";
 //import WaterfallChart from "../ChartComponents/WaterfallChart";
 
 interface TemplatePreviewProps {

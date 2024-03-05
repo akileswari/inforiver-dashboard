@@ -1,11 +1,12 @@
+// BarChart.tsx
 import React from 'react';
 import * as d3 from 'd3';
 import DataLabel from '../components/Datalabel.tsx'; 
 import CategoryLabel from '../components/CategoryLabel.tsx'; 
-import XAxisLine from '../components/Xaxis.tsx'; // Import XAxisLine component
 import XAxisTitle from '../components/XAxisTitle.tsx'; 
 import YAxis from '../components/YAxis.tsx'; 
-import Xaxis from '../components/Xaxis.tsx';
+import XAxisLine from '../components/Xaxis.tsx';
+
 
 interface BarChartProps {
   data: number[];
@@ -37,7 +38,7 @@ const BarChart: React.FC<BarChartProps> = ({ data, categories, width, height }) 
     <g>
       <YAxis yScale={yScale} padding={padding} height={height} yAxisTickCount={yAxisTickCount} />
       
-      <Xaxis x1={padding} y1={xAxisLineY} x2={width - padding} y2={xAxisLineY} /> {/* Render X-axis line */}
+      <XAxisLine x1={padding} y1={xAxisLineY} x2={width - padding} y2={xAxisLineY} />
         
       {data.map((value, index) => {
         const barHeight = Math.abs(yScale(value) - yScale(0));
@@ -60,6 +61,8 @@ const BarChart: React.FC<BarChartProps> = ({ data, categories, width, height }) 
       })}
         
       <XAxisTitle x={width / 2}  y={height - padding / 2 +2} text="X-Axis" />
+      
+      
     </g>
   );
 };
