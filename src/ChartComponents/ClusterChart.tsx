@@ -3,9 +3,9 @@ import * as d3 from 'd3';
 import DataLabel from '../components/Datalabel.tsx';
 import YAxis from '../components/YAxis.tsx';
 import MonthLabels from '../components/MonthLabels.tsx';
-import XAxisLine from '../components/XAxisLine.tsx'; // Import the new component
-import XAxisTitle from '../components//XAxisTitle.tsx'; // Import the new component
-import YAxisTitle from '../components/YAxisTitle.tsx'; // Import the new component
+import XAxisLine from '../components/XAxisLine.tsx';
+import XAxisTitle from '../components/XAxisTitle.tsx'; 
+import YAxisTitle from '../components/YAxisTitle.tsx'; 
 
 const ClusteredChart = ({ datasets, width, height }) => {
   const margin = { top: 100, right: 100, bottom: 40, left: 40 };
@@ -74,7 +74,7 @@ const ClusteredChart = ({ datasets, width, height }) => {
   const monthLabels = <MonthLabels monthNames={monthNames} xScale={xScale} innerHeight={innerHeight} />;
 
   return (
-    <svg width={width} height={height} style={{ margin: 'auto', display: 'block' }}>
+    <g width={width} height={height} style={{ margin: 'auto', display: 'block' }}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         <text x={innerWidth / 2} y={-margin.top / 2} fontSize="18px" textAnchor="middle">
           Cluster Chart
@@ -86,7 +86,7 @@ const ClusteredChart = ({ datasets, width, height }) => {
         <XAxisTitle x={innerWidth / 2} y={innerHeight + margin.bottom / 2+15} text="X-Axis" /> {/* Integrate X-axis title */}
         <YAxisTitle x={-margin.left / 2} y={innerHeight / 2} text="Y-Axis" /> {/* Integrate Y-axis title */}
       </g>
-    </svg>
+    </g>
   );
 };
 

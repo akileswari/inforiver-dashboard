@@ -1,11 +1,15 @@
+// XAxisLine.tsx
 import React from 'react';
 
-const XAxis = ({ innerHeight }) => {
-  return (
-    <g transform={`translate(0, ${innerHeight})`}>
-      <line x1={0} y1={0} x2={innerHeight} y2={0} stroke="black" />
-    </g>
-  );
+interface XAxisLineProps {
+  x1: number;
+  y1: number;
+  x2: number;
+  y2: number;
+}
+
+const XAxisLine: React.FC<XAxisLineProps> = ({ x1, y1, x2, y2 }) => {
+  return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="black" />;
 };
 
-export default XAxis;
+export default XAxisLine;
