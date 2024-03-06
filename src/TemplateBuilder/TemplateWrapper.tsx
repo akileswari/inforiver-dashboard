@@ -1,16 +1,20 @@
 import React from "react";
 import TemplatePreview from "./TemplatePreview";
 import TemplateToolbar from "./TemplateToolbar";
+import {
+  divHeight,
+  divWidth,
+  minHeight,
+  minWidth,
+} from "../components/constant/Helper";
 
 const TemplateWrapper = () => {
   // console.log(document.getElementsByClassName("template-toolbar"));
 
   // console.log(eWidth);
-  const divHeight = 400;
-  const divWidth = 800;
 
-  const fHeight = divHeight - 75;
-  const fWidth = divWidth - 200;
+  const fHeight = divHeight - minHeight;
+  const fWidth = divWidth - minWidth;
 
   return (
     <div

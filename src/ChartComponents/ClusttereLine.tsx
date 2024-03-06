@@ -95,7 +95,7 @@ const ClusterLineChart: React.FC<ClusterChartProps> = ({
         {/* Rendering YAxis component */}
         {/* <YTicks yScale={yScale} /> */}
         {/* x-axis */}
-        <g transform={`translate(0, ${innerHeight})`} className="axis axis--x">
+        {/* <g transform={`translate(0, ${innerHeight})`} className="axis axis--x">
           {data[0].name.map((name, i) => (
             <text
               key={i}
@@ -106,7 +106,7 @@ const ClusterLineChart: React.FC<ClusterChartProps> = ({
               {name}
             </text>
           ))}
-        </g>
+        </g> */}
         {/* y-axis */}
         {/* <g className="axis axis--y">
           {yScale.ticks().map((tick, i) => (

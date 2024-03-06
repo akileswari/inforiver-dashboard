@@ -142,7 +142,7 @@ const StackedLineChart: React.FC<LineChartProps> = ({
         ))}
 
         {/* x-axis */}
-        <g transform={`translate(0, ${innerHeight})`} className="axis axis--x">
+        {/* <g transform={`translate(0, ${innerHeight})`} className="axis axis--x">
           {data[0].name.map((name, i) => (
             <text
               key={i}
@@ -150,10 +150,10 @@ const StackedLineChart: React.FC<LineChartProps> = ({
               y={20}
               textAnchor="middle"
             >
-              {name}
+              {name}  
             </text>
           ))}
-        </g>
+        </g> */}
 
         {/* y-axis */}
         {/* <g className="axis axis--y">

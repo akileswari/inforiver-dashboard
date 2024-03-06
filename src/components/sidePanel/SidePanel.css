@@ -1,0 +1,13 @@
+.side-panel-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.hidden-button {
+  background-color: transparent;
+  color: black;
+  border: none; /* Remove default border */
+  margin: 5px 0; /* Add some margin for spacing */
+  padding: 5px 10px; /* Add some padding for visual improvement */
+  cursor: pointer; /* Indicate clickable behavior */
+}

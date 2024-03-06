@@ -41,8 +41,7 @@ const BarChart: React.FC<BarChartProps> = ({ data, width, height }) => {
         width={xScale.bandwidth()}
         height={Math.abs(yScale(d.value)! - yScale(0)!)}
         fill={d.value >= 0 ? "#4f45bd" : "orange"}
-      />
-      {/* Text for positive values */}
+      />{" "}
       {d.value >= 0 ? (
         <TextValues
           x={xScale(d.name)! + 20}
