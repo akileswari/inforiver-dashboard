@@ -6,7 +6,7 @@ import CategoryLabel from '../components/CategoryLabel.tsx';
 import XAxisTitle from '../components/XAxisTitle.tsx'; 
 import YAxis from '../components/YAxis.tsx'; 
 import XAxisLine from '../components/Xaxis.tsx';
-
+import theme from '../Theme/Theme'; 
 
 interface BarChartProps {
   data: number[];
@@ -53,14 +53,14 @@ const BarChart: React.FC<BarChartProps> = ({ data, categories, width, height }) 
           <g key={index}>
             <rect x={x} y={y} width={barWidth} height={barHeight} fill={fill} />
            
-            <CategoryLabel x={categoryLabelX} y={categoryLabelY} text={categories[index]} />
+            <CategoryLabel x={categoryLabelX} y={categoryLabelY} text={categories[index]} style={{ fontSize: theme.fontSize, fill: theme.fontColor }} /> {/* Apply theme */}
            
-            <DataLabel x={x + barWidth / 2} y={y} value={value} positive={value >= 0} />
+            <DataLabel x={x + barWidth / 2} y={y} value={value} positive={value >= 0} style={{ fontSize: theme.fontSize, fill: theme.fontColor }} /> {/* Apply theme */}
           </g>
         );
       })}
         
-      <XAxisTitle x={width / 2}  y={height - padding / 2 +2} text="X-Axis" />
+      <XAxisTitle x={width / 2}  y={height - padding / 2 +2} text="X-Axis" style={{ fontSize: theme.fontSize, fill: theme.fontColor }} /> {/* Apply theme */}
       
       
     </g>

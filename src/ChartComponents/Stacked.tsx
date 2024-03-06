@@ -1,12 +1,20 @@
-import React from 'react';
+
 import * as d3 from 'd3';
-import XAxisLine from '../components/XAxisLine.tsx'; 
+import XAxisLine from '../components/Xaxis.tsx'; 
 import DataLabel from '../components/Datalabel.tsx'; 
 import XAxisTitle from '../components/XAxisTitle.tsx'; 
 import YAxisTitle from '../components/YAxisTitle.tsx'; 
 import CategoryLabel from '../components/CategoryLabel.tsx';
 
-const StackedChart = ({ data, width, height, categories }) => {
+type StackedChartData = number[][];
+type StackedChartProps = {
+  data: StackedChartData;
+  width: number;
+  height: number;
+  categories: string[];
+};
+
+const StackedChart = ({ data, width, height, categories }: StackedChartProps) => {
   // Margins
   const margin = { top: 100, right: 100, bottom: 100, left: 40 };
   const innerWidth = width - margin.left - margin.right;
@@ -27,7 +35,6 @@ const StackedChart = ({ data, width, height, categories }) => {
     .domain([Math.min(0, d3.min(totals)), d3.max(totals)]) // Adjusted for negative values
     .range([innerHeight, 0]);
 
-  // Bars and data labels
   // Bars and data labels
 const bars = data.map((categoryData, categoryIndex) => {
   let yOffset = 0;
@@ -54,12 +61,12 @@ const bars = data.map((categoryData, categoryIndex) => {
       <g key={`${categoryIndex}-${index}`}>
         <rect
           x={xScale(categories[categoryIndex])}
-          y={value >= 0 ? barY : yScale(0)} // Adjusted y-coordinate for negative values
+          y={value >= 0 ? barY : yScale(0)} 
           width={xScale.bandwidth()}
           height={adjustedHeight}
-          fill={`rgb(${50 + index * 50}, ${100 + index * 100}, ${150 + index * 150})`} // Adjust color dynamically
+          fill={`rgb(${50 + index * 50}, ${100 + index * 100}, ${150 + index * 150})`} 
         />
-        {/* Render data label */}
+       
         <DataLabel x={labelX} y={labelY} value={value} positive={value >= 0} />
       </g>
     );
