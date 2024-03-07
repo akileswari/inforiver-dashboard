@@ -8,34 +8,60 @@ const SidePanel = () => {
     setShowElements(!showElements);
   };
   // array opf objects for insert and layout
+  const RepeatingElements = ({ className, iconName, label }) => {
+    return (
+      <div className="menu-item">
+        <i className={getIcon(iconName)}></i>
+        <span className="menu-label">{label}</span>
+      </div>
+    );
+  };
+
+  const MenuLayoutItem = ({ iconName, label, onClick }) => {
+    return (
+      <div className="menu-layout" onClick={onClick}>
+        <i className={getIcon(iconName)}></i>
+        <span className="menu-header">{label}</span>
+      </div>
+    );
+  };
+
   return (
     <div className="menu">
-      <div className="menu-layout">
-        <i className={getIcon("light-layout")}></i>
-        <span className="menu-header">Layout</span>
-      </div>
-      <div className="menu-layout" onClick={toggleElements}>
-        <i className={getIcon("light-dropdown-bottom")}></i>
-        <span className="menu-header">Insert element</span>
-      </div>
+      <MenuLayoutItem
+        iconName="light-layout"
+        label="Layout"
+        //  In this onclick  replace it with the layout redirection
+        onClick={toggleElements}
+      />
+      <MenuLayoutItem
+        iconName="light-dropdown-bottom"
+        label="Insert element"
+        onClick={toggleElements}
+      />
+
       {showElements && (
         <>
-          <div className="menu-item">
-            <i className={getIcon("light-chart")}></i>
-            <span className="menu-label">Chart</span>
-          </div>
-          <div className="menu-item">
-            <i className={getIcon("light-card")}></i>
-            <span className="menu-label">Card</span>
-          </div>
-          <div className="menu-item">
-            <i className={getIcon("light-table")}></i>
-            <span className="menu-label">Table</span>
-          </div>
-          <div className="menu-item">
-            <i className={getIcon("light-notes")}></i>
-            <span className="menu-label">Notes</span>
-          </div>
+          <RepeatingElements
+            className="menu-item"
+            iconName="light-chart"
+            label="Chart"
+          />
+          <RepeatingElements
+            className="menu-item"
+            iconName="light-card"
+            label="Card"
+          />
+          <RepeatingElements
+            className="menu-item"
+            iconName="light-table"
+            label="Table"
+          />
+          <RepeatingElements
+            className="menu-item"
+            iconName="light-notes"
+            label="Notes"
+          />
         </>
       )}
     </div>

@@ -4,3 +4,4 @@ export const minHeight = 75;
 export const minWidth = 200;
 
 export const getIcon = (name: string) => `template-builder ${name}`;
+export const getChartIcon = (name: string) => `chart ${name}`;

@@ -1,0 +1,11 @@
+.column-chart-options {
+  display: flex;
+  flex-direction: row;
+  /* width: ; */
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.scale-chart-options-icon {
+  scale: 1.5;
+}

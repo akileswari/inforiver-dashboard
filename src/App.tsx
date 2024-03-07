@@ -1,7 +1,7 @@
 import "./App.css";
 import PageTitle from "./components/pageTitle/PageTitle";
 import SidePanel from "./components/sidePanel/SidePanel";
-import SubPanel from "./components/SubPanel";
+import SubPanel from "./components/SubPanel/SubPanel";
 import TemplateWrapper from "./TemplateBuilder/TemplateWrapper";
 
 function App() {

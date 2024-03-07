@@ -2,6 +2,8 @@
 @import url(./components/sidePanel/SidePanel.css);
 @import url(./components/template-icon/css/style.css);
 @import url(./components/pageTitle/PageTitle.css);
+@import url(./components/chart-icon/css/style.css);
+@import url(./components/SubPanel/subPanel.css);
 #root {
   height: 100%;
   width: 100%;
@@ -32,8 +34,9 @@
 }
 
 .sub-panel {
+  padding: 1rem;
   height: calc(100% - 75px);
-  width: 250px;
+  width: 172px;
 }
 
 .template-wrapper {

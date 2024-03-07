@@ -1,5 +1,5 @@
 import React from "react";
-import * as d3 from "d3";
+import { scaleBand, scaleLinear } from "d3-scale";
 // import XTicks from "./Ticks/xTicks.tsx";
 import XAxis from "../components/Axis/xAxis.tsx";
 import YAxis from "../components/Axis/yAxis.tsx";
@@ -21,15 +21,13 @@ const ClusterLineChart: React.FC<ClusterChartProps> = ({
   const innerHeight = height - margin.top - margin.bottom;
 
   // Scales
-  const xScale = d3
-    .scaleBand()
+  const xScale = scaleBand()
     .domain(data[0].name)
     .range([0, innerWidth])
     .padding(0.4);
 
-  const yScale = d3
-    .scaleLinear()
-    .domain([0, d3.max(data.flatMap((d) => d.values)) || 0])
+  const yScale = scaleLinear()
+    .domain([0, Math.max(...data.flatMap((d) => d.values), 0)])
     .nice()
     .range([innerHeight, 0]);
 
