@@ -1,17 +1,16 @@
-import React from "react";
-import TemplatePreview from "./TemplatePreview";
-import TemplateToolbar from "./TemplateToolbar";
+import React from 'react';
+import TemplatePreview from './TemplatePreview';
+import TemplateToolbar from './TemplateToolbar';
+import { divHeight, divWidth, minHeight, minWidth } from '../constant/Helper';
 
-function TemplateWrapper() {
-  const toolbarHeight = 75; 
-  const remainingHeight = `calc(100% - ${toolbarHeight}px)`;
-  const svgWidth = 500;
-  const svgHeight = 400;
+const TemplateWrapper: React.FC = () => {
+  const fHeight = divHeight - minHeight;
+  const fWidth = divWidth - minWidth;
 
   return (
-    <div className="template-wrapper" style={{ height: remainingHeight }}>
+    <div className="template-wrapper" style={{ height: `${divHeight}px`, width: `${divWidth}px` }}>
       <TemplateToolbar />
-      <TemplatePreview svgWidth={svgWidth} svgHeight={svgHeight} />
+      <TemplatePreview svgWidth={fWidth} svgHeight={fHeight} />
     </div>
   );
 }

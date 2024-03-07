@@ -12,10 +12,11 @@ interface DataLabelProps {
 }
 
 const StyledText = styled.text<DataLabelProps>`
-  fill: ${(props: { positive: any; }) => (props.positive ? 'green' : 'red')};
-  font-size: ${(props: { fontSize: any; }) => props.fontSize || theme.fontSize};
+  fill: ${(props) => (props.positive ? 'green' : 'red')};
+  font-size: ${(props) => props.fontSize || theme.fontSize};
   font-family: ${theme.fontFamily};
 `;
+
 const DataLabel: React.FC<DataLabelProps> = ({ x, y, value, fontSize = theme.fontSize, positive = true }) => {
   return (
     <StyledText x={x} y={y} fontSize={fontSize} positive={positive} textAnchor="middle">

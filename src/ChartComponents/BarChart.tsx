@@ -9,15 +9,15 @@ import XAxisLine from '../components/Xaxis.tsx';
 import theme from '../Theme/Theme'; 
 
 interface BarChartProps {
-  data: number[];
-  categories: string[]; 
+  data: { name: string, value: number }[][];
   width: number;
   height: number;
 }
 
-const BarChart: React.FC<BarChartProps> = ({ data, categories, width, height }) => {
-  const maxValue = Math.max(...data);
-  const minValue = Math.min(...data);
+const BarChart: React.FC<BarChartProps> = ({ data, width, height }) => {
+  const allValues = data.reduce((acc, current) => [...acc, ...current], []);
+  const maxValue = Math.max(...allValues.map(entry => entry.value));
+  const minValue = Math.min(...allValues.map(entry => entry.value));
   const padding = 60; 
   const yAxisTickCount = 5;
 
@@ -28,7 +28,7 @@ const BarChart: React.FC<BarChartProps> = ({ data, categories, width, height }) 
 
   // x-axis scale
   const xScale = d3.scaleBand()
-    .domain(categories.slice(0, data.length)) 
+    .domain(data[0].map(entry => entry.name)) 
     .range([padding, width - padding])
     .paddingInner(0.1);
 
@@ -40,27 +40,30 @@ const BarChart: React.FC<BarChartProps> = ({ data, categories, width, height }) 
       
       <XAxisLine x1={padding} y1={xAxisLineY} x2={width - padding} y2={xAxisLineY} />
         
-      {data.map((value, index) => {
-        const barHeight = Math.abs(yScale(value) - yScale(0));
-        const barWidth = xScale.bandwidth(); 
-        const x = xScale(categories[index]) || 0;
-        const y = value >= 0 ? yScale(value) : yScale(0);
-        const fill = value >= 0 ? 'blue' : 'red';
-        // Category labels
-        const categoryLabelX = x + barWidth / 2;
-        const categoryLabelY = height - padding + 20;
-        return (
-          <g key={index}>
-            <rect x={x} y={y} width={barWidth} height={barHeight} fill={fill} />
-           
-            <CategoryLabel x={categoryLabelX} y={categoryLabelY} text={categories[index]} style={{ fontSize: theme.fontSize, fill: theme.fontColor }} /> {/* Apply theme */}
-           
-            <DataLabel x={x + barWidth / 2} y={y} value={value} positive={value >= 0} style={{ fontSize: theme.fontSize, fill: theme.fontColor }} /> {/* Apply theme */}
-          </g>
-        );
-      })}
+      {data.map((dataset, datasetIndex) => (
+        dataset.map((entry, index) => {
+          const value = entry.value;
+          const barHeight = Math.abs(yScale(value) - yScale(0));
+          const barWidth = xScale.bandwidth(); 
+          const x = xScale(entry.name) || 0;
+          const y = value >= 0 ? yScale(value) : yScale(0);
+          const fill = value >= 0 ? 'blue' : 'red';
+          // Category labels
+          const categoryLabelX = x + barWidth / 2;
+          const categoryLabelY = height - padding + 20;
+          return (
+            <g key={`${datasetIndex}-${index}`}>
+              <rect x={x} y={y} width={barWidth} height={barHeight} fill={fill} />
+             
+              <CategoryLabel x={categoryLabelX} y={categoryLabelY} text={entry.name} style={{ fontSize: theme.fontSize, fill: theme.fontColor }} /> 
+             
+              <DataLabel x={x + barWidth / 2} y={y} value={value} positive={value >= 0} style={{ fontSize: theme.fontSize, fill: theme.fontColor }} /> 
+            </g>
+          );
+        })
+      ))}
         
-      <XAxisTitle x={width / 2}  y={height - padding / 2 +2} text="X-Axis" style={{ fontSize: theme.fontSize, fill: theme.fontColor }} /> {/* Apply theme */}
+      <XAxisTitle x={width / 2}  y={height - padding / 2 +2} text="X-Axis" style={{ fontSize: theme.fontSize, fill: theme.fontColor }} />
       
       
     </g>
