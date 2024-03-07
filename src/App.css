@@ -1,9 +1,13 @@
+/* import * "../components/sidePanel/SidePanel.css"; */
+@import url(./components/sidePanel/SidePanel.css);
+@import url(./components/template-icon/css/style.css);
+@import url(./components/pageTitle/PageTitle.css);
 #root {
   height: 100%;
   width: 100%;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 1rem;
+  /* text-align: center; */
 }
 
 .App {
@@ -17,8 +21,9 @@
 }
 
 .page-title {
-  height: 75px;
+  height: 70px;
   width: 100%;
+  border-bottom: 1px solid grey;
 }
 
 .side-panel {

@@ -1,6 +1,6 @@
 import "./App.css";
-import PageTitle from "./components/PageTitle";
-import SidePanel from "./components/SidePanel";
+import PageTitle from "./components/pageTitle/PageTitle";
+import SidePanel from "./components/sidePanel/SidePanel";
 import SubPanel from "./components/SubPanel";
 import TemplateWrapper from "./TemplateBuilder/TemplateWrapper";
 
