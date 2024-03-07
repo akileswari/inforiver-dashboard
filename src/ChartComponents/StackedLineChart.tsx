@@ -1,5 +1,5 @@
 import React from "react";
-import * as d3 from "d3";
+import { scaleBand, scaleLinear } from "d3-scale";
 import XAxis from "../components/Axis/xAxis.tsx";
 import YAxis from "../components/Axis/yAxis.tsx";
 // import XTicks from "./Ticks/xTicks.tsx";
@@ -21,14 +21,12 @@ const StackedLineChart: React.FC<LineChartProps> = ({
   const innerHeight = height - margin.top - margin.bottom;
 
   // Scales
-  const xScale = d3
-    .scaleBand()
+  const xScale = scaleBand()
     .domain(data[0].name)
     .range([0, innerWidth])
     .padding(0.4);
 
-  const yScale = d3
-    .scaleLinear()
+  const yScale = scaleLinear()
     .domain([0, getMaxCumulativeSum(data)])
     .nice()
     .range([innerHeight, 0]);
