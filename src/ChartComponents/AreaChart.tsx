@@ -1,5 +1,5 @@
 import React from "react";
-import * as d3 from "d3";
+import { scaleBand, scaleLinear } from "d3-scale";
 import XAxis from "../components/Axis/xAxis.tsx";
 import YAxis from "../components/Axis/yAxis.tsx";
 interface AreaChartProps {
@@ -14,19 +14,19 @@ const AreaChart: React.FC<AreaChartProps> = ({ data, width, height }) => {
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
+  const values = data.map((d) => d.value);
+
   //maximum and minimum values
-  const maxValue = d3.max(data, (d) => d.value) || 0;
-  const minValue = d3.min(data, (d) => d.value) || 0;
+  const maxValue = Math.max(...values) || 0;
+  const minValue = Math.min(...values) || 0;
 
   // scales
-  const xScale = d3
-    .scaleBand()
+  const xScale = scaleBand()
     .domain(data.map((d) => d.name))
     .range([0, innerWidth])
     .padding(0.4);
 
-  const yScale = d3
-    .scaleLinear()
+  const yScale = scaleLinear()
     .domain([Math.min(minValue, 0), Math.max(maxValue, 0)])
     .nice()
     .range([innerHeight, 0]);
@@ -35,22 +35,16 @@ const AreaChart: React.FC<AreaChartProps> = ({ data, width, height }) => {
   const baselineY = yScale(0);
 
   // path data for the area
-  const areaPath = data
-    .map((d) => `${xScale(d.name)},${yScale(d.value)}`)
-    .join(" L");
+  const areaPath = data.map((d) => `${xScale(d.name)},${yScale(d.value)}`).join(" L");
 
-  const areaData = `M${xScale(
-    data[0].name
-  )},${baselineY} L${areaPath} L${xScale(
+  const areaData = `M${xScale(data[0].name)},${baselineY} L${areaPath} L${xScale(
     data[data.length - 1].name
   )},${baselineY}`;
 
   // path data for the stroke
-  const strokePath = `M${xScale(data[0].name)},${yScale(
-    data[0].value
-  )} L${areaPath} L${xScale(data[data.length - 1].name)},${yScale(
-    data[data.length - 1].value
-  )}`;
+  const strokePath = `M${xScale(data[0].name)},${yScale(data[0].value)} L${areaPath} L${xScale(
+    data[data.length - 1].name
+  )},${yScale(data[data.length - 1].value)}`;
 
   return (
     <g width={width} height={height}>
