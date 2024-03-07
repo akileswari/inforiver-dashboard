@@ -35,16 +35,22 @@ const AreaChart: React.FC<AreaChartProps> = ({ data, width, height }) => {
   const baselineY = yScale(0);
 
   // path data for the area
-  const areaPath = data.map((d) => `${xScale(d.name)},${yScale(d.value)}`).join(" L");
+  const areaPath = data
+    .map((d) => `${xScale(d.name)},${yScale(d.value)}`)
+    .join(" L");
 
-  const areaData = `M${xScale(data[0].name)},${baselineY} L${areaPath} L${xScale(
+  const areaData = `M${xScale(
+    data[0].name
+  )},${baselineY} L${areaPath} L${xScale(
     data[data.length - 1].name
   )},${baselineY}`;
 
   // path data for the stroke
-  const strokePath = `M${xScale(data[0].name)},${yScale(data[0].value)} L${areaPath} L${xScale(
-    data[data.length - 1].name
-  )},${yScale(data[data.length - 1].value)}`;
+  const strokePath = `M${xScale(data[0].name)},${yScale(
+    data[0].value
+  )} L${areaPath} L${xScale(data[data.length - 1].name)},${yScale(
+    data[data.length - 1].value
+  )}`;
 
   return (
     <g width={width} height={height}>

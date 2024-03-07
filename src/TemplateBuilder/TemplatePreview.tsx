@@ -1,4 +1,3 @@
-import React from "react";
 import LineChart from "../ChartComponents/LineChart";
 import { lineData, datasets } from "../components/dataSets/ChartDatas";
 // import BarChart from "../ChartComponents/Bar.tsx";
