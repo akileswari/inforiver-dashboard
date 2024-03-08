@@ -1,11 +1,49 @@
-.column-chart-options {
+.chart-options {
   display: flex;
   flex-direction: row;
   /* width: ; */
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
 .scale-chart-options-icon {
-  scale: 1.5;
+  scale: 0.9;
+}
+
+.charts-text {
+  font-size: 13px;
+  font-weight: 500;
+}
+.charts-text-title {
+  font-weight: 500;
+  margin: 0.5rem;
+}
+.chart-icon-box {
+  cursor: pointer;
+  border: 1px solid#DDDDDD;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+.chart-type-title {
+  /* display: flex; */
+  display: grid;
+  grid-template-columns: 2.5rem auto 2.5rem;
+  /* margin: 0; */
+  align-items: center;
+  cursor: pointer;
+}
+.chart-title-logo {
+  scale: 0.6;
+  margin: 0;
+}
+
+.template-builder.light-dropdown-right {
+  transition: transform ease-in 0.15s;
+}
+.template-builder.light-dropdown-right.down {
+  transform: rotate(90deg);
+}
+.template-builder.light-dropdown-right.up {
+  transform: rotate(270deg);
 }

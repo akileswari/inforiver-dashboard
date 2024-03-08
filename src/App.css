@@ -36,7 +36,8 @@
 .sub-panel {
   padding: 1rem;
   height: calc(100% - 75px);
-  width: 172px;
+  width: 202px;
+  font-family: Inter;
 }
 
 .template-wrapper {
