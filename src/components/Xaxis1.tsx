@@ -1,8 +1,8 @@
-import React from 'react';
+
 
 type XAxisProps = {
   innerHeight: number;
-  xScale: any; // You should replace `any` with the correct type for `xScale`
+  xScale: any; 
   data?: { name: string }[]; // Make the data prop optional
 };
 

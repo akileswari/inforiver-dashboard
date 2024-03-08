@@ -1,7 +1,7 @@
 
 import React from "react";
 import BarChart from "../ChartComponents/BarChart";
-import WaterfallChart from "../ChartComponents/WaterfallChart";
+// import WaterfallChart from "../ChartComponents/WaterfallChart";
 
 interface TemplatePreviewProps {
   svgWidth: number;
@@ -81,14 +81,14 @@ export default TemplatePreview;
 //   return (
 //     <div className="template-preview">
 //       <svg width={svgWidth} height={svgHeight}>
-//         {/* Render ClusteredChart with correct props */}
+      
 //         <ClusteredChart datasets={data} width={svgWidth} height={svgHeight} />
 //       </svg>
 //     </div>
 //   );
-// }
+//  }
 
-// export default TemplatePreview;
+//  export default TemplatePreview;
 // import React from 'react';
 // import StackedChart from '../ChartComponents/Stacked';
 
@@ -102,7 +102,7 @@ export default TemplatePreview;
 //     [
 //       { name: "Detergent", value: 10 },
 //       { name: "Shampoo", value: 20 },
-//       { name: "Tooth Brush", value: -19 },
+//       { name: "Tooth Brush", value: 19 },
 //       { name: "Oil", value: 30 },
 //       { name: "Face Wash", value: 35 },
 //     ], [
@@ -110,13 +110,13 @@ export default TemplatePreview;
 //       { name: "Shampoo", value: 75 },
 //       { name: "Tooth Brush", value: 60 },
 //       { name: "Oil", value: 55 },
-//       { name: "Face Wash", value: -10 },
+//       { name: "Face Wash", value: 10 },
 //     ], [
 //       { name: "Detergent", value: 50 },
 //       { name: "Shampoo", value: 75 },
 //       { name: "Tooth Brush", value: 60 },
 //       { name: "Oil", value: 55 },
-//       { name: "Face Wash", value: -10 },
+//       { name: "Face Wash", value: 10 },
 //     ]
 //   ];
 

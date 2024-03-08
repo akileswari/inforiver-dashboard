@@ -1,11 +1,10 @@
 import React from 'react';
 import * as d3 from 'd3';
 import DataLabel from '../components/Datalabel';
-import YAxis from '../components/YAxis';
-import MonthLabels from '../components/MonthLabels';
-import XAxisLine from '../components/Xaxis';
-import XAxisTitle from '../components/XAxisTitle';
+import YAxis from '../components/Axis/yAxis';
+import XAxis from '../components/Axis/xAxis';
 import YAxisTitle from '../components/YAxisTitle';
+import XAxisTitle from '../components/XAxisTitle';
 
 interface ClusteredChartProps {
   datasets: { name: string; value: number }[][];
@@ -35,7 +34,9 @@ const ClusteredChart: React.FC<ClusteredChartProps> = ({ datasets, width, height
 
   const yScale = d3.scaleLinear().domain([minValue, maxValue]).nice().range([innerHeight, 0]);
 
-  const yAxisElement = <YAxis yScale={yScale} padding={margin.left + -36} height={innerHeight} yAxisTickCount={5} />; // Adjust padding here
+  const yAxisElement = <YAxis margin={margin} width={innerWidth} yScale={yScale} />; // Adjust padding here
+  const xAxisElement = <XAxis innerHeight={innerHeight} xScale={xScale} data={datasets[0]} />;
+
   const bars = datasets.map((dataset, categoryIndex) =>
     dataset.map(({ name, value }, index) => {
       const barWidth = xScale.bandwidth() / numCategories;
@@ -57,8 +58,6 @@ const ClusteredChart: React.FC<ClusteredChartProps> = ({ datasets, width, height
     })
   );
 
-  const monthLabels = <MonthLabels monthNames={monthNames} xScale={xScale} innerHeight={innerHeight} />;
-
   return (
     <svg width={width} height={height} style={{ margin: 'auto', display: 'block' }}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
@@ -66,9 +65,8 @@ const ClusteredChart: React.FC<ClusteredChartProps> = ({ datasets, width, height
           Cluster Chart
         </text>
         {bars.flat()}
-        <XAxisLine x1={0} y1={yScale(0)} x2={innerWidth} y2={yScale(0)} />
         {yAxisElement}
-        {monthLabels}
+        {xAxisElement}
         <XAxisTitle x={innerWidth / 2} y={innerHeight + margin.bottom / 2 + 15} text="X-Axis" />
         <YAxisTitle x={-margin.left / 2} y={innerHeight / 2} text="Y-Axis" />
       </g>

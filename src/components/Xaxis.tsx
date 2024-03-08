@@ -1,15 +1,45 @@
-// XAxisLine.tsx
+// AxisWithLabels.tsx
 import React from 'react';
+import styled from 'styled-components';
+import theme from '../Theme/Theme';
 
-interface XAxisLineProps {
-  x1: number;
-  y1: number;
-  x2: number;
-  y2: number;
+interface DataItem {
+  name: string;
+  value: number;
 }
 
-const XAxisLine: React.FC<XAxisLineProps> = ({ x1, y1, x2, y2 }) => {
-  return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="black" />;
-};
+interface AxisWithLabelsProps {
+  data: DataItem[];
+  xScale: (value: number) => number;
+  y: number;
+  axisLength: number;
+  fontSize?: string;
+}
 
-export default XAxisLine;
+const StyledText = styled.text<{ fontSize?: string }>`
+  fill: ${theme.fontColor};
+  font-size: ${({ fontSize }) => fontSize || theme.fontSize};
+  font-family: ${theme.fontFamily};
+`;
+
+const AxisWithLabels: React.FC<AxisWithLabelsProps> = ({ data, xScale, y, axisLength, fontSize = theme.fontSize }) => {
+  return (
+    <>
+      <line x1={0} y1={y} x2={axisLength} y2={y} stroke="black" />
+      
+     
+      {data.map((item, index) => ( 
+        <StyledText
+          key={index}
+          x={xScale(index)}
+          y={y + 20} 
+          fontSize={fontSize}
+          textAnchor="middle"
+        >
+          {item.name}
+        </StyledText>
+      ))}
+    </>
+  );
+};
+export default AxisWithLabels;

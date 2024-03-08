@@ -13,7 +13,7 @@ const XAxis = ({ innerHeight, xScale, data }) => {
               key={i}
               className="data-label-xAxis-test"
               x={xScale(d.name)! + xScale.bandwidth() / 2}
-              y={20} // Adjust this value to position the labels lower
+              y={20} 
               textAnchor="middle"
             >
               {d.name}

@@ -1,5 +1,7 @@
-import React from 'react';
+
 import * as d3 from 'd3';
+import XAxis from '../components/Axis/xAxis'; 
+import YAxis from '../components/Axis/yAxis'; 
 
 const WaterfallChart = ({ data, width, height }) => {
   // Flatten the data and calculate the total sum
@@ -99,10 +101,19 @@ const WaterfallChart = ({ data, width, height }) => {
   );
 
   return (
-    <g transform={`translate(${margin.left}, ${margin.top})`}>
-      {bars}
-      {totalBar}
-    </g>
+    <svg width={width} height={height}>
+      <g transform={`translate(${margin.left}, ${margin.top})`}>
+        {/* Render YAxis component */}
+        <YAxis margin={margin} width={innerWidth} yScale={yScale} />
+
+        {/* Render XAxis component */}
+        <XAxis innerHeight={innerHeight} xScale={xScale} data={flattenedData} />
+
+        {/* Render bars */}
+        {bars}
+        {totalBar}
+      </g>
+    </svg>
   );
 };
 

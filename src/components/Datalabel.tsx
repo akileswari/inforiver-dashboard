@@ -1,11 +1,12 @@
+// DataLabel.tsx
 import React from 'react';
 import styled from 'styled-components';
-import theme from '../Theme/Theme'; 
+import theme from './Theme/Theme';
 
 interface DataLabelProps {
   x: number;
   y: number;
-  value: number;
+  value: number; // Ensure value prop is present
   fontSize?: string;
   positive?: boolean;
   style?: React.CSSProperties;
