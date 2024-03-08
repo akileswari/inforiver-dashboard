@@ -70,21 +70,14 @@ const BarChart: React.FC<BarChartProps> = ({ data, width, height }) => {
         <YAxis margin={margin} width={innerWidth} yScale={yScale} />
       </g>
       {/* Add labels for x and y axes */}
-      <text
-        x={margin.left + innerWidth / 2}
-        y={height - 10}
-        textAnchor="middle"
-        fontSize={"20px"}
-      >
+      <text x={margin.left + innerWidth / 2} y={height - 10} textAnchor="middle" fontSize={"20px"}>
         Product
       </text>
       <text
         x={margin.left - 30}
         y={margin.top + innerHeight / 2}
         textAnchor="middle"
-        transform={`rotate(-90, ${margin.left - 30}, ${
-          margin.top + innerHeight / 2
-        })`}
+        transform={`rotate(-90, ${margin.left - 30}, ${margin.top + innerHeight / 2})`}
         fontSize={"20px"}
       >
         Sales

@@ -20,16 +20,17 @@ const ClusterLineChart: React.FC<ClusterChartProps> = ({
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
+  const values = [] as number[];
+  data.forEach((d) => values.push(...d.values));
+  const max = Math.max(...values);
+
   // Scales
   const xScale = scaleBand()
     .domain(data[0].name)
     .range([0, innerWidth])
     .padding(0.4);
 
-  const yScale = scaleLinear()
-    .domain([0, Math.max(...data.flatMap((d) => d.values), 0)])
-    .nice()
-    .range([innerHeight, 0]);
+  const yScale = scaleLinear().domain([0, max]).nice().range([innerHeight, 0]);
 
   // Custom line generator function
   const generateLinePath = (dataset: { name: string[]; values: number[] }) => {
