@@ -1,5 +1,6 @@
-import { useState } from "react";
 import { getChartIcon } from "../constant/Helper";
+import { useSelector, useDispatch } from "react-redux";
+import { setToggledChartType } from "../../store/chartSlicer";
 const ChartIcon = ({ className }: { className: string }) => {
   return (
     <div className="chart-icon-box">
@@ -39,9 +40,20 @@ interface IChartBoxHolder {
 }
 
 const ChartBoxHolder = ({ title, chartIcons, logo }: IChartBoxHolder) => {
-  const [toggle, setToggle] = useState(false);
+  //   const [toggle, setToggle] = useState(false);
+  const currentToggle = useSelector(
+    (state: any) => state.chartStore.chartToggled
+  );
+
+  const dispatch = useDispatch();
+
+  let toggle = currentToggle === title;
+
+  // toggle = ChartStore.active ==== title
   const toggleCharts = () => {
-    setToggle(!toggle);
+    // setToggle(!toggle);
+    dispatch(setToggledChartType(title));
+    // cchartStore.setActive(title);
   };
   return (
     <>
