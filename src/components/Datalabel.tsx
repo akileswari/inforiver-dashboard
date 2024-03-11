@@ -1,29 +1,21 @@
-// DataLabel.tsx
-import React from 'react';
-import styled from 'styled-components';
-import theme from './Theme/Theme';
-
 interface DataLabelProps {
   x: number;
   y: number;
-  value: number; // Ensure value prop is present
-  fontSize?: string;
-  positive?: boolean;
-  style?: React.CSSProperties;
+  value: number;
+  positive: boolean;
+  theme: {
+    fontSize: string;
+    textColor: string;
+   
+  };
 }
+const DataLabel: React.FC<DataLabelProps> = ({ x, y, value, positive, theme }) => {
+  const { fontSize, textColor } = theme;
 
-const StyledText = styled.text<DataLabelProps>`
-  fill: ${(props) => (props.positive ? 'green' : 'red')};
-  font-size: ${(props) => props.fontSize || theme.fontSize};
-  font-family: ${theme.fontFamily};
-`;
-
-const DataLabel: React.FC<DataLabelProps> = ({ x, y, value, fontSize = theme.fontSize, positive = true }) => {
   return (
-    <StyledText x={x} y={y} fontSize={fontSize} positive={positive} textAnchor="middle">
+    <text x={x} y={y} fill={textColor} fontSize={fontSize} textAnchor="middle">
       {value}
-    </StyledText>
+    </text>
   );
 };
-
 export default DataLabel;

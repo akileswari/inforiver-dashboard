@@ -1,20 +1,4 @@
 import React from "react";
-<<<<<<< HEAD
-import BarChart from "../ChartComponents/BarChart"; 
-
-const Bar: React.FC = () => {
- 
-
-  return (
-    <div className="App">
-      
-       
-        <g>
-        
-        </g>
-     
-    </div>
-=======
 import { scaleBand, scaleLinear } from "d3-scale";
 import XAxis from "../components/Axis/xAxis.tsx";
 import YAxis from "../components/Axis/yAxis.tsx";
@@ -99,7 +83,6 @@ const BarChart: React.FC<BarChartProps> = ({ data, width, height }) => {
         Sales
       </text>
     </g>
->>>>>>> 55a520db1d37b8ccddef075fd48859066a3b3557
   );
 };
 

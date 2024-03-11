@@ -1,7 +1,7 @@
 // XAxisTitle.tsx
 import React from 'react';
 import styled from 'styled-components';
-import theme from './Theme/Theme'; 
+import theme from '../Theme/Theme'; 
 
 const StyledXAxisTitle = styled.text`
   fill: ${theme.fontColor};
