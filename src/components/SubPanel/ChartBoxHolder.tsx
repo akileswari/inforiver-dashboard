@@ -1,6 +1,6 @@
 import { getChartIcon } from "../constant/Helper";
 import { useSelector, useDispatch } from "react-redux";
-import { setToggledChartType } from "../../store/chartSlicer";
+import { setToggledChartType, setActiveChart } from "../../store/chartSlicer";
 const ChartIcon = ({ className }: { className: string }) => {
   return (
     <div className="chart-icon-box">
@@ -35,6 +35,7 @@ interface IChartBoxHolder {
   logo: string;
   chartIcons: {
     className: string;
+    id: string;
     // onClick : (id : string) => void
   }[];
 }
@@ -67,13 +68,15 @@ const ChartBoxHolder = ({ title, chartIcons, logo }: IChartBoxHolder) => {
         <div className={`chart-options`}>
           {toggle &&
             chartIcons.map((chart) => (
-              <ChartIcon className={chart.className} />
+              // setToggledChartTypeschart.id
+              <div
+                onClick={() => {
+                  dispatch(setActiveChart(chart.id));
+                }}
+              >
+                <ChartIcon className={chart.className} />
+              </div>
             ))}
-          {/* <ChartIcon className="light-overlapped-column" />
-          <ChartIcon className="light-stacked-column " />
-          <ChartIcon className="light-100stacked-column" />
-          <ChartIcon className="light-integrated-variance-column" />
-          <ChartIcon className="light-grouped-column" /> */}
         </div>
       </div>
     </>

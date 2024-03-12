@@ -73,46 +73,6 @@ const AreaChart: React.FC<AreaChartProps> = ({ data, width, height }) => {
           />
         ))}
 
-        {/* x-axis  */}
-        {/* <g transform={`translate(0, ${innerHeight})`} className="axis axis--x">
-          {data.map((d, i) => (
-            <text
-              key={i}
-              x={xScale(d.name)! + xScale.bandwidth() / 6}
-              y={20} // Adjust this value to position the labels lower
-              textAnchor="middle"
-            >
-              {d.name}
-            </text>
-          ))}
-        </g> */}
-
-        {/*y-axis */}
-        {/* <g className="axis axis--y">
-          {yScale.ticks().map((tick, i) => (
-            <g key={i} transform={`translate(0, ${yScale(tick)})`}>
-              <line x1={-6} x2={0} y1={0} y2={0} stroke="#000" />
-              <text
-                x={-9}
-                y={0}
-                dy="0.32em"
-                textAnchor="end"
-                fill="#000"
-                fontSize={12}
-              >
-                {tick}
-              </text>
-            </g>
-          ))}
-        </g> */}
-        {/*line to join axes */}
-        {/* <line
-          x1={0}
-          y1={yScale(0)}
-          x2={innerWidth}
-          y2={yScale(0)}
-          stroke="black"
-        /> */}
         <YAxis margin={margin} width={width} yScale={yScale} />
       </g>
 

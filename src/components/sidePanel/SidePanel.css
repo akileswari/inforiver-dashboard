@@ -11,6 +11,7 @@ body {
   border-right: 1px solid black;
   padding-right: 1.5rem;
   width: 175px;
+  border-right: 1px solid #d9e1e8;
   /* border-radius: 5px; */
 }
 .menu-label {

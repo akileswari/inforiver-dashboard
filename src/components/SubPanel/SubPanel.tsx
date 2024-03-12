@@ -1,22 +1,5 @@
+import { ELayouts } from "../../MainComp";
 import ChartBoxHolder from "./ChartBoxHolder";
-// const SubPanel = () => {
-//   const ChartIcons = ({className}) =>{}
-//   return (
-//     <div className="sub-panel">
-//       <p>Chart</p>
-//       <div className="column-charts">
-
-//         <i className={getChartIcon("light-overlapped-column")}></i>
-//         <i className={getChartIcon("light-stacked-column")}></i>
-//         <i className={getChartIcon("light-100stacked-column")}></i>
-//         <i className={getChartIcon("light-integrated-variance-column")}></i>
-//         <i className={getChartIcon("light-grouped-column")}></i>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default SubPanel;
 
 const columnChartIcons = [
   {
@@ -24,31 +7,40 @@ const columnChartIcons = [
     // onclick : () =>{
 
     // }
+    id: "overlapped-column",
   },
   {
     className: "light-100marimekko",
+    id: "100marimekko",
   },
   {
     className: "light-marimekko",
+    id: "marimekko",
   },
   {
     className: "light-stacked-column",
+    id: "stacked-column",
   },
   {
     className: "light-100stacked-column",
+    id: "100stacked-column",
   },
   {
     className: "light-grouped-column",
+    id: "grouped-column",
   },
 
   {
     className: "light-stacked-marimekko",
+    id: "stacked-marimekko",
   },
   {
     className: "light-100stacked-marimekko",
+    id: "100stacked-marimekko",
   },
   {
     className: "light-integrated-variance-column",
+    id: "integrated-variance-column",
   },
 ];
 
@@ -67,34 +59,44 @@ const areaChartIcons = [
   { className: "light-clustered-area" },
 ];
 
-const lineChartIcons = [{ className: "light-line" }];
+// const lineChartIcons = [{ className: "light-line" }];
 
-const SubPanel = () => {
+const SubPanel = ({
+  showSubPanelElements,
+}: {
+  showSubPanelElements: ELayouts;
+}) => {
+  if (showSubPanelElements !== ELayouts.CHART) return null;
+
   return (
     <div className="sub-panel">
-      <p className="charts-text-title">Chart</p>
-      <ChartBoxHolder
-        title="Column"
-        chartIcons={columnChartIcons}
-        logo="chart light-overlapped-column"
-      />
-      <ChartBoxHolder
-        title="Waterfall"
-        chartIcons={waterfallChartIcons}
-        logo="chart light-waterfall"
-      />
-      <p className="charts-text-title">Sparkline</p>
+      {showSubPanelElements === "CHART" && (
+        <>
+          <p className="charts-text-title">Chart</p>
+          <ChartBoxHolder
+            title="Column"
+            chartIcons={columnChartIcons}
+            logo="chart light-overlapped-column"
+          />
+          <ChartBoxHolder
+            title="Waterfall"
+            chartIcons={waterfallChartIcons}
+            logo="chart light-waterfall"
+          />
 
-      <ChartBoxHolder
-        title="Area"
-        chartIcons={areaChartIcons}
-        logo="chart light-area"
-      />
-      <ChartBoxHolder
-        title="Line"
-        chartIcons={areaChartIcons}
-        logo="chart light-line"
-      />
+          <p className="charts-text-title">Sparkline</p>
+          <ChartBoxHolder
+            title="Area"
+            chartIcons={areaChartIcons}
+            logo="chart light-area"
+          />
+          <ChartBoxHolder
+            title="Line"
+            chartIcons={areaChartIcons}
+            logo="chart light-line"
+          />
+        </>
+      )}
     </div>
   );
 };

@@ -86,56 +86,12 @@ const LineChart: React.FC<LineChartProps> = ({ data, width, height }) => {
               </g>
             );
           } else {
-            return null; // Skip rendering the line if there's no next data point
+            return null;
           }
         })}
-        {/* Rendering XAxis component */}
-        {/* <XTicks data={data} xScale={xScale} innerHeight={innerHeight} /> */}
 
         {/* Rendering YAxis component */}
-        {/* <YTicks yScale={yScale} /> */}
-
         <YAxis margin={margin} width={width} yScale={yScale} />
-
-        {/* x-axis  */}
-        {/* <g transform={`translate(0, ${innerHeight})`} className="axis axis--x">
-          {data.map((d, i) => (
-            <text
-              key={i}
-              x={xScale(d.name)! + xScale.bandwidth() / 2}
-              y={20} // Adjust this value to position the labels lower
-              textAnchor="middle"
-            >
-              {d.name}
-            </text>
-          ))}
-        </g> */}
-        {/*y-axis */}
-        {/* <g className="axis axis--y">
-          {yScale.ticks().map((tick, i) => (
-            <g key={i} transform={`translate(0, ${yScale(tick)})`}>
-              <line x1={-6} x2={0} y1={0} y2={0} stroke="#000" />
-              <text
-                x={-9}
-                y={0}
-                dy="0.32em"
-                textAnchor="end"
-                fill="#000"
-                fontSize={12}
-              >
-                {tick}
-              </text>
-            </g>
-          ))}
-        </g> */}
-        {/*line to join axes */}
-        {/* <line
-          x1={0}
-          y1={yScale(0)}
-          x2={innerWidth}
-          y2={yScale(0)}
-          stroke="black"
-        /> */}
       </g>
 
       {/*labels for x and y axes */}
@@ -156,20 +112,6 @@ const LineChart: React.FC<LineChartProps> = ({ data, width, height }) => {
       >
         Sales
       </text>
-
-      {/*data values at the end of each bar */}
-      {/* {data.map((d, i) => (
-        <text
-          key={i}
-          x={xScale(d.name)! + xScale.bandwidth()}
-          y={yScale(d.value)}
-          dx={39} // offset position for visibility
-          dy={"0.32em"} 
-          textAnchor="start"
-        >
-          {d.value}
-        </text>
-      ))} */}
 
       {data.map((d, i) => (
         <TextValues
