@@ -3,6 +3,7 @@ import React from "react";
 import BarChart from "../ChartComponents/BarChart";
 import lightTheme from "../components/Theme/lightTheme";
 import darkTheme from "../components/Theme/darkTheme";
+import WaterfallChart from "../ChartComponents/WaterfallChart";
 
 interface TemplatePreviewProps {
   svgWidth: number;
@@ -31,7 +32,9 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({ svgWidth, svgHeight }
   return (
     <div className="template-preview">
       <svg width={svgWidth} height={svgHeight} style={{ backgroundColor: theme.backgroundColor }}>
-        <BarChart data={data} width={svgWidth} height={svgHeight} theme={theme} toggleTheme={toggleTheme}  />
+        {/* <BarChart data={data} width={svgWidth} height={svgHeight} theme={theme} toggleTheme={toggleTheme}  /> */}
+        <WaterfallChart data={data} width={500} height={300} theme={theme} toggleTheme={toggleTheme} />
+
         <g transform={`translate(${svgWidth - 100}, 20)`}>
           <rect width="90" height="30" fill="gray" rx="5" onClick={toggleTheme} />
           <text x="45" y="20" textAnchor="middle" fill="white" fontSize="14">

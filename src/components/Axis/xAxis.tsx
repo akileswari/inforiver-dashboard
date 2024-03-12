@@ -1,3 +1,4 @@
+// XAxis.tsx
 import React from 'react';
 
 interface XAxisProps {
@@ -10,13 +11,14 @@ interface XAxisProps {
     fontFamily: string;
     backgroundColor: string;
     textColor: string; 
+    axisStrokeColor: string; // Add axisStrokeColor to the theme interface
   };
 }
 
 const XAxis: React.FC<XAxisProps> = ({ innerHeight, xScale, data, theme }) => {
   return (
     <>
-      <line x1={0} y1={0} x2={0} y2={innerHeight} stroke={theme.textColor} /> 
+      <line x1={0} y1={0} x2={0} y2={innerHeight} stroke={theme.axisStrokeColor} /> {/* Updated stroke here */}
       <g transform={`translate(0, ${innerHeight})`} className="axis axis--x">
         {data.map((d, i) => {
           return (

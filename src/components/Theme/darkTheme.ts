@@ -7,15 +7,17 @@ const darkTheme = {
     barColorNegative: 'lightcoral',
     textColor: 'white',
     backgroundColor: 'black',
+    axisStrokeColor: 'lightgray', 
     waterfall: {
         connectingLineColor: 'lightgray',
+        connectingLineStrokeWidth: 2,
     },
     cluster: {
         barColors: ['lightblue', 'lightcoral', 'lightgreen'],
         
     },
     stacked: {
-        stackColors: ['lightblue', 'lightcoral', 'lightgreen'], 
+        stackColors: ['lightblue', 'lightcoral', 'lightgreen'],
     },
 };
 

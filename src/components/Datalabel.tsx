@@ -2,7 +2,7 @@ interface DataLabelProps {
   x: number;
   y: number;
   value: number;
-  positive: boolean;
+  positive?: boolean;
   theme: {
     fontSize: string;
     textColor: string;

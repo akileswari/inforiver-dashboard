@@ -1,9 +1,10 @@
-
-import * as d3 from 'd3';
+import React from 'react';
+import { scaleBand, scaleLinear } from 'd3-scale';
 import XAxis from '../components/Axis/xAxis'; 
 import YAxis from '../components/Axis/yAxis'; 
+import DataLabel from '../components/Datalabel';
 
-const WaterfallChart = ({ data, width, height }) => {
+const WaterfallChart = ({ data, width, height, theme, toggleTheme }) => {
   // Flatten the data and calculate the total sum
   const flattenedData = data.flat();
   const total = flattenedData.reduce((acc, entry) => acc + entry.value, 0);
@@ -17,13 +18,13 @@ const WaterfallChart = ({ data, width, height }) => {
   const barPadding = 0.1;
   const barWidth = innerWidth / flattenedData.length - innerWidth / flattenedData.length * barPadding;
   const categories = flattenedData.map(entry => entry.name);
-  const xScale = d3.scaleBand()
+  const xScale = scaleBand()
     .domain(categories)
     .range([0, innerWidth])
     .paddingInner(barPadding);
 
   // yScale
-  const yScale = d3.scaleLinear()
+  const yScale = scaleLinear()
     .domain([0, total])
     .range([innerHeight, 0]);
 
@@ -33,7 +34,7 @@ const WaterfallChart = ({ data, width, height }) => {
     const { name, value } = entry;
     const barHeight = Math.abs(yScale(value) - yScale(0));
     const barY = value >= 0 ? yScale(cumulativeSum + value) : yScale(cumulativeSum);
-    const fill = value >= 0 ? 'green' : 'red';
+    const fill = value >= 0 ? theme.barColorPositive : theme.barColorNegative;
     cumulativeSum += value;
 
     // Connector lines
@@ -47,22 +48,20 @@ const WaterfallChart = ({ data, width, height }) => {
         y1={connectorLineY}
         x2={connectorLineEndX}
         y2={connectorLineY}
-        stroke="gray"
-        strokeWidth={1}
+        stroke={theme.waterfall.connectingLineColor}
+        strokeWidth={theme.waterfall.connectingLineStrokeWidth}
       />
     ) : null;
 
     // Cumulative text
     const cumulativeText = index > 0 ? (
-      <text
+      <DataLabel
+        key={`cumulative-text-${index}`}
         x={xScale(name) + xScale.bandwidth() / 2}
         y={barY - 20}
-        fontSize="12px"
-        fill="black"
-        textAnchor="middle"
-      >
-        {cumulativeSum}
-      </text>
+        value={cumulativeSum}
+        theme={theme}
+      />
     ) : null;
 
     return (
@@ -74,15 +73,12 @@ const WaterfallChart = ({ data, width, height }) => {
           height={barHeight}
           fill={fill}
         />
-        <text
+        <DataLabel
           x={xScale(name) + xScale.bandwidth() / 2}
           y={barY - 5}
-          fontSize="12px"
-          fill="black"
-          textAnchor="middle"
-        >
-          {value}
-        </text>
+          value={value}
+          theme={theme}
+        />
         {cumulativeText}
         {connectorLine}
       </g>
@@ -96,7 +92,7 @@ const WaterfallChart = ({ data, width, height }) => {
       y={yScale(total)}
       width={xScale.bandwidth()}
       height={innerHeight - yScale(total)}
-      fill="blue"
+      fill="blue" // Adjust as per your preference
     />
   );
 
@@ -104,14 +100,17 @@ const WaterfallChart = ({ data, width, height }) => {
     <svg width={width} height={height}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         {/* Render YAxis component */}
-        <YAxis margin={margin} width={innerWidth} yScale={yScale} />
+        <YAxis margin={margin} width={innerWidth} yScale={yScale} theme={theme} />
 
         {/* Render XAxis component */}
-        <XAxis innerHeight={innerHeight} xScale={xScale} data={flattenedData} />
+        <XAxis innerHeight={innerHeight} xScale={xScale} data={flattenedData} theme={theme} />
 
         {/* Render bars */}
         {bars}
         {totalBar}
+
+        {/* Toggle Theme Button */}
+        <button onClick={toggleTheme}>Toggle Theme</button>
       </g>
     </svg>
   );
