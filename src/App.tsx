@@ -1,4 +1,5 @@
 import "./App.css";
+import LayoutSection from "./components/layout/Layout";
 import PageTitle from "./components/pageTitle/PageTitle";
 import SidePanel from "./components/sidePanel/SidePanel";
 import SubPanel from "./components/SubPanel";
@@ -8,10 +9,12 @@ function App() {
   return (
     <div className="App">
       <PageTitle />
+      {/* <LayoutSection/> */}
       <div className="main-content">
         <SidePanel />
         <SubPanel />
         <TemplateWrapper />
+       
       </div>
     </div>
   );
