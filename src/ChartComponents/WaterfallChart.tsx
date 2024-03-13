@@ -34,7 +34,7 @@ const WaterfallChart = ({ data, width, height, theme, toggleTheme }) => {
     const { name, value } = entry;
     const barHeight = Math.abs(yScale(value) - yScale(0));
     const barY = value >= 0 ? yScale(cumulativeSum + value) : yScale(cumulativeSum);
-    const fill = value >= 0 ? theme.barColorPositive : theme.barColorNegative;
+    const fill = value >= 0 ? theme.variance.positive : theme.variance.negative; // Use positive or negative color from variance
     cumulativeSum += value;
 
     // Connector lines
@@ -92,27 +92,22 @@ const WaterfallChart = ({ data, width, height, theme, toggleTheme }) => {
       y={yScale(total)}
       width={xScale.bandwidth()}
       height={innerHeight - yScale(total)}
-      fill="blue" // Adjust as per your preference
+      fill="blue"
     />
   );
 
   return (
-    <svg width={width} height={height}>
-      <g transform={`translate(${margin.left}, ${margin.top})`}>
-        {/* Render YAxis component */}
-        <YAxis margin={margin} width={innerWidth} yScale={yScale} theme={theme} />
+    <g transform={`translate(${margin.left}, ${margin.top})`}>
+      {/* Render YAxis component */}
+      <YAxis margin={margin} width={innerWidth} yScale={yScale} theme={theme} />
 
-        {/* Render XAxis component */}
-        <XAxis innerHeight={innerHeight} xScale={xScale} data={flattenedData} theme={theme} />
+      <XAxis innerHeight={innerHeight} xScale={xScale} data={flattenedData} theme={theme} />
 
-        {/* Render bars */}
-        {bars}
-        {totalBar}
+      {bars}
+      {totalBar}
 
-        {/* Toggle Theme Button */}
-        <button onClick={toggleTheme}>Toggle Theme</button>
-      </g>
-    </svg>
+      <button onClick={toggleTheme}>Toggle Theme</button>
+    </g>
   );
 };
 

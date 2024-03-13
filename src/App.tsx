@@ -13,7 +13,7 @@ function App() {
       <div className="main-content">
         <SidePanel />
         <SubPanel />
-        <TemplateWrapper />
+        {/* <TemplateWrapper /> */}
        
       </div>
     </div>
