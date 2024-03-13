@@ -12,7 +12,7 @@ function App() {
       {/* <LayoutSection/> */}
       <div className="main-content">
         <SidePanel />
-        <SubPanel />
+        {/* <SubPanel /> */}
         {/* <TemplateWrapper /> */}
        
       </div>

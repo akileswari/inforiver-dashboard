@@ -7,9 +7,9 @@ const PageTitle: React.FC = () => {
       <div className="page-title">
         <div className="info-river-logo">
           <Logo />
-        </div>
-      </div>
-      <div className="container">
+          </div>
+             </div>
+             <div className="container">
       <div className="left-section">
         <div className="title-container">
           <div className="title">Layout</div>
@@ -25,6 +25,7 @@ const PageTitle: React.FC = () => {
           </div>
         </div>
       </div>
+
     </div>
 
     </>
