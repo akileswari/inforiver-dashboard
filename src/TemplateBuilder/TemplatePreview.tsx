@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import BarChart from "../ChartComponents/BarChart";
 import lightTheme from "../components/Theme/lightTheme";
 import darkTheme from "../components/Theme/darkTheme";
@@ -11,13 +11,24 @@ interface TemplatePreviewProps {
 }
 
 const TemplatePreview: React.FC<TemplatePreviewProps> = ({ svgWidth, svgHeight }) => {
-  const [isLightTheme, setIsLightTheme] = React.useState(true);
+  const [currentTheme, setCurrentTheme] = useState('light');
 
   const toggleTheme = () => {
-    setIsLightTheme((prevTheme) => !prevTheme);
+    setCurrentTheme((prevTheme) => prevTheme === 'light' ? 'dark' : 'light');
   };
 
-  const theme = isLightTheme ? lightTheme : darkTheme;
+  const getTheme = (theme: string) => {
+    switch (theme) {
+      case 'light':
+        return lightTheme;
+      case 'dark':
+        return darkTheme;
+      default:
+        return lightTheme; 
+    }
+  };
+
+  const theme = getTheme(currentTheme);
 
   const data = [
     [
@@ -32,8 +43,8 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({ svgWidth, svgHeight }
   return (
     <div className="template-preview">
       <svg width={svgWidth} height={svgHeight} style={{ backgroundColor: theme.backgroundColor }}>
-        {/* <BarChart data={data} width={svgWidth} height={svgHeight} theme={theme} toggleTheme={toggleTheme}  /> */}
-        <WaterfallChart data={data} width={500} height={300} theme={theme} toggleTheme={toggleTheme} />
+        <BarChart data={data} width={svgWidth} height={svgHeight} theme={theme} toggleTheme={toggleTheme} />
+        {/* <WaterfallChart data={data} width={500} height={300} theme={theme} toggleTheme={toggleTheme} /> */}
 
         <g transform={`translate(${svgWidth - 100}, 20)`}>
           <rect width="90" height="30" fill="gray" rx="5" onClick={toggleTheme} />
@@ -47,6 +58,7 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({ svgWidth, svgHeight }
 };
 
 export default TemplatePreview;
+
 
 
 // import React from 'react';

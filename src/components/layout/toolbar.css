@@ -1,0 +1,295 @@
+/* styles.css */
+
+.container {
+    display: flex;
+    padding: 0px 7px;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    flex: 1 0 0;
+    align-self: stretch;
+  }
+  
+  /* Grid */
+  .gridContainer,
+  .spacingContainer,
+  .marginContainer,
+  .cornerRadiusContainer,
+  .stokeContainer,
+  .shadowContainer {
+    display: flex;
+    height: 36px;
+    padding: 10px var(--Spacing-16, 16px);
+    
+    align-items: center;
+    gap: 8px;
+    
+    align-self: stretch;
+  }
+  
+  .gridItem,
+  .spacingItem,
+  .marginItem,
+  .cornerRadiusItem,
+  .stokeItem,
+  .shadowItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--Spacing-16, 16px);
+    
+    flex: 1 0 0;
+  }
+  
+  .gridText,
+  .headerText {
+    color: #002050;
+
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  
+  /* Spacing, Margin, Corner radius, Stoke */
+  .spacingContent,
+  .marginContent,
+  .cornerRadiusContent,
+  .stokeContent {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex: 1 0 0;
+  }
+  
+  .spacingValue,
+  .marginValue,
+  .cornerRadiusValue,
+  .stokeValue {
+    color: #333333;
+    font-size: 12px;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: 16px;
+    word-wrap: break-word;
+  }
+  
+  .spacingUnit,
+  .marginUnit {
+    color: #333333;
+    font-size: 12px;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: 16px;
+    word-wrap: break-word;
+  }
+  
+  .spacingIcon,
+  .marginIcon,
+  .cornerRadiusIcon,
+  .stokeIcon {
+    width: 12px;
+    height: 16px;
+    text-align: center;
+    color: #605E5C;
+    font-size: 12px;
+    font-family: 'Fabric MDL2 Assets';
+    font-weight: 400;
+    line-height: 12px;
+    word-wrap: break-word;
+  }
+  
+  /* Stoke */
+  .stokeColor {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .colorBox {
+    width: 20px;
+    height: 20px;
+    background: #444444;
+    border: 1px #DDDDDD solid;
+    border-radius: 3px;
+  }
+  
+  /* Shadow */
+  .shadowContent {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .shadowBox {
+    padding: 6px;
+    background: white;
+    border-radius: 2px;
+    border: 1px #DDDDDD solid;
+  }
+  
+  .shadowInner {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .shadowCircle {
+    width: 20px;
+    height: 20px;
+    background: #106EBE;
+    border-radius: 10px;
+  }
+  
+  .shadowSquare {
+    width: 20px;
+    height: 20px;
+    background: #106EBE;
+  }
+  /* styles.css */
+/*.......................*/
+.componentWrapper {
+    width: 188px;
+    height: 46px;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    display: inline-flex;
+  }
+  
+  .columnWrapper,
+  .rowWrapper {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 2px;
+    display: inline-flex;
+  }
+  
+  .columnTitle,
+  .rowTitle {
+    color: #596E8D;
+    font-size: 10px;
+    font-family: Inter;
+    font-weight: 500;
+    word-wrap: break-word;
+  }
+  
+  .columnContent,
+  .rowContent {
+    width: 70px;
+    padding: 8px;
+    background: white;
+    border-radius: 4px;
+    border: 1px #CCD2DC solid;
+    justify-content: space-between;
+    align-items: center;
+    display: inline-flex;
+  }
+  
+  .columnValue,
+  .rowValue {
+    color: #333333;
+    font-size: 12px;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: 16px;
+    word-wrap: break-word;
+  }
+  
+  .icon {
+    width: 12px;
+    height: 16px;
+    text-align: center;
+    color: #605E5C;
+    font-size: 12px;
+    font-family: 'Fabric MDL2 Assets';
+    font-weight: 400;
+    line-height: 12px;
+    word-wrap: break-word;
+  }
+  /* styles.css */
+
+/* styles.css */
+
+/* styles.css */
+
+.spacingWrapper {
+    width: 188px;
+    height: 68px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    display: inline-flex;
+  }
+  
+  .spacingHeader {
+    height: 36px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    display: inline-flex;
+  }
+  
+  .spacingTitle {
+    color: #002050;
+    font-size: 12px;
+    font-family: Inter;
+    font-weight: 500;
+    word-wrap: break-word;
+  }
+  
+  .spacingContent {
+    align-self: stretch;
+    height: 32px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 12px;
+    display: flex;
+  }
+  
+  .spacingItem {
+    align-self: stretch;
+    padding-left: 13px;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 42px;
+    display: inline-flex;
+  }
+  
+  .spacingValue {
+    color: #333333;
+    font-size: 12px;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: 16px;
+    word-wrap: break-word;
+  }
+  
+  .spacingUnit {
+    color: #333333;
+    font-size: 12px;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: 16px;
+    word-wrap: break-word;
+  }
+  
+  .icon {
+    width: 12px;
+    height: 16px;
+    text-align: center;
+    color: #605E5C;
+    font-size: 12px;
+    font-family: 'Fabric MDL2 Assets';
+    font-weight: 400;
+    line-height: 12px;
+    word-wrap: break-word;
+  }
+  

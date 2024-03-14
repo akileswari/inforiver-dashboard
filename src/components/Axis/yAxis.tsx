@@ -1,5 +1,5 @@
-// YAxis.tsx
 import React from 'react';
+import themes from '../Theme/Theme';
 
 interface YAxisProps {
   margin: { top: number; right: number; bottom: number; left: number };

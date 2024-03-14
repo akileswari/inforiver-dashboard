@@ -13,11 +13,12 @@ interface BarChartProps {
     fontColor: string;
     fontFamily: string;
     backgroundColor: string;
-    barColorPositive: string;
-    barColorNegative: string;
+    variance: {
+      positive: string;
+      negative: string;
+    };
   };
   toggleTheme: () => void;
-  backgroundColor: string;
 }
 
 const BarChart: React.FC<BarChartProps> = ({ data, width, height, theme, toggleTheme }) => {
@@ -51,13 +52,12 @@ const BarChart: React.FC<BarChartProps> = ({ data, width, height, theme, toggleT
           const barWidth = xScale.bandwidth();
           const x = xScale(entry.name) || 0;
           const y = value >= 0 ? yScale(value) : yScale(0);
-          const fill = value >= 0 ? theme.barColorPositive : theme.barColorNegative;
+          const fill = value >= 0 ? theme.variance.positive : theme.variance.negative;
 
           return (
             <g key={`${datasetIndex}-${index}`} transform={`translate(${x}, ${y})`}>
               <rect width={barWidth} height={barHeight} fill={fill} />
               <DataLabel x={50} y={0} value={value} positive={true} theme={theme} />
-
             </g>
           );
         })

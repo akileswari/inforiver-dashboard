@@ -22,7 +22,7 @@ const lightTheme = {
   },
   yAxis: {
     label: "#333333",
-    line: "#333333",
+    line: "black",
     gridLine: "#e6e6e6",
     axisLine: "#e6e6e6",
     scaleBand: "#268ce6",
