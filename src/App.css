@@ -4,11 +4,14 @@
 @import url(./components/pageTitle/PageTitle.css);
 @import url(./components/chart-icon/css/style.css);
 @import url(./components/SubPanel/subPanel.css);
+
 #root {
   height: 100%;
   width: 100%;
   margin: 0 auto;
   padding: 1rem;
+  max-width: 100%;
+  max-height: 100%;
   /* text-align: center; */
 }
 
@@ -20,6 +23,8 @@
 .main-content {
   display: flex;
   flex-direction: row;
+  height: 80dvh;
+  width: 100%;
 }
 
 .page-title {
@@ -31,23 +36,24 @@
 .side-panel {
   height: calc(100% - 75px);
   width: 250px;
-  border-right: 1px solid #d9e1e8;
+  /* border-right: 1px solid #d9e1e8; */
 }
 
 .sub-panel {
   padding: 1rem;
   /* height: calc(100% - 75px); */
   height: 600px;
-  width: 202px;
+  width: 180px;
   font-family: Inter;
   border-right: 1px solid #d9e1e8;
 }
 
 .template-wrapper {
   display: flex;
+  height: 100%;
   flex-direction: column;
-  height: calc(100% - 75px);
-  width: calc(100% - 500px);
+  /* height: calc(100% - 75px);
+  width: calc(100% - 500px); */
 }
 
 .template-toolbar {

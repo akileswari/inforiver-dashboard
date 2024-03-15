@@ -10,13 +10,17 @@
   scale: 0.9;
 }
 
-.charts-text {
+.charts-text,
+.chart-type-text {
   font-size: 13px;
   font-weight: 500;
 }
 .charts-text-title {
   font-weight: 500;
-  margin: 0.5rem;
+}
+.search-input {
+  display: flex;
+  border: 1px solid #dddddd;
 }
 .chart-icon-box {
   cursor: pointer;
@@ -46,4 +50,12 @@
 }
 .template-builder.light-dropdown-right.up {
   transform: rotate(270deg);
+}
+.search-box {
+  background-color: white !important;
+  border: none;
+  color: black;
+}
+.search-box:after {
+  border: none;
 }
