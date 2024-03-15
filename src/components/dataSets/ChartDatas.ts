@@ -1,4 +1,5 @@
-export const lineData = [
+// Adjust the type of lineData and dataSets
+export const lineData: { name: string; value: number }[][] = [
   [
     { name: "Detergent", value: 50 },
     { name: "Shampoo", value: 75 },
@@ -8,20 +9,19 @@ export const lineData = [
   ],
 ];
 
-// export const lineData = [
-//   { name: "Detergent", value: 10 },
-//   { name: "Shampoo", value: 75 },
-//   { name: "Tooth Brush", value: 60 },
-//   { name: "Oil", value: 55 },
-//   { name: "Face Wash", value: -10 },
-// ];
-export const datasets = [
-  {
-    name: ["January", "February", "March", "April", "May"],
-    values: [10, 20, 15, 25, 30],
-  },
-  {
-    name: ["January", "February", "March", "April", "May"],
-    values: [15, 25, 20, 30, 35],
-  },
+export const dataSets: { name: string; value: number }[][] = [
+  [
+    { name: "Detergent", value: 50 },
+    { name: "Shampoo", value: 75 },
+    { name: "Tooth Brush", value: 60 },
+    { name: "Oil", value: 55 },
+    { name: "Face Wash", value: -10 },
+  ],
+  [
+    { name: "Detergent", value: 10 },
+    { name: "Shampoo", value: 75 },
+    { name: "Tooth Brush", value: 60 },
+    { name: "Oil", value: 55 },
+    { name: "Face Wash", value: 10 },
+  ],
 ];

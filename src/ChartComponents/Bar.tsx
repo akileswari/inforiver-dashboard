@@ -53,7 +53,7 @@ const BarChart: React.FC<BarChartProps> = ({ data, width, height }) => {
               xScale(d.name)! +
               ((index + 0.5) * xScale.bandwidth()) / data.length
             }
-            y={d.value >= 0 ? yScale(d.value)! - 5 : yScale(d.value)! + 20}
+            y={d.value >= 0 ? yScale(d.value)! - 5 : yScale(d.value)! + 10}
             value={d.value}
             xScale={xScale}
             yScale={yScale}

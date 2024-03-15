@@ -1,10 +1,11 @@
 import LineChart from "../ChartComponents/LineChart";
 import { useSelector } from "react-redux";
 import ClusterLineChart from "../ChartComponents/ClusttereLine";
-import { lineData, datasets } from "../components/dataSets/ChartDatas";
+import { dataSets, lineData } from "../components/dataSets/ChartDatas";
 import BarChart from "../ChartComponents/Bar";
 import AreaChart from "../ChartComponents/AreaChart";
 import { useEffect, useRef, useState } from "react";
+import StackedLineChart from "../ChartComponents/StackedLineChart";
 // import BarChart from "../ChartComponents/Bar.tsx";
 // import ClusterLineChart from "../ChartComponents/ClusttereLine";
 // import StackedLineChart from "../ChartComponents/StackedLineChart";
@@ -19,13 +20,21 @@ const componentIds: Record<string, React.FC<any>> = {
   area: AreaChart,
   line: LineChart,
   "clustered-line": ClusterLineChart,
+  "stacked-line": StackedLineChart,
 };
 const TemplatePreview = (prop: IProps) => {
   const { height, width } = prop;
   const activeChart: string = useSelector(
     (state: any) => state.chartStore.activeChart
   );
+
   const SelectedComp = componentIds[activeChart];
+  // console.log(activeChart);
+
+  const finalData =
+    activeChart === "clustered-line" || activeChart === "stacked-line"
+      ? dataSets
+      : lineData;
   const templateRef = useRef(null);
   const [previewHeight, setPreviewHeight] = useState();
   const [previewWidth, setPreviewWidth] = useState();
@@ -58,7 +67,7 @@ const TemplatePreview = (prop: IProps) => {
 
         {SelectedComp && (
           <SelectedComp
-            data={lineData}
+            data={finalData}
             height={previewWidth}
             width={previewHeight}
           />

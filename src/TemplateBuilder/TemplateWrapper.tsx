@@ -1,4 +1,3 @@
-import React from "react";
 import TemplatePreview from "./TemplatePreview";
 import TemplateToolbar from "./TemplateToolbar";
 import {

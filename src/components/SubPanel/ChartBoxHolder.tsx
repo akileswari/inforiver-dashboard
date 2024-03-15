@@ -67,12 +67,10 @@ const ChartBoxHolder = ({ title, chartIcons, logo }: IChartBoxHolder) => {
         />
         <div className={`chart-options`}>
           {toggle &&
-            chartIcons.map((chart) => (
-              // setToggledChartTypeschart.id
+            chartIcons.map((chart, index) => (
               <div
-                onClick={() => {
-                  dispatch(setActiveChart(chart.id));
-                }}
+                key={index}
+                onClick={() => dispatch(setActiveChart(chart.id))}
               >
                 <ChartIcon className={chart.className} />
               </div>

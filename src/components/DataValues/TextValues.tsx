@@ -1,5 +1,3 @@
-import React from "react";
-
 function TextValues({ x, y, value, xScale, yScale }) {
   const isPositive = value >= 0;
 
