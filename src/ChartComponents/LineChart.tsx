@@ -5,7 +5,7 @@ import YAxis from "../components/Axis/yAxis.tsx";
 import TextValues from "../components/DataValues/TextValues.tsx";
 
 interface LineChartProps {
-  data: { name: string; value: number }[];
+  data: { name: string; value: number }[][];
   width: number;
   height: number;
 }
@@ -16,15 +16,24 @@ const LineChart: React.FC<LineChartProps> = ({ data, width, height }) => {
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
-  const values = data.map((d) => d.value);
+  // Calculate the maximum and minimum values across all datasets
+  const allValues: number[] = [];
 
-  //maximum and minimum values
-  const maxValue = Math.max(...values) || 0;
-  const minValue = Math.min(...values) || 0;
+  // Loop through each dataset
+  for (const dataset of data) {
+    // Loop through each item in the dataset
+    for (const item of dataset) {
+      // Add the value of each item to allValues
+      allValues.push(item.value);
+    }
+  }
 
-  // scales
+  const maxValue = Math.max(...allValues) || 0;
+  const minValue = Math.min(...allValues) || 0;
+
+  // Scales
   const xScale = scaleBand()
-    .domain(data.map((d) => d.name))
+    .domain(data[0].map((d) => d.name))
     .range([0, innerWidth])
     .padding(0.4);
 
@@ -33,120 +42,78 @@ const LineChart: React.FC<LineChartProps> = ({ data, width, height }) => {
     .nice()
     .range([innerHeight, 0]);
 
-  const highestValueIndex = data.reduce((acc, curr, index) => {
-    if (curr.value > data[acc].value) {
-      return index;
-    } else {
-      return acc;
-    }
-  }, 0);
-
-  const highestValueData = data[highestValueIndex];
-
   return (
-    <g width={`${width}px`} height={`${height}px`}>
-      <g transform={`translate(${margin.left}, ${margin.top})`}>
-        {/* <line x1={0} y1={0} x2={0} y2={innerHeight} stroke="black" /> */}
-        <XAxis innerHeight={innerHeight} xScale={xScale} data={data} />
+    <svg width={width} height={height}>
+      {data.map((dataset, index) => (
+        <g key={index} transform={`translate(${margin.left}, ${margin.top})`}>
+          {/* X Axis */}
+          <XAxis
+            innerHeight={innerHeight}
+            xScale={xScale}
+            data={dataset}
+            index={index}
+          />
 
-        {data.map((d, i) => {
-          if (i < data.length - 1) {
-            return (
-              <g key={i}>
-                <path
-                  d={`M${
-                    xScale(data[i].name)! + xScale.bandwidth() / 2
-                  },${yScale(data[i].value)} L${
-                    xScale(data[i + 1].name)! + xScale.bandwidth() / 2
-                  },${yScale(data[i + 1].value)}`}
-                  stroke="#cc936b"
-                  strokeWidth={2}
-                  fill="none"
-                />
-                <circle
-                  cx={xScale(data[0].name)! + xScale.bandwidth() / 2}
-                  cy={yScale(data[0].value)}
-                  r={4}
-                  fill="#cc936b"
-                />
-                <circle
-                  cx={
-                    xScale(data[data.length - 1].name)! + xScale.bandwidth() / 2
-                  }
-                  cy={yScale(data[data.length - 1].value)}
-                  r={4}
-                  fill="#cc936b"
-                />
-                <circle
-                  cx={xScale(highestValueData.name) + xScale.bandwidth() / 2}
-                  cy={yScale(highestValueData.value)}
-                  r={4}
-                  fill="#cc936b"
-                />
-              </g>
-            );
-          } else {
-            return null; // Skip rendering the line if there's no next data point
-          }
-        })}
-        {/* Rendering XAxis component */}
-        {/* <XTicks data={data} xScale={xScale} innerHeight={innerHeight} /> */}
+          {/* Line */}
+          {dataset.map((d, i) => {
+            if (i < dataset.length - 1) {
+              return (
+                <g key={i}>
+                  <path
+                    d={`M${
+                      xScale(dataset[i].name)! + xScale.bandwidth() / 2
+                    },${yScale(dataset[i].value)} L${
+                      xScale(dataset[i + 1].name)! + xScale.bandwidth() / 2
+                    },${yScale(dataset[i + 1].value)}`}
+                    stroke="#cc936b"
+                    strokeWidth={2}
+                    fill="none"
+                  />
+                  {/* Circles */}
+                  <circle
+                    cx={xScale(dataset[0].name)! + xScale.bandwidth() / 2}
+                    cy={yScale(dataset[0].value)}
+                    r={4}
+                    fill="#cc936b"
+                  />
+                  <circle
+                    cx={
+                      xScale(dataset[dataset.length - 1].name)! +
+                      xScale.bandwidth() / 2
+                    }
+                    cy={yScale(dataset[dataset.length - 1].value)}
+                    r={4}
+                    fill="#cc936b"
+                  />
+                  <circle
+                    cx={xScale(d.name)! + xScale.bandwidth() / 2}
+                    cy={yScale(d.value)}
+                    r={4}
+                    fill="#cc936b"
+                  />
+                </g>
+              );
+            } else {
+              return null;
+            }
+          })}
 
-        {/* Rendering YAxis component */}
-        {/* <YTicks yScale={yScale} /> */}
+          {/* Y Axis */}
+          <YAxis margin={margin} width={innerWidth} yScale={yScale} />
+        </g>
+      ))}
 
-        <YAxis margin={margin} width={width} yScale={yScale} />
-
-        {/* x-axis  */}
-        {/* <g transform={`translate(0, ${innerHeight})`} className="axis axis--x">
-          {data.map((d, i) => (
-            <text
-              key={i}
-              x={xScale(d.name)! + xScale.bandwidth() / 2}
-              y={20} // Adjust this value to position the labels lower
-              textAnchor="middle"
-            >
-              {d.name}
-            </text>
-          ))}
-        </g> */}
-        {/*y-axis */}
-        {/* <g className="axis axis--y">
-          {yScale.ticks().map((tick, i) => (
-            <g key={i} transform={`translate(0, ${yScale(tick)})`}>
-              <line x1={-6} x2={0} y1={0} y2={0} stroke="#000" />
-              <text
-                x={-9}
-                y={0}
-                dy="0.32em"
-                textAnchor="end"
-                fill="#000"
-                fontSize={12}
-              >
-                {tick}
-              </text>
-            </g>
-          ))}
-        </g> */}
-        {/*line to join axes */}
-        {/* <line
-          x1={0}
-          y1={yScale(0)}
-          x2={innerWidth}
-          y2={yScale(0)}
-          stroke="black"
-        /> */}
-      </g>
-
-      {/*labels for x and y axes */}
+      {/* X Axis Label */}
       <text
-        x={(width - margin.left - margin.right) / 2 + margin.left}
+        x={margin.left + innerWidth / 2}
         y={height - 10}
         textAnchor="middle"
         fontSize={"20px"}
       >
         Category
       </text>
+
+      {/* Y Axis Label */}
       <text
         x={-((height - margin.top - margin.bottom) / 2 + margin.top)}
         y={30}
@@ -157,31 +124,20 @@ const LineChart: React.FC<LineChartProps> = ({ data, width, height }) => {
         Sales
       </text>
 
-      {/*data values at the end of each bar */}
-      {/* {data.map((d, i) => (
-        <text
-          key={i}
-          x={xScale(d.name)! + xScale.bandwidth()}
-          y={yScale(d.value)}
-          dx={39} // offset position for visibility
-          dy={"0.32em"} 
-          textAnchor="start"
-        >
-          {d.value}
-        </text>
-      ))} */}
-
-      {data.map((d, i) => (
-        <TextValues
-          key={i}
-          x={xScale(d.name)! + xScale.bandwidth() + 50} // Add 39 for offset
-          y={yScale(d.value)}
-          value={d.value}
-          xScale={xScale}
-          yScale={yScale}
-        />
-      ))}
-    </g>
+      {/* Data values */}
+      {data.map((dataset, index) =>
+        dataset.map((d, i) => (
+          <TextValues
+            key={i}
+            x={xScale(d.name)! + xScale.bandwidth() + 50} // Adjust the x position as needed
+            y={yScale(d.value)}
+            value={d.value}
+            xScale={xScale}
+            yScale={yScale}
+          />
+        ))
+      )}
+    </svg>
   );
 };
 

@@ -1,4 +1,3 @@
-import React from "react";
 import TemplatePreview from "./TemplatePreview";
 import TemplateToolbar from "./TemplateToolbar";
 import {
@@ -19,7 +18,8 @@ const TemplateWrapper = () => {
   return (
     <div
       className="template-wrapper"
-      style={{ height: `${divHeight}px`, width: `${divWidth}px` }}
+      // style={{ height: `${divHeight}px`, width: `${divWidth}px` }}
+      // style={{ height: '100%', width: '100%' }}
     >
       <TemplateToolbar />
       <TemplatePreview height={fHeight} width={fWidth} />

@@ -1,5 +1,3 @@
-import React from "react";
-
 const YAxis = ({ margin, width, yScale }) => {
   return (
     <>
