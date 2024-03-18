@@ -2,6 +2,7 @@ import React from "react";
 import { scaleBand, scaleLinear } from "d3-scale";
 import XAxis from "../components/Axis/xAxis";
 import YAxis from "../components/Axis/yAxis";
+import TextValues from "../components/DataValues/TextValues";
 
 interface DataItem {
   name: string;
@@ -43,7 +44,9 @@ const StackedLineChart: React.FC<LineChartProps> = ({
   // Helper function to calculate maximum cumulative sum
   function getMaxCumulativeSum(data: DataItem[][]) {
     return Math.max(
-      ...data[0].map((_, i) => data.reduce((acc, cur) => acc + cur[i].value, 0))
+      ...data[data.length - 1].map((d, i) =>
+        data.reduce((acc, cur) => acc + cur[i].value, 0)
+      )
     );
   }
 
@@ -54,8 +57,15 @@ const StackedLineChart: React.FC<LineChartProps> = ({
     )
   );
 
+  // Generate data labels
+  const dataLabels = flattenedData.map((d) => ({
+    x: xScale(d.name)! + xScale.bandwidth() / 2,
+    y: yScale(d.value),
+    label: d.value.toString(), // Adjust this as needed
+  }));
+
   return (
-    <svg width={width} height={height}>
+    <g width={width} height={height}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         {/* X and Y Axes */}
         <XAxis
@@ -78,21 +88,18 @@ const StackedLineChart: React.FC<LineChartProps> = ({
         ))}
 
         {/* Data labels */}
-        {flattenedData.map((d, i) => (
-          <text
+        {dataLabels.map((d, i) => (
+          <TextValues
             key={i}
-            x={xScale(d.name)! + xScale.bandwidth() / 2}
-            y={innerHeight + margin.bottom - 10} // Adjusted to position labels below x-axis
-            dy={-10}
-            textAnchor="middle"
-            fontSize={12}
-            fill={i < data[0].length ? "blue" : "red"}
-          >
-            {d.value}
-          </text>
+            x={d.x}
+            y={d.y - 5} // Adjust this value to position labels properly
+            value={d.label}
+            xScale={xScale}
+            yScale={yScale}
+          />
         ))}
       </g>
-    </svg>
+    </g>
   );
 };
 

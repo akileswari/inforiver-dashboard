@@ -9,10 +9,7 @@ interface XAxisProps {
 
 const XAxis: React.FC<XAxisProps> = ({ innerHeight, xScale, data, index }) => {
   return (
-    <g
-      transform={`translate(0, ${innerHeight + index * 20})`}
-      className="axis axis--x"
-    >
+    <g transform={`translate(0, ${innerHeight})`} className="axis axis--x">
       {/* Add y-axis line */}
       <line x1={0} y1={0} x2={0} y2={-innerHeight} stroke="black" />
       {/* Render x-axis labels */}

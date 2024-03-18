@@ -5,13 +5,13 @@ import YAxis from "../components/Axis/yAxis.tsx";
 import TextValues from "../components/DataValues/TextValues.tsx";
 
 interface ClusterChartProps {
-  data: { name: string[]; values: number[] }[];
+  data: { name: string; value: number }[][];
   width: number;
   height: number;
 }
 
 const ClusterLineChart: React.FC<ClusterChartProps> = ({
-  data,
+  data: dataSets,
   width,
   height,
 }) => {
@@ -22,14 +22,19 @@ const ClusterLineChart: React.FC<ClusterChartProps> = ({
 
   // Flatten values from all datasets
   const allValues: number[] = [];
-  data.forEach((dataset) => allValues.push(...dataset.values));
+  dataSets.forEach((dataset) =>
+    dataset.forEach((d) => allValues.push(d.value))
+  );
 
   // Calculate the maximum value from all datasets
   const maxValue = Math.max(...allValues);
 
+  // Extract unique category names
+  const categoryNames = dataSets[0].map((d) => d.name);
+
   // Scales
   const xScale = scaleBand()
-    .domain(data[0].name)
+    .domain(categoryNames)
     .range([0, innerWidth])
     .padding(0.4);
 
@@ -38,51 +43,36 @@ const ClusterLineChart: React.FC<ClusterChartProps> = ({
     .nice()
     .range([innerHeight, 0]);
 
-  // Custom line generator function
-  const generateLinePath = (dataset: { name: string[]; values: number[] }) => {
-    let path = "";
-    dataset.values.forEach((value, i) => {
-      const x = xScale(dataset.name[i])! + xScale.bandwidth() / 2;
-      const y = yScale(value);
-      if (i === 0) {
-        path += `M ${x} ${y} `;
-      } else {
-        path += `L ${x} ${y} `;
-      }
-    });
-    return path;
-  };
-
   return (
     <svg width={width} height={height}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         {/* X Axis */}
-        <XAxis innerHeight={innerHeight} xScale={xScale} data={data} />
+        <XAxis innerHeight={innerHeight} xScale={xScale} data={categoryNames} />
 
         {/* Draw lines and circles */}
-        {data.map((dataset, i) => (
+        {dataSets.map((dataset, i) => (
           <React.Fragment key={i}>
             {/* Line */}
             <path
-              d={generateLinePath(dataset)}
+              d={generateLinePath(dataset, xScale, yScale)}
               fill="none"
               stroke="#cc936b"
               strokeWidth={2}
             />
 
             {/* Circles and text values */}
-            {dataset.values.map((value, j) => (
+            {dataset.map((d, j) => (
               <React.Fragment key={j}>
                 <circle
-                  cx={xScale(dataset.name[j])! + xScale.bandwidth() / 2}
-                  cy={yScale(value)}
+                  cx={xScale(d.name)! + xScale.bandwidth() / 2}
+                  cy={yScale(d.value)}
                   r={4}
                   fill="#cc936b"
                 />
                 <TextValues
-                  x={xScale(dataset.name[j])! + xScale.bandwidth() / 2 - 10}
-                  y={yScale(value) - 10}
-                  value={value}
+                  x={xScale(d.name)! + xScale.bandwidth() / 2 - 10}
+                  y={yScale(d.value) - 10}
+                  value={d.value}
                   xScale={xScale}
                   yScale={yScale}
                 />
@@ -117,6 +107,24 @@ const ClusterLineChart: React.FC<ClusterChartProps> = ({
       </text>
     </svg>
   );
+};
+
+const generateLinePath = (
+  dataset: { name: string; value: number }[],
+  xScale: any,
+  yScale: any
+) => {
+  let path = "";
+  dataset.forEach((d, i) => {
+    const x = xScale(d.name)! + xScale.bandwidth() / 2;
+    const y = yScale(d.value);
+    if (i === 0) {
+      path += `M ${x} ${y} `;
+    } else {
+      path += `L ${x} ${y} `;
+    }
+  });
+  return path;
 };
 
 export default ClusterLineChart;
