@@ -1,9 +1,8 @@
 
-import React, { useState } from "react";
-import BarChart from "../ChartComponents/BarChart";
-import lightTheme from "../components/Theme/lightTheme";
-import darkTheme from "../components/Theme/darkTheme";
-import WaterfallChart from "../ChartComponents/WaterfallChart";
+import React from 'react';
+import BarChart from '../ChartComponents/BarChart';
+import WaterfallChart from '../ChartComponents/WaterfallChart';
+import { useTheme } from '../components/Theme/Theme';
 
 interface TemplatePreviewProps {
   svgWidth: number;
@@ -11,32 +10,15 @@ interface TemplatePreviewProps {
 }
 
 const TemplatePreview: React.FC<TemplatePreviewProps> = ({ svgWidth, svgHeight }) => {
-  const [currentTheme, setCurrentTheme] = useState('light');
-
-  const toggleTheme = () => {
-    setCurrentTheme((prevTheme) => prevTheme === 'light' ? 'dark' : 'light');
-  };
-
-  const getTheme = (theme: string) => {
-    switch (theme) {
-      case 'light':
-        return lightTheme;
-      case 'dark':
-        return darkTheme;
-      default:
-        return lightTheme; 
-    }
-  };
-
-  const theme = getTheme(currentTheme);
+  const { theme, toggleTheme } = useTheme();
 
   const data = [
     [
-      { name: "Detergent", value: 10 },
-      { name: "Shampoo", value: 20 },
-      { name: "Tooth Brush", value: -19 },
-      { name: "Oil", value: 30 },
-      { name: "Face Wash", value: 35 },
+      { name: 'Detergent', value: 10 },
+      { name: 'Shampoo', value: 20 },
+      { name: 'Tooth Brush', value: -19 },
+      { name: 'Oil', value: 30 },
+      { name: 'Face Wash', value: 35 },
     ],
   ];
 
@@ -58,7 +40,6 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({ svgWidth, svgHeight }
 };
 
 export default TemplatePreview;
-
 
 
 // import React from 'react';

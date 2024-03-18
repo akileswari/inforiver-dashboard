@@ -1,4 +1,3 @@
-// XAxis.tsx
 import React from 'react';
 
 interface XAxisProps {
@@ -10,8 +9,7 @@ interface XAxisProps {
     fontColor: string;
     fontFamily: string;
     backgroundColor: string;
-    textColor: string; 
-    axisStrokeColor: string; 
+    axisStrokeColor: string; // Change to axisStrokeColor
   };
 }
 
@@ -30,7 +28,7 @@ const XAxis: React.FC<XAxisProps> = ({ innerHeight, xScale, data, theme }) => {
               textAnchor="middle"
               style={{
                 fontSize: theme.fontSize,
-                fill: theme.textColor,
+                fill: theme.fontColor, // Use fontColor for text color
                 fontFamily: theme.fontFamily,
                 backgroundColor: theme.backgroundColor
               }}

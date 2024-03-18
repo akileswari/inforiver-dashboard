@@ -18,7 +18,7 @@ function App() {
         <SidePanel />
         <Toolbar />
         <CustomToolbar />
-        <LayoutGrid />
+        {/* <LayoutGrid /> */}
         {/* <SubPanel /> */}
         {/* <TemplateWrapper /> */}
        

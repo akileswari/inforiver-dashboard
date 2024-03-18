@@ -55,7 +55,8 @@ const BarChart: React.FC<BarChartProps> = ({ data, width, height, theme, toggleT
           const fill = value >= 0 ? theme.variance.positive : theme.variance.negative;
 
           return (
-            <g key={`${datasetIndex}-${index}`} transform={`translate(${x}, ${y})`}>
+            <g key={`${datasetIndex}-${index}`} transform={`translate(${x}, ${y})`} style={{ backgroundColor: theme.chart.backgroundColor }}>
+
               <rect width={barWidth} height={barHeight} fill={fill} />
               <DataLabel x={50} y={0} value={value} positive={true} theme={theme} />
             </g>

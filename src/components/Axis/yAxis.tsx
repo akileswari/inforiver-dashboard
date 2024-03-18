@@ -1,28 +1,19 @@
 import React from 'react';
-import themes from '../Theme/Theme';
+import themes from "../Theme/Theme";
 
 interface YAxisProps {
   margin: { top: number; right: number; bottom: number; left: number };
   width: number;
   yScale: any; 
-  theme: {
-    fontSize: string;
-    fontColor: string;
-    fontFamily: string;
-    textColor: string; 
-    backgroundColor: string;
-    yAxis: {
-      label: string;
-      line: string;
-      gridLine: string;
-      axisLine: string;
-      scaleBand: string;
-    };
-  };
+  theme: typeof themes; // Adjust the type of theme object
 }
 
 const YAxis: React.FC<YAxisProps> = ({ margin, width, yScale, theme }) => {
   console.log(theme);
+  
+  // Access yAxis property from the nested structure
+  const yAxisTheme = theme.axis?.yAxis || {}; 
+
   return (
     <>
       <g>
@@ -31,20 +22,20 @@ const YAxis: React.FC<YAxisProps> = ({ margin, width, yScale, theme }) => {
           y1={yScale(0)}
           x2={width}
           y2={yScale(0)}
-          stroke={theme.yAxis.line} 
+          stroke={yAxisTheme.line} // Access line property from yAxisTheme
         />
       </g>
 
       <g className="axis axis--y">
         {yScale.ticks().map((tick, i) => (
           <g key={i} transform={`translate(0, ${yScale(tick)})`}>
-            <line x1={-6} x2={0} y1={0} y2={0} stroke={theme.yAxis.line} /> 
+            <line x1={-6} x2={0} y1={0} y2={0} stroke={yAxisTheme.line} /> 
             <text
               x={-9}
               y={0}
               dy="0.32em"
               textAnchor="end"
-              fill={theme.textColor}
+              fill={theme.fontColor} // Use fontColor for text color
               fontSize={theme.fontSize}
               fontFamily={theme.fontFamily}
             >
