@@ -1,45 +1,46 @@
-<<<<<<< HEAD
 import React from 'react';
-import themes from "../Theme/Theme";
 
 interface YAxisProps {
   margin: { top: number; right: number; bottom: number; left: number };
   width: number;
   yScale: any; 
-  theme: typeof themes; // Adjust the type of theme object
+  theme: {
+    yAxis?: {
+      label: string;
+      line: string;
+      gridLine: string;
+      axisLine: string;
+      scaleBand: string;
+    };
+    fontColor: string;
+    fontSize: string;
+    fontFamily: string;
+  };
 }
 
 const YAxis: React.FC<YAxisProps> = ({ margin, width, yScale, theme }) => {
-  console.log(theme);
-  
-  // Access yAxis property from the nested structure
-  const yAxisTheme = theme.axis?.yAxis || {}; 
+  const yAxisTheme = theme.yAxis || {};
 
-=======
-const YAxis = ({ margin, width, yScale }) => {
->>>>>>> 6e7eb559bacbe37b62f310448ab0e11887778710
   return (
     <>
-      <g>
-        <line
-          x1={margin.left - 20}
-          y1={yScale(0)}
-          x2={width}
-          y2={yScale(0)}
-          stroke={yAxisTheme.line} // Access line property from yAxisTheme
-        />
-      </g>
+      <line
+        x1={margin.left}
+        y1={0}
+        x2={margin.left}
+        y2={width} // Adjusted to use width instead of yScale
+        stroke={yAxisTheme.line || theme.fontColor}
+      />
 
       <g className="axis axis--y">
         {yScale.ticks().map((tick, i) => (
-          <g key={i} transform={`translate(0, ${yScale(tick)})`}>
-            <line x1={-6} x2={0} y1={0} y2={0} stroke={yAxisTheme.line} /> 
+          <g key={i} transform={`translate(${margin.left}, ${yScale(tick)})`}>
+            <line x1={0} x2={-6} y1={0} y2={0} stroke={yAxisTheme.line || theme.fontColor} /> 
             <text
               x={-9}
               y={0}
               dy="0.32em"
               textAnchor="end"
-              fill={theme.fontColor} // Use fontColor for text color
+              fill={yAxisTheme.label || theme.fontColor}
               fontSize={theme.fontSize}
               fontFamily={theme.fontFamily}
             >

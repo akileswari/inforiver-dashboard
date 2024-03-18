@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .container {
   display: flex;
 width: 1191px;
@@ -78,13 +77,4 @@ flex-shrink: 0;
 
 .export-button .button-text {
   color: white;
-=======
-.info-river-logo {
-  margin-left: 1.4rem;
-  display: flex;
-  align-items: center;
-  width: 131px;
-  border-right: 1px solid #d9e1e8;
-  height: 70px;
->>>>>>> 6e7eb559bacbe37b62f310448ab0e11887778710
 }
