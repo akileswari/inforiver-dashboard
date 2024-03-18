@@ -23,18 +23,20 @@ const YAxis: React.FC<YAxisProps> = ({ margin, width, yScale, theme }) => {
 
   return (
     <>
-      <line
-        x1={margin.left}
-        y1={0}
-        x2={margin.left}
-        y2={width} // Adjusted to use width instead of yScale
-        stroke={yAxisTheme.line || theme.fontColor}
-      />
+      <g>
+        <line
+          x1={margin.left}
+          y1={0}
+          x2={margin.left}
+          y2={yScale(yScale.domain()[1])}
+          stroke={yAxisTheme.line || theme.fontColor}
+        />
+      </g>
 
       <g className="axis axis--y">
         {yScale.ticks().map((tick, i) => (
           <g key={i} transform={`translate(${margin.left}, ${yScale(tick)})`}>
-            <line x1={0} x2={-6} y1={0} y2={0} stroke={yAxisTheme.line || theme.fontColor} /> 
+            <line x1={0} x2={0} y1={0} y2={0} stroke={yAxisTheme.line || theme.fontColor} /> 
             <text
               x={-9}
               y={0}
