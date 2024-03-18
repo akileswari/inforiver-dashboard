@@ -10,6 +10,8 @@ body {
   /* background-color: #f1f1f1; */
   border-right: 1px solid black;
   padding-right: 1.5rem;
+  width: 130px;
+  border-right: 1px solid #d9e1e8;
   /* border-radius: 5px; */
 }
 .menu-label {

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import themes from "../Theme/Theme";
 
@@ -14,6 +15,9 @@ const YAxis: React.FC<YAxisProps> = ({ margin, width, yScale, theme }) => {
   // Access yAxis property from the nested structure
   const yAxisTheme = theme.axis?.yAxis || {}; 
 
+=======
+const YAxis = ({ margin, width, yScale }) => {
+>>>>>>> 6e7eb559bacbe37b62f310448ab0e11887778710
   return (
     <>
       <g>

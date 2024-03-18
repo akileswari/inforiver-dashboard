@@ -10,10 +10,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+<<<<<<< HEAD
     "d3": "^7.8.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^6.1.8"
+=======
+    "@reduxjs/toolkit": "^2.2.1",
+    "d3-scale": "^4.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^9.1.0"
+>>>>>>> 6e7eb559bacbe37b62f310448ab0e11887778710
   },
   "devDependencies": {
     "@types/d3": "^7.4.3",

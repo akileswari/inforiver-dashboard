@@ -1,4 +1,6 @@
+import { Provider } from "react-redux";
 import "./App.css";
+<<<<<<< HEAD
 import CustomToolbar from "./components/layout/customIcon";
 import LayoutSection from "./components/layout/Layout";
 import LayoutGrid from "./components/layout/layoutGrid";
@@ -24,6 +26,16 @@ function App() {
        
       </div>
     </div>
+=======
+import MainComp from "./MainComp";
+import store from "./store";
+
+function App() {
+  return (
+    <Provider store={store}>
+      <MainComp />
+    </Provider>
+>>>>>>> 6e7eb559bacbe37b62f310448ab0e11887778710
   );
 }
 

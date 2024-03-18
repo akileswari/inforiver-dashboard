@@ -3,8 +3,9 @@ import { scaleBand, scaleLinear } from "d3-scale";
 import XAxis from "../components/Axis/xAxis.tsx";
 import YAxis from "../components/Axis/yAxis.tsx";
 import TextValues from "../components/DataValues/TextValues.tsx";
+
 interface BarChartProps {
-  data: { name: string; value: number }[];
+  data: { name: string; value: number }[][];
   width: number;
   height: number;
 }
@@ -15,74 +16,87 @@ const BarChart: React.FC<BarChartProps> = ({ data, width, height }) => {
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
-  // Get the minimum value to determine if the y-axis should start at 0
-  const minValue = Math.min(...data.map((d) => d.value));
-  const maxValue = Math.max(...data.map((d) => d.value));
   // Create scales
   const xScale = scaleBand()
-    .domain(data.map((d) => d.name))
+    .domain(data[0].map((d) => d.name))
     .range([0, innerWidth])
     .padding(0.3);
 
   const yScale = scaleLinear()
-    .domain([Math.min(minValue, 0), Math.max(maxValue, 0)])
+    .domain([
+      Math.min(
+        ...data.map((dataset) => Math.min(...dataset.map((d) => d.value)))
+      ),
+      Math.max(
+        ...data.map((dataset) => Math.max(...dataset.map((d) => d.value)))
+      ),
+    ])
     .nice()
     .range([innerHeight, 0]);
 
   // Draw bars
-  const bars = data.map((d) => (
-    <g key={d.name}>
-      {/* Bar */}
-      <rect
-        x={xScale(d.name)!}
-        y={d.value >= 0 ? yScale(d.value)! : yScale(0)!}
-        width={xScale.bandwidth()}
-        height={Math.abs(yScale(d.value)! - yScale(0)!)}
-        fill={d.value >= 0 ? "#4f45bd" : "orange"}
-      />{" "}
-      {d.value >= 0 ? (
-        <TextValues
-          x={xScale(d.name)! + 20}
-          y={yScale(d.value)! - 5}
-          value={d.value}
-          xScale={xScale}
-          yScale={yScale}
-          // bandwidth={xScale.bandwidth()}
-        />
-      ) : (
-        <TextValues
-          x={xScale(d.name)! + 40}
-          y={yScale(d.value)!}
-          value={d.value}
-          xScale={xScale}
-          yScale={yScale}
-          // bandwidth={xScale.bandwidth()}
-        />
-      )}
+  const bars = data.map((dataset, index) => (
+    <g key={index}>
+      {dataset.map((d, i) => (
+        <g key={i}>
+          {/* Bar */}
+          <rect
+            x={xScale(d.name)! + (index * xScale.bandwidth()) / data.length}
+            y={d.value >= 0 ? yScale(d.value)! : yScale(0)!}
+            width={xScale.bandwidth() / data.length}
+            height={Math.abs(yScale(d.value)! - yScale(0)!)}
+            fill={d.value >= 0 ? "#4f45bd" : "orange"}
+          />
+          {/* Text Values */}
+          <TextValues
+            x={
+              xScale(d.name)! +
+              ((index + 0.5) * xScale.bandwidth()) / data.length
+            }
+            y={d.value >= 0 ? yScale(d.value)! - 5 : yScale(d.value)! + 10}
+            value={d.value}
+            xScale={xScale}
+            yScale={yScale}
+          />
+        </g>
+      ))}
+      {/* X Axis */}
+      <XAxis
+        innerHeight={innerHeight}
+        xScale={xScale}
+        data={dataset}
+        index={index}
+      />
     </g>
   ));
 
   return (
-    <g width={width} height={height}>
+    <svg width={width} height={height}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         {bars}
-        <XAxis innerHeight={innerHeight} xScale={xScale} data={data} />
         <YAxis margin={margin} width={innerWidth} yScale={yScale} />
       </g>
       {/* Add labels for x and y axes */}
-      <text x={margin.left + innerWidth / 2} y={height - 10} textAnchor="middle" fontSize={"20px"}>
+      <text
+        x={margin.left + innerWidth / 2}
+        y={height - 10}
+        textAnchor="middle"
+        fontSize={"20px"}
+      >
         Product
       </text>
       <text
         x={margin.left - 30}
         y={margin.top + innerHeight / 2}
         textAnchor="middle"
-        transform={`rotate(-90, ${margin.left - 30}, ${margin.top + innerHeight / 2})`}
+        transform={`rotate(-90, ${margin.left - 30}, ${
+          margin.top + innerHeight / 2
+        })`}
         fontSize={"20px"}
       >
         Sales
       </text>
-    </g>
+    </svg>
   );
 };
 
