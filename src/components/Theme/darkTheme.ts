@@ -117,6 +117,12 @@ const darkTheme: IThemeColor = {
             '#737373',
         ],
     },
+
+    waterfall: {
+        connectingLineColor: '#ffffff', 
+        connectingLineStrokeWidth: 2, 
+    },
+
     xAxis: {
         label: '#ffffff',
         line: {
@@ -371,4 +377,6 @@ const darkTheme: IThemeColor = {
         gridLine: '#8A8A8A',
     },
 };
+
+
 export default darkTheme;

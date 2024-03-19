@@ -1,20 +1,19 @@
-
+import React from 'react';
 import * as d3 from 'd3';
-import XAxis from '../components/Axis/xAxis'; 
-import YAxis from '../components/Axis/yAxis'; 
-import DataLabel from '../components/Datalabel';
-import XAxisTitle from '../components/XAxisTitle';
-import YAxisTitle from '../components/YAxisTitle';
+import DataLabel from '../components/DataValues/Datalabel';
+import YAxis from '../components/Axis/yAxis';
+import XAxis from '../components/Axis/xAxis';
 
-type StackedChartData = { name: string; value: number }[][];
-type StackedChartProps = {
-  data: StackedChartData;
+interface StackedChartProps {
+  data: { name: string; value: number }[][];
   width: number;
   height: number;
   categories: string[];
-};
+  theme: any; 
+  toggleTheme: () => void; 
+}
 
-const StackedChart = ({ data = [], width, height, categories }: StackedChartProps) => {
+const StackedChart: React.FC<StackedChartProps> = ({ data, width, height, categories, theme, toggleTheme }) => {
   // Margins
   const margin = { top: 50, right: 50, bottom: 50, left: 50 };
   const innerWidth = width - margin.left - margin.right;
@@ -35,7 +34,7 @@ const StackedChart = ({ data = [], width, height, categories }: StackedChartProp
     .domain([Math.min(0, d3.min(totals) || 0), maxTotal])
     .range([innerHeight, 0]);
 
-  const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+  const colorScale = d3.scaleOrdinal<string>().range(theme.chart.seriesColors);
 
   const bars = data.map((categoryData, categoryIndex) => {
     let yOffset = 0;
@@ -66,7 +65,7 @@ const StackedChart = ({ data = [], width, height, categories }: StackedChartProp
             height={adjustedHeight}
             fill={colorScale(index)} 
           />
-          <DataLabel x={labelX} y={labelY} value={value} positive={value >= 0 ? "true" : "false"} />
+          <DataLabel x={labelX} y={labelY} value={value} positive={value >= 0 ? "true" : "false"} theme={theme} />
         </g>
       );
     });
@@ -82,19 +81,13 @@ const StackedChart = ({ data = [], width, height, categories }: StackedChartProp
         y={barY}
         dy="0.35em"
         fontSize="12px"
-        fill="black"
+        fill={theme.chart.labelColor}
         textAnchor="middle"
       >
         Total: {total}
       </text>
     );
   });
-
-  const xAxisTitle = <XAxisTitle x={innerWidth / 2} y={innerHeight + margin.bottom / 3 + 20} text="X-Axis" />;
-  const yAxisTitle = <YAxisTitle x={-margin.left / 2} y={innerHeight / 2} text="Y-Axis" />;
-
-  // Positioning the x-axis line
-  const xAxisLine = <line x1={margin.left} y1={innerHeight} x2={innerWidth + margin.left} y2={innerHeight} stroke="black" />;
 
   return (
     <g>
@@ -103,13 +96,13 @@ const StackedChart = ({ data = [], width, height, categories }: StackedChartProp
           Stacked Chart
         </text>
        
-        <XAxis innerHeight={innerHeight} xScale={xScale} data={data[0]} /> 
-        {xAxisTitle}
-        {yAxisTitle}
+        <XAxis innerHeight={innerHeight} xScale={xScale} data={data[0]} theme={theme} /> 
+       
         {bars.flat()}
         {totalLabels}
       </g>
-      <YAxis margin={margin} width={innerWidth} yScale={yScale} />
+      <YAxis margin={margin} width={innerWidth} yScale={yScale} theme={theme} />
+      <button onClick={toggleTheme}>Toggle Theme</button> 
     </g>
   );
 };

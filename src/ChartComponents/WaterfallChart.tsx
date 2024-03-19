@@ -2,19 +2,40 @@ import React from 'react';
 import { scaleBand, scaleLinear } from 'd3-scale';
 import XAxis from '../components/Axis/xAxis'; 
 import YAxis from '../components/Axis/yAxis'; 
-import DataLabel from '../components/Datalabel';
+import DataLabel from '../components/DataValues/Datalabel';
 
-const WaterfallChart = ({ data, width, height, theme, toggleTheme }) => {
-  // Flatten the data and calculate the total sum
+interface WaterfallChartData {
+  name: string;
+  value: number;
+}
+
+interface WaterfallChartProps {
+  data: WaterfallChartData[][];
+  width: number;
+  height: number;
+  theme: {
+    variance: {
+      positive: string;
+      negative: string;
+    };
+    waterfall: {
+      connectingLineColor: string;
+      connectingLineStrokeWidth: number;
+    };
+  };
+  toggleTheme: () => void;
+}
+
+const WaterfallChart: React.FC<WaterfallChartProps> = ({ data, width, height, theme, toggleTheme }) => {
+  
   const flattenedData = data.flat();
   const total = flattenedData.reduce((acc, entry) => acc + entry.value, 0);
 
-  // Margins and inner dimensions
+  
   const margin = { top: 100, right: 100, bottom: 40, left: 40 };
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
-
-  // Calculate bar width and xScale
+// Calculate bar width and xScale
   const barPadding = 0.1;
   const barWidth = innerWidth / flattenedData.length - innerWidth / flattenedData.length * barPadding;
   const categories = flattenedData.map(entry => entry.name);

@@ -116,6 +116,11 @@ const highLightAdditionalColors = {
             '#676A6F',
         ],
     },
+    waterfall: {
+        connectingLineColor: '#333333', 
+        connectingLineStrokeWidth: 1, 
+    },
+
     xAxis: {
         label: '#333333',
         line: {
