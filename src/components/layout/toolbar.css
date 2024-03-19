@@ -1,5 +1,30 @@
 /* toolbar.css */
+.shadowContainer {
+  width: 188px;
+  height: 198px;
+  gap: 0px;
+  opacity: 0px;
+  position: relative;
+  bottom: -23px;
+}
+.all-shadows {
+  position: relative;
+  right: 28px;
+}
+.toolbar-container {
+  display: block;
+  position: relative;
+  right: -245px;
+  width: 202px;
+  height: 668px;
+  padding: 0px 7px 0px 7px;
+  gap: 2px;
+  opacity: 0px;
+  top: 10px;
+  
 
+  border: 1px solid rgb(237, 234, 234);
+}
 .container {
   display: flex;
   padding: 0px 7px;
@@ -74,13 +99,16 @@
 .spacingWrapper,
 .marginWrapper,
 .cornerRadiusContainer,
-.stokeContainer,
-.shadowContainer {
+.stokeContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   align-self: stretch;
+  width: 188px;
+  height: 68px;
+  gap: 0px;
+  opacity: 0px;
 }
 
 .spacingHeader,
@@ -88,14 +116,14 @@
 .cornerRedisHeader,
 .stokeHeader {
   height: 36px;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 10px;
-  padding-bottom: 10px;
   justify-content: flex-start;
   align-items: center;
-  gap: 8px;
   display: inline-flex;
+  width: 79px;
+  height: 36px;
+  padding: 10px 16px 10px 16px;
+  gap: 8px;
+  opacity: 0px;
 }
 
 .spacingTitle,
@@ -120,7 +148,8 @@
   display: flex;
 }
 
-.stoke,.shadow{
+.stoke,
+.shadow {
   display: flex;
   align-items: center;
   gap: 18px;
@@ -131,14 +160,15 @@
   width: var(--Size-20, 20px);
 
   height: var(--Size-20, 20px);
-  border: 1px solid #DDD;
+  border: 1px solid #ddd;
 
   background: var(--dark-gray-icon, #444);
 }
 
 .spacingItem,
 .marginItem,
-.cornerRadiusItem,.stokeContent {
+.cornerRadiusItem,
+.stokeContent {
   display: flex;
   width: 70px;
   padding: 8px;
@@ -193,16 +223,15 @@
   border-radius: 4px;
   background: #f5f5f5;
 }
-.outer-container{
-  
-    width: 29.33px;
-    height: 16px;
-    position: relative;
-    background: #106EBE;
-    border-radius: 13.33px;
-    overflow: hidden;
-  }
-.inner-circle{
+.outer-container {
+  width: 29.33px;
+  height: 16px;
+  position: relative;
+  background: #106ebe;
+  border-radius: 13.33px;
+  overflow: hidden;
+}
+.inner-circle {
   width: 8px;
   height: 8px;
   left: 18.67px;
@@ -211,12 +240,12 @@
   background: white;
   border-radius: 9999px;
 }
-.all-shadows{
+.all-shadows {
   display: flex;
-padding: 10px 10px 10px 13px;
-flex-direction: column;
-justify-content: center;
-align-items: flex-start;
-gap: 10px;
-align-self: stretch;
+  padding: 10px 10px 10px 13px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
 }

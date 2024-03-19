@@ -40,7 +40,7 @@ const StackedChart: React.FC<StackedChartProps> = ({ data, width, height, catego
     let yOffset = 0;
     return categoryData.map((item, index) => {
       const value = item.value;
-      const barHeight = Math.abs(yScale(value) - yScale(0)); // Absolute height
+      const barHeight = Math.abs(yScale(value) - yScale(0)); 
       let barY, adjustedHeight;
       
       if (value >= 0) {

@@ -10,6 +10,9 @@ padding: 10px;
   display: flex;
 align-items: flex-start;
 gap: 10px;
+position: relative;
+    right: -252px;
+    top: 11px;
 }
 
 .custom-item {

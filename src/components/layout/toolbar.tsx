@@ -5,7 +5,7 @@ import { getIcon } from "../constant/Helper";
 
 const Component = () => {
   return (
-    <div className="container">
+    <div className="toolbar-container">
       {/* Grid */}
       <div className="gridContainer">
         <div className="gridItem">
@@ -58,7 +58,7 @@ const Component = () => {
       {/* Corner radius */}
       <div className="cornerRadiusContainer">
         <div className="cornerRadiusHeader">
-          <div className="headerText">Corner radius</div>
+          <div className="marginTitle">Corner radius</div>
         </div>
         <div className="cornerRadiusContent">
           <div className="cornerRadiusItem">

@@ -14,11 +14,11 @@ function App() {
       <PageTitle />
       
       <div className="main-content">
-        {/* <Toolbar /> */}
-        {/* <CustomToolbar /> */}
-        {/* <LayoutGrid /> */}
+        <Toolbar />
+        <CustomToolbar />
+         <LayoutGrid />
         {/* <SubPanel /> */}
-        <TemplateWrapper />
+        {/* <TemplateWrapper /> */}
       </div>
     </div>
   );
