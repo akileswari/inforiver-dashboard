@@ -28,14 +28,20 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({ svgWidth, svgHeight }
         <BarChart data={data} width={svgWidth} height={svgHeight} theme={theme} toggleTheme={function (): void {
           throw new Error('Function not implemented.');
         } } />
-        {/* <WaterfallChart data={data} width={500} height={300} theme={theme} /> */}
+        {/* <WaterfallChart data={data} width={500} height={300} theme={theme} toggleTheme={toggleTheme} /> */}
 
-        <g transform={`translate(${svgWidth - 100}, 20)`} onClick={toggleTheme}>
-          <rect width="90" height="30" fill={theme.footer.label} rx="5" />
-          <text x="45" y="20" textAnchor="middle" fill={theme.footer.label} fontSize="14">
-            Toggle Theme
-          </text>
-        </g>
+        <g transform={`translate(${svgWidth - 100}, 20)`}>
+  <rect width="90" height="30" fill={theme.footer.label} rx="5" />
+  <foreignObject x="0" y="0" width="90" height="30">
+    <select
+      style={{ width: '100%', height: '100%', backgroundColor: 'transparent', border: 'none', outline: 'none' }}
+      onChange={e => toggleTheme(e.target.value)}
+    >
+      <option value="light">Light Theme</option>
+      <option value="dark">Dark Theme</option>
+    </select>
+  </foreignObject>
+</g>
       </svg>
     </div>
   );

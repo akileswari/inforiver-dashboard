@@ -5,44 +5,40 @@ interface YAxisProps {
   width: number;
   yScale: any; 
   theme: {
-    yAxis?: {
-      label: string;
-      line: string;
-      gridLine: string;
-      axisLine: string;
-      scaleBand: string;
-    };
-    fontColor: string;
+    xAxis: any;
+    yAxis: any;
     fontSize: string;
+    fontColor: string;
     fontFamily: string;
+    backgroundColor: string;
+    axisStrokeColor: string; 
   };
 }
 
 const YAxis: React.FC<YAxisProps> = ({ margin, width, yScale, theme }) => {
-  const yAxisTheme = theme.yAxis || {};
-
+  
   return (
     <>
       <g>
         <line
-          x1={margin.left}
+          x1={margin.top +20}
           y1={0}
-          x2={margin.left}
+          x2={width}
           y2={yScale(yScale.domain()[1])}
-          stroke={yAxisTheme.line || theme.fontColor}
+          stroke={theme.yAxis.line}
         />
       </g>
 
       <g className="axis axis--y">
         {yScale.ticks().map((tick, i) => (
           <g key={i} transform={`translate(${margin.left}, ${yScale(tick)})`}>
-            <line x1={0} x2={0} y1={0} y2={0} stroke={yAxisTheme.line || theme.fontColor} /> 
+            <line x1={-6} x2={0} y1={0} y2={0} stroke={theme.yAxis.line} /> 
             <text
               x={-9}
               y={0}
               dy="0.32em"
               textAnchor="end"
-              fill={yAxisTheme.label || theme.fontColor}
+              fill={theme.yAxis.label}
               fontSize={theme.fontSize}
               fontFamily={theme.fontFamily}
             >
