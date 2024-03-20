@@ -1,9 +1,16 @@
-import React from "react";
+
 import "./toolbar.css";
 import "../layout-icon/template bilder icon march 8/css/style.css";
 import { getIcon } from "../constant/Helper";
+import { useState } from "react";
 
-const Component = () => {
+const Toolbar = () => {
+  const [isChecked, setIsChecked] = useState(true);
+
+  
+  const handleToggleChange = () => {
+    setIsChecked(!isChecked);
+  };
   return (
     <div className="toolbar-container">
       {/* Grid */}
@@ -16,44 +23,101 @@ const Component = () => {
         <div className="columnWrapper">
           <div className="columnTitle">Column</div>
           <div className="columnContent">
-            <div className="columnValue">3</div>
-            <i className={getIcon("light-Stepper")}></i>
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              min="0"
+              defaultValue="0"
+            />
           </div>
         </div>
         <div className="rowWrapper">
           <div className="rowTitle">Row</div>
           <div className="rowContent">
-            <div className="rowValue">3</div>
-            <i className={getIcon("light-Stepper")}></i>
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              min="0"
+              defaultValue="0"
+            />
           </div>
         </div>
       </div>
 
       {/* Spacing */}
-      <div className="spacingWrapper">
-        <div className="spacingHeader">
-          <div className="spacingTitle">Spacing</div>
+      <div className="gap">
+        <div className="spacingWrapper">
+          <div className="spacingHeader">
+            <div className="spacingTitle">Spacing</div>
+          </div>
+          <div className="spacingContent">
+            <div className="spacingItem">
+              <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                min="0"
+                defaultValue="0"
+              />
+            </div>
+          </div>
         </div>
-        <div className="spacingContent">
-          <div className="spacingItem">
-            <div className="spacingValue">10 px</div>
 
-            <i className={getIcon("light-dropdown-bottom")}></i>
+        <div className="marginWrapper">
+          <div className="marginHeader">
+            <div className="marginTitle">Margin</div>
+          </div>
+          <div className="marginContent">
+            <div className="marginItem">
+              <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                min="0"
+                defaultValue="0"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="gap">
+        <div className="spacingWrapper">
+          <div className="spacingHeader">
+            <div className="spacingTitle">Horizontal</div>
+          </div>
+          <div className="spacingContent">
+            <div className="spacingItem">
+              <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                min="0"
+                defaultValue="0"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="spacingWrapper">
+          <div className="spacingHeader">
+            <div className="spacingTitle">Vertical</div>
+          </div>
+          <div className="spacingContent">
+            <div className="spacingItem">
+              <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                min="0"
+                defaultValue="0"
+              />
+            </div>
           </div>
         </div>
       </div>
       {/* Margin */}
-      <div className="marginWrapper">
-        <div className="marginHeader">
-          <div className="marginTitle">Margin</div>
-        </div>
-        <div className="marginContent">
-          <div className="marginItem">
-            <div className="marginValue">10 px</div>
-            <i className={getIcon("light-dropdown-bottom")}></i>
-          </div>
-        </div>
-      </div>
+
 
       {/* Corner radius */}
       <div className="cornerRadiusContainer">
@@ -62,8 +126,13 @@ const Component = () => {
         </div>
         <div className="cornerRadiusContent">
           <div className="cornerRadiusItem">
-            <div className="cornerRadiusValue">0</div>
-            <i className={getIcon("light-dropdown-bottom")}></i>
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              min="0"
+              defaultValue="0"
+            />
           </div>
         </div>
       </div>
@@ -75,8 +144,13 @@ const Component = () => {
         </div>
         <div className="stoke">
           <div className="stokeContent">
-            <div className="stokeValue">0</div>
-            <i className={getIcon("light-dropdown-bottom")}></i>
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              min="0"
+              defaultValue="0"
+            />
           </div>
           <div className="colorBox"></div>
         </div>
@@ -90,9 +164,10 @@ const Component = () => {
           <div className="shadowContent">
             <div className="shadowBox">
               <div className="shadow">
-                <div className="outer-container">
-                  <div className="inner-circle"></div>
-                </div>
+                <label className="switch">
+                <input type="checkbox" checked={isChecked} onChange={handleToggleChange}></input>
+                  <span className="slider round"></span>
+                </label>
                 <div className="colorBox"></div>
               </div>
               <div className="all-shadows">
@@ -137,4 +212,4 @@ const Component = () => {
   );
 };
 
-export default Component;
+export default Toolbar;

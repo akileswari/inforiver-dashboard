@@ -9,6 +9,7 @@ export enum ELayouts {
   CARD = "CARD",
   TABLE = "TABLE",
   NOTES = "NOTES",
+  LAYOUT = "LAYOUT",
 }
 
 const MainComp = () => {

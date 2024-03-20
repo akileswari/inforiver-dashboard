@@ -1,11 +1,15 @@
-// CustomToolbar.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import "./customIcon.css";
-import { useTheme } from "../Theme/Theme"; 
+import { useTheme } from "../Theme/Theme";
 import { getIcon } from "../constant/Helper";
 
 const CustomToolbar = () => {
-  const { theme, toggleTheme } = useTheme(); // Using the useTheme hook to get theme and toggleTheme function
+  const { theme, toggleTheme } = useTheme();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleSelect = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <div className="custom-toolbar">
@@ -18,9 +22,9 @@ const CustomToolbar = () => {
         <div className="custom-label">Swap</div>
       </div>
       <div className="custom-item">
-        <i className={getIcon(theme.name)}></i> 
-        <div className="custom-label">Theme</div>
-        <select value={theme.name} onChange={toggleTheme}> 
+        <i className={getIcon("light-theme")}></i>
+        <select value={theme.name} onChange={toggleTheme} style={{ border: 'none' }} title='Theme'>
+          <option selected disabled>Theme</option>
           <option value="light-theme">Light Theme</option>
           <option value="dark-theme">Dark Theme</option>
         </select>

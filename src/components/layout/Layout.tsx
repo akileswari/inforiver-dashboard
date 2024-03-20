@@ -1,25 +1,19 @@
+import { Provider } from "react-redux";
+import store from "../../store";
+import Toolbar from "./toolbar";
+import CustomToolbar from "./customIcon";
+import LayoutGrid from "./layoutGrid";
 
-import './Layout.css';
+
+
 
 const LayoutSection = () => {
   return (
-    // <div className="container">
-    //   <div className="left-section">
-    //     <div className="title-container">
-    //       <div className="title">Layout</div>
-    //     </div>
-    //   </div>
-    //   <div className="right-section">
-    //     <div className="button-container">
-    //       <div className="reset-button">
-    //         <div className="button-text">Reset</div>
-    //       </div>
-    //       <div className="export-button">
-    //         <div className="button-text">Export Json</div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
+    <Provider store={store}>
+      <Toolbar/>
+      <CustomToolbar/>
+      <LayoutGrid/>
+      </Provider>
   );
 };
 
