@@ -27,42 +27,52 @@ const StackedLineChart: React.FC<LineChartProps> = ({
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
-  // Flatten the nested array of objects
-  const flattenedData = data.reduce((acc, cur) => [...acc, ...cur], []);
+  // Calculate cumulative values
+  const cumulativeData = data.reduce((acc, cur) => {
+    const lastDataset = acc[acc.length - 1];
+    return [
+      ...acc,
+      cur.map((d, i) => ({
+        ...d,
+        cumulativeValue:
+          d.value + (lastDataset ? lastDataset[i].cumulativeValue : 0),
+      })),
+    ];
+  }, [] as DataItem[][]);
 
+  // Helper function to calculate maximum cumulative sum
+  function getMaxCumulativeSum(data: DataItem[][]) {
+    return Math.max(...data[data.length - 1].map((d) => d.cumulativeValue));
+  }
   // Scales
   const xScale = scaleBand()
-    .domain(flattenedData.map((d) => d.name))
+    .domain(data[0].map((d) => d.name))
     .range([0, innerWidth])
     .padding(0.4);
 
   const yScale = scaleLinear()
-    .domain([0, getMaxCumulativeSum(data)])
+    .domain([0, getMaxCumulativeSum(cumulativeData)])
     .nice()
     .range([innerHeight, 0]);
 
-  // Helper function to calculate maximum cumulative sum
-  function getMaxCumulativeSum(data: DataItem[][]) {
-    return Math.max(
-      ...data[data.length - 1].map((d, i) =>
-        data.reduce((acc, cur) => acc + cur[i].value, 0)
-      )
-    );
-  }
-
   // Generate paths for lines for each dataset
-  const paths = data.map((dataset) =>
+  const paths = cumulativeData.map((dataset) =>
     dataset.map(
-      (d) => `${xScale(d.name)! + xScale.bandwidth() / 2} ${yScale(d.value)}`
+      (d) =>
+        `${xScale(d.name)! + xScale.bandwidth() / 2} ${yScale(
+          d.cumulativeValue
+        )}`
     )
   );
 
-  // Generate data labels
-  const dataLabels = flattenedData.map((d) => ({
-    x: xScale(d.name)! + xScale.bandwidth() / 2,
-    y: yScale(d.value),
-    label: d.value.toString(), // Adjust this as needed
-  }));
+  // Generate data labels for each dataset
+  const dataLabels = cumulativeData.map((dataset) =>
+    dataset.map((d) => ({
+      x: xScale(d.name)! + xScale.bandwidth() / 2,
+      y: yScale(d.cumulativeValue),
+      label: d.cumulativeValue.toString(), // Adjust this as needed
+    }))
+  );
 
   return (
     <g width={width} height={height}>
@@ -70,7 +80,7 @@ const StackedLineChart: React.FC<LineChartProps> = ({
         {/* X and Y Axes */}
         <XAxis
           innerHeight={innerHeight}
-          data={flattenedData}
+          data={data[0]}
           xScale={xScale}
           index={index}
         />
@@ -87,17 +97,20 @@ const StackedLineChart: React.FC<LineChartProps> = ({
           />
         ))}
 
-        {/* Data labels */}
-        {dataLabels.map((d, i) => (
-          <TextValues
-            key={i}
-            x={d.x}
-            y={d.y - 5} // Adjust this value to position labels properly
-            value={d.label}
-            xScale={xScale}
-            yScale={yScale}
-          />
-        ))}
+        {/* Data labels for each dataset */}
+        {dataLabels.map((dataset, i) =>
+          dataset.map((d, j) => (
+            <TextValues
+              key={`${i}-${j}`}
+              x={d.x}
+              y={d.y - 5} // Adjust this value to position labels properly
+              value={d.label}
+              xScale={xScale}
+              yScale={yScale}
+              fontSize={"12px"}
+            />
+          ))
+        )}
       </g>
     </g>
   );

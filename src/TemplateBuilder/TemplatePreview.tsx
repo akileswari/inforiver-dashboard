@@ -51,7 +51,6 @@ const TemplatePreview = (prop: IProps) => {
     setPreviewWidth(calcWidth);
     // document.addEventListener("resize", () => {});
   });
-  console.log(height, width);
   return (
     <div
       ref={templateRef}
