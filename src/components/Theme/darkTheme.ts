@@ -1,156 +1,64 @@
-import themes from "./Theme";
-
-
-const boxplotColors = {
-    BP: '#ffffff',
-    BP1: '#118DFF',
-    BP2: '#999999',
-    BP3: '#DFDFDF',
-    BP4: '#BFBFBF',
-    BP5: '#808080',
-    BP6: '#666666',
-    BP7: '#CFD4D8',
-    BP8: '#ACB4BC',
-};
-
-const additionalColors = {
-    AC1: '#118DFF',
-    AC2: '#999999',
-    AC3: '#DFDFDF',
-    AC4: '#BFBFBF',
-    AC5: '#808080',
-    AC6: '#666666',
-    AC7: '#CFD4D8',
-    AC8: '#ACB4BC',
-    AC9: '#97A1AC',
-    AC10: '#7E8A98',
-    AC11: '#636E78',
-    AC12: '#ADADC9',
-    AC13: '#7F7D9C',
-    AC14: '#696880',
-    AC15: '#B6BECE',
-    AC16: '#919DB6',
-    AC17: '#7685A3',
-    AC18: '#D1C2D6',
-    AC19: '#B69DBE',
-    AC20: '#9777A2',
-    AC21: '#D4CAD4',
-    AC22: '#BAAAA1',
-    AC23: '#9E887B',
-    AC24: '#D7C1C1',
-    AC25: '#C19F9F',
-    AC26: '#A67373',
-    AC27: '#C1D7D0',
-    AC28: '#9BBFB3',
-    AC29: '#73A695',
-    ...boxplotColors,
-};
-const highLightBoxplotColors = {
-    BP: '#E2E9F2',
-    BP1: '#9CA9BD',
-    BP2: '#B2D9FF',
-    BP3: '#81AFDB',
-    BP4: '#4785BF',
-    BP5: '#2284E0',
-    BP6: '#A0C6EB',
-    BP7: '#73A4D1',
-    BP8: '#3681C7',
-};
-
-const highLightAdditionalColors = {
-    AC1: '#E2E9F2',
-    AC2: '#9CA9BD',
-    AC3: '#B2D9FF',
-    AC4: '#81AFDB',
-    AC5: '#4785BF',
-    AC6: '#2284E0',
-    AC7: '#A0C6EB',
-    AC8: '#73A4D1',
-    AC9: '#3681C7',
-    AC10: '#A9BFD4',
-    AC11: '#E2E9F2',
-    AC12: '#9CA9BD',
-    AC13: '#B2D9FF',
-    AC14: '#81AFDB',
-    AC15: '#4785BF',
-    AC16: '#2284E0',
-    AC17: '#A0C6EB',
-    AC18: '#73A4D1',
-    AC19: '#3681C7',
-    AC20: '#A9BFD4',
-    AC21: '#E2E9F2',
-    AC22: '#9CA9BD',
-    AC23: '#B2D9FF',
-    AC24: '#81AFDB',
-    AC25: '#4785BF',
-    AC26: '#2284E0',
-    AC27: '#A0C6EB',
-    AC28: '#73A4D1',
-    AC29: '#3681C7',
-    ...highLightBoxplotColors,
-};
+import { IThemeColor } from "./typing";
 
 const darkTheme: IThemeColor = {
     chart: {
-        background: '#333333',
+        background: '#000000',
         foreground: '#ffffff',
         accent: '#0078D4',
-        accentLight: '#043962',
-        hover: '#4d4d4d',
-        hoverStrong: '#595959',
-        border: '#aaaaaa',
+        accentLight: '#E9F5FE',
+        hover: '#333333',
+        hoverStrong: '#444444',
+        border: '#666666',
         seriesColors: [
-            '#E7E7E7',
-            '#797979',
-            '#A3A3A3',
-            '#6C6C6C',
+            '#4B4B4B',
             '#999999',
-            '#888888',
-            '#ACACAC',
-            '#DADADA',
-            '#C2C2C2',
-            '#666666',
-            '#919191',
-            '#CDCDCD',
-            '#B7B7B7',
+            '#747474',
+            '#E4E4E4',
+            '#BFBFBF',
+            '#848484',
+            '#ABABAB',
+            '#5D5D5D',
+            '#9E9D9D',
+            '#3F3F3F',
+            '#D9D9D9',
+            '#898E94',
             '#818181',
-            '#737373',
+            '#707070',
+            '#676A6F',
         ],
     },
-
     waterfall: {
-        connectingLineColor: '#ffffff', 
-        connectingLineStrokeWidth: 2, 
+        connectingLineColor: '#333333',
+        connectingLineStrokeWidth: 1,
     },
-
     xAxis: {
         label: '#ffffff',
         line: {
-            normal: '#aaaaaa',
-            thick: '#aaaaaa',
-            double: '#aaaaaa',
+            normal: '#ffffff',
+            thick: '#858585',
+            double: '#ffffff',
         },
-        gridLine: '#aaaaaa',
-        groupLine: '#666666',
+        gridLine: '#666666',
+        groupLine: '#555555',
     },
     yAxis: {
         label: '#ffffff',
-        line: '#aaaaaa',
-        gridLine: '#aaaaaa',
-        axisLine: '#aaaaaa',
-        scaleBand: '#74b1e9',
+        line: '#ffffff',
+        gridLine: '#666666',
+        axisLine: '#666666',
+        scaleBand: '#268ce6',
     },
     dataLabel: {
         label: '#ffffff',
-        background: '#333333',
-        extraACBgColor: '#333333cc',
+        background: '#000000',
+        extraACBgColor: '#ffffffcc',
     },
     deviation: {
         label: '#ffffff',
-        line: '#aaaaaa',
-        circle: '#aaaaaa',
-        bar: '#aaaaaa',
-        background: '#118dff',
+        line: '#808080',
+        circle: '#000000',
+        bar: '#ffffff',
+        background: '#0070c0',
     },
     legend: {
         label: '#ffffff',
@@ -161,222 +69,150 @@ const darkTheme: IThemeColor = {
     },
     measure: {
         fillColor: {
-            AC: '#ffffff',
-            PY: '#a6a6a6',
-            PL: '#333333',
-            FC: '#333333',
-            ...additionalColors,
-            TT: '#C3CCD7',
+            AC: '#262626',
+            PY: '#bfbfbf',
+            PL: '#4e4e4e',
+            FC: '#262626',
+           
         },
         highlightColor: {
-            AC: '#E2E9F2',
-            PY: '#9CA9BD',
-            PL: '#E2E9F2',
-            FC: '#E2E9F2',
-            ...highLightAdditionalColors,
-            TT: '#E2E9F2',
+            AC: '#0E4FA2',
+            PY: '#82BDEB',
+            PL: '#0E4FA2',
+            FC: '#0E4FA2',
+           
         },
         borderColor: {
-            AC: '#ffffff',
-            PY: '#a6a6a6',
-            PL: '#99CDFF',
-            FC: '#FD9EFF',
-            ...additionalColors,
-            TT: '#C3CCD7',
+            AC: '#262626',
+            PY: '#bfbfbf',
+            PL: '#4e4e4e',
+            FC: '#262626',
+            
         },
         pattern: {
             AC: 'solid',
             PY: 'solid',
             PL: 'outlined',
             FC: 'hatched',
-           
-            TT: 'solid',
+            // Additional patterns here...
         },
     },
     lineArea: {
-        fillColor: {
-            AC: '#ffffff',
-            PY: '#a6a6a6',
-            PL: '#99CDFF',
-            FC: '#FD9EFF',
-            ...additionalColors,
-            TT: '#C3CCD7',
-        },
-        borderColor: {
-            AC: '#ffffff',
-            PY: '#a6a6a6',
-            PL: '#99CDFF',
-            FC: '#FD9EFF',
-            ...additionalColors,
-            TT: '#C3CCD7',
-        },
-        boxPlotBorderColor: {
-            AC: '#0078d4',
-            PY: '#a6a6a6',
-            PL: '#99CDFF',
-            FC: '#FD9EFF',
-            ...additionalColors,
-            TT: '#C3CCD7',
-        },
-        lineStyle: {
-            AC: 'solid',
-            PY: 'solid',
-            PL: 'dashed',
-            FC: 'dashed',
-           
-            TT: 'solid',
-        },
-        marker: {
-            AC: { enabled: true, color: '#EAEAEA', boxPlotLineMarkerColor: '#0078d4' },
-            PY: { enabled: false },
-            PL: { enabled: false, color: '#EAEAEA', boxPlotLineMarkerColor: '#99CDFF' },
-            FC: { enabled: true },
-            
-        },
+        fillColor: undefined,
+        borderColor: undefined,
+        boxPlotBorderColor: undefined,
+        lineStyle: undefined,
+        marker: undefined,
+        boxPlotMarker: undefined
     },
     variance: {
-        positive: '#7BCA01',
-        negative: '#f64747',
+        positive: "",
+        negative: ""
     },
     trendColor: {
-        up: '#7bca01',
-        down: '#f64747',
-        Neutral: '#BFBFBF',
+        down: "",
+        up: "",
+        Neutral: ""
     },
-
-    marker: '#ffffff',
+    marker: "",
     smallMultiples: {
-        panelBackground: '#333333',
-        panelBorder: '#aaaaaa',
-        panelTitleCategory: '#ffffff',
-        panelTitleValue: '#ffffff',
-        alternateGrid: '#595959',
+        panelBackground: "",
+        panelBorder: "",
+        panelTitleCategory: "",
+        panelTitleValue: "",
+        alternateGrid: ""
     },
     kpi: {
-        title: '#ffffff',
-        total: '#ffffff',
-        valueLabel: '#ffffff',
+        total: "",
+        title: "",
+        valueLabel: "",
         value: {
-            positive: '#7BCA01',
-            negative: '#f64747',
-        },
+            positive: "",
+            negative: ""
+        }
     },
-    rankedOthers: {
-        AC: '#FFCF91',
-        PY: '#CF8957',
-        PL: '#FFCF91',
-        FC: '#FFCF91',
-    },
+    rankedOthers: undefined,
     analytics: {
-        referenceLine: '#88C6FF',
-        referenceBand: '#434343',
-        referenceBandOpacity: 0.5,
-        trendLine: '#ff8d5b',
-        fontColor: '#8AC7ff',
-        additionalSeries: '#4EC0C3',
-        foreground: '#FFFFFF',
-        background: '#333333',
-        backgroundOpacity: 0.8,
-        errorBar: '#AAAAAA',
+        referenceLine: "",
+        referenceBand: "",
+        referenceBandOpacity: 0,
+        trendLine: "",
+        fontColor: "",
+        additionalSeries: "",
+        foreground: "",
+        background: "",
+        backgroundOpacity: 0,
+        errorBar: ""
     },
     annotation: {
-        markerColor: '#0078D4',
-        arrowColor: '#88C6FF',
-        borderColor: '#88C6FF',
+        markerColor: "",
+        arrowColor: "",
+        borderColor: ""
     },
     outlineRect: {
-        borderColor: '#8A8A8A',
+        borderColor: ""
     },
     bullet: {
-        CONDITIONAL_BAR: {
-            actual: '', // variance color
-            target: '#FFFFFF',
-            additionalTarget: '#A6A6A6',
-        },
-        QUALITATIVE_BULLET: {
-            actual: '#FFFFFF',
-            target: '#FFFFFF',
-            additionalTarget: '#A6A6A6',
-        },
-        COMPARATIVE_BULLET: {
-            actual: '#FFFFFF',
-            target: '#74B1E9',
-            additionalTarget: '#FFFFFf',
-        },
-        DOT_PLOT: {
-            actual: '#FFFFFF',
-            target: '#74B1E9',
-            additionalTarget: '#A6A6A6',
-        },
-        DUMBBELL: {
-            actual: '#FFFFFF',
-            target: '#A6A6A6',
-            additionalTarget: '', // no additional target
-        },
-        IBCS_BULLET: {
-            actual: '#ffffff',
-            target: '#A6A6A6',
-            additionalTarget: '',
-        },
-        PROGRESS_CHART: {
-            actual: '#ffffff',
-            target: '', // Target color will differ based on the template
-            additionalTarget: '#A6A6A6',
-        },
+        CONDITIONAL_BAR: undefined,
+        PROGRESS_CHART: undefined,
+        IBCS_BULLET: undefined,
+        QUALITATIVE_BULLET: undefined,
+        COMPARATIVE_BULLET: undefined,
+        DUMBBELL: undefined,
+        DOT_PLOT: undefined
     },
     trellis: {
-        averagePanel: '#565656',
+        averagePanel: ""
     },
     boxPlotConfig: {
         whiskerMin: {
-            fillColor: '#A0A0A0',
+            fillColor: ""
         },
         whiskerMax: {
-            fillColor: '#A0A0A0',
+            fillColor: ""
         },
         medianQuartile: {
-            fillColor: '#46D5F4',
+            fillColor: ""
         },
         commonSettings: {
-            fillColor: '#FFFFFF',
-            stemColor: '#A0A0A0',
+            fillColor: "",
+            stemColor: ""
         },
         outliers: {
-            color: '#46D5F4',
+            color: ""
         },
         boxPlotOverlapped: {
             commonSettings: {
-                fillColor: '#C6C6C6',
-            },
+                fillColor: ""
+            }
         },
         boxPlotForecast: {
             whiskerMin: {
-                fillColor: '#A0A0A0',
+                fillColor: ""
             },
             whiskerMax: {
-                fillColor: '#A0A0A0',
+                fillColor: ""
             },
             medianQuartile: {
-                fillColor: '#46D5F4',
+                fillColor: ""
             },
             commonSettings: {
-                fillColor: '#FFFFFF',
-                stemColor: '#A0A0A0',
-            },
-        },
+                fillColor: "",
+                stemColor: ""
+            }
+        }
     },
     table: {
-        background: '#333333',
-        font: '#FFFFFF',
-        columnHeaderColor: '#FFFFFF',
-        rowHeaderColor: '#FFFFFF',
-        valueColor: '#FFFFFF',
-        outline: '#AAAAAA',
-        oddRow: '#333333',
-        evenRow: '#464646',
-        gridLine: '#8A8A8A',
-    },
+        background: "",
+        font: "",
+        columnHeaderColor: "",
+        rowHeaderColor: "",
+        valueColor: "",
+        outline: "",
+        oddRow: "",
+        evenRow: "",
+        gridLine: ""
+    }
 };
-
 
 export default darkTheme;

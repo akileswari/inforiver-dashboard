@@ -1,5 +1,4 @@
 import { useState } from "react";
-//import { AdvancedColorPicker } from "@visualbi/bifrost-ui/dist/react/forms/AdvancedColorPicker";
 import TemplateWrapper from "./TemplateBuilder/TemplateWrapper";
 import SubPanel from "./components/SubPanel/SubPanel";
 import PageTitle from "./components/pageTitle/PageTitle";
@@ -29,11 +28,7 @@ const MainComp = () => {
           showSubPanelElements={showSubPanelElements}
         />
         <SubPanel showSubPanelElements={showSubPanelElements} />
-        <TemplateWrapper />
-        {/* <AdvancedColorPicker onChange={function (color: string): void {
-          throw new Error("Function not implemented.");
-        } } value={""}
-        /> */}
+        {/* <TemplateWrapper /> */}
       </div>
     </div>
   );

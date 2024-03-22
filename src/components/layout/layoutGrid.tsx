@@ -1,7 +1,7 @@
-import "./customIcon.css";
+
 
 import "../layout-icon/template bilder icon march 8/css/style.css";
-import "./layoutGrid.css";
+import "../CSS/layoutGrid.css";
 const LayoutGrid = () => {
   return(
    <div className="grid-container">

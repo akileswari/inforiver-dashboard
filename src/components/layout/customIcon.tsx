@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./customIcon.css";
+import "../CSS/customIcon.css";
 import { useTheme } from "../Theme/Theme";
 import { getIcon } from "../constant/Helper";
 

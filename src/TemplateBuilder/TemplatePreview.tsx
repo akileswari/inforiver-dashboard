@@ -102,7 +102,10 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({ svgWidth, svgHeight }
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="template-preview">
+    <div
+      className="template-preview"
+      style={{ height: "100%", width: "100%" }}
+    >
       <svg width={svgWidth} height={svgHeight} style={{ backgroundColor: theme.chart.background }}>
 
         <ClusteredChart datasets={data} width={svgWidth} height={svgHeight} theme={theme} toggleTheme={toggleTheme} />

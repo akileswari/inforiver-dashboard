@@ -1,4 +1,5 @@
 import '../Theme/Theme'
+import { IThemeColor } from './typing';
 
 const boxplotColors = {
     BP: '#262626',

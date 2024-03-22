@@ -1,5 +1,5 @@
 
-import "./toolbar.css";
+import "../CSS/toolbar.css";
 import "../layout-icon/template bilder icon march 8/css/style.css";
 import { getIcon } from "../constant/Helper";
 import { useState } from "react";
@@ -25,12 +25,12 @@ const Toolbar = () => {
 
   const toggleColorPicker1 = () => {
     setShowColorPicker1(!showColorPicker1);
-    setShowColorPicker2(false); // Close the other color picker
+    setShowColorPicker2(false);
   };
 
   const toggleColorPicker2 = () => {
     setShowColorPicker2(!showColorPicker2);
-    setShowColorPicker1(false); // Close the other color picker
+    setShowColorPicker1(false); 
   };
   return (
     <div className="toolbar-container">
