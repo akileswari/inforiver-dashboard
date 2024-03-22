@@ -155,13 +155,12 @@ const SubPanel = ({
             <i className="template-builder light-search"></i>
             <input
               type="text"
-              name="Search"
               // id="search-chart"
               placeholder="Search.."
               className="search-box"
             />
           </div>
-          <p className="chart-type-text">comparision / composition</p>
+          <p className="chart-type-text">Comparision / Composition</p>
 
           <ChartBoxHolder
             title="Column"

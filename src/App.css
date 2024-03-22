@@ -42,8 +42,8 @@
 .sub-panel {
   padding: 1rem;
   /* height: calc(100% - 75px); */
-  height: 600px;
-  width: 180px;
+  height: 550px;
+  width: 202px;
   font-family: Inter;
   border-right: 1px solid #d9e1e8;
 }
