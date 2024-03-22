@@ -5,13 +5,15 @@
   gap: 0px;
   justify: space-between;
   opacity: 0px;
-display: flex;
+  display: flex;
 }
-.container{
+
+.container {
   container: flex;
   height: 80px;
   width: 100%;
 }
+
 .left-section {
   display: flex;
   align-items: center;
@@ -26,15 +28,15 @@ display: flex;
   gap: 6px;
 } */
 
-.title-container{
+.title-container {
   width: 65px;
-  height:36px;
+  height: 36px;
   gap: 6px;
   border-radius: 4px 0px 0px 0px;
   opacity: 0px;
   position: relative;
-  left: -593px ;
-    top: 20px;
+  left: -593px;
+  top: 20px;
 }
 
 .right-section {
@@ -42,7 +44,7 @@ display: flex;
   display: flex;
   align-items: center;
   gap: 10px;
-  
+
 }
 
 .button-container {
@@ -50,8 +52,7 @@ display: flex;
   position: relative;
 }
 
-.reset-button
- {
+.reset-button {
   width: Fixed (76px)px;
   height: Fixed (38px)px;
   left: 309.2px;
@@ -60,17 +61,18 @@ display: flex;
   border-radius: 5px 0px 0px 0px;
   border: 1px 0px 0px 0px;
   opacity: 0px;
-  
-  
+
+
 }
-.export-button{
+
+.export-button {
   width: Hug (127px)px;
-height: Fixed (38px)px;
-left: 397.2px;
-padding: 8px 24px 8px 24px;
-gap: 10px;
-border-radius: 5px 0px 0px 0px;
-opacity: 0px;
+  height: Fixed (38px)px;
+  left: 397.2px;
+  padding: 8px 24px 8px 24px;
+  gap: 10px;
+  border-radius: 9px;
+  opacity: 0px;
 
 }
 
@@ -89,10 +91,10 @@ opacity: 0px;
   color: white;
 }
 
-.button-container{
+.button-container {
   position: relative;
-    right: -476px;
-    top: -13px ;
-    display: inline-flex;
+  right: -476px;
+  top: -13px;
+  display: inline-flex;
 
 }

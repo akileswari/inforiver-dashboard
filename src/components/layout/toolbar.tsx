@@ -3,13 +3,34 @@ import "./toolbar.css";
 import "../layout-icon/template bilder icon march 8/css/style.css";
 import { getIcon } from "../constant/Helper";
 import { useState } from "react";
-
+import { SketchPicker } from 'react-color';
 const Toolbar = () => {
   const [isChecked, setIsChecked] = useState(true);
+  const [color1, setColor1] = useState('#ffffff');
+  const [color2, setColor2] = useState('#ffffff');
+  const [showColorPicker1, setShowColorPicker1] = useState(false);
+  const [showColorPicker2, setShowColorPicker2] = useState(false);
 
-  
   const handleToggleChange = () => {
     setIsChecked(!isChecked);
+  };
+
+  const handleColorChange1 = (selectedColor) => {
+    setColor1(selectedColor.hex);
+  };
+
+  const handleColorChange2 = (selectedColor) => {
+    setColor2(selectedColor.hex);
+  };
+
+  const toggleColorPicker1 = () => {
+    setShowColorPicker1(!showColorPicker1);
+    setShowColorPicker2(false); // Close the other color picker
+  };
+
+  const toggleColorPicker2 = () => {
+    setShowColorPicker2(!showColorPicker2);
+    setShowColorPicker1(false); // Close the other color picker
   };
   return (
     <div className="toolbar-container">
@@ -47,75 +68,41 @@ const Toolbar = () => {
       </div>
 
       {/* Spacing */}
-      <div className="gap">
-        <div className="spacingWrapper">
-          <div className="spacingHeader">
-            <div className="spacingTitle">Spacing</div>
-          </div>
-          <div className="spacingContent">
-            <div className="spacingItem">
-              <input
-                type="number"
-                id="quantity"
-                name="quantity"
-                min="0"
-                defaultValue="0"
-              />
-            </div>
+      <div className="spacingWrapper">
+        <div className="spacingHeader">
+          <div className="spacingTitle">Spacing</div>
+        </div>
+        <div className="spacingContent">
+          <div className="spacingItem">
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              min="0"
+              defaultValue="0"
+            />
           </div>
         </div>
+      </div>
 
-        <div className="marginWrapper">
-          <div className="marginHeader">
-            <div className="marginTitle">Margin</div>
-          </div>
-          <div className="marginContent">
-            <div className="marginItem">
-              <input
-                type="number"
-                id="quantity"
-                name="quantity"
-                min="0"
-                defaultValue="0"
-              />
-            </div>
+      <div className="marginWrapper">
+        <div className="marginHeader">
+          <div className="marginTitle">Margin</div>
+        </div>
+        <div className="marginContent">
+          <div className="marginItem">
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              min="0"
+              defaultValue="0"
+            />
           </div>
         </div>
       </div>
-      <div className="gap">
-        <div className="spacingWrapper">
-          <div className="spacingHeader">
-            <div className="spacingTitle">Horizontal</div>
-          </div>
-          <div className="spacingContent">
-            <div className="spacingItem">
-              <input
-                type="number"
-                id="quantity"
-                name="quantity"
-                min="0"
-                defaultValue="0"
-              />
-            </div>
-          </div>
-        </div>
-        <div className="spacingWrapper">
-          <div className="spacingHeader">
-            <div className="spacingTitle">Vertical</div>
-          </div>
-          <div className="spacingContent">
-            <div className="spacingItem">
-              <input
-                type="number"
-                id="quantity"
-                name="quantity"
-                min="0"
-                defaultValue="0"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+
+
       {/* Margin */}
 
 
@@ -151,64 +138,76 @@ const Toolbar = () => {
               min="0"
               defaultValue="0"
             />
-          </div>
-          <div className="colorBox"></div>
-        </div>
-      </div>
-      {/* Shadow */}
-      <div className="shadowContainer">
-        <div className="shadowHeader">
-          <div className="headerText">Shadow</div>
-        </div>
-        <div className="shadowItem">
-          <div className="shadowContent">
-            <div className="shadowBox">
-              <div className="shadow">
-                <label className="switch">
-                <input type="checkbox" checked={isChecked} onChange={handleToggleChange}></input>
-                  <span className="slider round"></span>
-                </label>
-                <div className="colorBox"></div>
+            <div className="color-picker">
+              <div className="colorBox" onClick={toggleColorPicker1}>
+                {showColorPicker1 && (
+                  <SketchPicker color={color1} onChange={handleColorChange1} className="picker" />
+                )}
               </div>
-              <div className="all-shadows">
-                <div className="shadowInner">
-                  <div className="shadow-icon">
-                    <i className={getIcon("light-shadow-top")}></i>
+            </div>
+          </div>
+        </div>
+        {/* Shadow */}
+        <div className="shadowContainer">
+          <div className="shadowHeader">
+            <div className="headerText">Shadow</div>
+          </div>
+          <div className="shadowItem">
+            <div className="shadowContent">
+              <div className="shadowBox">
+                <div className="shadow">
+                  <label className="switch">
+                    <input type="checkbox" checked={isChecked} onChange={handleToggleChange}></input>
+                    <span className="slider round"></span>
+                  </label>
+                  <div className="color-picker">
+                    <div className="colorBox" onClick={toggleColorPicker2}>
+                      {showColorPicker2 && (
+                        <SketchPicker color={color2} onChange={handleColorChange2} className="picker_shadow" />
+                      )}
+                    </div>
                   </div>
-                  <div className="shadow-icon">
-                    <i className={getIcon("light-shadow-topleft")}></i>
-                  </div>
-                  <div className="shadow-icon">
-                    <i className={getIcon("light-shadow-right")}></i>
-                  </div>
-                  <div className="shadow-icon">
-                    <i className={getIcon("light-shadow-bottomleft")}></i>
-                  </div>
-                  <div className="shadow-icon">
-                    <i className={getIcon("light-shadow-bottom")}></i>
-                  </div>
-                  <div className="shadow-icon">
-                    <i className={getIcon("light-shadow-bottomright")}></i>
-                  </div>
-                  <div className="shadow-icon">
-                    <i className={getIcon("light-shadow-left")}></i>
-                  </div>
-                  <div className="shadow-icon">
-                    <i className={getIcon("light-shadow-centre")}></i>
-                  </div>
-                  <div className="shadow-icon">
-                    <i className={getIcon("light-shadow-topright")}></i>
+                </div>
+                <div className="all-shadows">
+                  <div className="shadowInner">
+                    <div className="shadow-icon">
+                      <i className={getIcon("light-shadow-top")}></i>
+                    </div>
+                    <div className="shadow-icon">
+                      <i className={getIcon("light-shadow-topleft")}></i>
+                    </div>
+                    <div className="shadow-icon">
+                      <i className={getIcon("light-shadow-right")}></i>
+                    </div>
+                    <div className="shadow-icon">
+                      <i className={getIcon("light-shadow-bottomleft")}></i>
+                    </div>
+                    <div className="shadow-icon">
+                      <i className={getIcon("light-shadow-bottom")}></i>
+                    </div>
+                    <div className="shadow-icon">
+                      <i className={getIcon("light-shadow-bottomright")}></i>
+                    </div>
+                    <div className="shadow-icon">
+                      <i className={getIcon("light-shadow-left")}></i>
+                    </div>
+                    <div className="shadow-icon">
+                      <i className={getIcon("light-shadow-centre")}></i>
+                    </div>
+                    <div className="shadow-icon">
+                      <i className={getIcon("light-shadow-topright")}></i>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="shadowBox">
-              <div className="shadowInner"></div>
+              <div className="shadowBox">
+                <div className="shadowInner"></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      /</div>
   );
 };
 

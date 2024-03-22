@@ -1,4 +1,5 @@
 import { useState } from "react";
+//import { AdvancedColorPicker } from "@visualbi/bifrost-ui/dist/react/forms/AdvancedColorPicker";
 import TemplateWrapper from "./TemplateBuilder/TemplateWrapper";
 import SubPanel from "./components/SubPanel/SubPanel";
 import PageTitle from "./components/pageTitle/PageTitle";
@@ -9,7 +10,7 @@ export enum ELayouts {
   CARD = "CARD",
   TABLE = "TABLE",
   NOTES = "NOTES",
-  LAYOUT = "LAYOUT",
+  LAYOUT = "LAYOUT"
 }
 
 const MainComp = () => {
@@ -29,6 +30,10 @@ const MainComp = () => {
         />
         <SubPanel showSubPanelElements={showSubPanelElements} />
         <TemplateWrapper />
+        {/* <AdvancedColorPicker onChange={function (color: string): void {
+          throw new Error("Function not implemented.");
+        } } value={""}
+        /> */}
       </div>
     </div>
   );

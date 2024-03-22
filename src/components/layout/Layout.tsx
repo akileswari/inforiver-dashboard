@@ -10,10 +10,10 @@ import LayoutGrid from "./layoutGrid";
 const LayoutSection = () => {
   return (
     <Provider store={store}>
-      <Toolbar/>
-      <CustomToolbar/>
-      <LayoutGrid/>
-      </Provider>
+      <Toolbar />
+      <CustomToolbar />
+      <LayoutGrid />
+    </Provider>
   );
 };
 

@@ -13,21 +13,23 @@ const CustomToolbar = () => {
 
   return (
     <div className="custom-toolbar">
+      
       <div className="custom-item">
-        <i className={getIcon("light-card")}></i>
-        <div className="custom-label">Auto fit</div>
+        <i className={getIcon("light-theme")}></i>
+        <select value={theme.name} onChange={toggleTheme}  title='Theme'>
+          <option selected disabled>Theme</option>
+          <option value="light-theme">Light Theme</option>
+          <option value="dark-theme">Dark Theme</option>
+        </select>
       </div>
+      
       <div className="custom-item">
         <i className={getIcon("light-swap")}></i>
         <div className="custom-label">Swap</div>
       </div>
       <div className="custom-item">
-        <i className={getIcon("light-theme")}></i>
-        <select value={theme.name} onChange={toggleTheme} style={{ border: 'none' }} title='Theme'>
-          <option selected disabled>Theme</option>
-          <option value="light-theme">Light Theme</option>
-          <option value="dark-theme">Dark Theme</option>
-        </select>
+        <i className={getIcon("light-delete")}></i>
+        <div className="custom-label">Delete</div>
       </div>
       <div className="line"></div>
       <div className="custom-separator"></div>

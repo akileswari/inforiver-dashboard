@@ -9,8 +9,8 @@ const TemplateWrapper: React.FC = () => {
 
   return (
     <div className="template-wrapper" style={{ height: `${divHeight}px`, width: `${divWidth}px` }}>
-      {/* <TemplateToolbar /> */}
-      {/* <TemplatePreview svgWidth={fWidth} svgHeight={fHeight} /> */}
+      {/* <TemplateToolbar />
+      <TemplatePreview svgWidth={fWidth} svgHeight={fHeight} /> */}
     </div>
   );
 }

@@ -99,8 +99,7 @@
 
 .spacingWrapper,
 .marginWrapper,
-.cornerRadiusContainer,
-.stokeContainer {
+.cornerRadiusContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -122,8 +121,6 @@
   display: inline-flex;
   width: 79px;
   height: 36px;
-  padding: 10px 16px 10px 16px;
-  gap: 8px;
   opacity: 0px;
 }
 
@@ -162,7 +159,7 @@
 
   height: var(--Size-20, 20px);
   border: 1px solid #ddd;
-
+  margin-left: 20px;
   background: var(--dark-gray-icon, #444);
 }
 
@@ -312,4 +309,26 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+/* .color-picker{
+  width: 32px;
+height: 32px;
+padding: 6px 0px 0px 0px;
+gap: 8px;
+border: 1px rgb(225, 220, 220);
+opacity: 0px;
+
+} */
+
+.picker{
+  position: relative;
+    top: -287px;
+    left: -116px;
+}
+
+.picker_shadow{
+  position: relative;
+    top: -287px;
+    left: -95px;
 }
