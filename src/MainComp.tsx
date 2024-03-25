@@ -36,7 +36,6 @@ const MainComp = () => {
           showSubPanelElements={showSubPanelElements}
         />
         <TemplateWrapper />
-        {/* } */}
       </div>
     </div>
   );

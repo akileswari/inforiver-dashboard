@@ -97,6 +97,26 @@ const StackedLineChart: React.FC<LineChartProps> = ({
           />
         ))}
 
+        <text
+          x={margin.left + innerWidth / 3}
+          y={height - margin.right}
+          textAnchor="middle"
+          fontSize={"20px"}
+        >
+          Category
+        </text>
+
+        {/* Y Axis Label */}
+        <text
+          x={-((height - margin.top - margin.bottom) / 2 + margin.top)}
+          y={margin.right - margin.left}
+          textAnchor="middle"
+          transform={`rotate(-90)`}
+          fontSize={"20px"}
+        >
+          Sales
+        </text>
+
         {/* Data labels for each dataset */}
         {dataLabels.map((dataset, i) =>
           dataset.map((d, j) => (

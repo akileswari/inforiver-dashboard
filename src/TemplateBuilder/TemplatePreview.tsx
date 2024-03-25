@@ -6,6 +6,7 @@ import BarChart from "../ChartComponents/Bar";
 import AreaChart from "../ChartComponents/AreaChart";
 import { useEffect, useRef, useState } from "react";
 import StackedLineChart from "../ChartComponents/StackedLineChart";
+import useChartStore from "../store/zustand/Zustand";
 // import BarChart from "../ChartComponents/Bar.tsx";
 // import ClusterLineChart from "../ChartComponents/ClusttereLine";
 // import StackedLineChart from "../ChartComponents/StackedLineChart";
@@ -24,9 +25,8 @@ const componentIds: Record<string, React.FC<any>> = {
 };
 const TemplatePreview = (prop: IProps) => {
   const { height, width } = prop;
-  const activeChart: string = useSelector(
-    (state: any) => state.chartStore.activeChart
-  );
+
+  const activeChart = useChartStore((state: any) => state.activeChart);
 
   const SelectedComp = componentIds[activeChart];
   // console.log(activeChart);
