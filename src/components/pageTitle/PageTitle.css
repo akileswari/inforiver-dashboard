@@ -12,12 +12,22 @@
   container: flex;
   height: 80px;
   width: 100%;
+  position: relative;
+  top: -155px;
+  left: 669px;
 }
 
 .left-section {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.title {
+  
+  font-size: larger;
+  font-weight: 500;
+  margin-left: 53px;
 }
 
 /* .title-container {
@@ -50,6 +60,7 @@
 .button-container {
   width: auto;
   position: relative;
+  gap: 19px
 }
 
 .reset-button {
@@ -61,23 +72,21 @@
   border-radius: 5px 0px 0px 0px;
   border: 1px 0px 0px 0px;
   opacity: 0px;
-
-
+cursor: pointer;
+  
 }
-
+.reset-button:hover {background-color: #e7e7e7;}
 .export-button {
-  width: Hug (127px)px;
+  
   height: Fixed (38px)px;
   left: 397.2px;
   padding: 8px 24px 8px 24px;
   gap: 10px;
   border-radius: 9px;
   opacity: 0px;
-
-}
-
-.export-button {
   background: #0066ff;
+  width: 81px;
+  cursor: pointer;
 }
 
 .button-text {
