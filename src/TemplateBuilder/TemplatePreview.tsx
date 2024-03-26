@@ -1,5 +1,4 @@
 import LineChart from "../ChartComponents/LineChart";
-import { useSelector } from "react-redux";
 import ClusterLineChart from "../ChartComponents/ClusttereLine";
 import { dataSets, lineData } from "../components/dataSets/ChartDatas";
 import BarChart from "../ChartComponents/Bar";
@@ -11,10 +10,10 @@ import useChartStore from "../store/zustand/Zustand";
 // import ClusterLineChart from "../ChartComponents/ClusttereLine";
 // import StackedLineChart from "../ChartComponents/StackedLineChart";
 
-interface IProps {
-  height: number;
-  width: number;
-}
+// interface IProps {
+//   height: number;
+//   width: number;
+// }
 
 const componentIds: Record<string, React.FC<any>> = {
   "overlapped-column": BarChart,
@@ -23,12 +22,14 @@ const componentIds: Record<string, React.FC<any>> = {
   "clustered-line": ClusterLineChart,
   "stacked-line": StackedLineChart,
 };
-const TemplatePreview = (prop: IProps) => {
-  const { height, width } = prop;
+const TemplatePreview = () => {
+  // const { height, width } = prop;
 
   const activeChart = useChartStore((state: any) => state.activeChart);
 
   const SelectedComp = componentIds[activeChart];
+  console.log(SelectedComp);
+
   // console.log(activeChart);
 
   const finalData =
@@ -41,15 +42,9 @@ const TemplatePreview = (prop: IProps) => {
   useEffect(() => {
     let calcHeight = (templateRef.current as any).clientHeight;
     let calcWidth = (templateRef.current as any).clientWidth;
-    // setPreviewHeight((templateRef.current as any).clientheight);'
-    // console.log(templateRef.current);
-    // const val = (templateRef.current as any).getBoundingClientRect;
-    // console.log(val.height);
-    // console.log((templateRef.current as any).style.height);
-    // console.log((templateRef.current as any).clientHeight);
+
     setPreviewHeight(calcHeight);
     setPreviewWidth(calcWidth);
-    // document.addEventListener("resize", () => {});
   });
   return (
     <div
@@ -62,8 +57,6 @@ const TemplatePreview = (prop: IProps) => {
         height={previewWidth}
         width={previewHeight}
       >
-        {/* <LineChart data={lineData} width={width} height={height} /> */}
-
         {SelectedComp && (
           <SelectedComp
             data={finalData}
@@ -71,9 +64,6 @@ const TemplatePreview = (prop: IProps) => {
             width={previewHeight}
           />
         )}
-        {/* <BarChart data={lineData} height={height} width={width} /> */}
-        {/* <ClusterLineChart data={datasets} height={height} width={width} /> */}
-        {/* <StackedLineChart data={datasets} height={height} width={width} /> */}
       </svg>
     </div>
   );

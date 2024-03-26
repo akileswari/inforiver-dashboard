@@ -28,7 +28,13 @@ const StackedLineChart: React.FC<LineChartProps> = ({
   const innerHeight = height - margin.top - margin.bottom;
 
   // Flatten the nested array of objects
-  const flattenedData = data.reduce((acc, cur) => [...acc, ...cur], []);
+  // const flattenedData = data.reduce((acc, cur) => [...acc, ...cur], []);
+  const flattenedData: DataItem[] = [];
+  data.forEach((dataset) => {
+    dataset.forEach((item) => {
+      flattenedData.push(item);
+    });
+  });
 
   // Scales
   const xScale = scaleBand()
