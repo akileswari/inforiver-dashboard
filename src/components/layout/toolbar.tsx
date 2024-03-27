@@ -62,7 +62,7 @@ const Toolbar = ({ setRows, setColumns }) => {
               id="row"
               name="row"
               min="0"
-              defaultValue="0"
+              defaultValue="3"
               onChange={handleInputChange1}
             />
           </div>
@@ -75,7 +75,7 @@ const Toolbar = ({ setRows, setColumns }) => {
               id="col"
               name="col"
               min="0"
-              defaultValue="0"
+              defaultValue="3"
               onChange={handleInputChange2}
             />
           </div>

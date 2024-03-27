@@ -1,34 +1,40 @@
+import { useState, useEffect } from 'react';
+import { WidthProvider, Responsive } from 'react-grid-layout';
+import 'react-grid-layout/css/styles.css';
+import 'react-resizable/css/styles.css';
 
-import "../CSS/style.css";
-import "../CSS/layoutGrid.css";
+const ResponsiveGridLayout = WidthProvider(Responsive);
 
-const LayoutGrid = ({ rows, columns }) => {
-  const gridItems = [];
-  const rowCount = isNaN(rows) || rows < 1 ? 1 : rows;
-  const columnCount = isNaN(columns) || columns < 1 ? 1 : columns;
+const MyGridComponent = ({ rows, columns }) => {
+  const [layout, setLayout] = useState([]);
 
-  
-  for (let i = 0; i < rowCount; i++) {
-    for (let j = 0; j < columnCount; j++) {
-      gridItems.push(
-        <div key={`${i}-${j}`} className="rectangle"></div>
-      );
+  useEffect(() => {
+    const newLayout = [];
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < columns; x++) {
+        newLayout.push({
+          i: `${y}-${x}`,
+          x: x,
+          y: y,
+          w: 1,
+          h: 1,
+        });
+      }
     }
-  }
-
- 
-  const gridContainerStyles = {
-    display: 'grid',
-    gridTemplateColumns: `repeat(${columnCount}, auto)`,
-    gap: `10px`,
-    marginLeft: `500px`
-};
+    setLayout(newLayout);
+  }, [rows, columns]);
 
   return (
-    <div className="grid-container" style={gridContainerStyles}>
-      {gridItems}
+    <div>
+      <ResponsiveGridLayout className="layout" layouts={{ lg: layout }}>
+        {layout.map((item) => (
+          <div key={item.i} className="grid-item">
+            {item.i}
+          </div>
+        ))}
+      </ResponsiveGridLayout>
     </div>
   );
 };
 
-export default LayoutGrid;
+export default MyGridComponent;
