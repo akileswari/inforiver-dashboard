@@ -1,22 +1,13 @@
 ee.grid-container {
-  width: 960px;
-    height: 532px;
-    display: grid;
-    grid-template-columns: auto auto auto;
-    padding: 13.19px 0px 0px 0px;
-    gap: 8.79px;
-    border: 1px rgb(235, 228, 228);
-    opacity: 0px;
-    position: absolute;
-    left: 412px;
-    top: 160px;
+  display: grid;
+  grid-gap: 10px;
+  background-color: white;
+  padding: 10px;
 }
 
 .rectangle {
   width: 304.54px;
   height: 126.37px;
-  gap: 10px;
-  opacity: 0px;
-  background-color: rgb(214, 214, 214);
-  
+
+  background-color: #EDEDED;
 }

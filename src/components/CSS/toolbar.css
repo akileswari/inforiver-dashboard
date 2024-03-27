@@ -176,7 +176,9 @@
   border: 1px solid var(--Border-Grey, #ccd2dc);
   background: var(--white-100, #fff);
 }
-
+.cornerRadiusItem{
+  margin-top: 20px;
+}
 .spacingValue,
 .marginValue,
 .cornerRadiusValue,

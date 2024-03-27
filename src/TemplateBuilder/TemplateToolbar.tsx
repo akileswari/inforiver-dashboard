@@ -1,7 +1,7 @@
 
 
 const TemplateToolbar = () => {
-  return <div className="template-toolbar">Template toolbar</div>;
+  return <div className="template-toolbar"></div>;
 };
 
 export default TemplateToolbar;

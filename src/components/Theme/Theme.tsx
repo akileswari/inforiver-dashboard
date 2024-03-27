@@ -1,16 +1,18 @@
 import { useState } from 'react';
 import lightTheme from './lightTheme';
-
 import darkTheme from './darkTheme';
 
-export const useTheme = () => {
-  const [currentTheme, setCurrentTheme] = useState('light');
+type ThemeKey = 'light' | 'dark';
+type Theme = typeof lightTheme | typeof darkTheme;
 
-  const toggleTheme = () => {
-    setCurrentTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+export const useTheme = (): { theme: Theme; setTheme: (themeKey: ThemeKey) => void } => {
+  const [currentTheme, setCurrentTheme] = useState<ThemeKey>('light');
+
+  const setTheme = (themeKey: ThemeKey) => {
+    setCurrentTheme(themeKey);
   };
 
-  const getTheme = (theme: string) => {
+  const getTheme = (theme: ThemeKey): Theme => {
     switch (theme) {
       case 'light':
         return lightTheme;
@@ -21,7 +23,7 @@ export const useTheme = () => {
     }
   };
 
-  const theme = getTheme(currentTheme);
+  const theme: Theme = getTheme(currentTheme);
 
-  return { theme, toggleTheme };
+  return { theme, setTheme };
 };

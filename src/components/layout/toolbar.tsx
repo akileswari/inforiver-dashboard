@@ -1,15 +1,28 @@
 
 import "../CSS/toolbar.css";
-import "../layout-icon/template bilder icon march 8/css/style.css";
+import "../CSS/style.css";
 import { getIcon } from "../constant/Helper";
 import { useState } from "react";
 import { SketchPicker } from 'react-color';
-const Toolbar = () => {
+
+const Toolbar = ({ setRows, setColumns }) => { 
   const [isChecked, setIsChecked] = useState(true);
   const [color1, setColor1] = useState('#ffffff');
   const [color2, setColor2] = useState('#ffffff');
   const [showColorPicker1, setShowColorPicker1] = useState(false);
   const [showColorPicker2, setShowColorPicker2] = useState(false);
+  
+
+
+  const handleInputChange1 = (e) => {
+    const value = parseInt(e.target.value);
+    setRows(value);
+  };
+
+  const handleInputChange2 = (e) => {
+    const value = parseInt(e.target.value);
+    setColumns(value);
+  };
 
   const handleToggleChange = () => {
     setIsChecked(!isChecked);
@@ -30,7 +43,7 @@ const Toolbar = () => {
 
   const toggleColorPicker2 = () => {
     setShowColorPicker2(!showColorPicker2);
-    setShowColorPicker1(false); 
+    setShowColorPicker1(false);
   };
   return (
     <div className="toolbar-container">
@@ -46,10 +59,11 @@ const Toolbar = () => {
           <div className="columnContent">
             <input
               type="number"
-              id="quantity"
-              name="quantity"
+              id="row"
+              name="row"
               min="0"
               defaultValue="0"
+              onChange={handleInputChange1}
             />
           </div>
         </div>
@@ -58,10 +72,11 @@ const Toolbar = () => {
           <div className="rowContent">
             <input
               type="number"
-              id="quantity"
-              name="quantity"
+              id="col"
+              name="col"
               min="0"
               defaultValue="0"
+              onChange={handleInputChange2}
             />
           </div>
         </div>
@@ -72,7 +87,7 @@ const Toolbar = () => {
         <div className="spacingHeader">
           <div className="spacingTitle">Spacing</div>
         </div>
-        <div className="spacingContent">
+        <div className="spacingCont`ent">
           <div className="spacingItem">
             <input
               type="number"
@@ -207,8 +222,14 @@ const Toolbar = () => {
           </div>
         </div>
       </div>
-      /</div>
+      
+      </div>
   );
 };
 
 export default Toolbar;
+
+
+
+
+
