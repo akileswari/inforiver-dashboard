@@ -6,6 +6,7 @@ import AreaChart from "../ChartComponents/AreaChart";
 import { useEffect, useRef, useState } from "react";
 import StackedLineChart from "../ChartComponents/StackedLineChart";
 import useChartStore from "../store/zustand/Zustand";
+import WaterfallChart from "../ChartComponents/WaterfallChart";
  
 const componentIds: Record<string, React.FC<any>> = {
   "overlapped-column": BarChart,
@@ -13,6 +14,7 @@ const componentIds: Record<string, React.FC<any>> = {
   line: LineChart,
   "clustered-line": ClusterLineChart,
   "stacked-line": StackedLineChart,
+  "waterfall": WaterfallChart
 };
 const TemplatePreview = () => {
   // const { height, width } = prop;

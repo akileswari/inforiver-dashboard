@@ -1,18 +1,5 @@
-ee.grid-container {
-  display: grid;
-  grid-gap: 10px;
-  background-color: white;
-  padding: 10px;
-}
 
-.rectangle {
-  width: 304.54px;
-  height: 126.37px;
 
-  background-color: #EDEDED;
-}
-.layout{
-  position: relative;
-    width: 960px;
-    left: 596px;
+.grid-item {
+  border: 1px solid #505050; 
 }

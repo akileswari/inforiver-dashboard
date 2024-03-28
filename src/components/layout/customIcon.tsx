@@ -4,25 +4,22 @@ import { useTheme } from "../Theme/Theme";
 import { getIcon } from "../constant/Helper";
 
 const CustomToolbar = () => {
-  const { theme, toggleTheme } = useTheme();
-  const [isOpen, setIsOpen] = useState(false);
+  const { theme, setTheme } = useTheme(); // Destructure setTheme from useTheme
 
-  const toggleSelect = () => {
-    setIsOpen(!isOpen);
+  const handleThemeChange = (event) => {
+    const selectedTheme = event.target.value; // Get the selected theme from the dropdown
+    setTheme(selectedTheme); // Set the selected theme using the setTheme function from useTheme
   };
 
   return (
     <div className="custom-toolbar">
-      
       <div className="custom-item">
         <i className={getIcon("light-theme")}></i>
-        <select value={theme.name} onChange={toggleTheme}  title='Theme'>
-          <option selected disabled>Theme</option>
-          <option value="light-theme">Light Theme</option>
-          <option value="dark-theme">Dark Theme</option>
+        <select value={theme.name} onChange={handleThemeChange} title='Theme'>
+          <option value="light">Light Theme</option>
+          <option value="dark">Dark Theme</option>
         </select>
       </div>
-      
       <div className="custom-item">
         <i className={getIcon("light-swap")}></i>
         <div className="custom-label">Swap</div>

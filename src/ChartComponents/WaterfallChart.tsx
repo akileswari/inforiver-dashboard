@@ -3,7 +3,9 @@ import { scaleBand, scaleLinear } from 'd3-scale';
 import XAxis from '../components/Axis/xAxis'; 
 import YAxis from '../components/Axis/yAxis'; 
 import DataLabel from '../components/DataValues/Datalabel';
-
+import '../components/Theme/Theme'
+import '../components/Theme/lightTheme'
+import '../components/Theme/darkTheme'
 interface WaterfallChartData {
   name: string;
   value: number;
@@ -55,7 +57,7 @@ const WaterfallChart: React.FC<WaterfallChartProps> = ({ data, width, height, th
     const { name, value } = entry;
     const barHeight = Math.abs(yScale(value) - yScale(0));
     const barY = value >= 0 ? yScale(cumulativeSum + value) : yScale(cumulativeSum);
-    const fill = value >= 0 ? theme.variance.positive : theme.variance.negative; // Use positive or negative color from variance
+    const fill = value >= 0 ? theme.variance.positive : theme.variance.negative; 
     cumulativeSum += value;
 
     // Connector lines
