@@ -28,7 +28,14 @@ const MainComp = () => {
           toggleToPreview={toggleToPreview}
           showSubPanelElements={showSubPanelElements}
         />
-        <SubPanel showSubPanelElements={showSubPanelElements} />
+
+        {/* {
+          isChartTab && */}
+
+        <SubPanel
+          toggleToPreview={toggleToPreview}
+          showSubPanelElements={showSubPanelElements}
+        />
         <TemplateWrapper />
       </div>
     </div>

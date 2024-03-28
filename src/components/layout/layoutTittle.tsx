@@ -1,4 +1,4 @@
-import '../pageTitle/PageTitle.css'
+import '../assets/css/PageTitle.css'
 const LayoutTittle = () => {
     return (
         <div className="container">

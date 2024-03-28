@@ -16,10 +16,10 @@
     "d3": "^7.8.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-   
     "react-grid-layout": "^1.4.4",
     "react-redux": "^9.1.0",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.8",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/d3": "^7.4.3",

@@ -4,6 +4,7 @@
   /* width: ; */
   flex-wrap: wrap;
   gap: 0.6rem;
+  padding: 6px;
 }
 
 .scale-chart-options-icon {
@@ -12,8 +13,9 @@
 
 .charts-text,
 .chart-type-text {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
+  font: inter;
 }
 .charts-text-title {
   font-weight: 500;
@@ -21,6 +23,9 @@
 .search-input {
   display: flex;
   border: 1px solid #dddddd;
+  height: 28px;
+  width: 190px;
+  border-radius: 0.2rem;
 }
 .chart-icon-box {
   cursor: pointer;
@@ -28,14 +33,15 @@
   border-radius: 5px;
   display: flex;
   align-items: center;
+  width: 40px;
+  height: 40px;
 }
 .chart-type-title {
-  /* display: flex; */
   display: grid;
   grid-template-columns: 2.5rem auto 2.5rem;
-  /* margin: 0; */
   align-items: center;
   cursor: pointer;
+  width: 174px;
 }
 .chart-title-logo {
   scale: 0.6;
@@ -55,7 +61,5 @@
   background-color: white !important;
   border: none;
   color: black;
-}
-.search-box:after {
-  border: none;
+  outline: none;
 }

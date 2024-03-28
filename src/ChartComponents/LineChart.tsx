@@ -43,7 +43,7 @@ const LineChart: React.FC<LineChartProps> = ({ data, width, height }) => {
     .range([innerHeight, 0]);
 
   return (
-    <svg width={width} height={height}>
+    <g width={width} height={height}>
       {data.map((dataset, index) => (
         <g key={index} transform={`translate(${margin.left}, ${margin.top})`}>
           {/* X Axis */}
@@ -134,10 +134,11 @@ const LineChart: React.FC<LineChartProps> = ({ data, width, height }) => {
             value={d.value}
             xScale={xScale}
             yScale={yScale}
+            fontSize={"12px"}
           />
         ))
       )}
-    </svg>
+    </g>
   );
 };
 

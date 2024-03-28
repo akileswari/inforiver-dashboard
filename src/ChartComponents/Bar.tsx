@@ -57,6 +57,7 @@ const BarChart: React.FC<BarChartProps> = ({ data, width, height }) => {
             value={d.value}
             xScale={xScale}
             yScale={yScale}
+            fontSize={"12px"}
           />
         </g>
       ))}

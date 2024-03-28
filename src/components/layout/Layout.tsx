@@ -3,7 +3,7 @@ import store from "../../store";
 import Toolbar from "./toolbar";
 import CustomToolbar from "./customIcon";
 import LayoutTittle from "./layoutTittle";
-import MyGridComponent from "./layoutGrid";
+import GridComponent from "./layoutGrid";
 import { useState } from "react";
 
 
@@ -19,7 +19,7 @@ const LayoutSection = () => {
       <LayoutTittle />
       <Toolbar setRows={setRows} setColumns={setColumns} /> 
       <CustomToolbar />
-      <MyGridComponent rows={rows} columns={columns} />
+      <GridComponent rows={rows} columns={columns} />
     </Provider>
   );
 };

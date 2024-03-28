@@ -1,6 +1,7 @@
 import { getChartIcon } from "../constant/Helper";
-import { useSelector, useDispatch } from "react-redux";
-import { setToggledChartType, setActiveChart } from "../../store/chartSlicer";
+// import { useSelector, useDispatch } from "react-redux";
+// import { setToggledChartType, setActiveChart } from "../../store/chartSlicer";
+import useChartStore from "../../store/zustand/Zustand";
 const ChartIcon = ({ className }: { className: string }) => {
   return (
     <div className="chart-icon-box">
@@ -41,43 +42,42 @@ interface IChartBoxHolder {
 }
 
 const ChartBoxHolder = ({ title, chartIcons, logo }: IChartBoxHolder) => {
-  //   const [toggle, setToggle] = useState(false);
-  const currentToggle = useSelector(
-    (state: any) => state.chartStore.chartToggled
+  const toggle = useChartStore((state: any) => state.chartToggled === title);
+
+  const setToggledChartType = useChartStore(
+    (state: any) => state.setToggledChartType1
   );
 
-  const dispatch = useDispatch();
+  const setActiveChart = useChartStore((state: any) => state.setActiveChart1);
 
-  let toggle = currentToggle === title;
-
-  // toggle = ChartStore.active ==== title
   const toggleCharts = () => {
-    // setToggle(!toggle);
-    dispatch(setToggledChartType(title));
-    // cchartStore.setActive(title);
+    console.log(title, "title");
+    setToggledChartType(title);
   };
+
   return (
-    <>
-      <div className="column-charts">
-        <ChartTitle
-          title={title}
-          logo={logo}
-          dropDown={toggle ? "up " : " down"}
-          toggleCharts={toggleCharts}
-        />
-        <div className={`chart-options`}>
-          {toggle &&
-            chartIcons.map((chart, index) => (
-              <div
-                key={index}
-                onClick={() => dispatch(setActiveChart(chart.id))}
-              >
-                <ChartIcon className={chart.className} />
-              </div>
-            ))}
-        </div>
+    <div className="column-charts">
+      <ChartTitle
+        title={title}
+        logo={logo}
+        dropDown={toggle ? "up " : " down"}
+        toggleCharts={toggleCharts}
+      />
+      <div className={`chart-options`}>
+        {toggle &&
+          chartIcons.map((chart, index) => (
+            <div
+              key={index}
+              onClick={() => {
+                console.log(chart.id, "chart.id");
+                return setActiveChart(chart.id);
+              }}
+            >
+              <ChartIcon className={chart.className} />
+            </div>
+          ))}
       </div>
-    </>
+    </div>
   );
 };
 

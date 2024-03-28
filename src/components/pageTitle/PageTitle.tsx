@@ -1,6 +1,6 @@
 import React from "react";
 import { Logo } from "../template-icon/Logo";
-import "./PageTitle.css";
+import "../assets/css/PageTitle.css";
 const PageTitle: React.FC = () => {
   return (
     <>

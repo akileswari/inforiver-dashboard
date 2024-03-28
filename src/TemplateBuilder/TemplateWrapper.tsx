@@ -1,20 +1,13 @@
 
+import { divWidth } from "../components/constant/Helper";
+import { divHeight } from "../constant/Helper";
 import TemplatePreview from "./TemplatePreview";
 import TemplateToolbar from "./TemplateToolbar";
-import {
-  divHeight,
-  divWidth,
-  minHeight,
-  minWidth,
-} from "../components/constant/Helper";
 
 const TemplateWrapper = () => {
   // console.log(document.getElementsByClassName("template-toolbar"));
 
   // console.log(eWidth);
-
-  const fHeight = divHeight - minHeight;
-  const fWidth = divWidth - minWidth;
 
   return (
     <div
@@ -22,7 +15,7 @@ const TemplateWrapper = () => {
       style={{ height: `${divHeight}px`, width: `${divWidth}px` }}
     >
       <TemplateToolbar />
-      <TemplatePreview height={fHeight} width={fWidth} />
+      <TemplatePreview />
     </div>
   );
 };

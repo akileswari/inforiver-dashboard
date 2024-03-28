@@ -1,130 +1,132 @@
 import React from "react";
 import { scaleBand, scaleLinear } from "d3-scale";
-import XAxis from "../components/Axis/xAxis.tsx";
-import YAxis from "../components/Axis/yAxis.tsx";
-import TextValues from "../components/DataValues/TextValues.tsx";
+import XAxis from "../components/Axis/xAxis";
+import YAxis from "../components/Axis/yAxis";
+import TextValues from "../components/DataValues/TextValues";
 
-interface ClusterChartProps {
-  data: { name: string; value: number }[][];
-  width: number;
-  height: number;
+interface DataItem {
+  name: string;
+  value: number;
 }
 
-const ClusterLineChart: React.FC<ClusterChartProps> = ({
-  data: dataSets,
+interface LineChartProps {
+  data: DataItem[][];
+  width: number;
+  height: number;
+  index: number; // Add index property here
+}
+
+const StackedLineChart: React.FC<LineChartProps> = ({
+  data,
   width,
   height,
+  index, // Receive index prop here
 }) => {
   // Dimensions
   const margin = { top: 20, right: 30, bottom: 50, left: 80 };
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
-  // Flatten values from all datasets
-  const allValues: number[] = [];
-  dataSets.forEach((dataset) =>
-    dataset.forEach((d) => allValues.push(d.value))
-  );
-
-  // Calculate the maximum value from all datasets
-  const maxValue = Math.max(...allValues);
-
-  // Extract unique category names
-  const categoryNames = dataSets[0].map((d) => d.name);
+  // Flatten the nested array of objects
+  // const flattenedData = data.reduce((acc, cur) => [...acc, ...cur], []);
+  const flattenedData: DataItem[] = [];
+  data.forEach((dataset) => {
+    dataset.forEach((item) => {
+      flattenedData.push(item);
+    });
+  });
 
   // Scales
   const xScale = scaleBand()
-    .domain(categoryNames)
+    .domain(flattenedData.map((d) => d.name))
     .range([0, innerWidth])
     .padding(0.4);
 
   const yScale = scaleLinear()
-    .domain([0, maxValue])
+    .domain([0, getMaxCumulativeSum(data)])
     .nice()
     .range([innerHeight, 0]);
+
+  // Helper function to calculate maximum cumulative sum
+  function getMaxCumulativeSum(data: DataItem[][]) {
+    return Math.max(
+      ...data[data.length - 1].map((d, i) =>
+        data.reduce((acc, cur) => acc + cur[i].value, 0)
+      )
+    );
+  }
+
+  // Generate paths for lines for each dataset
+  const paths = data.map((dataset) =>
+    dataset.map(
+      (d) => `${xScale(d.name)! + xScale.bandwidth() / 2} ${yScale(d.value)}`
+    )
+  );
+
+  // Generate data labels
+  const dataLabels = flattenedData.map((d) => ({
+    x: xScale(d.name)! + xScale.bandwidth() / 2,
+    y: yScale(d.value),
+    label: d.value.toString(), // Adjust this as needed
+  }));
 
   return (
     <svg width={width} height={height}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
-        {/* X Axis */}
-        <XAxis innerHeight={innerHeight} xScale={xScale} data={categoryNames} />
-
-        {/* Draw lines and circles */}
-        {dataSets.map((dataset, i) => (
-          <React.Fragment key={i}>
-            {/* Line */}
-            <path
-              d={generateLinePath(dataset, xScale, yScale)}
-              fill="none"
-              stroke="#cc936b"
-              strokeWidth={2}
-            />
-
-            {/* Circles and text values */}
-            {dataset.map((d, j) => (
-              <React.Fragment key={j}>
-                <circle
-                  cx={xScale(d.name)! + xScale.bandwidth() / 2}
-                  cy={yScale(d.value)}
-                  r={4}
-                  fill="#cc936b"
-                />
-                <TextValues
-                  x={xScale(d.name)! + xScale.bandwidth() / 2 - 10}
-                  y={yScale(d.value) - 10}
-                  value={d.value}
-                  xScale={xScale}
-                  yScale={yScale}
-                />
-              </React.Fragment>
-            ))}
-          </React.Fragment>
-        ))}
-
-        {/* Y Axis */}
+        {/* X and Y Axes */}
+        <XAxis
+          innerHeight={innerHeight}
+          data={flattenedData}
+          xScale={xScale}
+          index={index}
+        />
         <YAxis margin={margin} width={width} yScale={yScale} />
+
+        {/* Lines for each dataset */}
+        {paths.map((path, i) => (
+          <path
+            key={i}
+            d={`M ${path.join(" L ")}`}
+            fill="none"
+            stroke={i === 0 ? "blue" : "red"}
+            strokeWidth={i === 0 ? 1 : 2}
+          />
+        ))}
+        <text
+          x={margin.left + innerWidth / 3}
+          y={height - margin.top}
+          textAnchor="middle"
+          fontSize={"20px"}
+        >
+          Category
+        </text>
+
+        {/* Y Axis Label */}
+        <text
+          x={-((height - margin.top - margin.bottom) / 2 + margin.top)}
+          y={-margin.bottom}
+          textAnchor="middle"
+          transform={`rotate(-90)`}
+          fontSize={"20px"}
+        >
+          Sales
+        </text>
+
+        {/* Data labels */}
+        {dataLabels.map((d, i) => (
+          <TextValues
+            key={i}
+            x={d.x}
+            y={d.y - 10} // Adjust this value to properly position labels below x-axis line
+            value={d.label}
+            xScale={xScale}
+            yScale={yScale}
+            fontSize={"12px"}
+          />
+        ))}
       </g>
-
-      {/* X Axis Label */}
-      <text
-        x={(width - margin.left - margin.right) / 2 + margin.left}
-        y={height - 10}
-        textAnchor="middle"
-        fontSize={"20px"}
-      >
-        Category
-      </text>
-
-      {/* Y Axis Label */}
-      <text
-        x={-((height - margin.top - margin.bottom) / 2 + margin.top)}
-        y={30}
-        textAnchor="middle"
-        transform={`rotate(-90)`}
-        fontSize={"20px"}
-      >
-        Sales
-      </text>
     </svg>
   );
 };
 
-const generateLinePath = (
-  dataset: { name: string; value: number }[],
-  xScale: any,
-  yScale: any
-) => {
-  let path = "";
-  dataset.forEach((d, i) => {
-    const x = xScale(d.name)! + xScale.bandwidth() / 2;
-    const y = yScale(d.value);
-    if (i === 0) {
-      path += `M ${x} ${y} `;
-    } else {
-      path += `L ${x} ${y} `;
-    }
-  });
-  return path;
-};
-
-export default ClusterLineChart;
+export default StackedLineChart;
