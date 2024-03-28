@@ -9,6 +9,7 @@ export enum ELayouts {
   CARD = "CARD",
   TABLE = "TABLE",
   NOTES = "NOTES",
+  // LAYOUT = "LAYOUT",
 }
 
 const MainComp = () => {
@@ -26,7 +27,14 @@ const MainComp = () => {
           toggleToPreview={toggleToPreview}
           showSubPanelElements={showSubPanelElements}
         />
-        <SubPanel showSubPanelElements={showSubPanelElements} />
+
+        {/* {
+          isChartTab && */}
+
+        <SubPanel
+          toggleToPreview={toggleToPreview}
+          showSubPanelElements={showSubPanelElements}
+        />
         <TemplateWrapper />
       </div>
     </div>

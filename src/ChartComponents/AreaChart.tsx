@@ -2,7 +2,7 @@ import React from "react";
 import { scaleBand, scaleLinear } from "d3-scale";
 import XAxis from "../components/Axis/xAxis.tsx";
 import YAxis from "../components/Axis/yAxis.tsx";
-import { lineData } from "./data"; // Importing the provided dataset
+import TextValues from "../components/DataValues/TextValues.tsx";
 
 interface AreaChartProps {
   data: { name: string; value: number }[][];
@@ -57,7 +57,7 @@ const AreaChart: React.FC<AreaChartProps> = ({ data, width, height }) => {
   );
 
   return (
-    <svg width={width} height={height}>
+    <g width={width} height={height}>
       {data.map((dataset, index) => (
         <g key={index} transform={`translate(${margin.left}, ${margin.top})`}>
           {/* X Axis */}
@@ -119,19 +119,18 @@ const AreaChart: React.FC<AreaChartProps> = ({ data, width, height }) => {
       {/* Data values at the end of each bar */}
       {data.map((dataset, index) =>
         dataset.map((d, i) => (
-          <text
+          <TextValues
             key={i}
-            x={xScale(d.name)! + xScale.bandwidth()}
-            y={yScale(d.value)}
-            dx={8} // offset position for visibility
-            dy={"0.32em"} // vertically center text on data point
-            textAnchor="start"
-          >
-            {d.value}
-          </text>
+            x={xScale(d.name)! + xScale.bandwidth() + 20}
+            y={yScale(d.value) + 10}
+            value={d.value}
+            xScale={xScale}
+            yScale={yScale}
+            fontSize={12}
+          />
         ))
       )}
-    </svg>
+    </g>
   );
 };
 

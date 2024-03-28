@@ -7,23 +7,22 @@ body {
 .menu {
   display: flex;
   flex-direction: column;
-  /* background-color: #f1f1f1; */
   border-right: 1px solid black;
-  padding-right: 1.5rem;
-  width: 130px;
+  width: 175px;
   border-right: 1px solid #d9e1e8;
-  /* border-radius: 5px; */
 }
 .menu-label {
   color: #637794;
+  font-size: 12px;
+  font-family: inter;
+  font-weight: 500;
 }
 
 .menu-item {
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  /* margin-bottom: 5px; */
-  margin-left: 1.5rem;
+  margin-left: 2rem;
   padding: 10px;
   border-radius: 3px;
   cursor: pointer;
@@ -32,9 +31,15 @@ body {
 }
 
 .menu-item:hover {
-  background-color: #e1e1e1;
+  background-color: #eef0f4;
+  width: 110px;
 }
-
+.template-builder.light-search {
+  color: #eef0f4;
+  scale: 0.9;
+  margin-top: 0.2rem;
+  fill: #d9e1e8;
+}
 .menu-header {
   font-weight: 500;
   cursor: pointer;

@@ -1,9 +1,9 @@
 /* import * "../components/sidePanel/SidePanel.css"; */
-@import url(./components/sidePanel/SidePanel.css);
+@import url(./components/assets/css/SidePanel.css);
 @import url(./components/template-icon/css/style.css);
-@import url(./components/pageTitle/PageTitle.css);
+@import url(./components/assets/css/PageTitle.css);
 @import url(./components/chart-icon/css/style.css);
-@import url(./components/SubPanel/subPanel.css);
+@import url(./components/assets/css/subPanel.css);
 
 #root {
   height: 100%;
@@ -42,8 +42,8 @@
 .sub-panel {
   padding: 1rem;
   /* height: calc(100% - 75px); */
-  height: 600px;
-  width: 180px;
+  height: 550px;
+  width: 202px;
   font-family: Inter;
   border-right: 1px solid #d9e1e8;
 }
