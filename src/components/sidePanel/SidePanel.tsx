@@ -1,6 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { getIcon } from "../constant/Helper";
 import { ELayouts } from "../../MainComp";
+import LayoutSection from "../layout/Layout";
 
 const SidePanel = ({
   toggleToPreview,
@@ -14,31 +15,18 @@ const SidePanel = ({
     label: string;
     onClick: () => void;
   }
-  interface RepeatingElements {
-    className: string;
-    iconName: string;
-    label: string;
-    onClick: () => void;
-  }
-  const [showElements, setShowElements] = useState(false);
 
-  const toggleElements = () => {
-    setShowElements(!showElements);
+  const [showLayoutSection, setShowLayoutSection] = useState(false);
+  const [showElements, setshowElements] = useState(false);
+
+  const toggleLayoutSection = () => {
+    setShowLayoutSection(!showLayoutSection);
+    setshowElements(false); 
   };
 
-  // array opf objects for insert and layout
-  const RepeatingElements = ({
-    className,
-    iconName,
-    label,
-    onClick,
-  }: RepeatingElements) => {
-    return (
-      <div className="menu-item" onClick={onClick}>
-        <i className={getIcon(iconName)}></i>
-        <span className="menu-label">{label}</span>
-      </div>
-    );
+  const toggleInsertElement = () => {
+    setshowElements(!showElements);
+    if (!showElements) setShowLayoutSection(false); 
   };
 
   const MenuLayoutItem = ({ iconName, label, onClick }: MenuLayoutItem) => {
@@ -50,19 +38,41 @@ const SidePanel = ({
     );
   };
 
+  const RepeatingElements = ({
+    className,
+    iconName,
+    label,
+    onClick,
+  }: {
+    className: string;
+    iconName: string;
+    label: string;
+    onClick: () => void;
+  }) => {
+    return (
+      <div className={className} onClick={onClick}>
+        <i className={getIcon(iconName)}></i>
+        <span className="menu-label">{label}</span>
+      </div>
+    );
+  };
+
   return (
     <div className="menu">
       <MenuLayoutItem
         iconName="light-layout"
         label="Layout"
-        //  In this onclick  replace it with the layout redirection
-        onClick={toggleElements}
+        onClick={toggleLayoutSection}
       />
       <MenuLayoutItem
         iconName="light-dropdown-bottom"
         label="Insert element"
-        onClick={toggleElements}
+        onClick={toggleInsertElement}
       />
+
+      {showLayoutSection && (
+        <LayoutSection  />
+      )}
 
       {showElements && (
         <>

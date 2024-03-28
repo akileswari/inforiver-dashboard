@@ -1,15 +1,16 @@
 import { useState } from "react";
-import TemplateWrapper from "./TemplateBuilder/TemplateWrapper";
+
 import SubPanel from "./components/SubPanel/SubPanel";
 import PageTitle from "./components/pageTitle/PageTitle";
 import SidePanel from "./components/sidePanel/SidePanel";
+import TemplateWrapper from "./TemplateBuilder/TemplateWrapper";
 
 export enum ELayouts {
   CHART = "CHART",
   CARD = "CARD",
   TABLE = "TABLE",
   NOTES = "NOTES",
-  // LAYOUT = "LAYOUT",
+  LAYOUT = "LAYOUT"
 }
 
 const MainComp = () => {

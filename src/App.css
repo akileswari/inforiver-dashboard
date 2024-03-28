@@ -61,7 +61,9 @@
   width: 100%;
 }
 
-.template-toolbar {
-  height: 75px;
-  width: 100%;
+body{
+  min-height: 100vh;
+  width: vw;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }

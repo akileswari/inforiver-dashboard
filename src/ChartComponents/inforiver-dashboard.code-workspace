@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../../barchart/bar"
+		},
+		{
+			"path": "../../../../inforiver-dashboard"
+		}
+	],
+	"settings": {}
+}
