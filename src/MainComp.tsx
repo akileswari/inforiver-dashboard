@@ -29,7 +29,7 @@ const MainComp = () => {
           showSubPanelElements={showSubPanelElements}
         />
         <SubPanel showSubPanelElements={showSubPanelElements} />
-        {/* <TemplateWrapper /> */}
+        <TemplateWrapper />
       </div>
     </div>
   );

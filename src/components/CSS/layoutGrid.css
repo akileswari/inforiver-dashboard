@@ -11,3 +11,8 @@ ee.grid-container {
 
   background-color: #EDEDED;
 }
+.layout{
+  position: relative;
+    width: 960px;
+    left: 596px;
+}

@@ -16,9 +16,10 @@ const TemplatePreview = (prop: IProps) => {
       style={{ width: `${width}px`, height: `${height}px` }}
     >
       <svg style={{ width: `${width}px`, height: `${height}px` }}>
+        
        
-        <WaterfallChart data={lineData} width={width} height={height} theme={theme}
-         toggleTheme={toggleTheme} />
+        {/* <WaterfallChart data={lineData} width={width} height={height} theme={theme}
+         toggleTheme={toggleTheme} /> */}
       </svg>
     </div>
   );

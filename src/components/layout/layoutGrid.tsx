@@ -26,6 +26,16 @@ const MyGridComponent = ({ rows, columns }) => {
 
   return (
     <div>
+      <style>
+        {`
+          .react-grid-layout {
+            position: relative;
+            transition: height 200ms ease; 
+            left: 500px;
+            width:960px
+          }
+        `}
+      </style>
       <ResponsiveGridLayout className="layout" layouts={{ lg: layout }}>
         {layout.map((item) => (
           <div key={item.i} className="grid-item">
