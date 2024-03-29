@@ -153,6 +153,7 @@ const Toolbar = ({ setRows, setColumns }) => {
               min="0"
               defaultValue="0"
             />
+            </div>
             <div className="color-picker">
               <div className="colorBox" onClick={toggleColorPicker1}>
                 {showColorPicker1 && (
@@ -161,7 +162,7 @@ const Toolbar = ({ setRows, setColumns }) => {
               </div>
             </div>
           </div>
-        </div>
+        
         {/* Shadow */}
         <div className="shadowContainer">
           <div className="shadowHeader">

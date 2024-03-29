@@ -2,6 +2,7 @@ import '../assets/css/PageTitle.css'
 const LayoutTittle = () => {
     return (
         <div className="container">
+           
             <div className="left-section">
                 <div className="title-container">
                     <div className="title">Layout</div>
