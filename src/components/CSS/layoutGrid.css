@@ -3,3 +3,9 @@
 .grid-item {
   border: 1px solid #505050; 
 }
+.react-grid-layout {
+  position: relative;
+  transition: height 200ms ease; 
+  left:300px
+
+}

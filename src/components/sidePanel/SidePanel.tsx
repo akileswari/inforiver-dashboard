@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { getIcon } from "../constant/Helper";
 import { ELayouts } from "../../MainComp";
-import LayoutSection from "../layout/Layout";
+
+import CustomToolbar from "../layout/customIcon";
+import Toolbar from "../layout/toolbar";
 
 const SidePanel = ({
   toggleToPreview,
@@ -17,16 +19,16 @@ const SidePanel = ({
   }
 
   const [showLayoutSection, setShowLayoutSection] = useState(false);
-  const [showElements, setshowElements] = useState(false);
+  const [showInsertElementSubPanel, setShowInsertElementSubPanel] = useState(true); // State to control rendering of subpanel for "Insert element"
 
   const toggleLayoutSection = () => {
     setShowLayoutSection(!showLayoutSection);
-    setshowElements(false); 
+    setShowInsertElementSubPanel(false); // Hide subpanel when layout section is toggled
   };
 
   const toggleInsertElement = () => {
-    setshowElements(!showElements);
-    if (!showElements) setShowLayoutSection(false); 
+    setShowInsertElementSubPanel(true); // Always show subpanel when "Insert element" is clicked
+    setShowLayoutSection(false); // Hide layout section if open
   };
 
   const MenuLayoutItem = ({ iconName, label, onClick }: MenuLayoutItem) => {
@@ -71,10 +73,10 @@ const SidePanel = ({
       />
 
       {showLayoutSection && (
-        <LayoutSection  />
+        <><CustomToolbar /><Toolbar /></>
       )}
 
-      {showElements && (
+      {showInsertElementSubPanel && (
         <>
           <RepeatingElements
             className="menu-item"
@@ -107,4 +109,4 @@ const SidePanel = ({
   );
 };
 
-export default SidePanel;
+export default SidePanel; 

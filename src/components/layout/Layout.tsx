@@ -19,7 +19,7 @@ const LayoutSection = () => {
       <LayoutTittle />
       <Toolbar setRows={setRows} setColumns={setColumns} /> 
       <CustomToolbar />
-      <GridComponent rows={rows} columns={columns} />
+      {/* <GridComponent rows={rows} columns={columns} /> */}
     </Provider>
   );
 };

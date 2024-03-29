@@ -8,6 +8,11 @@ const useChartStore = create((set) => ({
       chartToggled: state.chartToggled === payload ? null : payload,
     })),
   setActiveChart1: (payload: any) => set({ activeChart: payload }),
+  clearActiveChart: () =>
+    set({
+      activeChart: null,
+      chartToggled: null,
+    })
 }));
 
 export default useChartStore;

@@ -1,4 +1,5 @@
 import { ELayouts } from "../../MainComp";
+import CustomToolbar from "../layout/customIcon";
 import ChartBoxHolder from "./ChartBoxHolder";
 
 const columnChartIcons = [
@@ -144,8 +145,7 @@ const SubPanel = ({
 }: {
   showSubPanelElements: ELayouts;
 }) => {
-  if (showSubPanelElements !== ELayouts.CHART) return null;
-
+  if (showSubPanelElements !== ELayouts.CHART || showSubPanelElements === null) return null;
   return (
     <div className="sub-panel">
       {showSubPanelElements === "CHART" && (
@@ -199,9 +199,10 @@ const SubPanel = ({
             chartIcons={comboChartIcons}
             logo="chart light-spline-column-area"
           />
+          <CustomToolbar/>
         </>
       )}
-             ./
+            
 
     </div>
   );
