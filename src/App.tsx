@@ -1,13 +1,19 @@
 import { Provider } from "react-redux";
 import "./App.css";
-import MainComp from "./MainComp";
+;
+
+
+import MainComp, { ELayouts } from "./MainComp";
 import store from "./store";
+import LayoutSection from "./components/layout/Layout";
 
 function App() {
   return (
     <Provider store={store}>
-      <MainComp />
+      < MainComp />
+      {/* <LayoutSection /> */}
     </Provider>
+
   );
 }
 

@@ -6,32 +6,26 @@ import AreaChart from "../ChartComponents/AreaChart";
 import { useEffect, useRef, useState } from "react";
 import StackedLineChart from "../ChartComponents/StackedLineChart";
 import useChartStore from "../store/zustand/Zustand";
-// import BarChart from "../ChartComponents/Bar.tsx";
-// import ClusterLineChart from "../ChartComponents/ClusttereLine";
-// import StackedLineChart from "../ChartComponents/StackedLineChart";
-
-// interface IProps {
-//   height: number;
-//   width: number;
-// }
-
+import WaterfallChart from "../ChartComponents/WaterfallChart";
+ 
 const componentIds: Record<string, React.FC<any>> = {
   "overlapped-column": BarChart,
   area: AreaChart,
   line: LineChart,
   "clustered-line": ClusterLineChart,
   "stacked-line": StackedLineChart,
+  "waterfall": WaterfallChart
 };
 const TemplatePreview = () => {
   // const { height, width } = prop;
-
+ 
   const activeChart = useChartStore((state: any) => state.activeChart);
-
+ 
   const SelectedComp = componentIds[activeChart];
-  console.log(SelectedComp);
-
+  // console.log(SelectedComp);
+ 
   // console.log(activeChart);
-
+ 
   const finalData =
     activeChart === "clustered-line" || activeChart === "stacked-line"
       ? dataSets
@@ -42,7 +36,7 @@ const TemplatePreview = () => {
   useEffect(() => {
     let calcHeight = (templateRef.current as any).clientHeight;
     let calcWidth = (templateRef.current as any).clientWidth;
-
+ 
     setPreviewHeight(calcHeight);
     setPreviewWidth(calcWidth);
   });
@@ -68,5 +62,6 @@ const TemplatePreview = () => {
     </div>
   );
 };
-
+ 
 export default TemplatePreview;
+ 
