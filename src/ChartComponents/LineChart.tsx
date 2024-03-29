@@ -135,6 +135,7 @@ const LineChart: React.FC<LineChartProps> = ({ data, width, height }) => {
             xScale={xScale}
             yScale={yScale}
             fontSize={"12px"}
+            theme={"dark"}
           />
         ))
       )}

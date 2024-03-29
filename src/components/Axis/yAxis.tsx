@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 interface YAxisProps {
   margin: { top: number; right: number; bottom: number; left: number };
   width: number;
-  yScale: any; 
+  yScale: any;
   theme: {
     xAxis: any;
     yAxis: any;
@@ -11,12 +11,11 @@ interface YAxisProps {
     fontColor: string;
     fontFamily: string;
     backgroundColor: string;
-    axisStrokeColor: string; 
+    axisStrokeColor: string;
   };
 }
 
 const YAxis: React.FC<YAxisProps> = ({ margin, width, yScale, theme }) => {
-  
   return (
     <>
       <g>
@@ -31,8 +30,11 @@ const YAxis: React.FC<YAxisProps> = ({ margin, width, yScale, theme }) => {
 
       <g className="axis axis--y">
         {yScale.ticks().map((tick, i) => (
-          <g key={i} transform={`translate(${margin.left}, ${yScale(tick)})`}>
-           <line x1={-6} x2={0} y1={0} y2={0}stroke={theme.yAxis.line} /> 
+          <g
+            key={i}
+            transform={`translate(${margin.left - 80}, ${yScale(tick) + 10})`}
+          >
+            <line x1={-6} x2={0} y1={0} y2={0} stroke={theme.yAxis.line} />
             <text
               x={-9}
               y={0}

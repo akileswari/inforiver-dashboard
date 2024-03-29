@@ -82,9 +82,16 @@ const StackedLineChart: React.FC<LineChartProps> = ({
           innerHeight={innerHeight}
           data={data[0]}
           xScale={xScale}
-          index={index}
+          theme={{
+            xAxis: "d",
+            yAxis: "d",
+            fontSize: "d",
+            fontColor: "#363636",
+            fontFamily: "Arial",
+            backgroundColor: "red",
+          }}
         />
-        <YAxis margin={margin} width={width} yScale={yScale} />
+        <YAxis margin={margin} width={width} yScale={yScale} theme={"dark"} />
 
         {/* Lines for each dataset */}
         {paths.map((path, i) => (
@@ -128,6 +135,7 @@ const StackedLineChart: React.FC<LineChartProps> = ({
               xScale={xScale}
               yScale={yScale}
               fontSize={"12px"}
+              theme={"dark"}
             />
           ))
         )}

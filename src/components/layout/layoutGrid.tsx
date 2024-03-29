@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { WidthProvider, Responsive } from 'react-grid-layout';
-import '../CSS/layoutGrid.css'
-import 'react-grid-layout/css/styles.css';
-import 'react-resizable/css/styles.css';
+import { useState, useEffect } from "react";
+import { WidthProvider, Responsive } from "react-grid-layout";
+import "../CSS/layoutGrid.css";
+import "react-grid-layout/css/styles.css";
+import "react-resizable/css/styles.css";
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const GridComponent = ({ rows, columns }) => {
@@ -25,7 +25,7 @@ const GridComponent = ({ rows, columns }) => {
   }, [rows, columns]);
 
   return (
-    <div className='.react-grid-layout'>
+    <div className=".react-grid-layout">
       <style>
         {`
           .react-grid-layout {

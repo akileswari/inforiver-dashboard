@@ -127,6 +127,7 @@ const AreaChart: React.FC<AreaChartProps> = ({ data, width, height }) => {
             xScale={xScale}
             yScale={yScale}
             fontSize={12}
+            theme={"dark"}
           />
         ))
       )}

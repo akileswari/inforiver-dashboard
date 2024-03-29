@@ -1,4 +1,5 @@
 import { ELayouts } from "../../MainComp";
+import CustomToolbar from "../layout/CustomToolBar";
 import ChartBoxHolder from "./ChartBoxHolder";
 
 const columnChartIcons = [
@@ -201,8 +202,7 @@ const SubPanel = ({
           />
         </>
       )}
-             ./
-
+      <CustomToolbar />
     </div>
   );
 };

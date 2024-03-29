@@ -1,21 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "../CSS/customIcon.css";
 import { useTheme } from "../Theme/Theme";
 import { getIcon } from "../constant/Helper";
-
+import themeStore from "../../store/zustand/themeIndicator";
+import { color, select } from "d3";
 const CustomToolbar = () => {
-  const { theme, setTheme } = useTheme(); // Destructure setTheme from useTheme
+  const [selectedTheme, setSelectedTheme] = useState("light");
+  // const { theme, setTheme } = useTheme(); // Destructure setTheme from useTheme
+
+  const themeType = themeStore((state: any) => state.themeType);
+  console.log(themeType);
 
   const handleThemeChange = (event) => {
+    // console.log(event.target.value);
     const selectedTheme = event.target.value; // Get the selected theme from the dropdown
-    setTheme(selectedTheme); // Set the selected theme using the setTheme function from useTheme
+    setSelectedTheme(selectedTheme); // Set state to reflect the change in selected theme
+    setThemeType(selectedTheme);
   };
+
+  const setThemeType = themeStore((state: any) => state.setTHemeType);
 
   return (
     <div className="custom-toolbar">
       <div className="custom-item">
         <i className={getIcon("light-theme")}></i>
-        <select value={theme.name} onChange={handleThemeChange} title='Theme'>
+
+        <select
+          value={selectedTheme}
+          onChange={handleThemeChange}
+          title="Theme"
+          style={{ color: "black" }}
+        >
           <option value="light">Light Theme</option>
           <option value="dark">Dark Theme</option>
         </select>
