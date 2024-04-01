@@ -14,7 +14,9 @@ const TemplateWrapper = () => {
       className="template-wrapper"
       style={{ height: `${divHeight}px`, width: `${divWidth}px` }}
     >
+      
       <TemplateToolbar />
+      
       <TemplatePreview />
     </div>
   );

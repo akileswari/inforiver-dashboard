@@ -1,15 +1,13 @@
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { WidthProvider, Responsive } from 'react-grid-layout';
 import '../CSS/layoutGrid.css'
 import 'react-grid-layout/css/styles.css';
-import 'react-resizable/css/styles.css';
+
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 interface GridComponentProps {
   rows: number;
   columns: number;
-  height?: number;
-  width?: number;
 }
 
 const LayoutGrid: React.FC<GridComponentProps> = ({ rows, columns }) => {
@@ -31,16 +29,19 @@ const LayoutGrid: React.FC<GridComponentProps> = ({ rows, columns }) => {
     setLayout(newLayout);
   }, [rows, columns]);
 
-  return (
-    
-      <ResponsiveGridLayout className="layout" layouts={{ lg: layout }}>
-        {layout.map((item) => (
-          <div key={item.i} className="grid-item">
-            
-          </div>
-        ))}
-      </ResponsiveGridLayout>
+  const gridItemStyle = {
+    width: `${100 / columns}%`,
+    height: `${100 / rows}%`
+  };
 
+  return (
+    <ResponsiveGridLayout className="layout" layouts={{ lg: layout }}>
+      {layout.map((item) => (
+        <div key={item.i} className="grid-item" style={gridItemStyle}>
+          {/* You can render content inside the grid item if needed */}
+        </div>
+      ))}
+    </ResponsiveGridLayout>
   );
 };
 

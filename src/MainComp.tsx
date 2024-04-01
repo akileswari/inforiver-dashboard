@@ -42,7 +42,6 @@ const MainComp = () => {
         )}
         <TemplateWrapper />
       </div>
-      {/* Render toolbar only if showToolbar is true */}
       {showToolbar && <Toolbar />}
     </div>
   );

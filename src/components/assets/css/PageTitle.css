@@ -13,9 +13,9 @@
   height: 80px;
   width: 100%;
   position: relative;
-    bottom: 83px;
-    left: 67px;
- border-right-color: coral;
+  bottom: 83px;
+  left: 67px;
+  border-right-color: rgb(29, 27, 26);
 }
 
 .left-section {
@@ -25,7 +25,7 @@
 }
 
 .title {
-  
+
   font-size: larger;
   font-weight: 500;
   margin-left: 161px;
@@ -73,12 +73,16 @@
   border-radius: 5px 0px 0px 0px;
   border: 1px 0px 0px 0px;
   opacity: 0px;
-cursor: pointer;
-  
+  cursor: pointer;
+
 }
-.reset-button:hover {background-color: #e7e7e7;}
+
+.reset-button:hover {
+  background-color: #e7e7e7;
+}
+
 .export-button {
-  
+
   height: Fixed (38px)px;
   left: 397.2px;
   padding: 8px 24px 8px 24px;
@@ -108,6 +112,7 @@ cursor: pointer;
   display: inline-flex;
 
 }
-.stroke{
+
+.stroke {
   border: 1px solid gray;
 }

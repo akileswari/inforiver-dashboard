@@ -1,5 +1,7 @@
+// TemplatePreview.tsx
 import React, { useEffect, useRef, useState } from "react";
 import useChartStore from "../store/zustand/Zustand";
+import useToolbarStore from "../store/zustand/ToolbarStore"; // Import the Zustand store
 import LineChart from "../ChartComponents/LineChart";
 import ClusterLineChart from "../ChartComponents/ClusttereLine";
 import { dataSets, lineData } from "../components/dataSets/ChartDatas";
@@ -8,9 +10,6 @@ import AreaChart from "../ChartComponents/AreaChart";
 import StackedLineChart from "../ChartComponents/StackedLineChart";
 import WaterfallChart from "../ChartComponents/WaterfallChart";
 import LayoutGrid from "../components/layout/layoutGrid";
-
-const rows = 2;
-const columns = 2;
 
 const componentIds: Record<string, React.FC<any>> = {
   "overlapped-column": BarChart,
@@ -33,13 +32,16 @@ const TemplatePreview = () => {
   const [previewWidth, setPreviewWidth] = useState();
   const isChartActive = activeChart !== null;
 
+  // Get rows and columns from the store
+  const { rows, columns } = useToolbarStore();
+
   useEffect(() => {
-    let calcHeight = (templateRef.current as any).clientHeight;
-    let calcWidth = (templateRef.current as any).clientWidth;
+    const calcHeight = (templateRef.current as any)?.clientHeight;
+    const calcWidth = (templateRef.current as any)?.clientWidth;
 
     setPreviewHeight(calcHeight);
     setPreviewWidth(calcWidth);
-  });
+  }, [activeChart]);
 
   return (
     <div
@@ -58,7 +60,7 @@ const TemplatePreview = () => {
           )}
         </svg>
       )}
-      {!isChartActive && <LayoutGrid rows={rows} columns={columns} height={previewHeight} width={previewWidth}/>}
+      {!isChartActive && <LayoutGrid rows={rows} columns={columns} />}
     </div>
   );
 };

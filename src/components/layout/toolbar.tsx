@@ -1,27 +1,28 @@
-
-import "../CSS/toolbar.css";
-import "../CSS/style.css";
-import { getIcon } from "../constant/Helper";
-import { useState } from "react";
+// Toolbar.tsx
+import React, { useState } from "react";
 import { SketchPicker } from 'react-color';
-
+import useToolbarStore from "../../store/zustand/ToolbarStore"; // Import the Zustand store
+import { getIcon } from "../constant/Helper";
+import '../CSS/toolbar.css'
 const Toolbar = () => { 
+  
   const [isChecked, setIsChecked] = useState(true);
   const [color1, setColor1] = useState('#ffffff');
   const [color2, setColor2] = useState('#ffffff');
   const [showColorPicker1, setShowColorPicker1] = useState(false);
   const [showColorPicker2, setShowColorPicker2] = useState(false);
   
-
+  // Get rows and columns from the store
+  const { rows, columns, setRows, setColumns } = useToolbarStore();
 
   const handleInputChange1 = (e) => {
     const value = parseInt(e.target.value);
-    setRows(value);
+    setRows(value); // Update rows in the store
   };
 
   const handleInputChange2 = (e) => {
     const value = parseInt(e.target.value);
-    setColumns(value);
+    setColumns(value); // Update columns in the store
   };
 
   const handleToggleChange = () => {
@@ -62,7 +63,7 @@ const Toolbar = () => {
               id="row"
               name="row"
               min="0"
-              defaultValue="3"
+              value={rows} // Use rows value from the store
               onChange={handleInputChange1}
             />
           </div>
@@ -74,8 +75,7 @@ const Toolbar = () => {
               type="number"
               id="col"
               name="col"
-              min="0"
-              defaultValue="3"
+              value={columns} // Use columns value from the store
               onChange={handleInputChange2}
             />
           </div>
@@ -229,8 +229,4 @@ const Toolbar = () => {
 };
 
 export default Toolbar;
-
-
-
-
 

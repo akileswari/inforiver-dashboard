@@ -9,3 +9,6 @@
   left:300px
 
 }
+.react-grid-layout.layout {
+  height: auto !important;
+}
