@@ -12,7 +12,7 @@ interface GridComponentProps {
   width?: number;
 }
 
-const GridComponent: React.FC<GridComponentProps> = ({ rows, columns }) => {
+const LayoutGrid: React.FC<GridComponentProps> = ({ rows, columns }) => {
   const [layout, setLayout] = useState([]);
 
   useEffect(() => {
@@ -44,4 +44,4 @@ const GridComponent: React.FC<GridComponentProps> = ({ rows, columns }) => {
   );
 };
 
-export default GridComponent;
+export default LayoutGrid;

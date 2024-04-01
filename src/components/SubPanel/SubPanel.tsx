@@ -147,7 +147,8 @@ const SubPanel = ({
 }) => {
   if (showSubPanelElements !== ELayouts.CHART || showSubPanelElements === null) return null;
   return (
-    <div className="sub-panel">
+    <div className="sub-panel" style={{ marginTop: "-77px" }}>
+
       {showSubPanelElements === "CHART" && (
         <>
           <p className="charts-text-title">Chart</p>

@@ -7,7 +7,7 @@ import BarChart from "../ChartComponents/Bar";
 import AreaChart from "../ChartComponents/AreaChart";
 import StackedLineChart from "../ChartComponents/StackedLineChart";
 import WaterfallChart from "../ChartComponents/WaterfallChart";
-import GridComponent from "../components/layout/layoutGrid";
+import LayoutGrid from "../components/layout/layoutGrid";
 
 const rows = 2;
 const columns = 2;
@@ -58,7 +58,7 @@ const TemplatePreview = () => {
           )}
         </svg>
       )}
-      {!isChartActive && <GridComponent rows={rows} columns={columns} height={previewHeight} width={previewWidth}/>}
+      {!isChartActive && <LayoutGrid rows={rows} columns={columns} height={previewHeight} width={previewWidth}/>}
     </div>
   );
 };

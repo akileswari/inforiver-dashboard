@@ -12,23 +12,20 @@ const SidePanel = ({
   toggleToPreview: (value: ELayouts) => void;
   showSubPanelElements: ELayouts;
 }) => {
-  interface MenuLayoutItem {
-    iconName: string;
-    label: string;
-    onClick: () => void;
-  }
-
   const [showLayoutSection, setShowLayoutSection] = useState(false);
-  const [showInsertElementSubPanel, setShowInsertElementSubPanel] = useState(true); // State to control rendering of subpanel for "Insert element"
+  const [showInsertElementSubPanel, setShowInsertElementSubPanel] = useState(true);
+  const [showToolbar, setShowToolbar] = useState(false); 
 
   const toggleLayoutSection = () => {
     setShowLayoutSection(!showLayoutSection);
-    setShowInsertElementSubPanel(false); // Hide subpanel when layout section is toggled
+    setShowInsertElementSubPanel(true);
+    setShowToolbar(true); 
   };
 
-  const toggleInsertElement = () => {
-    setShowInsertElementSubPanel(true); // Always show subpanel when "Insert element" is clicked
-    setShowLayoutSection(false); // Hide layout section if open
+  const toggleToPreviewWithToolbar = (value: ELayouts) => {
+    toggleToPreview(value);
+    setShowLayoutSection(false); 
+    setShowToolbar(false); 
   };
 
   const MenuLayoutItem = ({ iconName, label, onClick }: MenuLayoutItem) => {
@@ -69,11 +66,11 @@ const SidePanel = ({
       <MenuLayoutItem
         iconName="light-dropdown-bottom"
         label="Insert element"
-        onClick={toggleInsertElement}
+        onClick={() => setShowInsertElementSubPanel(true)}
       />
 
       {showLayoutSection && (
-        <><CustomToolbar /><Toolbar /></>
+        <Toolbar /> // Always render toolbar if layout section is toggled
       )}
 
       {showInsertElementSubPanel && (
@@ -82,31 +79,32 @@ const SidePanel = ({
             className="menu-item"
             iconName="light-chart"
             label="Chart"
-            onClick={() => toggleToPreview(ELayouts.CHART)}
+            onClick={() => toggleToPreviewWithToolbar(ELayouts.CHART)}
           />
 
           <RepeatingElements
             className="menu-item"
             iconName="light-card"
             label="Card"
-            onClick={() => toggleToPreview(ELayouts.CARD)}
+            onClick={() => toggleToPreviewWithToolbar(ELayouts.CARD)}
           />
           <RepeatingElements
             className="menu-item"
             iconName="light-table"
             label="Table"
-            onClick={() => toggleToPreview(ELayouts.TABLE)}
+            onClick={() => toggleToPreviewWithToolbar(ELayouts.TABLE)}
           />
           <RepeatingElements
             className="menu-item"
             iconName="light-notes"
             label="Notes"
-            onClick={() => toggleToPreview(ELayouts.NOTES)}
+            onClick={() => toggleToPreviewWithToolbar(ELayouts.NOTES)}
           />
+          {showToolbar && <CustomToolbar />} 
         </>
       )}
     </div>
   );
 };
 
-export default SidePanel; 
+export default SidePanel;

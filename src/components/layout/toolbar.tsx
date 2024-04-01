@@ -5,7 +5,7 @@ import { getIcon } from "../constant/Helper";
 import { useState } from "react";
 import { SketchPicker } from 'react-color';
 
-const Toolbar = ({ setRows, setColumns }) => { 
+const Toolbar = () => { 
   const [isChecked, setIsChecked] = useState(true);
   const [color1, setColor1] = useState('#ffffff');
   const [color2, setColor2] = useState('#ffffff');

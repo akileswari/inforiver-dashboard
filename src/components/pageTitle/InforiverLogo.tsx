@@ -1,7 +1,7 @@
 import React from "react";
 import { Logo } from "../template-icon/Logo";
 import "../assets/css/PageTitle.css";
-const PageTitle: React.FC = () => {
+const InforiverLogo: React.FC = () => {
   return (
     <>
       <div className="page-title">
@@ -14,4 +14,4 @@ const PageTitle: React.FC = () => {
   );
 };
 
-export default PageTitle;
+export default InforiverLogo;
