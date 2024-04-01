@@ -1,6 +1,6 @@
 import { Provider } from "react-redux";
 import "./App.css";
-import MainComp, { ELayouts } from "./MainComp";
+import MainComp, { ELayouts } from "./MainComponent";
 import store from "./store";
 
 function App() {

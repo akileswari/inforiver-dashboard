@@ -1,9 +1,8 @@
 import React from "react";
 import { scaleBand, scaleLinear } from "d3-scale";
-import XAxis from "../components/Axis/xAxis";
-import YAxis from "../components/Axis/yAxis";
-import TextValues from "../components/DataValues/TextValues";
-
+import XAxis from "../components/axis/xAxis";
+import YAxis from "../components/axis/yAxis";
+import TextValues from "../components/dataValues/TextValues";
 interface DataItem {
   name: string;
   value: number;
@@ -13,14 +12,16 @@ interface LineChartProps {
   data: DataItem[][];
   width: number;
   height: number;
-  index: number; // Add index property here
+  index: number;
+  theme: string; // Add index property here
 }
 
 const StackedLineChart: React.FC<LineChartProps> = ({
   data,
   width,
   height,
-  index, // Receive index prop here
+  index,
+  theme, // Receive index prop here
 }) => {
   // Dimensions
   const margin = { top: 20, right: 30, bottom: 50, left: 80 };
@@ -82,16 +83,9 @@ const StackedLineChart: React.FC<LineChartProps> = ({
           innerHeight={innerHeight}
           data={data[0]}
           xScale={xScale}
-          theme={{
-            xAxis: "d",
-            yAxis: "d",
-            fontSize: "d",
-            fontColor: "#363636",
-            fontFamily: "Arial",
-            backgroundColor: "red",
-          }}
+          theme={theme}
         />
-        <YAxis margin={margin} width={width} yScale={yScale} theme={"dark"} />
+        <YAxis margin={margin} width={width} yScale={yScale} theme={theme} />
 
         {/* Lines for each dataset */}
         {paths.map((path, i) => (
@@ -134,8 +128,8 @@ const StackedLineChart: React.FC<LineChartProps> = ({
               value={d.label}
               xScale={xScale}
               yScale={yScale}
-              fontSize={"12px"}
-              theme={"dark"}
+              // fontSize={"12px"}
+              theme={theme}
             />
           ))
         )}

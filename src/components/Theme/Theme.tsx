@@ -1,7 +1,6 @@
 import { useState } from "react";
 import lightTheme from "./lightTheme";
 import darkTheme from "./darkTheme";
-import themeStore from "../../store/zustand/themeIndicator";
 
 type ThemeKey = "light" | "dark";
 type Theme = typeof lightTheme | typeof darkTheme;
@@ -11,9 +10,6 @@ export const useTheme = (): {
   setTheme: (themeKey: ThemeKey) => void;
 } => {
   const [currentTheme, setCurrentTheme] = useState<ThemeKey>("light");
-
-  const themeType = themeStore((state) => state.themeType);
-  console.log(themeType, "Theme.tsx type");
 
   const setTheme = (themeKey: ThemeKey) => {
     setCurrentTheme(themeKey);

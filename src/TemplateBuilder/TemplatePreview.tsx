@@ -5,8 +5,11 @@ import BarChart from "../ChartComponents/Bar";
 import AreaChart from "../ChartComponents/AreaChart";
 import { useEffect, useRef, useState } from "react";
 import StackedLineChart from "../ChartComponents/StackedLineChart";
-import useChartStore from "../store/zustand/Zustand";
+import useChartStore from "../store/zustand/zustand";
 import WaterfallChart from "../ChartComponents/WaterfallChart";
+import { useSelector } from "react-redux";
+import lightTheme from "../components/Theme/lightTheme";
+import darkTheme from "../components/Theme/darkTheme";
 
 const componentIds: Record<string, React.FC<any>> = {
   "overlapped-column": BarChart,
@@ -37,6 +40,21 @@ const TemplatePreview = () => {
     setPreviewHeight(calcHeight);
     setPreviewWidth(calcWidth);
   });
+  const themeType = useSelector((state: any) => state.themeStore.themeType);
+
+  const getTheme = (theme: any): any => {
+    switch (theme) {
+      case "light":
+        return lightTheme;
+      case "dark":
+        return darkTheme;
+      default:
+        return lightTheme;
+    }
+  };
+  const theme = getTheme(themeType);
+  // const themeClassName = theme. === "dark" ? "dark-theme" : "light-theme";
+
   return (
     <div
       ref={templateRef}
@@ -47,12 +65,15 @@ const TemplatePreview = () => {
         // style={{ height: previewHeight, width: previewWidth }
         height={previewWidth}
         width={previewHeight}
+        style={{ backgroundColor: theme.chart.background }}
+        // className={themeClassName}
       >
         {SelectedComp && (
           <SelectedComp
             data={finalData}
             height={previewWidth}
             width={previewHeight}
+            theme={theme}
           />
         )}
       </svg>

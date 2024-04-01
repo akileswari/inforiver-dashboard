@@ -1,24 +1,20 @@
-import React, { useState } from "react";
-import "../CSS/customIcon.css";
-import { useTheme } from "../Theme/Theme";
+import "../css/customIcon.css";
 import { getIcon } from "../constant/Helper";
-import themeStore from "../../store/zustand/themeIndicator";
-import { color, select } from "d3";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setThemeType } from "../../store/ThemeIndicator";
+
 const CustomToolbar = () => {
   const [selectedTheme, setSelectedTheme] = useState("light");
-  // const { theme, setTheme } = useTheme(); // Destructure setTheme from useTheme
 
-  const themeType = themeStore((state: any) => state.themeType);
-  console.log(themeType);
+  const dispatch = useDispatch();
 
-  const handleThemeChange = (event) => {
-    // console.log(event.target.value);
-    const selectedTheme = event.target.value; // Get the selected theme from the dropdown
-    setSelectedTheme(selectedTheme); // Set state to reflect the change in selected theme
-    setThemeType(selectedTheme);
+  const handleThemeChange = (event: any) => {
+    const selectedTheme = event.target.value;
+    setSelectedTheme(selectedTheme);
+    // dispatch(setThemeType("light"))
+    dispatch(setThemeType(selectedTheme)); // Dispatch the action to update the theme
   };
-
-  const setThemeType = themeStore((state: any) => state.setTHemeType);
 
   return (
     <div className="custom-toolbar">

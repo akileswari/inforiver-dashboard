@@ -1,6 +1,4 @@
-import React from "react";
-
-function TextValues({ x, y, value, xScale, yScale, fontSize, theme }) {
+function TextValues({ x, y, value, xScale, fontSize, theme }) {
   const isPositive = value >= 0;
 
   const adjustedY = isPositive ? y - 5 : y;

@@ -1,16 +1,21 @@
 import React from "react";
 import { scaleBand, scaleLinear } from "d3-scale";
-import XAxis from "../components/Axis/xAxis.tsx";
-import YAxis from "../components/Axis/yAxis.tsx";
-import TextValues from "../components/DataValues/TextValues.tsx";
-
+import XAxis from "../components/axis/xAxis.tsx";
+import YAxis from "../components/axis/yAxis.tsx";
+import TextValues from "../components/dataValues/TextValues.tsx";
 interface AreaChartProps {
   data: { name: string; value: number }[][];
   width: number;
   height: number;
+  theme: string;
 }
 
-const AreaChart: React.FC<AreaChartProps> = ({ data, width, height }) => {
+const AreaChart: React.FC<AreaChartProps> = ({
+  data,
+  width,
+  height,
+  theme,
+}) => {
   // Dimensions
   const margin = { top: 20, right: 30, bottom: 50, left: 80 };
   const innerWidth = width - margin.left - margin.right;
@@ -66,6 +71,7 @@ const AreaChart: React.FC<AreaChartProps> = ({ data, width, height }) => {
             data={dataset}
             xScale={xScale}
             index={index}
+            theme={theme}
           />
 
           {/* Area */}
@@ -91,7 +97,12 @@ const AreaChart: React.FC<AreaChartProps> = ({ data, width, height }) => {
           ))}
 
           {/* Y Axis */}
-          <YAxis margin={margin} width={innerWidth} yScale={yScale} />
+          <YAxis
+            margin={margin}
+            width={innerWidth}
+            yScale={yScale}
+            theme={theme}
+          />
         </g>
       ))}
 
@@ -127,7 +138,7 @@ const AreaChart: React.FC<AreaChartProps> = ({ data, width, height }) => {
             xScale={xScale}
             yScale={yScale}
             fontSize={12}
-            theme={"dark"}
+            theme={theme}
           />
         ))
       )}

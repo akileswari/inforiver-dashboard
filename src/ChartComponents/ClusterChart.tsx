@@ -1,18 +1,24 @@
-import React from 'react';
-import * as d3 from 'd3';
-import DataLabel from '../components/DataValues/Datalabel';
-import YAxis from '../components/Axis/yAxis';
-import XAxis from '../components/Axis/xAxis';
+import React from "react";
+import * as d3 from "d3";
+import DataLabel from "../components/dataValues/Datalabel";
+import YAxis from "../components/axis/yAxis";
+import XAxis from "../components/axis/xAxis";
 
 interface ClusteredChartProps {
   datasets: { name: string; value: number }[][];
   width: number;
   height: number;
-  theme: any; 
+  theme: any;
   toggleTheme: () => void;
 }
 
-const ClusteredChart: React.FC<ClusteredChartProps> = ({ datasets, width, height, theme, toggleTheme }) => {
+const ClusteredChart: React.FC<ClusteredChartProps> = ({
+  datasets,
+  width,
+  height,
+  theme,
+  toggleTheme,
+}) => {
   const margin = { top: 100, right: 100, bottom: 40, left: 40 };
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
@@ -23,8 +29,10 @@ const ClusteredChart: React.FC<ClusteredChartProps> = ({ datasets, width, height
   const minValue = d3.min(datasets.flat(), (d) => d.value) || 0;
   const maxValue = d3.max(datasets.flat(), (d) => d.value) || 0;
 
- 
-  const colorScale = d3.scaleOrdinal<string>().domain(d3.range(numCategories).map(String)).range(theme.chart.seriesColors);
+  const colorScale = d3
+    .scaleOrdinal<string>()
+    .domain(d3.range(numCategories).map(String))
+    .range(theme.chart.seriesColors);
 
   const xScale = d3
     .scaleBand()
@@ -33,10 +41,23 @@ const ClusteredChart: React.FC<ClusteredChartProps> = ({ datasets, width, height
     .paddingInner(0.1)
     .paddingOuter(0.1);
 
-  const yScale = d3.scaleLinear().domain([minValue, maxValue]).nice().range([innerHeight, 0]);
+  const yScale = d3
+    .scaleLinear()
+    .domain([minValue, maxValue])
+    .nice()
+    .range([innerHeight, 0]);
 
-  const yAxisElement = <YAxis margin={margin} width={innerWidth} yScale={yScale} theme={theme} />;
-  const xAxisElement = <XAxis innerHeight={innerHeight} xScale={xScale} data={datasets[0]} theme={theme} />;
+  const yAxisElement = (
+    <YAxis margin={margin} width={innerWidth} yScale={yScale} theme={theme} />
+  );
+  const xAxisElement = (
+    <XAxis
+      innerHeight={innerHeight}
+      xScale={xScale}
+      data={datasets[0]}
+      theme={theme}
+    />
+  );
 
   const bars = datasets.map((dataset, categoryIndex) =>
     dataset.map(({ name, value }, index) => {
@@ -53,23 +74,38 @@ const ClusteredChart: React.FC<ClusteredChartProps> = ({ datasets, width, height
             height={barHeight}
             fill={colorScale(String(categoryIndex))}
           />
-          <DataLabel x={barX + barWidth / 2} y={value >= 0 ? barY : barY + barHeight} value={value} positive={value >= 0} theme={theme} />
+          <DataLabel
+            x={barX + barWidth / 2}
+            y={value >= 0 ? barY : barY + barHeight}
+            value={value}
+            positive={value >= 0}
+            theme={theme}
+          />
         </g>
       );
     })
   );
 
   return (
-    <svg width={width} height={height} style={{ margin: 'auto', display: 'block' }}>
+    <svg
+      width={width}
+      height={height}
+      style={{ margin: "auto", display: "block" }}
+    >
       <g transform={`translate(${margin.left}, ${margin.top})`}>
-        <text x={innerWidth / 2} y={-margin.top / 2} fontSize="18px" textAnchor="middle">
+        <text
+          x={innerWidth / 2}
+          y={-margin.top / 2}
+          fontSize="18px"
+          textAnchor="middle"
+        >
           Cluster Chart
         </text>
         {bars.flat()}
         {yAxisElement}
         {xAxisElement}
-        
-        <button onClick={toggleTheme}>Toggle Theme</button> {/* Add a button to toggle theme */}
+        <button onClick={toggleTheme}>Toggle Theme</button>{" "}
+        {/* Add a button to toggle theme */}
       </g>
     </svg>
   );

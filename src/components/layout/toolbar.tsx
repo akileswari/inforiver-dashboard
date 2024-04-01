@@ -1,18 +1,15 @@
-
-import "../CSS/toolbar.css";
-import "../CSS/style.css";
+import "../css/toolbar.css";
+import "../css/style.css";
 import { getIcon } from "../constant/Helper";
 import { useState } from "react";
-import { SketchPicker } from 'react-color';
+import { SketchPicker } from "react-color";
 
-const Toolbar = ({ setRows, setColumns }) => { 
+const Toolbar = ({ setRows, setColumns }) => {
   const [isChecked, setIsChecked] = useState(true);
-  const [color1, setColor1] = useState('#ffffff');
-  const [color2, setColor2] = useState('#ffffff');
+  const [color1, setColor1] = useState("#ffffff");
+  const [color2, setColor2] = useState("#ffffff");
   const [showColorPicker1, setShowColorPicker1] = useState(false);
   const [showColorPicker2, setShowColorPicker2] = useState(false);
-  
-
 
   const handleInputChange1 = (e) => {
     const value = parseInt(e.target.value);
@@ -117,9 +114,7 @@ const Toolbar = ({ setRows, setColumns }) => {
         </div>
       </div>
 
-
       {/* Margin */}
-
 
       {/* Corner radius */}
       <div className="cornerRadiusContainer">
@@ -153,16 +148,20 @@ const Toolbar = ({ setRows, setColumns }) => {
               min="0"
               defaultValue="0"
             />
-            </div>
-            <div className="color-picker">
-              <div className="colorBox" onClick={toggleColorPicker1}>
-                {showColorPicker1 && (
-                  <SketchPicker color={color1} onChange={handleColorChange1} className="picker" />
-                )}
-              </div>
+          </div>
+          <div className="color-picker">
+            <div className="colorBox" onClick={toggleColorPicker1}>
+              {showColorPicker1 && (
+                <SketchPicker
+                  color={color1}
+                  onChange={handleColorChange1}
+                  className="picker"
+                />
+              )}
             </div>
           </div>
-        
+        </div>
+
         {/* Shadow */}
         <div className="shadowContainer">
           <div className="shadowHeader">
@@ -173,13 +172,21 @@ const Toolbar = ({ setRows, setColumns }) => {
               <div className="shadowBox">
                 <div className="shadow">
                   <label className="switch">
-                    <input type="checkbox" checked={isChecked} onChange={handleToggleChange}></input>
+                    <input
+                      type="checkbox"
+                      checked={isChecked}
+                      onChange={handleToggleChange}
+                    ></input>
                     <span className="slider round"></span>
                   </label>
                   <div className="color-picker">
                     <div className="colorBox" onClick={toggleColorPicker2}>
                       {showColorPicker2 && (
-                        <SketchPicker color={color2} onChange={handleColorChange2} className="picker_shadow" />
+                        <SketchPicker
+                          color={color2}
+                          onChange={handleColorChange2}
+                          className="picker_shadow"
+                        />
                       )}
                     </div>
                   </div>
@@ -223,14 +230,8 @@ const Toolbar = ({ setRows, setColumns }) => {
           </div>
         </div>
       </div>
-      
-      </div>
+    </div>
   );
 };
 
 export default Toolbar;
-
-
-
-
-

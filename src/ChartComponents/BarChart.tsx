@@ -1,17 +1,14 @@
 import React from "react";
 import { scaleBand, scaleLinear } from "d3-scale";
-import DataLabel from "../components/DataValues/Datalabel.tsx";
-import XAxis from "../components/Axis/xAxis.tsx";
-import YAxis from "../components/Axis/yAxis.tsx";
-import themeStore from "../store/zustand/themeIndicator.ts";
-import lightTheme from "../components/Theme/lightTheme.ts";
-import darkTheme from "../components/Theme/darkTheme.ts";
+import DataLabel from "../components/dataValues/Datalabel.tsx";
+import XAxis from "../components/axis/xAxis.tsx";
+import YAxis from "../components/axis/yAxis.tsx";
+
 interface BarChartProps {
   data: { name: string; value: number }[][];
   width: number;
   height: number;
   theme: {
-    [x: string]: any;
     fontSize: string;
     fontColor: string;
     fontFamily: string;
@@ -24,21 +21,13 @@ interface BarChartProps {
   toggleTheme: () => void;
 }
 
-const BarChart: React.FC<BarChartProps> = ({ data, width, height }) => {
-  const themeType = themeStore((state: any) => state.themeType);
-  console.log(themeType, "From Batchart.tsx");
-
-  const getTheme = (theme: any): any => {
-    switch (theme) {
-      case "light":
-        return lightTheme;
-      case "dark":
-        return darkTheme;
-      default:
-        return lightTheme;
-    }
-  };
-  const theme = getTheme(themeType);
+const BarChart: React.FC<BarChartProps> = ({
+  data,
+  width,
+  height,
+  theme,
+  toggleTheme,
+}) => {
   const margin = { top: 40, right: 60, bottom: 40, left: 40 }; // Adjust margins
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
@@ -62,7 +51,6 @@ const BarChart: React.FC<BarChartProps> = ({ data, width, height }) => {
     <svg width={width} height={height}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         {/* Render the bars first */}
-
         {data.map((dataset, datasetIndex) =>
           dataset.map((entry, index) => {
             const value = entry.value;
@@ -106,6 +94,8 @@ const BarChart: React.FC<BarChartProps> = ({ data, width, height }) => {
           theme={theme}
         />
       </g>
+      {/* Add button outside the g element */}
+      <button onClick={toggleTheme}>Toggle Theme</button>
     </svg>
   );
 };

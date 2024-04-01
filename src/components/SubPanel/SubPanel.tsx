@@ -1,7 +1,6 @@
-import { ELayouts } from "../../MainComp";
+import { ELayouts } from "../../MainComponent";
 import CustomToolbar from "../layout/CustomToolBar";
 import ChartBoxHolder from "./ChartBoxHolder";
-
 const columnChartIcons = [
   {
     className: "light-overlapped-column",
@@ -140,6 +139,46 @@ const comboChartIcons = [
   },
 ];
 
+const comparisionComposition = [
+  {
+    title: "Column",
+    chartIcons: columnChartIcons,
+    logo: "chart light-overlapped-column",
+  },
+  {
+    title: "Waterfall",
+    chartIcons: waterfallChartIcons,
+    logo: "chart light-waterfall",
+  },
+  {
+    title: "Special",
+    chartIcons: specialChartIcons,
+    logo: "chart light-lollipop",
+  },
+  {
+    title: "Bullet",
+    chartIcons: bulletChartIcons,
+    logo: "chart light-qualitative-bullet",
+  },
+];
+
+const sparkLine = [
+  {
+    title: "Area",
+    chartIcons: areaChartIcons,
+    logo: "chart light-area",
+  },
+  {
+    title: "Line",
+    chartIcons: lineChartIcons,
+    logo: "chart light-line",
+  },
+  {
+    title: "Combo",
+    chartIcons: comboChartIcons,
+    logo: "chart light-spline-column-area",
+  },
+];
 const SubPanel = ({
   showSubPanelElements,
 }: {
@@ -154,52 +193,28 @@ const SubPanel = ({
           <p className="charts-text-title">Chart</p>
           <div className="search-input">
             <i className="template-builder light-search"></i>
-            <input
-              type="text"
-              // id="search-chart"
-              placeholder="Search.."
-              className="search-box"
-            />
+            <input type="text" placeholder="Search.." className="search-box" />
           </div>
           <p className="chart-type-text">Comparision / Composition</p>
 
-          <ChartBoxHolder
-            title="Column"
-            chartIcons={columnChartIcons}
-            logo="chart light-overlapped-column"
-          />
-          <ChartBoxHolder
-            title="Waterfall"
-            chartIcons={waterfallChartIcons}
-            logo="chart light-waterfall"
-          />
-          <ChartBoxHolder
-            title="Special"
-            chartIcons={specialChartIcons}
-            logo="chart light-lollipop"
-          />
-          <ChartBoxHolder
-            title="Bullet"
-            chartIcons={bulletChartIcons}
-            logo="chart light-qualitative-bullet"
-          />
+          {comparisionComposition.map((config, index) => (
+            <ChartBoxHolder
+              key={index}
+              title={config.title}
+              chartIcons={config.chartIcons}
+              logo={config.logo}
+            />
+          ))}
 
           <p className="charts-text-title">Sparkline</p>
-          <ChartBoxHolder
-            title="Area"
-            chartIcons={areaChartIcons}
-            logo="chart light-area"
-          />
-          <ChartBoxHolder
-            title="Line"
-            chartIcons={lineChartIcons}
-            logo="chart light-line"
-          />
-          <ChartBoxHolder
-            title="Combo"
-            chartIcons={comboChartIcons}
-            logo="chart light-spline-column-area"
-          />
+          {sparkLine.map((config, index) => (
+            <ChartBoxHolder
+              key={index}
+              title={config.title}
+              chartIcons={config.chartIcons}
+              logo={config.logo}
+            />
+          ))}
         </>
       )}
       <CustomToolbar />

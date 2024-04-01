@@ -1,9 +1,9 @@
 import { Provider } from "react-redux";
 import store from "../../store";
-import Toolbar from "./toolbar";
+import Toolbar from "./Toolbar";
 import CustomToolbar from "./CustomToolBar";
-import LayoutTittle from "./layoutTittle";
-import GridComponent from "./layoutGrid";
+import LayoutTitle from "../layout/LayoutTitle";
+import GridComponent from "./LayoutGrid";
 import { useState } from "react";
 
 const LayoutSection = () => {
@@ -12,7 +12,7 @@ const LayoutSection = () => {
 
   return (
     <Provider store={store}>
-      <LayoutTittle />
+      <LayoutTitle />
       <Toolbar setRows={setRows} setColumns={setColumns} />
       <CustomToolbar />
       <GridComponent rows={rows} columns={columns} />

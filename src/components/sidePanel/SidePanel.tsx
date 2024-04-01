@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getIcon } from "../constant/Helper";
-import { ELayouts } from "../../MainComp";
+import { ELayouts } from "../../MainComponent";
 import LayoutSection from "../layout/Layout";
 
 const SidePanel = ({
@@ -21,12 +21,12 @@ const SidePanel = ({
 
   const toggleLayoutSection = () => {
     setShowLayoutSection(!showLayoutSection);
-    setshowElements(false); 
+    setshowElements(false);
   };
 
   const toggleInsertElement = () => {
     setshowElements(!showElements);
-    if (!showElements) setShowLayoutSection(false); 
+    if (!showElements) setShowLayoutSection(false);
   };
 
   const MenuLayoutItem = ({ iconName, label, onClick }: MenuLayoutItem) => {
@@ -70,9 +70,7 @@ const SidePanel = ({
         onClick={toggleInsertElement}
       />
 
-      {showLayoutSection && (
-        <LayoutSection  />
-      )}
+      {showLayoutSection && <LayoutSection />}
 
       {showElements && (
         <>

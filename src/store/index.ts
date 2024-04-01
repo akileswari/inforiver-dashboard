@@ -1,8 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import chartSlicer from "./chartSlicer";
-
+import themeStore from "./ThemeIndicator";
 const rootReducer = combineReducers({
-  chartStore: chartSlicer,
+  themeStore: themeStore,
 });
 
 const store = configureStore({

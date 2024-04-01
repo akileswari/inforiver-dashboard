@@ -1,8 +1,8 @@
 import React from "react";
 import { scaleBand, scaleLinear } from "d3-scale";
-import XAxis from "../components/Axis/xAxis";
-import YAxis from "../components/Axis/yAxis";
-import TextValues from "../components/DataValues/TextValues";
+import XAxis from "../components/axis/xAxis";
+import YAxis from "../components/axis/yAxis";
+import TextValues from "../components/dataValues/TextValues";
 
 interface DataItem {
   name: string;
@@ -13,14 +13,16 @@ interface LineChartProps {
   data: DataItem[][];
   width: number;
   height: number;
-  index: number; // Add index property here
+  index: number;
+  theme: string; // Add index property here
 }
 
 const StackedLineChart: React.FC<LineChartProps> = ({
   data,
   width,
   height,
-  index, // Receive index prop here
+  index,
+  theme, // Receive index prop here
 }) => {
   // Dimensions
   const margin = { top: 20, right: 30, bottom: 50, left: 80 };
@@ -79,8 +81,9 @@ const StackedLineChart: React.FC<LineChartProps> = ({
           data={flattenedData}
           xScale={xScale}
           index={index}
+          theme={theme}
         />
-        <YAxis margin={margin} width={width} yScale={yScale} />
+        <YAxis margin={margin} width={width} yScale={yScale} theme={theme} />
 
         {/* Lines for each dataset */}
         {paths.map((path, i) => (
@@ -121,8 +124,7 @@ const StackedLineChart: React.FC<LineChartProps> = ({
             value={d.label}
             xScale={xScale}
             yScale={yScale}
-            fontSize={"12px"}
-            theme={"dark"}
+            theme={theme}
           />
         ))}
       </g>

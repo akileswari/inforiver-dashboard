@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { WidthProvider, Responsive } from "react-grid-layout";
-import "../CSS/layoutGrid.css";
+import "../css/layoutGrid.css";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 const ResponsiveGridLayout = WidthProvider(Responsive);

@@ -1,32 +1,21 @@
 import React from "react";
 import { scaleBand, scaleLinear } from "d3-scale";
-import XAxis from "../components/Axis/xAxis.tsx";
-import YAxis from "../components/Axis/yAxis.tsx";
-import TextValues from "../components/DataValues/TextValues.tsx";
-import themeStore from "../store/zustand/themeIndicator.ts";
+import XAxis from "../components/axis/xAxis.tsx";
+import YAxis from "../components/axis/yAxis.tsx";
+import TextValues from "../components/dataValues/TextValues.tsx";
 import lightTheme from "../components/Theme/lightTheme.ts";
 import darkTheme from "../components/Theme/darkTheme.ts";
+import { useSelector } from "react-redux";
+import { IThemeColor } from "../components/Theme/typing.ts";
 interface BarChartProps {
   data: { name: string; value: number }[][];
   width: number;
   height: number;
+  theme: IThemeColor;
 }
 
-const BarChart: React.FC<BarChartProps> = ({ data, width, height }) => {
+const BarChart: React.FC<BarChartProps> = ({ data, width, height, theme }) => {
   // Dimensions
-  const themeType = themeStore((state: any) => state.themeType);
-
-  const getTheme = (theme: any): any => {
-    switch (theme) {
-      case "light":
-        return lightTheme;
-      case "dark":
-        return darkTheme;
-      default:
-        return lightTheme;
-    }
-  };
-  const theme = getTheme(themeType);
 
   const margin = { top: 20, right: 30, bottom: 40, left: 80 };
   const innerWidth = width - margin.left - margin.right;
@@ -90,7 +79,11 @@ const BarChart: React.FC<BarChartProps> = ({ data, width, height }) => {
   ));
 
   return (
-    <g width={width} height={height}>
+    <g
+      width={width}
+      height={height}
+      style={{ backgroundColor: theme.chart.background }}
+    >
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         {bars}
         <YAxis

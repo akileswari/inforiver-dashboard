@@ -1,6 +1,3 @@
-
-import { divWidth } from "../components/constant/Helper";
-import { divHeight } from "../constant/Helper";
 import TemplatePreview from "./TemplatePreview";
 import TemplateToolbar from "./TemplateToolbar";
 
@@ -10,10 +7,7 @@ const TemplateWrapper = () => {
   // console.log(eWidth);
 
   return (
-    <div
-      className="template-wrapper"
-      style={{ height: `${divHeight}px`, width: `${divWidth}px` }}
-    >
+    <div className="template-wrapper">
       <TemplateToolbar />
       <TemplatePreview />
     </div>
