@@ -25,7 +25,6 @@ interface WaterfallChartProps {
       connectingLineStrokeWidth: number;
     };
   };
-  toggleTheme: () => void;
 }
 
 const WaterfallChart: React.FC<WaterfallChartProps> = ({
@@ -33,7 +32,6 @@ const WaterfallChart: React.FC<WaterfallChartProps> = ({
   width,
   height,
   theme,
-  toggleTheme,
 }) => {
   const flattenedData = data.flat();
   const total = flattenedData.reduce((acc, entry) => acc + entry.value, 0);

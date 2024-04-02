@@ -2,7 +2,7 @@ import "../css/customIcon.css";
 import { getIcon } from "../constant/Helper";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setThemeType } from "../../store/ThemeIndicator";
+import { setThemeType } from "../../store/themeIndicator";
 
 const CustomToolbar = () => {
   const [selectedTheme, setSelectedTheme] = useState("light");

@@ -4,22 +4,20 @@ import DataLabel from "../components/dataValues/Datalabel";
 import YAxis from "../components/axis/yAxis";
 import XAxis from "../components/axis/xAxis";
 
-interface StackedChartProps {
+interface StackedBarChartProps {
   data: { name: string; value: number }[][];
   width: number;
   height: number;
   categories: string[];
   theme: any;
-  toggleTheme: () => void;
 }
 
-const StackedChart: React.FC<StackedChartProps> = ({
+const StackedBarChart: React.FC<StackedBarChartProps> = ({
   data,
   width,
   height,
   categories,
   theme,
-  toggleTheme,
 }) => {
   // Margins
   const margin = { top: 50, right: 50, bottom: 50, left: 50 };
@@ -127,9 +125,8 @@ const StackedChart: React.FC<StackedChartProps> = ({
         {totalLabels}
       </g>
       <YAxis margin={margin} width={innerWidth} yScale={yScale} theme={theme} />
-      <button onClick={toggleTheme}>Toggle Theme</button>
     </g>
   );
 };
 
-export default StackedChart;
+export default StackedBarChart;

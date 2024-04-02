@@ -4,9 +4,6 @@ import ChartBoxHolder from "./ChartBoxHolder";
 const columnChartIcons = [
   {
     className: "light-overlapped-column",
-    // onclick : () =>{
-
-    // }
     id: "overlapped-column",
   },
   {

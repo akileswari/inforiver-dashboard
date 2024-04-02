@@ -32,7 +32,7 @@ const YAxis: React.FC<YAxisProps> = ({ margin, width, yScale, theme }) => {
         {yScale.ticks().map((tick, i) => (
           <g
             key={i}
-            transform={`translate(${margin.left - 80}, ${yScale(tick) + 10})`}
+            transform={`translate(${margin.left - 80}, ${yScale(tick)})`}
           >
             <line x1={-6} x2={0} y1={0} y2={0} stroke={theme.yAxis.line} />
             <text

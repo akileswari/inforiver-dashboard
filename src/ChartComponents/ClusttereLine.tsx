@@ -3,6 +3,7 @@ import { scaleBand, scaleLinear } from "d3-scale";
 import XAxis from "../components/axis/xAxis";
 import YAxis from "../components/axis/yAxis";
 import TextValues from "../components/dataValues/TextValues";
+import { IThemeColor } from "../components/Theme/typing";
 
 interface DataItem {
   name: string;
@@ -14,7 +15,7 @@ interface LineChartProps {
   width: number;
   height: number;
   index: number;
-  theme: string; // Add index property here
+  theme: IThemeColor; // Add index property here
 }
 
 const StackedLineChart: React.FC<LineChartProps> = ({

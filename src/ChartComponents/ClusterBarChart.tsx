@@ -5,29 +5,27 @@ import YAxis from "../components/axis/yAxis";
 import XAxis from "../components/axis/xAxis";
 
 interface ClusteredChartProps {
-  datasets: { name: string; value: number }[][];
+  data: { name: string; value: number }[][];
   width: number;
   height: number;
   theme: any;
-  toggleTheme: () => void;
 }
 
 const ClusteredChart: React.FC<ClusteredChartProps> = ({
-  datasets,
+  data,
   width,
   height,
   theme,
-  toggleTheme,
 }) => {
   const margin = { top: 100, right: 100, bottom: 40, left: 40 };
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
-  const numCategories = datasets.length;
+  const numCategories = data.length;
 
-  const monthNames = datasets[0].map((d) => d.name);
+  const monthNames = data[0].map((d) => d.name);
 
-  const minValue = d3.min(datasets.flat(), (d) => d.value) || 0;
-  const maxValue = d3.max(datasets.flat(), (d) => d.value) || 0;
+  const minValue = d3.min(data.flat(), (d) => d.value) || 0;
+  const maxValue = d3.max(data.flat(), (d) => d.value) || 0;
 
   const colorScale = d3
     .scaleOrdinal<string>()
@@ -54,12 +52,12 @@ const ClusteredChart: React.FC<ClusteredChartProps> = ({
     <XAxis
       innerHeight={innerHeight}
       xScale={xScale}
-      data={datasets[0]}
+      data={data[0]}
       theme={theme}
     />
   );
 
-  const bars = datasets.map((dataset, categoryIndex) =>
+  const bars = data.map((dataset, categoryIndex) =>
     dataset.map(({ name, value }, index) => {
       const barWidth = xScale.bandwidth() / numCategories;
       const barX = xScale(name) + barWidth * categoryIndex;
@@ -104,7 +102,6 @@ const ClusteredChart: React.FC<ClusteredChartProps> = ({
         {bars.flat()}
         {yAxisElement}
         {xAxisElement}
-        <button onClick={toggleTheme}>Toggle Theme</button>{" "}
         {/* Add a button to toggle theme */}
       </g>
     </svg>
