@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import SubPanel from "./components/SubPanel/SubPanel";
-import Title from "./components/layout/layoutTittle"; // Import the Title component
+import Title from "./components/pageTitle/title"; 
 import InforiverLogo from "./components/pageTitle/InforiverLogo";
 import SidePanel from "./components/sidePanel/SidePanel";
 import TemplateWrapper from "./TemplateBuilder/TemplateWrapper";
@@ -18,17 +18,15 @@ export enum ELayouts {
 const MainComp = () => {
   const [showSubPanelElements, setShowSubPanelElements] =
     useState<ELayouts | null>(null);
-  const [showToolbar, setShowToolbar] = useState(false); // State to manage toolbar visibility
-
+  const [showToolbar, setShowToolbar] = useState(false); 
   const toggleToPreview = (payload: ELayouts) => {
     setShowSubPanelElements(payload === showSubPanelElements ? null : payload);
-    setShowToolbar(payload === ELayouts.LAYOUT); // Show toolbar only when layout is clicked
-  };
+    setShowToolbar(payload === ELayouts.LAYOUT);  };
 
   return (
     <div className="App">
       <InforiverLogo />
-      <Title title={showSubPanelElements === null ? "Layout" : "Insert element"} /> {/* Render the Title component */}
+      <Title title={showSubPanelElements === null ? "Layout" : "Insert element"} /> 
       <div className="main-content">
         <SidePanel
           toggleToPreview={toggleToPreview}

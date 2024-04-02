@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { getIcon } from "../constant/Helper";
 import { ELayouts } from "../../MainComp";
 
-import CustomToolbar from "../layout/customIcon";
+import CustomToolbar from "../layout/customToolbar";
 import Toolbar from "../layout/toolbar";
 
 const SidePanel = ({

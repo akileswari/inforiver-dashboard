@@ -1,8 +1,8 @@
 import React from 'react';
 import { scaleBand, scaleLinear } from 'd3-scale';
-import DataLabel from '../components/DataValues/Datalabel.tsx';
-import XAxis from '../components/Axis/xAxis.tsx';
-import YAxis from '../components/Axis/yAxis.tsx';
+import DataLabel from '../components/dataValues/Datalabel.tsx';
+import XAxis from '../components/axis/xAxis.tsx';
+import YAxis from '../components/axis/yAxis.tsx';
 
 interface BarChartProps {
   data: { name: string; value: number }[][];

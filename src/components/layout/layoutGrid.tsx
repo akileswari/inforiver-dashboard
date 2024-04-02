@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { WidthProvider, Responsive } from 'react-grid-layout';
-import '../CSS/layoutGrid.css'
+import '../assets/css/layoutGrid.css';
 import 'react-grid-layout/css/styles.css';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
@@ -12,6 +12,10 @@ interface GridComponentProps {
 
 const LayoutGrid: React.FC<GridComponentProps> = ({ rows, columns }) => {
   const [layout, setLayout] = useState([]);
+  
+  
+  const dynamicHeight = rows * 2;
+  const dynamicWidth = columns * 2;
 
   useEffect(() => {
     const newLayout = [];
@@ -21,24 +25,21 @@ const LayoutGrid: React.FC<GridComponentProps> = ({ rows, columns }) => {
           i: `${y}-${x}`,
           x: x,
           y: y,
-          w: 1,
-          h: 1,
-        });
+          w: 6.5/columns,
+          h: 4/rows, 
+        
+         
+        }); 
       }
     }
     setLayout(newLayout);
-  }, [rows, columns]);
-
-  const gridItemStyle = {
-    width: `${100 / columns}%`,
-    height: `${100 / rows}%`
-  };
+  }, [rows, columns, dynamicHeight, dynamicWidth]);
 
   return (
-    <ResponsiveGridLayout className="layout" layouts={{ lg: layout }}>
+    <ResponsiveGridLayout className="layout" layouts={{ lg: layout }} margin={[10,10]}>
       {layout.map((item) => (
-        <div key={item.i} className="grid-item" style={gridItemStyle}>
-          {/* You can render content inside the grid item if needed */}
+        <div key={item.i} className="grid-item">
+          
         </div>
       ))}
     </ResponsiveGridLayout>

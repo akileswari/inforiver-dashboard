@@ -1,8 +1,8 @@
 import React from 'react';
 import * as d3 from 'd3';
-import DataLabel from '../components/DataValues/Datalabel';
-import YAxis from '../components/Axis/yAxis';
-import XAxis from '../components/Axis/xAxis';
+import DataLabel from '../components/dataValues/Datalabel';
+import YAxis from '../components/axis/yAxis';
+import XAxis from '../components/axis/xAxis';
 
 interface ClusteredChartProps {
   datasets: { name: string; value: number }[][];

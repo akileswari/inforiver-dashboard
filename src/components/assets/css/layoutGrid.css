@@ -2,12 +2,13 @@
 
 .grid-item {
   border: 1px solid #505050; 
+  
 }
 .react-grid-layout {
-  position: relative;
+ width: 100%;
+ height: 100%;
   transition: height 200ms ease; 
-  left:300px
-
+  
 }
 .react-grid-layout.layout {
   height: auto !important;

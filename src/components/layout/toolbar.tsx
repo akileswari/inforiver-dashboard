@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { SketchPicker } from 'react-color';
 import { useSelector, useDispatch } from 'react-redux';
 import { getIcon } from "../constant/Helper";
-import '../CSS/toolbar.css';
+import '../assets/css/toolbar.css';
 import { setColumns, setRows } from "../../store/ToolbarSlice";
 const Toolbar = () => {
   const dispatch = useDispatch();
   const rows = useSelector(state => state.toolbar.rows);
+
   const columns = useSelector(state => state.toolbar.columns);
+  //console.log(rows,columns)
 
   const [isChecked, setIsChecked] = useState(true);
   const [color1, setColor1] = useState('#ffffff');
@@ -47,8 +49,8 @@ const Toolbar = () => {
     setShowColorPicker1(false);
   };
 
-  
-  return (  
+
+  return (
     <div className="toolbar-container">
       {/* Grid */}
       <div className="gridContainer">
@@ -58,7 +60,7 @@ const Toolbar = () => {
       </div>
       <div className="componentWrapper">
         <div className="columnWrapper">
-          <div className="columnTitle">Column</div>
+          <div className="columnTitle">Row</div>
           <div className="columnContent">
             <input
               type="number"
@@ -71,7 +73,7 @@ const Toolbar = () => {
           </div>
         </div>
         <div className="rowWrapper">
-          <div className="rowTitle">Row</div>
+          <div className="rowTitle">Column</div>
           <div className="rowContent">
             <input
               type="number"

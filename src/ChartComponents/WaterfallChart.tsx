@@ -1,8 +1,8 @@
 import React from 'react';
 import { scaleBand, scaleLinear } from 'd3-scale';
-import XAxis from '../components/Axis/xAxis'; 
-import YAxis from '../components/Axis/yAxis'; 
-import DataLabel from '../components/DataValues/Datalabel';
+import XAxis from '../components/axis/xAxis'; 
+import YAxis from '../components/axis/yAxis'; 
+import DataLabel from '../components/dataValues/Datalabel';
 import '../components/Theme/Theme'
 import '../components/Theme/lightTheme'
 import '../components/Theme/darkTheme'

@@ -1,14 +1,15 @@
+// TemplatePreview.tsx
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from 'react-redux';
-import LineChart from "../ChartComponents/LineChart";
-import ClusterLineChart from "../ChartComponents/ClusttereLine";
+import useChartStore from "../store/zustand/Zustand";
+import LineChart from "../chartComponents/LineChart";
+import ClusterLineChart from "../chartComponents/ClusttereLine";
 import { dataSets, lineData } from "../components/dataSets/ChartDatas";
-import BarChart from "../ChartComponents/Bar";
-import AreaChart from "../ChartComponents/AreaChart";
-import StackedLineChart from "../ChartComponents/StackedLineChart";
-import WaterfallChart from "../ChartComponents/WaterfallChart";
+import BarChart from "../chartComponents/Bar";
+import AreaChart from "../chartComponents/AreaChart";
+import StackedLineChart from "../chartComponents/StackedLineChart";
+import WaterfallChart from "../chartComponents/WaterfallChart";
 import LayoutGrid from "../components/layout/layoutGrid";
-import { RootState } from '../store/redux/store'; // assuming you have a RootState type defined
+import { useSelector } from "react-redux";
 
 const componentIds: Record<string, React.FC<any>> = {
   "overlapped-column": BarChart,
@@ -20,7 +21,7 @@ const componentIds: Record<string, React.FC<any>> = {
 };
 
 const TemplatePreview = () => {
-  const activeChart = useSelector((state: RootState) => state.chartStore.activeChart);
+  const activeChart = useChartStore((state: any) => state.activeChart);
   const SelectedComp = componentIds[activeChart];
   const finalData =
     activeChart === "clustered-line" || activeChart === "stacked-line"
@@ -31,8 +32,8 @@ const TemplatePreview = () => {
   const [previewWidth, setPreviewWidth] = useState();
   const isChartActive = activeChart !== null;
 
-  const rows = useSelector((state: RootState) => state.toolbar.rows);
-  const columns = useSelector((state: RootState) => state.toolbar.columns);
+  
+  const { rows, columns } = useSelector((state :any)=> state.toolbar);
 
   useEffect(() => {
     const calcHeight = (templateRef.current as any)?.clientHeight;
@@ -46,7 +47,7 @@ const TemplatePreview = () => {
     <div
       ref={templateRef}
       className="template-preview"
-      style={{ height: "100%", width: "100%" }}
+      style={{ height: "100%", width: "100%", position: "relative", left:"300px" }}
     >
       {isChartActive && (
         <svg height={previewWidth} width={previewHeight}>
@@ -56,10 +57,11 @@ const TemplatePreview = () => {
               height={previewWidth}
               width={previewHeight}
             />
+            
           )}
         </svg>
       )}
-      {!isChartActive && <LayoutGrid rows={rows} columns={columns} />}
+     {!isChartActive && <LayoutGrid rows={rows} columns={columns} />}
     </div>
   );
 };

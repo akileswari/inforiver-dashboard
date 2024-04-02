@@ -1,5 +1,5 @@
 import { ELayouts } from "../../MainComp";
-import CustomToolbar from "../layout/customIcon";
+import CustomToolbar from "../layout/customToolbar";
 import ChartBoxHolder from "./ChartBoxHolder";
 
 const columnChartIcons = [
