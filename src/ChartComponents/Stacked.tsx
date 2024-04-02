@@ -32,8 +32,6 @@ const StackedChart: React.FC<StackedChartProps> = ({ data, width, height }) => {
     .domain([Math.min(0, d3.min(totals) || 0), maxTotal])
     .range([innerHeight, 0]);
 
-  const colorScale = d3.scaleOrdinal<string>().range(theme.chart.seriesColors);
-
   const bars = data.map((categoryData, categoryIndex) => {
     let yOffset = 0;
     return categoryData.map((item, index) => {
@@ -61,9 +59,9 @@ const StackedChart: React.FC<StackedChartProps> = ({ data, width, height }) => {
             y={value >= 0 ? barY : yScale(0)}
             width={xScale.bandwidth()}
             height={adjustedHeight}
-            fill={colorScale(index)}
+            fill="#007bff" // Set the color here
           />
-          <DataLabel x={labelX} y={labelY} value={value} positive={value >= 0 ? 'true' : 'false'} theme={theme} />
+          <DataLabel x={labelX} y={labelY} value={value} positive={value >= 0 ? 'true' : 'false'} />
         </g>
       );
     });
@@ -79,7 +77,7 @@ const StackedChart: React.FC<StackedChartProps> = ({ data, width, height }) => {
         y={barY}
         dy="0.35em"
         fontSize="12px"
-        fill={theme.chart.labelColor}
+        fill="#000" // Set the color here
         textAnchor="middle"
       >
         Total: {total}
@@ -94,11 +92,11 @@ const StackedChart: React.FC<StackedChartProps> = ({ data, width, height }) => {
           Stacked Chart
         </text>
 
-        <XAxis innerHeight={innerHeight} xScale={xScale} data={data[0]} theme={theme} />
+        <XAxis innerHeight={innerHeight} xScale={xScale} data={data[0]} />
         {bars.flat()}
         {totalLabels}
       </g>
-      <YAxis margin={margin} width={innerWidth} yScale={yScale} theme={theme} />
+      <YAxis margin={margin} width={innerWidth} yScale={yScale} />
     </svg>
   );
 };

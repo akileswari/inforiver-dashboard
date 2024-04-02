@@ -125,7 +125,7 @@
 }
 
 .spacingTitle,
-.marginTitle,
+.marginTitle,.cornerRadiusTitle
 .headerText {
   color: #002050;
   font-size: 12px;

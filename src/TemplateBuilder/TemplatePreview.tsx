@@ -10,6 +10,7 @@ import StackedLineChart from "../chartComponents/StackedLineChart";
 import WaterfallChart from "../chartComponents/WaterfallChart";
 import LayoutGrid from "../components/layout/layoutGrid";
 import { useSelector } from "react-redux";
+import StackedChart from "../chartComponents/Stacked";
 
 const componentIds: Record<string, React.FC<any>> = {
   "overlapped-column": BarChart,
@@ -47,7 +48,7 @@ const TemplatePreview = () => {
     <div
       ref={templateRef}
       className="template-preview"
-      style={{ height: "100%", width: "100%", position: "relative", left:"300px" }}
+      style={{ height: "100%", width: "100%", position: "relative", left:"300px" , top:"-90px"}}
     >
       {isChartActive && (
         <svg height={previewWidth} width={previewHeight}>
@@ -55,9 +56,7 @@ const TemplatePreview = () => {
             <SelectedComp
               data={finalData}
               height={previewWidth}
-              width={previewHeight}
-            />
-            
+              width={previewHeight} />
           )}
         </svg>
       )}

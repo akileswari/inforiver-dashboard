@@ -14,8 +14,7 @@ const LayoutGrid: React.FC<GridComponentProps> = ({ rows, columns }) => {
   const [layout, setLayout] = useState([]);
   
   
-  const dynamicHeight = rows * 2;
-  const dynamicWidth = columns * 2;
+  
 
   useEffect(() => {
     const newLayout = [];
@@ -23,17 +22,17 @@ const LayoutGrid: React.FC<GridComponentProps> = ({ rows, columns }) => {
       for (let x = 0; x < columns; x++) {
         newLayout.push({
           i: `${y}-${x}`,
-          x: x,
-          y: y,
+          x: 2,
+          y: 2,
           w: 6.5/columns,
-          h: 4/rows, 
+          h: 3.5/rows, 
         
          
         }); 
       }
     }
     setLayout(newLayout);
-  }, [rows, columns, dynamicHeight, dynamicWidth]);
+  }, [rows, columns]);
 
   return (
     <ResponsiveGridLayout className="layout" layouts={{ lg: layout }} margin={[10,10]}>

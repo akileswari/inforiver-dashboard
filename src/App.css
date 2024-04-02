@@ -65,10 +65,12 @@ body{
   min-height: 100vh;
   width: vw;
   overflow-x: hidden;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
 }
 
 /* @media only screen and (max-width: 620px) {
   .main-content{
 
   } */
+
+  
