@@ -1,7 +1,5 @@
-// TemplatePreview.tsx
 import React, { useEffect, useRef, useState } from "react";
-import useChartStore from "../store/zustand/Zustand";
-import useToolbarStore from "../store/zustand/ToolbarStore"; // Import the Zustand store
+import { useSelector } from 'react-redux';
 import LineChart from "../ChartComponents/LineChart";
 import ClusterLineChart from "../ChartComponents/ClusttereLine";
 import { dataSets, lineData } from "../components/dataSets/ChartDatas";
@@ -10,6 +8,7 @@ import AreaChart from "../ChartComponents/AreaChart";
 import StackedLineChart from "../ChartComponents/StackedLineChart";
 import WaterfallChart from "../ChartComponents/WaterfallChart";
 import LayoutGrid from "../components/layout/layoutGrid";
+import { RootState } from '../store/redux/store'; // assuming you have a RootState type defined
 
 const componentIds: Record<string, React.FC<any>> = {
   "overlapped-column": BarChart,
@@ -21,7 +20,7 @@ const componentIds: Record<string, React.FC<any>> = {
 };
 
 const TemplatePreview = () => {
-  const activeChart = useChartStore((state: any) => state.activeChart);
+  const activeChart = useSelector((state: RootState) => state.chartStore.activeChart);
   const SelectedComp = componentIds[activeChart];
   const finalData =
     activeChart === "clustered-line" || activeChart === "stacked-line"
@@ -32,8 +31,8 @@ const TemplatePreview = () => {
   const [previewWidth, setPreviewWidth] = useState();
   const isChartActive = activeChart !== null;
 
-  // Get rows and columns from the store
-  const { rows, columns } = useToolbarStore();
+  const rows = useSelector((state: RootState) => state.toolbar.rows);
+  const columns = useSelector((state: RootState) => state.toolbar.columns);
 
   useEffect(() => {
     const calcHeight = (templateRef.current as any)?.clientHeight;
