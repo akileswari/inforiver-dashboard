@@ -8,6 +8,7 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 interface GridComponentProps {
   rows: number;
   columns: number;
+  margin: number;
 }
 
 const LayoutGrid: React.FC<GridComponentProps> = ({ rows, columns }) => {
@@ -35,7 +36,7 @@ const LayoutGrid: React.FC<GridComponentProps> = ({ rows, columns }) => {
   }, [rows, columns]);
 
   return (
-    <ResponsiveGridLayout className="layout" layouts={{ lg: layout }} margin={[10,10]}>
+    <ResponsiveGridLayout className="layout custom-layout" layouts={{ lg: layout }} margin={[2,2]}>
       {layout.map((item) => (
         <div key={item.i} className="grid-item">
           

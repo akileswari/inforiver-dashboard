@@ -9,16 +9,21 @@ const Toolbar = () => {
   const dispatch = useDispatch();
   const rows = useSelector((state: any) => state.toolbar.rows);
   const columns = useSelector((state: any) => state.toolbar.columns);
-  const spacing = useSelector((state: any)=> state.toolbar.spacing);
+  const spacing = useSelector((state: any) => state.toolbar.spacing);
   const margin = useSelector((state: any) => state.toolbar.margin);
   const cornerRadius = useSelector((state: any) => state.toolbar.cornerRadius);
   const stroke = useSelector((state: any) => state.toolbar.stroke);
-  const shadow = useSelector((state: any)=> state.toolbar.shadow);
+  const shadow = useSelector((state: any) => state.toolbar.shadow);
 
   const [color1, setColor1] = useState('black');
   const [color2, setColor2] = useState('black');
   const [showColorPicker1, setShowColorPicker1] = useState(false);
   const [showColorPicker2, setShowColorPicker2] = useState(false);
+ 
+  const handleToggleChange = () => {
+    setShadow(!shadow); 
+  };
+  
 
   const handleInputChange1 = (e) => {
     const value = parseInt(e.target.value);
@@ -50,10 +55,7 @@ const Toolbar = () => {
     dispatch(setStroke(value));
   };
 
-  const handleToggleChange = () => {
-    setShowColorPicker2(!showColorPicker2);
-    dispatch(setShadow(!showColorPicker2));
-  };
+  
 
   const handleColorChange1 = (selectedColor) => {
     setColor1(selectedColor.hex);
@@ -139,7 +141,7 @@ const Toolbar = () => {
               id="spacing"
               name="spacing"
               min="0"
-              value={spacing}
+              value={margin}
               onChange={handleSpacingChange}
             />
           </div>
@@ -189,8 +191,9 @@ const Toolbar = () => {
         <div className="strokeHeader">
           <div className="marginTitle">Stroke</div>
         </div>
-        <div className="stoke">
-          <div className="stokeContent">
+
+        <div className="stokeContent">
+          <div className="stokeItem">
             <input
               type="number"
               id="stroke"
@@ -199,15 +202,17 @@ const Toolbar = () => {
               value={stroke}
               onChange={handleStrokeChange}
             />
-            <div className="color-picker" ref={colorPickerRef1}>
-              <div className="colorBox" onClick={toggleColorPicker1} style={{ backgroundColor: color1 }}>
-                {showColorPicker1 && (
-                  <SketchPicker color={color1} onChange={handleColorChange1} className="picker" />
-                )}
-              </div>
+          </div>
+          <div className="color-picker" ref={colorPickerRef1}>
+            <div className="colorBox" onClick={toggleColorPicker1} style={{ backgroundColor: color1 }}>
+              {showColorPicker1 && (
+                <SketchPicker color={color1} onChange={handleColorChange1} className="picker" />
+              )}
             </div>
           </div>
+
         </div>
+
       </div>
 
       {/* Shadow */}
@@ -220,18 +225,20 @@ const Toolbar = () => {
             <div className="shadowBox">
               <div className="shadow">
                 <label className="switch">
-                  <input type="checkbox" checked={shadow} onChange={handleToggleChange} />
+                  <input type="checkbox" checked={shadow}  onChange={handleToggleChange}/>
                   <span className="slider round"></span>
                 </label>
-                <div className="color-picker" ref={colorPickerRef2}>
-                  <div className="colorBox" onClick={toggleColorPicker2} style={{ backgroundColor: color2 }}>
-                    {showColorPicker2 && (
-                      <SketchPicker color={color2} onChange={handleColorChange2} className="picker_shadow" />
-                    )}
-                  </div>
-                </div>
               </div>
             </div>
+            <div className="pickerShadow" ref={colorPickerRef2}>
+              <div className="colorBox" onClick={toggleColorPicker2} style={{ backgroundColor: color2 }}>
+                {showColorPicker2 && (
+                  <SketchPicker color={color2} onChange={handleColorChange2} className="picker" />
+                )}
+              </div>
+            </div>
+
+
           </div>
           <div className="all-shadows">
             <div className="shadowInner">

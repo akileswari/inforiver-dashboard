@@ -13,3 +13,6 @@
 .react-grid-layout.layout {
   height: auto !important;
 }
+.custom-layout{
+  margin: 10px 10px;
+}

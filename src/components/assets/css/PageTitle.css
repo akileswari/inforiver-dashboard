@@ -11,11 +11,12 @@
 .container {
   container: flex;
   height: 80px;
-  width: 100%;
+  width: 87%;
   position: relative;
-  bottom: 83px;
-  left: 67px;
-  border-right-color: rgb(29, 27, 26);
+  bottom: 76px;
+  left: 176px;
+  box-shadow: 0px 1px 4px 0px #00000040;
+
 }
 
 .left-section {
