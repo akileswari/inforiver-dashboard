@@ -1,4 +1,3 @@
-import Toolbar from "../components/layout/toolbar";
 
 
 const TemplateToolbar = () => {
