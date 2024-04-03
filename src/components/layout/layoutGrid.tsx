@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { WidthProvider, Responsive } from 'react-grid-layout';
 import '../assets/css/layoutGrid.css';
 import 'react-grid-layout/css/styles.css';
@@ -8,7 +8,7 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 interface GridComponentProps {
   rows: number;
   columns: number;
-  margin: number;
+ 
 }
 
 const LayoutGrid: React.FC<GridComponentProps> = ({ rows, columns }) => {
@@ -17,17 +17,17 @@ const LayoutGrid: React.FC<GridComponentProps> = ({ rows, columns }) => {
   
   
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const newLayout = [];
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < columns; x++) {
+        console.log(y,x);
         newLayout.push({
           i: `${y}-${x}`,
-          x: 2,
-          y: 2,
-          w: 6.5/columns,
-          h: 3.5/rows, 
-        
+          x: x*(6/columns),
+          y: x,
+          w: 6/columns,
+          h: 4/rows, 
          
         }); 
       }
@@ -36,7 +36,7 @@ const LayoutGrid: React.FC<GridComponentProps> = ({ rows, columns }) => {
   }, [rows, columns]);
 
   return (
-    <ResponsiveGridLayout className="layout custom-layout" layouts={{ lg: layout }} margin={[2,2]}>
+    <ResponsiveGridLayout className="layout custom-layout" layouts={{ lg: layout}} isBounded={true}>
       {layout.map((item) => (
         <div key={item.i} className="grid-item">
           

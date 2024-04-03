@@ -70,7 +70,7 @@ const SidePanel = ({
       />
 
       {showLayoutSection && (
-        <Toolbar /> // Always render toolbar if layout section is toggled
+        <Toolbar /> 
       )}
 
       {showInsertElementSubPanel && (

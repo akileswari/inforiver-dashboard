@@ -81,3 +81,10 @@ border: 0px 0px 1px 0px;
 opacity: 0px;
 border-bottom: 1px solid #D9E1E8
   } */
+
+  .preview-grid{
+    border: 1px solid #DDDDDD;
+    position: "relative";
+    left:"300px" ;
+     top:"-90px"
+  }
