@@ -128,7 +128,6 @@ const StackedLineChart: React.FC<LineChartProps> = ({
               value={d.label}
               xScale={xScale}
               yScale={yScale}
-              // fontSize={"12px"}
               theme={theme}
             />
           ))

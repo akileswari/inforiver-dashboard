@@ -18,13 +18,19 @@
 .App {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .main-content {
-  display: flex;
-  flex-direction: row;
+  /* display: flex; */
+  /* flex-direction: row; */
   height: 80dvh;
   width: 100%;
+
+  display: grid;
+  /* flex-direction: column; */
+  width: 100%;
+  grid-template-columns: 1.5fr 1.5fr 8.5fr;
 }
 
 .page-title {
@@ -49,9 +55,10 @@
 }
 
 .template-wrapper {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: max-content;
+  /* height: 100%; */
+  /* flex-direction: row; */
   /* height: calc(100% - 75px);
   width: calc(100% - 500px); */
 }
@@ -63,7 +70,7 @@
 
 body {
   min-height: 100vh;
-  width: vw;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  width: 100vw;
+  /* overflow-x: hidden;
+  overflow-y: hidden; */
 }

@@ -8,7 +8,6 @@ interface StackedBarChartProps {
   data: { name: string; value: number }[][];
   width: number;
   height: number;
-  categories: string[];
   theme: any;
 }
 
@@ -16,7 +15,6 @@ const StackedBarChart: React.FC<StackedBarChartProps> = ({
   data,
   width,
   height,
-  categories,
   theme,
 }) => {
   // Margins
@@ -32,7 +30,7 @@ const StackedBarChart: React.FC<StackedBarChartProps> = ({
 
   const xScale = d3
     .scaleBand()
-    .domain(categories)
+    .domain(data[0].map((d) => d.name))
     .range([0, innerWidth])
     .padding(0.1);
 
@@ -43,34 +41,36 @@ const StackedBarChart: React.FC<StackedBarChartProps> = ({
 
   const colorScale = d3.scaleOrdinal<string>().range(theme.chart.seriesColors);
 
-  const bars = data.map((categoryData, categoryIndex) => {
+  const bars = data[0].map((_, index) => {
     let yOffset = 0;
-    return categoryData.map((item, index) => {
+    return data.map((categoryData, categoryIndex) => {
+      const item = categoryData[index];
       const value = item.value;
       const barHeight = Math.abs(yScale(value) - yScale(0));
       let barY, adjustedHeight;
 
-      if (value >= 0) {
+      // Calculate barY and adjustedHeight based on yOffset
+      if (yOffset + value >= 0) {
         barY = yScale(yOffset + value);
         adjustedHeight = barHeight;
       } else {
-        barY = yScale(yOffset);
-        adjustedHeight = Math.abs(yScale(0) - yScale(value));
+        barY = yScale(0);
+        adjustedHeight = Math.abs(yScale(yOffset) - yScale(yOffset + value));
       }
 
       yOffset += value;
 
-      const labelX = xScale(categories[categoryIndex]) + xScale.bandwidth() / 2;
-      const labelY = value >= 0 ? barY + adjustedHeight / 2 : yScale(0) + 20;
+      const labelX = xScale(item.name) + xScale.bandwidth() / 2;
+      const labelY = yOffset >= 0 ? barY + adjustedHeight / 2 : yScale(0) + 20;
 
       return (
         <g key={`${categoryIndex}-${index}`}>
           <rect
-            x={xScale(categories[categoryIndex])}
-            y={value >= 0 ? barY : yScale(0)}
+            x={xScale(item.name)}
+            y={barY}
             width={xScale.bandwidth()}
             height={adjustedHeight}
-            fill={colorScale(index)}
+            fill={colorScale(categoryIndex)}
           />
           <DataLabel
             x={labelX}
@@ -84,23 +84,24 @@ const StackedBarChart: React.FC<StackedBarChartProps> = ({
     });
   });
 
-  const totalLabels = totals.map((total, categoryIndex) => {
-    const barX = xScale(categories[categoryIndex]) + xScale.bandwidth() / 2;
-    const barY = total >= 0 ? yScale(total) - 10 : yScale(total) + 20;
-    return (
-      <text
-        key={`total-${categoryIndex}`}
-        x={barX}
-        y={barY}
-        dy="0.35em"
-        fontSize="12px"
-        fill={theme.chart.labelColor}
-        textAnchor="middle"
-      >
-        Total: {total}
-      </text>
-    );
-  });
+  // const totalLabels = totals.map((total, categoryIndex) => {
+  //   const barX = xScale() + xScale.bandwidth() / 2;
+  //   const barY = total >= 0 ? yScale(total) - 10 : yScale(total) + 20;
+  //   return (
+  //     <text
+  //       key={`total-${categoryIndex}`}
+  //       x={barX}
+  //       y={barY}
+  //       dy="0.35em"
+  //       fontSize="12px"
+  //       fill={theme.chart.labelColor}
+  //       textAnchor="middle"
+  //     >
+  //       Total: {total}
+  //     </text>
+  //   );
+  // });
+  console.log(bars);
 
   return (
     <g>
@@ -113,16 +114,14 @@ const StackedBarChart: React.FC<StackedBarChartProps> = ({
         >
           Stacked Chart
         </text>
-
         <XAxis
           innerHeight={innerHeight}
           xScale={xScale}
           data={data[0]}
           theme={theme}
         />
-
-        {bars.flat()}
-        {totalLabels}
+        {bars}
+        {/* {totalLabels} */}
       </g>
       <YAxis margin={margin} width={innerWidth} yScale={yScale} theme={theme} />
     </g>

@@ -4,7 +4,7 @@ import { dataSets, lineData } from "../components/dataSets/ChartDatas";
 import BarChart from "../ChartComponents/Bar";
 import StackedBarChart from "../ChartComponents/StackedBarChart";
 import AreaChart from "../ChartComponents/AreaChart";
-import { useEffect, useRef, useState } from "react";
+// import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import StackedLineChart from "../ChartComponents/StackedLineChart";
 import useChartStore from "../store/zustand/zustand";
 import WaterfallChart from "../ChartComponents/WaterfallChart";
@@ -23,7 +23,13 @@ const componentIds: Record<string, React.FC<any>> = {
   "100stacked-column": StackedBarChart,
   "grouped-column": ClusteredBarChart,
 };
-const TemplatePreview = () => {
+const TemplatePreview = ({
+  height,
+  width,
+}: {
+  height: number;
+  width: number;
+}) => {
   // const { height, width } = prop;
 
   const activeChart = useChartStore((state: any) => state.activeChart);
@@ -37,16 +43,16 @@ const TemplatePreview = () => {
     activeChart === "100stacked-column"
       ? dataSets
       : lineData;
-  const templateRef = useRef(null);
-  const [previewHeight, setPreviewHeight] = useState();
-  const [previewWidth, setPreviewWidth] = useState();
-  useEffect(() => {
-    let calcHeight = (templateRef.current as any).clientHeight;
-    let calcWidth = (templateRef.current as any).clientWidth;
+  // const templateRef = useRef(null);
+  // const [previewHeight, setPreviewHeight] = useState();
+  // const [previewWidth, setPreviewWidth] = useState();
+  // useLayoutEffect(() => {
+  //   let calcHeight = (templateRef.current as any).clientHeight;
+  //   let calcWidth = (templateRef.current as any).clientWidth;
 
-    setPreviewHeight(calcHeight);
-    setPreviewWidth(calcWidth);
-  });
+  //   setPreviewHeight(calcHeight);
+  //   setPreviewWidth(calcWidth);
+  // }, []);
   const themeType = useSelector((state: any) => state.themeStore.themeType);
 
   const getTheme = (theme: any): any => {
@@ -65,22 +71,23 @@ const TemplatePreview = () => {
 
   return (
     <div
-      ref={templateRef}
       className="template-preview"
-      style={{ height: "100%", width: "100%" }}
+      // style={{ height: "100%", width: "100%" }}
+      height={height}
+      width={width}
     >
       <svg
         // style={{ height: previewHeight, width: previewWidth }
-        height={previewWidth}
-        width={previewHeight}
+        height={height}
+        width={width}
         style={{ backgroundColor: theme.chart.background }}
         // className={themeClassName}
       >
         {SelectedComp && (
           <SelectedComp
             data={finalData}
-            height={previewWidth}
-            width={previewHeight}
+            height={height}
+            width={width}
             theme={theme}
           />
         )}

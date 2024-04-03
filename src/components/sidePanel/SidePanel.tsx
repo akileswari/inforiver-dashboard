@@ -57,6 +57,28 @@ const SidePanel = ({
     );
   };
 
+  const menuItems = [
+    {
+      iconName: "light-chart",
+      label: "Chart",
+      layout: ELayouts.CHART,
+    },
+    {
+      iconName: "light-card",
+      label: "Card",
+      layout: ELayouts.CARD,
+    },
+    {
+      iconName: "light-table",
+      label: "Table",
+      layout: ELayouts.TABLE,
+    },
+    {
+      iconName: "light-notes",
+      label: "Notes",
+      layout: ELayouts.NOTES,
+    },
+  ];
   return (
     <div className="menu">
       <MenuLayoutItem
@@ -74,31 +96,15 @@ const SidePanel = ({
 
       {showElements && (
         <>
-          <RepeatingElements
-            className="menu-item"
-            iconName="light-chart"
-            label="Chart"
-            onClick={() => toggleToPreview(ELayouts.CHART)}
-          />
-
-          <RepeatingElements
-            className="menu-item"
-            iconName="light-card"
-            label="Card"
-            onClick={() => toggleToPreview(ELayouts.CARD)}
-          />
-          <RepeatingElements
-            className="menu-item"
-            iconName="light-table"
-            label="Table"
-            onClick={() => toggleToPreview(ELayouts.TABLE)}
-          />
-          <RepeatingElements
-            className="menu-item"
-            iconName="light-notes"
-            label="Notes"
-            onClick={() => toggleToPreview(ELayouts.NOTES)}
-          />
+          {menuItems.map((menuItem, index) => (
+            <RepeatingElements
+              key={index}
+              className="menu-item"
+              iconName={menuItem.iconName}
+              label={menuItem.label}
+              onClick={() => toggleToPreview(menuItem.layout)}
+            />
+          ))}
         </>
       )}
     </div>
