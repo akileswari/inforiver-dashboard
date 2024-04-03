@@ -34,7 +34,7 @@ const TemplatePreview = () => {
   const isChartActive = activeChart !== null;
 
   
-  const { rows, columns } = useSelector((state :any)=> state.toolbar);
+  const { rows, columns,spacing,margin,strokeColor } = useSelector((state :any)=> state.toolbar);
 
   useEffect(() => {
     const calcHeight = (templateRef.current as any)?.clientHeight;
@@ -48,7 +48,7 @@ const TemplatePreview = () => {
     <div
       ref={templateRef}
       className="template-preview preview-grid"
-      style={{ height: "100%", width: "100%"}}
+      style={{ height: "100%", width: "100%", position: "relative", left:"300px" , top:"-10px"}}
     >
       {isChartActive && (
         <svg height={previewWidth} width={previewHeight}>
@@ -60,7 +60,7 @@ const TemplatePreview = () => {
           )}
         </svg>
       )}
-     {!isChartActive && <LayoutGrid rows={rows} columns={columns} />}
+     {!isChartActive && <LayoutGrid rows={rows} columns={columns} margin={spacing} containerPadding={margin} strokeColor={strokeColor} />}
     </div>
   );
 };

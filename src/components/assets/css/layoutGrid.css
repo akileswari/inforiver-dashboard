@@ -2,6 +2,7 @@
 
 .grid-item {
   border: 1px solid #505050; 
+  box-shadow: 2px;
   
 }
 .react-grid-layout {

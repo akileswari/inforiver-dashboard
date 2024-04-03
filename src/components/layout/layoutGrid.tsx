@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { WidthProvider, Responsive } from 'react-grid-layout';
 import '../assets/css/layoutGrid.css';
 import 'react-grid-layout/css/styles.css';
@@ -8,10 +8,12 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 interface GridComponentProps {
   rows: number;
   columns: number;
- 
+ margin: number;
+ containerPadding: number;
+ strokeColor: string;
 }
 
-const LayoutGrid: React.FC<GridComponentProps> = ({ rows, columns }) => {
+const LayoutGrid: React.FC<GridComponentProps> = ({ rows, columns,margin,containerPadding,strokeColor}) => {
   const [layout, setLayout] = useState([]);
   
   
@@ -36,9 +38,9 @@ const LayoutGrid: React.FC<GridComponentProps> = ({ rows, columns }) => {
   }, [rows, columns]);
 
   return (
-    <ResponsiveGridLayout className="layout custom-layout" layouts={{ lg: layout}}>
+    <ResponsiveGridLayout className="layout custom-layout" layouts={{ lg: layout}} margin={[margin,margin]}containerPadding={[containerPadding,containerPadding]}>
       {layout.map((item) => (
-        <div key={item.i} className="grid-item">
+        <div key={item.i} className="grid-item" style={{ borderColor: strokeColor }} >
           
         </div>
       ))}

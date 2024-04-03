@@ -14,10 +14,10 @@ const Toolbar = () => {
   const cornerRadius = useSelector((state: any) => state.toolbar.cornerRadius);
   const stroke = useSelector((state: any) => state.toolbar.stroke);
   const shadow = useSelector((state: any) => state.toolbar.shadow);
-
-  const [color1, setColor1] = useState('black');
+const strokeColor =  useSelector((state: any) => state.toolbar.strokeColor);
+  // const [color1, setColor1] = useState('black');
   const [color2, setColor2] = useState('black');
-  const [showColorPicker1, setShowColorPicker1] = useState(false);
+  // const [showColorPicker1, setShowColorPicker1] = useState(false);
   const [showColorPicker2, setShowColorPicker2] = useState(false);
  
   const handleToggleChange = () => {
@@ -141,7 +141,7 @@ const Toolbar = () => {
               id="spacing"
               name="spacing"
               min="0"
-              value={margin}
+              value={spacing}
               onChange={handleSpacingChange}
             />
           </div>
@@ -204,9 +204,9 @@ const Toolbar = () => {
             />
           </div>
           <div className="color-picker" ref={colorPickerRef1}>
-            <div className="colorBox" onClick={toggleColorPicker1} style={{ backgroundColor: color1 }}>
-              {showColorPicker1 && (
-                <SketchPicker color={color1} onChange={handleColorChange1} className="picker" />
+            <div className="colorBox" onClick={toggleColorPicker1} style={{ backgroundColor: strokeColor }}>
+              {showColorPicker2 && (
+                <SketchPicker color={strokeColor} onChange={handleColorChange1} className="picker" />
               )}
             </div>
           </div>

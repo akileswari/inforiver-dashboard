@@ -4,7 +4,6 @@ import { ELayouts } from "../../MainComp";
 
 import CustomToolbar from "../layout/customToolbar";
 import Toolbar from "../layout/toolbar";
-import SubPanel from "../SubPanel/SubPanel";
 
 const SidePanel = ({
   toggleToPreview,
@@ -15,15 +14,18 @@ const SidePanel = ({
 }) => {
   const [showLayoutSection, setShowLayoutSection] = useState(false);
   const [showInsertElementSubPanel, setShowInsertElementSubPanel] = useState(true);
+  const [showToolbar, setShowToolbar] = useState(false);
 
   const toggleLayoutSection = () => {
     setShowLayoutSection(!showLayoutSection);
     setShowInsertElementSubPanel(true);
+    setShowToolbar(true);
   };
 
   const toggleToPreviewWithToolbar = (value: ELayouts) => {
     toggleToPreview(value);
     setShowLayoutSection(false);
+    setShowToolbar(false);
   };
 
   const MenuLayoutItem = ({ iconName, label, onClick }: MenuLayoutItem) => {
@@ -67,10 +69,6 @@ const SidePanel = ({
         onClick={() => setShowInsertElementSubPanel(true)}
       />
 
-      {showLayoutSection && (
-        <Toolbar />
-      )}
-
       {showInsertElementSubPanel && (
         <>
           <RepeatingElements
@@ -98,16 +96,14 @@ const SidePanel = ({
             label="Notes"
             onClick={() => toggleToPreviewWithToolbar(ELayouts.NOTES)}
           />
+
+          {showLayoutSection && (
+            <Toolbar />
+          )}
+
+          {showToolbar && <CustomToolbar />}
         </>
       )}
-
-      {/* Render SubPanel after all menu items and the layout section */}
-      {showLayoutSection && (
-        <SubPanel showSubPanelElements={showSubPanelElements} />
-      )}
-
-      {/* Render CustomToolbar */}
-      <CustomToolbar />
     </div>
   );
 };

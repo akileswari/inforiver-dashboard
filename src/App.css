@@ -42,7 +42,7 @@
 .sub-panel {
   padding: 1rem;
  
-  height: 550px;
+  height: 773px;
   width: 202px;
   font-family: Inter;
   border-right: 1px solid #d9e1e8;
@@ -81,4 +81,7 @@ body{
     left:"300px" ;
      top:"-90px"
   }
- 
+ .logo{
+  margin-left: 33px;
+  margin-top: 10px;
+ }
