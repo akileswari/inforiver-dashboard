@@ -162,48 +162,50 @@ const SubPanel = ({
             />
           </div>
           <p className="chart-type-text">Comparision / Composition</p>
+          <div className="chart-icons">
+            <ChartBoxHolder
+              title="Column"
+              chartIcons={columnChartIcons}
+              logo="chart light-overlapped-column"
+            />
+            <ChartBoxHolder
+              title="Waterfall"
+              chartIcons={waterfallChartIcons}
+              logo="chart light-waterfall"
+            />
+            <ChartBoxHolder
+              title="Special"
+              chartIcons={specialChartIcons}
+              logo="chart light-lollipop"
+            />
+            <ChartBoxHolder
+              title="Bullet"
+              chartIcons={bulletChartIcons}
+              logo="chart light-qualitative-bullet"
+            />
 
-          <ChartBoxHolder
-            title="Column"
-            chartIcons={columnChartIcons}
-            logo="chart light-overlapped-column"
-          />
-          <ChartBoxHolder
-            title="Waterfall"
-            chartIcons={waterfallChartIcons}
-            logo="chart light-waterfall"
-          />
-          <ChartBoxHolder
-            title="Special"
-            chartIcons={specialChartIcons}
-            logo="chart light-lollipop"
-          />
-          <ChartBoxHolder
-            title="Bullet"
-            chartIcons={bulletChartIcons}
-            logo="chart light-qualitative-bullet"
-          />
+            <p className="charts-text-title">Sparkline</p>
+            <ChartBoxHolder
+              title="Area"
+              chartIcons={areaChartIcons}
+              logo="chart light-area"
+            />
+            <ChartBoxHolder
+              title="Line"
+              chartIcons={lineChartIcons}
+              logo="chart light-line"
+            />
+            <ChartBoxHolder
+              title="Combo"
+              chartIcons={comboChartIcons}
+              logo="chart light-spline-column-area"
+            />
+          </div>
+          <CustomToolbar />
 
-          <p className="charts-text-title">Sparkline</p>
-          <ChartBoxHolder
-            title="Area"
-            chartIcons={areaChartIcons}
-            logo="chart light-area"
-          />
-          <ChartBoxHolder
-            title="Line"
-            chartIcons={lineChartIcons}
-            logo="chart light-line"
-          />
-          <ChartBoxHolder
-            title="Combo"
-            chartIcons={comboChartIcons}
-            logo="chart light-spline-column-area"
-          />
-          <CustomToolbar/>
         </>
+
       )}
-            
 
     </div>
   );

@@ -36,7 +36,7 @@ const LayoutGrid: React.FC<GridComponentProps> = ({ rows, columns }) => {
   }, [rows, columns]);
 
   return (
-    <ResponsiveGridLayout className="layout custom-layout" layouts={{ lg: layout}} isBounded={true}>
+    <ResponsiveGridLayout className="layout custom-layout" layouts={{ lg: layout}}>
       {layout.map((item) => (
         <div key={item.i} className="grid-item">
           
