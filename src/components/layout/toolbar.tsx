@@ -3,7 +3,7 @@ import { SketchPicker } from 'react-color';
 import { useSelector, useDispatch } from 'react-redux';
 import { getIcon } from "../constant/Helper";
 import '../assets/css/toolbar.css';
-import { setColumns, setRows, setSpacing, setMargin, setCornerRadius, setStroke, setShadow } from "../../store/ToolbarSlice";
+import { setColumns, setRows, setSpacing, setMargin, setCornerRadius, setStroke, setShadow, setStrokeColor, setShadowColor,setSelectedShadow} from "../../store/ToolbarSlice";
 
 const Toolbar = () => {
   const dispatch = useDispatch();
@@ -14,55 +14,56 @@ const Toolbar = () => {
   const cornerRadius = useSelector((state: any) => state.toolbar.cornerRadius);
   const stroke = useSelector((state: any) => state.toolbar.stroke);
   const shadow = useSelector((state: any) => state.toolbar.shadow);
-const strokeColor =  useSelector((state: any) => state.toolbar.strokeColor);
-  // const [color1, setColor1] = useState('black');
-  const [color2, setColor2] = useState('black');
-  // const [showColorPicker1, setShowColorPicker1] = useState(false);
+  const strokeColor = useSelector((state: any) => state.toolbar.strokeColor);
+  const shadowColor = useSelector((state: any) => state.toolbar.shadowColor);
+  const selectedShadow = useSelector((state: any) => state.toolbar.selectedShadow);
+  const [showColorPicker1, setShowColorPicker1] = useState(false);
   const [showColorPicker2, setShowColorPicker2] = useState(false);
- 
-  const handleToggleChange = () => {
-    setShadow(!shadow); 
-  };
-  
 
-  const handleInputChange1 = (e) => {
+  const handleToggleChange = () => {
+    dispatch(setShadow(!shadow));
+  };
+
+  const handleInputChange1 = (e: any) => {
     const value = parseInt(e.target.value);
     dispatch(setRows(value));
   };
 
-  const handleInputChange2 = (e) => {
+  const handleInputChange2 = (e: any) => {
     const value = parseInt(e.target.value);
     dispatch(setColumns(value));
   };
 
-  const handleSpacingChange = (e) => {
+  const handleSpacingChange = (e: any) => {
     const value = parseInt(e.target.value);
     dispatch(setSpacing(value));
   };
 
-  const handleMarginChange = (e) => {
+  const handleMarginChange = (e: any) => {
     const value = parseInt(e.target.value);
     dispatch(setMargin(value));
   };
 
-  const handleCornerRadiusChange = (e) => {
+  const handleCornerRadiusChange = (e: any) => {
     const value = parseInt(e.target.value);
     dispatch(setCornerRadius(value));
   };
 
-  const handleStrokeChange = (e) => {
+  const handleStrokeChange = (e: any) => {
     const value = parseInt(e.target.value);
     dispatch(setStroke(value));
   };
 
-  
-
-  const handleColorChange1 = (selectedColor) => {
-    setColor1(selectedColor.hex);
+  const handleColorChange1 = (selectedColor: any) => {
+    dispatch(setStrokeColor(selectedColor.hex));
   };
 
-  const handleColorChange2 = (selectedColor) => {
-    setColor2(selectedColor.hex);
+  const handleColorChange2 = (selectedColor: any) => {
+    dispatch(setShadowColor(selectedColor.hex));
+  };
+
+  const handleShadowSelection = (selectedShadowType: string) => {
+    dispatch(setSelectedShadow(selectedShadowType));
   };
 
   const toggleColorPicker1 = () => {
@@ -73,12 +74,11 @@ const strokeColor =  useSelector((state: any) => state.toolbar.strokeColor);
     setShowColorPicker2(!showColorPicker2);
   };
 
-
   const colorPickerRef1 = useRef(null);
   const colorPickerRef2 = useRef(null);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: any) => {
       if (colorPickerRef1.current && !colorPickerRef1.current.contains(event.target)) {
         setShowColorPicker1(false);
       }
@@ -95,7 +95,6 @@ const strokeColor =  useSelector((state: any) => state.toolbar.strokeColor);
 
   return (
     <div className="toolbar-container">
-      {/* Grid */}
       <div className="gridContainer">
         <div className="gridItem">
           <div className="gridText">Grid</div>
@@ -109,7 +108,8 @@ const strokeColor =  useSelector((state: any) => state.toolbar.strokeColor);
               type="number"
               id="row"
               name="row"
-              min="0"
+              min={1}
+              max={7}
               value={rows}
               onChange={handleInputChange1}
             />
@@ -122,6 +122,8 @@ const strokeColor =  useSelector((state: any) => state.toolbar.strokeColor);
               type="number"
               id="col"
               name="col"
+              min={1}
+              max={8}
               value={columns}
               onChange={handleInputChange2}
             />
@@ -198,14 +200,14 @@ const strokeColor =  useSelector((state: any) => state.toolbar.strokeColor);
               type="number"
               id="stroke"
               name="stroke"
-              min="0"
+              min={1}
               value={stroke}
               onChange={handleStrokeChange}
             />
           </div>
           <div className="color-picker" ref={colorPickerRef1}>
             <div className="colorBox" onClick={toggleColorPicker1} style={{ backgroundColor: strokeColor }}>
-              {showColorPicker2 && (
+              {showColorPicker1 && (
                 <SketchPicker color={strokeColor} onChange={handleColorChange1} className="picker" />
               )}
             </div>
@@ -225,48 +227,46 @@ const strokeColor =  useSelector((state: any) => state.toolbar.strokeColor);
             <div className="shadowBox">
               <div className="shadow">
                 <label className="switch">
-                  <input type="checkbox" checked={shadow}  onChange={handleToggleChange}/>
+                  <input type="checkbox" checked={shadow} onChange={handleToggleChange} />
                   <span className="slider round"></span>
                 </label>
               </div>
             </div>
             <div className="pickerShadow" ref={colorPickerRef2}>
-              <div className="colorBox" onClick={toggleColorPicker2} style={{ backgroundColor: color2 }}>
+              <div className="colorBox" onClick={toggleColorPicker2} style={{ backgroundColor: shadowColor }}>
                 {showColorPicker2 && (
-                  <SketchPicker color={color2} onChange={handleColorChange2} className="picker" />
+                  <SketchPicker color={shadowColor} onChange={handleColorChange2} className="picker" />
                 )}
               </div>
             </div>
-
-
           </div>
           <div className="all-shadows">
             <div className="shadowInner">
-              <div className="shadow-icon">
+              <div className="shadow-icon" onClick={() => handleShadowSelection('light-shadow-top')}>
                 <i className={getIcon("light-shadow-top")}></i>
               </div>
-              <div className="shadow-icon">
+              <div className="shadow-icon" onClick={() => handleShadowSelection('light-shadow-topleft')}>
                 <i className={getIcon("light-shadow-topleft")}></i>
               </div>
-              <div className="shadow-icon">
+              <div className="shadow-icon" onClick={() => handleShadowSelection('light-shadow-right')}>
                 <i className={getIcon("light-shadow-right")}></i>
               </div>
-              <div className="shadow-icon">
+              <div className="shadow-icon" onClick={() => handleShadowSelection('light-shadow-bottomleft')}>
                 <i className={getIcon("light-shadow-bottomleft")}></i>
               </div>
-              <div className="shadow-icon">
+              <div className="shadow-icon" onClick={() => handleShadowSelection('light-shadow-bottom')}>
                 <i className={getIcon("light-shadow-bottom")}></i>
               </div>
-              <div className="shadow-icon">
+              <div className="shadow-icon" onClick={() => handleShadowSelection('light-shadow-bottomright')}>
                 <i className={getIcon("light-shadow-bottomright")}></i>
               </div>
-              <div className="shadow-icon">
+              <div className="shadow-icon" onClick={() => handleShadowSelection('light-shadow-left')}>
                 <i className={getIcon("light-shadow-left")}></i>
               </div>
-              <div className="shadow-icon">
+              <div className="shadow-icon" onClick={() => handleShadowSelection('light-shadow-centre')}>
                 <i className={getIcon("light-shadow-centre")}></i>
               </div>
-              <div className="shadow-icon">
+              <div className="shadow-icon" onClick={() => handleShadowSelection('light-shadow-topright')}>
                 <i className={getIcon("light-shadow-topright")}></i>
               </div>
             </div>
