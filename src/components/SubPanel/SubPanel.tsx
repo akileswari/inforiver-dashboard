@@ -201,7 +201,7 @@ const SubPanel = ({
               logo="chart light-spline-column-area"
             />
           </div>
-          <CustomToolbar />
+          {/* <CustomToolbar /> */}
 
         </>
 

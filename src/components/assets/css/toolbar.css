@@ -241,6 +241,7 @@
   gap: 10px;
   border-radius: 4px;
   background: #f5f5f5;
+  cursor: pointer;
 }
 .outer-container {
   width: 29.33px;

@@ -38,9 +38,11 @@ const MainComp = () => {
             showSubPanelElements={showSubPanelElements}
           />
         )}
+
+        
         <TemplateWrapper />
       </div>
-      {showToolbar && <Toolbar />}
+      
     </div>
   );
 };

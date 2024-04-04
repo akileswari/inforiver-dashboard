@@ -33,7 +33,7 @@ const LayoutGrid: React.FC<GridComponentProps> = ({
   selectedShadow
 }) => {
   const [layout, setLayout] = useState([]);
-
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
   useLayoutEffect(() => {
     const newLayout = [];
     for (let y = 0; y < rows; y++) {
@@ -75,6 +75,22 @@ const LayoutGrid: React.FC<GridComponentProps> = ({
     }
   };
 
+  const handleItemClick = (itemId: string, event: React.MouseEvent<HTMLDivElement>) => {
+    if (event.shiftKey) {
+     
+      setSelectedItems(prevSelected => {
+        if (prevSelected.includes(itemId)) {
+          return prevSelected.filter(id => id !== itemId);
+        } else {
+          return [...prevSelected, itemId];
+        }
+      });
+    } else {
+      setSelectedItems([itemId]);
+    }
+  };
+
+
   return (
     <ResponsiveGridLayout
       className="layout custom-layout"
@@ -87,13 +103,16 @@ const LayoutGrid: React.FC<GridComponentProps> = ({
     >
       {layout.map((item) => (
         <div
-          key={item.i}
-          className="grid-item"
+        key={item.i}
+        className={`grid-item ${selectedItems.includes(item.i) ? 'selected' : ''}`}
+        onClick={(e) => handleItemClick(item.i, e)}
+    
           style={{
             borderColor: strokeColor,
             borderWidth: `${strokeWidth}px`,
             borderRadius: `${cornerRadius}px`,
-            boxShadow: shadow ? `${fixedBoxShadow} ${shadowColor}` : getShadowStyle()
+            boxShadow: shadow ? `${fixedBoxShadow} ${shadowColor}` : getShadowStyle(),
+            background: selectedItems.includes(item.i) ? '#e6e6e6' : 'transparent',
           }}
         ></div>
       ))}

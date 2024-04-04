@@ -201,6 +201,7 @@ const Toolbar = () => {
               id="stroke"
               name="stroke"
               min={1}
+              max={8}
               value={stroke}
               onChange={handleStrokeChange}
             />

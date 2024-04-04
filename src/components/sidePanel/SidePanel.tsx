@@ -101,7 +101,7 @@ const SidePanel = ({
             <Toolbar />
           )}
 
-          {showToolbar && <CustomToolbar />}
+          {/* {showToolbar && <CustomToolbar />} */}
         </>
       )}
     </div>

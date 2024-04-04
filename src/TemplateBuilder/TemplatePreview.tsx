@@ -48,7 +48,7 @@ const TemplatePreview = () => {
     <div
       ref={templateRef}
       className="template-preview preview-grid"
-      style={{ height: "100%", width: "100%", position: "relative", left: "300px", top: "-10px" }}
+      style={{ height: "100%", width: "100%", position: "relative", left: "300px"}}
     >
       {isChartActive && (
         <svg height={previewWidth} width={previewHeight}>

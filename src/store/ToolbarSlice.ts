@@ -8,7 +8,7 @@ const initialState = {
   spacing: 3,
   margin: 3,
   cornerRadius: 0,
-  stroke: 0,
+  stroke: 1,
   shadow: false,
   strokeColor: 'black',
   shadowColor: 'black',

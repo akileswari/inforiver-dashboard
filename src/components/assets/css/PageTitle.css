@@ -68,10 +68,11 @@
   left: 309.2px;
   padding: 8px 12px 8px 12px;
   gap: 10px;
-  border-radius: 5px 0px 0px 0px;
-  border: 1px 0px 0px 0px;
+  border-radius: 2px 2px 2px 2px;
+  border: 1px;
   opacity: 0px;
   cursor: pointer;
+  border: 1px solid #DDDDDD
 
 }
 
