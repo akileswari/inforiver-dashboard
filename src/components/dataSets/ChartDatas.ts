@@ -22,6 +22,6 @@ export const dataSets: { name: string; value: number }[][] = [
     { name: "Shampoo", value: 57 },
     { name: "Tooth Brush", value: 40 },
     { name: "Oil", value: 60 },
-    { name: "Face Wash", value: -10 },
+    { name: "Face Wash", value: 10 },
   ],
 ];

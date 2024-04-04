@@ -214,7 +214,6 @@ const SubPanel = ({
           ))}
         </>
       )}
-      <CustomToolbar />
     </div>
   );
 };

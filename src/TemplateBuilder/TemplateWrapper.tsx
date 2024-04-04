@@ -17,13 +17,14 @@ const TemplateWrapper = () => {
     setPreviewWidth(calcWidth);
   }, []);
 
-  console.log(previewHeight, "Preview Height");
-  console.log(previewWidth, "Preview Width");
-
   return (
     <div className="template-wrapper" ref={templateRef}>
       <TemplateToolbar />
-      <TemplatePreview height={previewHeight} width={previewWidth} />
+      <TemplatePreview
+        height={previewHeight}
+        width={previewWidth}
+        templateRef={templateRef}
+      />
     </div>
   );
 };

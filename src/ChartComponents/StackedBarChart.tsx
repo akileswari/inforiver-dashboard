@@ -23,21 +23,26 @@ const StackedBarChart: React.FC<StackedBarChartProps> = ({
   const innerHeight = height - margin.top - margin.bottom;
 
   // Calculate the total sum of data for each category
-  const totals = data.map((categoryData) =>
-    d3.sum(categoryData, (d) => d.value)
+  const categorySums = data[0].map((_, index) =>
+    data.reduce((sum, categoryData) => sum + categoryData[index].value, 0)
   );
-  const maxTotal = d3.max(totals) || 0;
+  const maxTotal = Math.max(...categorySums);
+  const minTotal = Math.min(...categorySums);
 
   const xScale = d3
     .scaleBand()
     .domain(data[0].map((d) => d.name))
     .range([0, innerWidth])
     .padding(0.1);
+  console.log(xScale.range());
 
   const yScale = d3
     .scaleLinear()
-    .domain([Math.min(0, d3.min(totals) || 0), maxTotal])
-    .range([innerHeight, 0]);
+    .domain([Math.min(minTotal, 0), Math.max(maxTotal, 0)])
+    .nice()
+    .range([innerHeight - 30, 0]);
+  // yscale min and mapping is wrong
+  console.log(yScale.domain(), yScale.range(), "Domain & range");
 
   const colorScale = d3.scaleOrdinal<string>().range(theme.chart.seriesColors);
 
@@ -50,7 +55,7 @@ const StackedBarChart: React.FC<StackedBarChartProps> = ({
       let barY, adjustedHeight;
 
       // Calculate barY and adjustedHeight based on yOffset
-      if (yOffset + value >= 0) {
+      if (value >= 0) {
         barY = yScale(yOffset + value);
         adjustedHeight = barHeight;
       } else {

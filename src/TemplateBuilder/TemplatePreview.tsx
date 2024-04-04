@@ -26,9 +26,11 @@ const componentIds: Record<string, React.FC<any>> = {
 const TemplatePreview = ({
   height,
   width,
+  templateRef,
 }: {
   height: number;
   width: number;
+  templateRef: React.MutableRefObject<HTMLDivElement>;
 }) => {
   // const { height, width } = prop;
 
@@ -70,16 +72,11 @@ const TemplatePreview = ({
   // const themeClassName = theme. === "dark" ? "dark-theme" : "light-theme";
 
   return (
-    <div
-      className="template-preview"
-      // style={{ height: "100%", width: "100%" }}
-      height={height}
-      width={width}
-    >
+    <div className="template-preview">
       <svg
         // style={{ height: previewHeight, width: previewWidth }
-        height={height}
-        width={width}
+        height={templateRef?.current?.clientHeight}
+        width={templateRef?.current?.clientWidth}
         style={{ backgroundColor: theme.chart.background }}
         // className={themeClassName}
       >
