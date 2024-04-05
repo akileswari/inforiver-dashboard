@@ -51,7 +51,7 @@ const ChartBoxHolder = ({ title, chartIcons, logo }: IChartBoxHolder) => {
   const setActiveChart = useChartStore((state: any) => state.setActiveChart1);
 
   const toggleCharts = () => {
-    console.log(title, "title");
+    // console.log(title, "title");
     setToggledChartType(title);
   };
 

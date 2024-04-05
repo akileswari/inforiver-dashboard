@@ -5,14 +5,14 @@ import Title from "./components/pageTitle/title";
 import InforiverLogo from "./components/pageTitle/InforiverLogo";
 import SidePanel from "./components/sidePanel/SidePanel";
 import TemplateWrapper from "./TemplateBuilder/TemplateWrapper";
-import Toolbar from "./components/layout/toolbar";
+
 
 export enum ELayouts {
   CHART = "CHART",
   CARD = "CARD",
   TABLE = "TABLE",
   NOTES = "NOTES",
-  LAYOUT = "LAYOUT"
+  LAYOUT = "LAYOUT",
 }
 
 const MainComp = () => {

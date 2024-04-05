@@ -1,12 +1,15 @@
-import { useState } from 'react';
-import lightTheme from './lightTheme';
-import darkTheme from './darkTheme';
+import { useState } from "react";
+import lightTheme from "./lightTheme";
+import darkTheme from "./darkTheme";
 
-type ThemeKey = 'light' | 'dark';
+type ThemeKey = "light" | "dark";
 type Theme = typeof lightTheme | typeof darkTheme;
 
-export const useTheme = (): { theme: Theme; setTheme: (themeKey: ThemeKey) => void } => {
-  const [currentTheme, setCurrentTheme] = useState<ThemeKey>('light');
+export const useTheme = (): {
+  theme: Theme;
+  setTheme: (themeKey: ThemeKey) => void;
+} => {
+  const [currentTheme, setCurrentTheme] = useState<ThemeKey>("light");
 
   const setTheme = (themeKey: ThemeKey) => {
     setCurrentTheme(themeKey);
@@ -14,9 +17,9 @@ export const useTheme = (): { theme: Theme; setTheme: (themeKey: ThemeKey) => vo
 
   const getTheme = (theme: ThemeKey): Theme => {
     switch (theme) {
-      case 'light':
+      case "light":
         return lightTheme;
-      case 'dark':
+      case "dark":
         return darkTheme;
       default:
         return lightTheme;

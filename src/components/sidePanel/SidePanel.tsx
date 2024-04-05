@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { getIcon } from "../constant/Helper";
-import { ELayouts } from "../../MainComp";
-
-import CustomToolbar from "../layout/customToolbar";
+import { ELayouts } from "../../MainComponent";
 import Toolbar from "../layout/toolbar";
-
 const SidePanel = ({
   toggleToPreview,
   showSubPanelElements,
@@ -56,6 +53,28 @@ const SidePanel = ({
     );
   };
 
+  const menuItems = [
+    {
+      iconName: "light-chart",
+      label: "Chart",
+      layout: ELayouts.CHART,
+    },
+    {
+      iconName: "light-card",
+      label: "Card",
+      layout: ELayouts.CARD,
+    },
+    {
+      iconName: "light-table",
+      label: "Table",
+      layout: ELayouts.TABLE,
+    },
+    {
+      iconName: "light-notes",
+      label: "Notes",
+      layout: ELayouts.NOTES,
+    },
+  ];
   return (
     <div className="menu">
       <MenuLayoutItem

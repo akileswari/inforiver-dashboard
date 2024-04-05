@@ -1,8 +1,8 @@
-import React from 'react';
-import { scaleBand, scaleLinear } from 'd3-scale';
-import DataLabel from '../components/dataValues/Datalabel.tsx';
-import XAxis from '../components/axis/xAxis.tsx';
-import YAxis from '../components/axis/yAxis.tsx';
+import React from "react";
+import { scaleBand, scaleLinear } from "d3-scale";
+import DataLabel from "../components/dataValues/Datalabel.tsx";
+import XAxis from "../components/axis/xAxis.tsx";
+import YAxis from "../components/axis/yAxis.tsx";
 
 interface BarChartProps {
   data: { name: string; value: number }[][];
@@ -26,15 +26,15 @@ const BarChart: React.FC<BarChartProps> = ({
   width,
   height,
   theme,
-  toggleTheme
+  toggleTheme,
 }) => {
   const margin = { top: 40, right: 60, bottom: 40, left: 40 }; // Adjust margins
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
   const allValues = data.reduce((acc, current) => [...acc, ...current], []);
-  const maxValue = Math.max(...allValues.map(entry => entry.value));
-  const minValue = Math.min(...allValues.map(entry => entry.value));
+  const maxValue = Math.max(...allValues.map((entry) => entry.value));
+  const minValue = Math.min(...allValues.map((entry) => entry.value));
 
   // y-axis scale
   const yScale = scaleLinear()
@@ -43,7 +43,7 @@ const BarChart: React.FC<BarChartProps> = ({
 
   // x-axis scale
   const xScale = scaleBand()
-    .domain(data[0].map(entry => entry.name))
+    .domain(data[0].map((entry) => entry.name))
     .range([0, innerWidth])
     .paddingInner(0.1);
 
@@ -58,13 +58,23 @@ const BarChart: React.FC<BarChartProps> = ({
             const barWidth = xScale.bandwidth();
             const x = xScale(entry.name)!; // Remove the fallback value
             const y = value >= 0 ? yScale(value) : yScale(0);
-            const fill = value >= 0 ? theme.variance.positive : theme.variance.negative;
+            const fill =
+              value >= 0 ? theme.variance.positive : theme.variance.negative;
 
             return (
-              <g key={`${datasetIndex}-${index}`} transform={`translate(${x}, ${y})`} style={{ backgroundColor: theme.chart.backgroundColor }}>
-
+              <g
+                key={`${datasetIndex}-${index}`}
+                transform={`translate(${x}, ${y})`}
+                style={{ backgroundColor: theme.chart.backgroundColor }}
+              >
                 <rect width={barWidth} height={barHeight} fill={fill} />
-                <DataLabel x={50} y={0} value={value} positive={true} theme={theme} />
+                <DataLabel
+                  x={50}
+                  y={0}
+                  value={value}
+                  positive={true}
+                  theme={theme}
+                />
               </g>
             );
           })
@@ -77,7 +87,12 @@ const BarChart: React.FC<BarChartProps> = ({
           theme={theme}
         />
         {/* Render the y-axis line before the y-axis text */}
-        <YAxis margin={margin} width={innerWidth} yScale={yScale} theme={theme} />
+        <YAxis
+          margin={margin}
+          width={innerWidth}
+          yScale={yScale}
+          theme={theme}
+        />
       </g>
       {/* Add button outside the g element */}
       <button onClick={toggleTheme}>Toggle Theme</button>

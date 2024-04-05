@@ -8,9 +8,15 @@ interface LineChartProps {
   data: { name: string; value: number }[][];
   width: number;
   height: number;
+  theme: string;
 }
 
-const LineChart: React.FC<LineChartProps> = ({ data, width, height }) => {
+const LineChart: React.FC<LineChartProps> = ({
+  data,
+  width,
+  height,
+  theme,
+}) => {
   // Dimensions
   const margin = { top: 20, right: 30, bottom: 50, left: 80 };
   const innerWidth = width - margin.left - margin.right;
@@ -52,6 +58,7 @@ const LineChart: React.FC<LineChartProps> = ({ data, width, height }) => {
             xScale={xScale}
             data={dataset}
             index={index}
+            theme={theme}
           />
 
           {/* Line */}
@@ -99,7 +106,12 @@ const LineChart: React.FC<LineChartProps> = ({ data, width, height }) => {
           })}
 
           {/* Y Axis */}
-          <YAxis margin={margin} width={innerWidth} yScale={yScale} />
+          <YAxis
+            margin={margin}
+            width={innerWidth}
+            yScale={yScale}
+            theme={theme}
+          />
         </g>
       ))}
 
@@ -135,6 +147,7 @@ const LineChart: React.FC<LineChartProps> = ({ data, width, height }) => {
             xScale={xScale}
             yScale={yScale}
             fontSize={"12px"}
+            theme={theme}
           />
         ))
       )}
