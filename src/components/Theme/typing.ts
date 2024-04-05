@@ -1,4 +1,5 @@
 export interface IThemeColor {
+    name: string | number | readonly string[] | undefined;
     chart: {
         background: string;
         foreground: string;

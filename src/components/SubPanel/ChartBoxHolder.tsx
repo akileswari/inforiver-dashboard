@@ -1,7 +1,7 @@
 import { getChartIcon } from "../constant/Helper";
 // import { useSelector, useDispatch } from "react-redux";
 // import { setToggledChartType, setActiveChart } from "../../store/chartSlicer";
-import useChartStore from "../../store/zustand/zustand";
+import useChartStore from "../../store/zustand/Zustand";
 const ChartIcon = ({ className }: { className: string }) => {
   return (
     <div className="chart-icon-box">

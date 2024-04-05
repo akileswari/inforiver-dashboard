@@ -3,6 +3,7 @@ import { scaleBand, scaleLinear } from "d3-scale";
 import XAxis from "../components/axis/xAxis.tsx";
 import YAxis from "../components/axis/yAxis.tsx";
 import TextValues from "../components/dataValues/TextValues.tsx";
+
 interface AreaChartProps {
   data: { name: string; value: number }[][];
   width: number;

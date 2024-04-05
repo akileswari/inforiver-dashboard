@@ -1,5 +1,5 @@
 import { ELayouts } from "../../MainComponent";
-import CustomToolbar from "../layout/CustomToolBar";
+import CustomToolbar from "../layout/customToolbar";
 import ChartBoxHolder from "./ChartBoxHolder";
 const columnChartIcons = [
   {
@@ -181,10 +181,10 @@ const SubPanel = ({
 }: {
   showSubPanelElements: ELayouts;
 }) => {
-  if (showSubPanelElements !== ELayouts.CHART) return null;
-
+  if (showSubPanelElements !== ELayouts.CHART || showSubPanelElements === null)
+    return null;
   return (
-    <div className="sub-panel">
+    <div className="sub-panel" style={{ marginTop: "-77px" }}>
       {showSubPanelElements === "CHART" && (
         <>
           <p className="charts-text-title">Chart</p>
@@ -193,25 +193,46 @@ const SubPanel = ({
             <input type="text" placeholder="Search.." className="search-box" />
           </div>
           <p className="chart-type-text">Comparision / Composition</p>
-
-          {comparisionComposition.map((config, index) => (
+          <div className="chart-icons">
             <ChartBoxHolder
-              key={index}
-              title={config.title}
-              chartIcons={config.chartIcons}
-              logo={config.logo}
+              title="Column"
+              chartIcons={columnChartIcons}
+              logo="chart light-overlapped-column"
             />
-          ))}
-
-          <p className="charts-text-title">Sparkline</p>
-          {sparkLine.map((config, index) => (
             <ChartBoxHolder
-              key={index}
-              title={config.title}
-              chartIcons={config.chartIcons}
-              logo={config.logo}
+              title="Waterfall"
+              chartIcons={waterfallChartIcons}
+              logo="chart light-waterfall"
             />
-          ))}
+            <ChartBoxHolder
+              title="Special"
+              chartIcons={specialChartIcons}
+              logo="chart light-lollipop"
+            />
+            <ChartBoxHolder
+              title="Bullet"
+              chartIcons={bulletChartIcons}
+              logo="chart light-qualitative-bullet"
+            />
+
+            <p className="charts-text-title">Sparkline</p>
+            <ChartBoxHolder
+              title="Area"
+              chartIcons={areaChartIcons}
+              logo="chart light-area"
+            />
+            <ChartBoxHolder
+              title="Line"
+              chartIcons={lineChartIcons}
+              logo="chart light-line"
+            />
+            <ChartBoxHolder
+              title="Combo"
+              chartIcons={comboChartIcons}
+              logo="chart light-spline-column-area"
+            />
+          </div>
+          {/* <CustomToolbar /> */}
         </>
       )}
     </div>

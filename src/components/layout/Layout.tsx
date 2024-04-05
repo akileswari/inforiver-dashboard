@@ -1,8 +1,8 @@
 import { Provider } from "react-redux";
 import store from "../../store";
-import Toolbar from "./Toolbar";
+import Toolbar from "./toolbar";
 import LayoutTitle from "../layout/LayoutTitle";
-import GridComponent from "./LayoutGrid";
+import GridComponent from "./layoutGrid";
 import { useState } from "react";
 
 const LayoutSection = () => {
@@ -13,7 +13,18 @@ const LayoutSection = () => {
     <Provider store={store}>
       <LayoutTitle />
       <Toolbar setRows={setRows} setColumns={setColumns} />
-      <GridComponent rows={rows} columns={columns} />
+      <GridComponent
+        rows={rows}
+        columns={columns}
+        margin={0}
+        containerPadding={0}
+        strokeColor={""}
+        strokeWidth={0}
+        cornerRadius={0}
+        shadow={undefined}
+        shadowColor={""}
+        selectedShadow={""}
+      />
     </Provider>
   );
 };

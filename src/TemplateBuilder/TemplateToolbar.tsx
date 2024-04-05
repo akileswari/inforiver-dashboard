@@ -1,5 +1,4 @@
-import CustomToolbar from "../components/layout/CustomToolBar";
-
+import CustomToolbar from "../components/layout/customToolbar";
 const TemplateToolbar = () => {
   return (
     <div className="template-toolbar">
