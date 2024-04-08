@@ -41,9 +41,6 @@ const WaterfallChart: React.FC<WaterfallChartProps> = ({
   const innerHeight = height - margin.top - margin.bottom;
   // Calculate bar width and xScale
   const barPadding = 0.1;
-  const barWidth =
-    innerWidth / flattenedData.length -
-    (innerWidth / flattenedData.length) * barPadding;
   const categories = flattenedData.map((entry) => entry.name);
   const xScale = scaleBand()
     .domain(categories)
@@ -71,6 +68,7 @@ const WaterfallChart: React.FC<WaterfallChartProps> = ({
         : xScale(name) + xScale.bandwidth() / 2;
     const connectorLineY = yScale(cumulativeSum);
     // console.log(theme.waterfall.connectingLineColor);
+    const barWidth = xScale.bandwidth();
 
     const connectorLine =
       index !== flattenedData.length - 1 ? (

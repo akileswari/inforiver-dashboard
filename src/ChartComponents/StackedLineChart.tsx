@@ -3,7 +3,6 @@ import { scaleBand, scaleLinear } from "d3-scale";
 import XAxis from "../components/axis/xAxis";
 import YAxis from "../components/axis/yAxis";
 import TextValues from "../components/dataValues/TextValues";
-
 interface DataItem {
   name: string;
   value: number;

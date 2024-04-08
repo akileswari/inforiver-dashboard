@@ -1,5 +1,4 @@
 import { ELayouts } from "../../MainComponent";
-import CustomToolbar from "../layout/customToolbar";
 import ChartBoxHolder from "./ChartBoxHolder";
 const columnChartIcons = [
   {
@@ -193,46 +192,25 @@ const SubPanel = ({
             <input type="text" placeholder="Search.." className="search-box" />
           </div>
           <p className="chart-type-text">Comparision / Composition</p>
-          <div className="chart-icons">
-            <ChartBoxHolder
-              title="Column"
-              chartIcons={columnChartIcons}
-              logo="chart light-overlapped-column"
-            />
-            <ChartBoxHolder
-              title="Waterfall"
-              chartIcons={waterfallChartIcons}
-              logo="chart light-waterfall"
-            />
-            <ChartBoxHolder
-              title="Special"
-              chartIcons={specialChartIcons}
-              logo="chart light-lollipop"
-            />
-            <ChartBoxHolder
-              title="Bullet"
-              chartIcons={bulletChartIcons}
-              logo="chart light-qualitative-bullet"
-            />
 
-            <p className="charts-text-title">Sparkline</p>
+          {comparisionComposition.map((config, index) => (
             <ChartBoxHolder
-              title="Area"
-              chartIcons={areaChartIcons}
-              logo="chart light-area"
+              key={index}
+              title={config.title}
+              chartIcons={config.chartIcons}
+              logo={config.logo}
             />
+          ))}
+
+          <p className="charts-text-title">Sparkline</p>
+          {sparkLine.map((config, index) => (
             <ChartBoxHolder
-              title="Line"
-              chartIcons={lineChartIcons}
-              logo="chart light-line"
+              key={index}
+              title={config.title}
+              chartIcons={config.chartIcons}
+              logo={config.logo}
             />
-            <ChartBoxHolder
-              title="Combo"
-              chartIcons={comboChartIcons}
-              logo="chart light-spline-column-area"
-            />
-          </div>
-          {/* <CustomToolbar /> */}
+          ))}
         </>
       )}
     </div>
