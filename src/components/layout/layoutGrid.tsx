@@ -4,7 +4,7 @@ import '../assets/css/layoutGrid.css';
 import 'react-grid-layout/css/styles.css';
 import { useGrid } from '../context/Context';
 import { useDispatch, useSelector } from 'react-redux';
-import { setGridItems } from '../../store/gridSlice';
+import { setGridItems, setGridItemsSize, updateGridItemSize } from '../../store/gridSlice';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -50,8 +50,10 @@ const LayoutGrid: React.FC<GridComponentProps> = ({
   const { selectedGridItems, setSelectedGridItems } = useGrid(); 
   const [layout, setLayout] = useState<GridItem[]>([]);
   const dispatch = useDispatch();
+  const gridItems = useSelector((state:any) => state.grid.gridItems);
   const templateHeight = height / 150;
-  const templateWidth = Math.floor(width / 117);
+  const templateWidth = Math.floor(width / 101);
+console.log(templateHeight, templateWidth);
 
   useLayoutEffect(() => {
     const newLayout: GridItem[] = [];
@@ -111,14 +113,22 @@ const LayoutGrid: React.FC<GridComponentProps> = ({
     console.log(selectedGridItems)
   }, [dispatch, selectedGridItems]);
 
+
+ 
+
+  const handleResizeStop = (itemId, width, height) => {
+    dispatch(updateGridItemSize({ itemId, width, height }));
+  };
+
   return (
     <ResponsiveGridLayout
       className="layout custom-layout"
       layouts={{ lg: layout }}
       margin={[margin, margin]}
       containerPadding={[containerPadding, containerPadding]}
-      onResizeStop={(e) => {
-        console.log(e);
+      onResizeStop={(layout, oldItem, newItem) => {
+        handleResizeStop(newItem.i, newItem.w, newItem.h);
+        console.log(newItem.i,newItem.w, newItem.h);
       }}
       isDraggable={false}
     >

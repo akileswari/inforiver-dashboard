@@ -5,19 +5,15 @@ import { getIcon } from "../constant/Helper";
 import { useGrid } from '.././context/Context.js'; 
 import { useDispatch } from 'react-redux';
 import { setGridItems } from '../../store/gridSlice.js';
-const CustomToolbar = ({undo,redo}) => {
+
+const CustomToolbar = () => {
   const { theme, setTheme } = useTheme(); 
   const dispatch = useDispatch();
   const {  selectedGridItems, swapGridItems } = useGrid(); 
 
-  const handleUndoClick = () => {
-    dispatch(undo());
-  };
-
+  
  
-  const handleRedoClick = () => {
-    dispatch(redo());
-  };
+ 
 
   const handleThemeChange = (event) => {
     const selectedTheme = event.target.value; 
@@ -60,10 +56,10 @@ const CustomToolbar = ({undo,redo}) => {
       </div>
       <div className="line"></div>
       <div className="custom-separator"></div>
-      <div className="custom-item" onClick={handleUndoClick} >
+      <div className="custom-item" >
         <i className={getIcon("light-undo")}></i>
       </div>
-      <div className="custom-item" onClick={handleRedoClick}>
+      <div className="custom-item" >
         <i className={getIcon("light-redo")}></i>
       </div>
     </div>

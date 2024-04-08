@@ -4,13 +4,11 @@ import CustomToolbar from "../components/layout/customToolbar";
 interface TemplateToolbarProps {
   selectedGridItems: string[]; 
   swapGridItems: () => void; 
-  undo,
-  redo,
 }
-const TemplateToolbar: React.FC<TemplateToolbarProps> = ({ selectedGridItems, swapGridItems, undo, redo }) => {
+const TemplateToolbar: React.FC<TemplateToolbarProps> = ({ selectedGridItems, swapGridItems}) => {
   return (
     <div className="template-toolbar">
-      <CustomToolbar selectedGridItems={selectedGridItems} swapGridItems={swapGridItems} undo={undo} redo={redo}/>
+      <CustomToolbar selectedGridItems={selectedGridItems} swapGridItems={swapGridItems}/>
     </div>
   );
 };

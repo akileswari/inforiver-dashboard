@@ -6,13 +6,13 @@ import '../assets/css/toolbar.css';
 import { setColumns, setRows, setSpacing, setMargin, setCornerRadius, setStroke, setShadow, setStrokeColor, setShadowColor,setSelectedShadow,undo,redo} from "../../store/ToolbarSlice";
 import { ELayouts } from "../../MainComponent";
 
+
 const Toolbar = (
    
   {
-  
+   
     showSubPanelElements,
   }: {
-   
     showSubPanelElements: ELayouts;
   }
 

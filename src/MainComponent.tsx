@@ -6,7 +6,7 @@ import InforiverLogo from "./components/pageTitle/InforiverLogo";
 import SidePanel from "./components/sidePanel/SidePanel";
 import TemplateWrapper from "./TemplateBuilder/TemplateWrapper";
 import Toolbar from "./components/layout/toolbar";
-import { undo, redo } from '../src/store/ToolbarSlice';
+
 
 export enum ELayouts {
   CHART = "CHART",
@@ -44,8 +44,7 @@ const MainComp = () => {
         <Toolbar 
         toolpreview={toolPreview}
         showSubPanelElements={showSubPanelElements}
-        undo={undo}
-        redo={redo}
+       
         />
        )}
         {showSubPanelElements === ELayouts.CHART && (
