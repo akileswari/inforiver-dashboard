@@ -2,8 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import chartSlicer from "./chartSlicer";
 import toolbarSlice from "./ToolbarSlice";
 import titleSlice from "./titleSlice";
-import themeStore from "./themeIndicator";
-
+import themeStore from "../store/ThemeIndicator";
 const rootReducer = combineReducers({
   themeStore: themeStore,
   chartStore: chartSlicer,
