@@ -3,9 +3,23 @@ import { SketchPicker } from 'react-color';
 import { useSelector, useDispatch } from 'react-redux';
 import { getIcon } from "../constant/Helper";
 import '../assets/css/toolbar.css';
-import { setColumns, setRows, setSpacing, setMargin, setCornerRadius, setStroke, setShadow, setStrokeColor, setShadowColor,setSelectedShadow} from "../../store/ToolbarSlice";
+import { setColumns, setRows, setSpacing, setMargin, setCornerRadius, setStroke, setShadow, setStrokeColor, setShadowColor,setSelectedShadow,undo,redo} from "../../store/ToolbarSlice";
+import { ELayouts } from "../../MainComponent";
 
-const Toolbar = () => {
+const Toolbar = (
+   
+  {
+  
+    showSubPanelElements,
+  }: {
+   
+    showSubPanelElements: ELayouts;
+  }
+
+) => {
+
+
+
   const dispatch = useDispatch();
   const rows = useSelector((state: any) => state.toolbar.rows);
   const columns = useSelector((state: any) => state.toolbar.columns);
@@ -93,6 +107,10 @@ const Toolbar = () => {
     };
   }, []);
 
+  console.log("Rows:", rows);
+  console.log("Columns:", columns);
+
+  if (showSubPanelElements !== ELayouts.LAYOUT || showSubPanelElements === null) return null;
   return (
     <div className="toolbar-container">
       <div className="gridContainer">

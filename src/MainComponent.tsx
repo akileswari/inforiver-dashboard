@@ -5,7 +5,8 @@ import Title from "./components/pageTitle/title";
 import InforiverLogo from "./components/pageTitle/InforiverLogo";
 import SidePanel from "./components/sidePanel/SidePanel";
 import TemplateWrapper from "./TemplateBuilder/TemplateWrapper";
-
+import Toolbar from "./components/layout/toolbar";
+import { undo, redo } from '../src/store/ToolbarSlice';
 
 export enum ELayouts {
   CHART = "CHART",
@@ -18,10 +19,16 @@ export enum ELayouts {
 const MainComp = () => {
   const [showSubPanelElements, setShowSubPanelElements] =
     useState<ELayouts | null>(null);
-  const [showToolbar, setShowToolbar] = useState(false); 
+  const [showToolbar, setShowToolbar] = useState<ELayouts | null>(null);
+
   const toggleToPreview = (payload: ELayouts) => {
     setShowSubPanelElements(payload === showSubPanelElements ? null : payload);
-    setShowToolbar(payload === ELayouts.LAYOUT);  };
+   
+  };
+
+ const toolPreview  = (payload: ELayouts) =>{
+  setShowToolbar(payload === showToolbar ? null : payload)
+ }
 
   return (
     <div className="App">
@@ -31,18 +38,24 @@ const MainComp = () => {
         <SidePanel
           toggleToPreview={toggleToPreview}
           showSubPanelElements={showSubPanelElements}
+          
         />
+       {showSubPanelElements===ELayouts.LAYOUT&&(
+        <Toolbar 
+        toolpreview={toolPreview}
+        showSubPanelElements={showSubPanelElements}
+        undo={undo}
+        redo={redo}
+        />
+       )}
         {showSubPanelElements === ELayouts.CHART && (
           <SubPanel
             toggleToPreview={toggleToPreview}
             showSubPanelElements={showSubPanelElements}
           />
         )}
-
-        
         <TemplateWrapper />
       </div>
-      
     </div>
   );
 };

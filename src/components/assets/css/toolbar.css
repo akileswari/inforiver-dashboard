@@ -14,15 +14,13 @@
 }
 .toolbar-container {
   display: block;
-    position: absolute;
+   
     
    
     padding: 0px 7px 0px 7px;
     gap: 2px;
     opacity: 0px;
-    top: 81px;
-    left: 199px;
-   
+    margin-top: -77px;
     border-right: 1px solid #d9e1e8;
  
 }

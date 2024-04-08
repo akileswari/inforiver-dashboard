@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { getIcon } from "../constant/Helper";
 import { ELayouts } from "../../MainComponent";
-import Toolbar from "../layout/toolbar";
+
 const SidePanel = ({
   toggleToPreview,
   showSubPanelElements,
@@ -9,20 +9,13 @@ const SidePanel = ({
   toggleToPreview: (value: ELayouts) => void;
   showSubPanelElements: ELayouts;
 }) => {
-  const [showLayoutSection, setShowLayoutSection] = useState(false);
+ 
   const [showInsertElementSubPanel, setShowInsertElementSubPanel] = useState(true);
-  const [showToolbar, setShowToolbar] = useState(false);
-
-  const toggleLayoutSection = () => {
-    setShowLayoutSection(!showLayoutSection);
-    setShowInsertElementSubPanel(true);
-    setShowToolbar(true);
-  };
-
+ 
+  
   const toggleToPreviewWithToolbar = (value: ELayouts) => {
     toggleToPreview(value);
-    setShowLayoutSection(false);
-    setShowToolbar(false);
+
   };
 
   const MenuLayoutItem = ({ iconName, label, onClick }: MenuLayoutItem) => {
@@ -80,7 +73,8 @@ const SidePanel = ({
       <MenuLayoutItem
         iconName="light-layout"
         label="Layout"
-        onClick={toggleLayoutSection}
+      
+       onClick= {()=>toggleToPreviewWithToolbar(ELayouts.LAYOUT)}
       />
       <MenuLayoutItem
         iconName="light-dropdown-bottom"
@@ -116,11 +110,9 @@ const SidePanel = ({
             onClick={() => toggleToPreviewWithToolbar(ELayouts.NOTES)}
           />
 
-          {showLayoutSection && (
-            <Toolbar />
-          )}
+         
 
-          {/* {showToolbar && <CustomToolbar />} */}
+        
         </>
       )}
     </div>

@@ -28,7 +28,7 @@
   width: 100%;
 
   display: grid;
-  /* flex-direction: column; */
+  
   width: 100%;
   grid-template-columns: 1.5fr 1.5fr 8.5fr;
 }
@@ -69,7 +69,7 @@
 
 .toolbar-container {
   height: 773px;
-  width: calc(100%-202px);
+  width: 202px;
 }
 
 .template-wrapper {
@@ -84,15 +84,11 @@
 
 .template-toolbar {
   height: 40px;
-  width: 95%;
+  width: 100%;
  
 }
 
-@media screen and (min-width: 768px) {
-  .template-toolbar {
-    margin-left: 237px;
-  }
-}
+
 
 body {
   min-height: 100vh;
@@ -101,15 +97,13 @@ body {
   overflow-y: hidden;
 }
 
-
-.preview-grid {
-  border: 1px solid #DDDDDD;
-  position: "relative";
-  left: "300px";
-  top: "-90px"
-}
-
 .logo {
   margin-left: 33px;
   margin-top: 10px;
+}
+
+.template-preview {
+  overflow-y: scroll;
+  border: 1px solid #DDDDDD;
+  height: 900px;
 }

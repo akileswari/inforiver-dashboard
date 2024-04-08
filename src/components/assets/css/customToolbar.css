@@ -1,7 +1,7 @@
 /* CustomToolbar.css */
 
 .custom-toolbar {
-  width: 960px;
+  width: 1015px;
   height: 40px;
   background: #f5f9fe;
   border-radius: 4px;
@@ -22,9 +22,11 @@
 }
 .line {
   width: var(--Size-20, 1px);
-  background: #ddd;
+  background: gray;
   height: 20px;
   transform: "rotate(-90deg)";
+  margin-top: 10px;
+  
 }
 .custom-item .custom-icon {
   position: relative;
@@ -40,6 +42,7 @@
   left: 2.5px;
   top: 3.75px;
   border: 1px #002050 solid;
+ 
 }
 
 .custom-item .custom-icon .triangle-up {
@@ -97,4 +100,12 @@ select {
   width: 110px;
   height: 20px;
   background-color: #f7f7ff;
+}
+button{
+  border: none;
+  color: #002050;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
 }
