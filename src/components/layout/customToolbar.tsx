@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import "../CSS/customIcon.css";
+
+import "../assets/css/customToolbar.css";
 import { useTheme } from "../Theme/Theme";
 import { getIcon } from "../constant/Helper";
 
 const CustomToolbar = () => {
-  const { theme, setTheme } = useTheme(); // Destructure setTheme from useTheme
+  const { theme, setTheme } = useTheme(); 
 
   const handleThemeChange = (event) => {
-    const selectedTheme = event.target.value; // Get the selected theme from the dropdown
-    setTheme(selectedTheme); // Set the selected theme using the setTheme function from useTheme
+    const selectedTheme = event.target.value; 
+    setTheme(selectedTheme); 
   };
 
   return (

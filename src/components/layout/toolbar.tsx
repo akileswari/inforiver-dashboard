@@ -1,53 +1,100 @@
-
-import "../CSS/toolbar.css";
-import "../CSS/style.css";
-import { getIcon } from "../constant/Helper";
-import { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SketchPicker } from 'react-color';
+import { useSelector, useDispatch } from 'react-redux';
+import { getIcon } from "../constant/Helper";
+import '../assets/css/toolbar.css';
+import { setColumns, setRows, setSpacing, setMargin, setCornerRadius, setStroke, setShadow, setStrokeColor, setShadowColor,setSelectedShadow} from "../../store/ToolbarSlice";
 
-const Toolbar = ({ setRows, setColumns }) => { 
-  const [isChecked, setIsChecked] = useState(true);
-  const [color1, setColor1] = useState('#ffffff');
-  const [color2, setColor2] = useState('#ffffff');
+const Toolbar = () => {
+  const dispatch = useDispatch();
+  const rows = useSelector((state: any) => state.toolbar.rows);
+  const columns = useSelector((state: any) => state.toolbar.columns);
+  const spacing = useSelector((state: any) => state.toolbar.spacing);
+  const margin = useSelector((state: any) => state.toolbar.margin);
+  const cornerRadius = useSelector((state: any) => state.toolbar.cornerRadius);
+  const stroke = useSelector((state: any) => state.toolbar.stroke);
+  const shadow = useSelector((state: any) => state.toolbar.shadow);
+  const strokeColor = useSelector((state: any) => state.toolbar.strokeColor);
+  const shadowColor = useSelector((state: any) => state.toolbar.shadowColor);
+  const selectedShadow = useSelector((state: any) => state.toolbar.selectedShadow);
   const [showColorPicker1, setShowColorPicker1] = useState(false);
   const [showColorPicker2, setShowColorPicker2] = useState(false);
-  
-
-
-  const handleInputChange1 = (e) => {
-    const value = parseInt(e.target.value);
-    setRows(value);
-  };
-
-  const handleInputChange2 = (e) => {
-    const value = parseInt(e.target.value);
-    setColumns(value);
-  };
 
   const handleToggleChange = () => {
-    setIsChecked(!isChecked);
+    dispatch(setShadow(!shadow));
   };
 
-  const handleColorChange1 = (selectedColor) => {
-    setColor1(selectedColor.hex);
+  const handleInputChange1 = (e: any) => {
+    const value = parseInt(e.target.value);
+    dispatch(setRows(value));
   };
 
-  const handleColorChange2 = (selectedColor) => {
-    setColor2(selectedColor.hex);
+  const handleInputChange2 = (e: any) => {
+    const value = parseInt(e.target.value);
+    dispatch(setColumns(value));
+  };
+
+  const handleSpacingChange = (e: any) => {
+    const value = parseInt(e.target.value);
+    dispatch(setSpacing(value));
+  };
+
+  const handleMarginChange = (e: any) => {
+    const value = parseInt(e.target.value);
+    dispatch(setMargin(value));
+  };
+
+  const handleCornerRadiusChange = (e: any) => {
+    const value = parseInt(e.target.value);
+    dispatch(setCornerRadius(value));
+  };
+
+  const handleStrokeChange = (e: any) => {
+    const value = parseInt(e.target.value);
+    dispatch(setStroke(value));
+  };
+
+  const handleColorChange1 = (selectedColor: any) => {
+    dispatch(setStrokeColor(selectedColor.hex));
+  };
+
+  const handleColorChange2 = (selectedColor: any) => {
+    dispatch(setShadowColor(selectedColor.hex));
+  };
+
+  const handleShadowSelection = (selectedShadowType: string) => {
+    dispatch(setSelectedShadow(selectedShadowType));
   };
 
   const toggleColorPicker1 = () => {
     setShowColorPicker1(!showColorPicker1);
-    setShowColorPicker2(false);
   };
 
   const toggleColorPicker2 = () => {
     setShowColorPicker2(!showColorPicker2);
-    setShowColorPicker1(false);
   };
+
+  const colorPickerRef1 = useRef(null);
+  const colorPickerRef2 = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (colorPickerRef1.current && !colorPickerRef1.current.contains(event.target)) {
+        setShowColorPicker1(false);
+      }
+      if (colorPickerRef2.current && !colorPickerRef2.current.contains(event.target)) {
+        setShowColorPicker2(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="toolbar-container">
-      {/* Grid */}
       <div className="gridContainer">
         <div className="gridItem">
           <div className="gridText">Grid</div>
@@ -55,27 +102,29 @@ const Toolbar = ({ setRows, setColumns }) => {
       </div>
       <div className="componentWrapper">
         <div className="columnWrapper">
-          <div className="columnTitle">Column</div>
+          <div className="columnTitle">Row</div>
           <div className="columnContent">
             <input
               type="number"
               id="row"
               name="row"
-              min="0"
-              defaultValue="3"
+              min={1}
+              max={7}
+              value={rows}
               onChange={handleInputChange1}
             />
           </div>
         </div>
         <div className="rowWrapper">
-          <div className="rowTitle">Row</div>
+          <div className="rowTitle">Column</div>
           <div className="rowContent">
             <input
               type="number"
               id="col"
               name="col"
-              min="0"
-              defaultValue="3"
+              min={1}
+              max={8}
+              value={columns}
               onChange={handleInputChange2}
             />
           </div>
@@ -87,19 +136,21 @@ const Toolbar = ({ setRows, setColumns }) => {
         <div className="spacingHeader">
           <div className="spacingTitle">Spacing</div>
         </div>
-        <div className="spacingCont`ent">
+        <div className="spacingContent">
           <div className="spacingItem">
             <input
               type="number"
-              id="quantity"
-              name="quantity"
+              id="spacing"
+              name="spacing"
               min="0"
-              defaultValue="0"
+              value={spacing}
+              onChange={handleSpacingChange}
             />
           </div>
         </div>
       </div>
 
+      {/* Margin */}
       <div className="marginWrapper">
         <div className="marginHeader">
           <div className="marginTitle">Margin</div>
@@ -108,18 +159,15 @@ const Toolbar = ({ setRows, setColumns }) => {
           <div className="marginItem">
             <input
               type="number"
-              id="quantity"
-              name="quantity"
+              id="margin"
+              name="margin"
               min="0"
-              defaultValue="0"
+              value={margin}
+              onChange={handleMarginChange}
             />
           </div>
         </div>
       </div>
-
-
-      {/* Margin */}
-
 
       {/* Corner radius */}
       <div className="cornerRadiusContainer">
@@ -130,107 +178,104 @@ const Toolbar = ({ setRows, setColumns }) => {
           <div className="cornerRadiusItem">
             <input
               type="number"
-              id="quantity"
-              name="quantity"
+              id="cornerRadius"
+              name="cornerRadius"
               min="0"
-              defaultValue="0"
+              value={cornerRadius}
+              onChange={handleCornerRadiusChange}
             />
           </div>
         </div>
       </div>
 
-      {/* Stoke */}
-      <div className="stokeContainer">
-        <div className="stokeHeader">
-          <div className="headerText">Stoke</div>
+      {/* Stroke */}
+      <div className="strokeContainer">
+        <div className="strokeHeader">
+          <div className="marginTitle">Stroke</div>
         </div>
-        <div className="stoke">
-          <div className="stokeContent">
+
+        <div className="stokeContent">
+          <div className="stokeItem">
             <input
               type="number"
-              id="quantity"
-              name="quantity"
-              min="0"
-              defaultValue="0"
+              id="stroke"
+              name="stroke"
+              min={1}
+              max={8}
+              value={stroke}
+              onChange={handleStrokeChange}
             />
+          </div>
+          <div className="color-picker" ref={colorPickerRef1}>
+            <div className="colorBox" onClick={toggleColorPicker1} style={{ backgroundColor: strokeColor }}>
+              {showColorPicker1 && (
+                <SketchPicker color={strokeColor} onChange={handleColorChange1} className="picker" />
+              )}
             </div>
-            <div className="color-picker">
-              <div className="colorBox" onClick={toggleColorPicker1}>
-                {showColorPicker1 && (
-                  <SketchPicker color={color1} onChange={handleColorChange1} className="picker" />
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* Shadow */}
+      <div className="shadowContainer">
+        <div className="shadowHeader">
+          <div className="marginTitle">Shadow</div>
+        </div>
+        <div className="shadowItem">
+          <div className="shadowContent">
+            <div className="shadowBox">
+              <div className="shadow">
+                <label className="switch">
+                  <input type="checkbox" checked={shadow} onChange={handleToggleChange} />
+                  <span className="slider round"></span>
+                </label>
+              </div>
+            </div>
+            <div className="pickerShadow" ref={colorPickerRef2}>
+              <div className="colorBox" onClick={toggleColorPicker2} style={{ backgroundColor: shadowColor }}>
+                {showColorPicker2 && (
+                  <SketchPicker color={shadowColor} onChange={handleColorChange2} className="picker" />
                 )}
               </div>
             </div>
           </div>
-        
-        {/* Shadow */}
-        <div className="shadowContainer">
-          <div className="shadowHeader">
-            <div className="headerText">Shadow</div>
-          </div>
-          <div className="shadowItem">
-            <div className="shadowContent">
-              <div className="shadowBox">
-                <div className="shadow">
-                  <label className="switch">
-                    <input type="checkbox" checked={isChecked} onChange={handleToggleChange}></input>
-                    <span className="slider round"></span>
-                  </label>
-                  <div className="color-picker">
-                    <div className="colorBox" onClick={toggleColorPicker2}>
-                      {showColorPicker2 && (
-                        <SketchPicker color={color2} onChange={handleColorChange2} className="picker_shadow" />
-                      )}
-                    </div>
-                  </div>
-                </div>
-                <div className="all-shadows">
-                  <div className="shadowInner">
-                    <div className="shadow-icon">
-                      <i className={getIcon("light-shadow-top")}></i>
-                    </div>
-                    <div className="shadow-icon">
-                      <i className={getIcon("light-shadow-topleft")}></i>
-                    </div>
-                    <div className="shadow-icon">
-                      <i className={getIcon("light-shadow-right")}></i>
-                    </div>
-                    <div className="shadow-icon">
-                      <i className={getIcon("light-shadow-bottomleft")}></i>
-                    </div>
-                    <div className="shadow-icon">
-                      <i className={getIcon("light-shadow-bottom")}></i>
-                    </div>
-                    <div className="shadow-icon">
-                      <i className={getIcon("light-shadow-bottomright")}></i>
-                    </div>
-                    <div className="shadow-icon">
-                      <i className={getIcon("light-shadow-left")}></i>
-                    </div>
-                    <div className="shadow-icon">
-                      <i className={getIcon("light-shadow-centre")}></i>
-                    </div>
-                    <div className="shadow-icon">
-                      <i className={getIcon("light-shadow-topright")}></i>
-                    </div>
-                  </div>
-                </div>
+          <div className="all-shadows">
+            <div className="shadowInner">
+              <div className="shadow-icon" onClick={() => handleShadowSelection('light-shadow-top')}>
+                <i className={getIcon("light-shadow-top")}></i>
               </div>
-              <div className="shadowBox">
-                <div className="shadowInner"></div>
+              <div className="shadow-icon" onClick={() => handleShadowSelection('light-shadow-topleft')}>
+                <i className={getIcon("light-shadow-topleft")}></i>
+              </div>
+              <div className="shadow-icon" onClick={() => handleShadowSelection('light-shadow-right')}>
+                <i className={getIcon("light-shadow-right")}></i>
+              </div>
+              <div className="shadow-icon" onClick={() => handleShadowSelection('light-shadow-bottomleft')}>
+                <i className={getIcon("light-shadow-bottomleft")}></i>
+              </div>
+              <div className="shadow-icon" onClick={() => handleShadowSelection('light-shadow-bottom')}>
+                <i className={getIcon("light-shadow-bottom")}></i>
+              </div>
+              <div className="shadow-icon" onClick={() => handleShadowSelection('light-shadow-bottomright')}>
+                <i className={getIcon("light-shadow-bottomright")}></i>
+              </div>
+              <div className="shadow-icon" onClick={() => handleShadowSelection('light-shadow-left')}>
+                <i className={getIcon("light-shadow-left")}></i>
+              </div>
+              <div className="shadow-icon" onClick={() => handleShadowSelection('light-shadow-centre')}>
+                <i className={getIcon("light-shadow-centre")}></i>
+              </div>
+              <div className="shadow-icon" onClick={() => handleShadowSelection('light-shadow-topright')}>
+                <i className={getIcon("light-shadow-topright")}></i>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
-      </div>
+    </div>
   );
 };
 
 export default Toolbar;
-
-
-
-
-

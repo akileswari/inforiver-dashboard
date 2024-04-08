@@ -1,11 +1,12 @@
-import '../assets/css/PageTitle.css'
-const LayoutTittle = () => {
+import React from 'react';
+import '../assets/css/PageTitle.css';
+
+const Title = ({title}) => {
     return (
         <div className="container">
-           
             <div className="left-section">
                 <div className="title-container">
-                    <div className="title">Layout</div>
+                    <div className="title">{title}</div>
                 </div>
             </div>
             <div className="right-section">
@@ -21,4 +22,5 @@ const LayoutTittle = () => {
         </div>
     );
 };
-export default LayoutTittle;
+
+export default Title;

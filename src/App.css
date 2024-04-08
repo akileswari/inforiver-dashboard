@@ -9,7 +9,7 @@
   height: 100%;
   width: 100%;
   margin: 0 auto;
-  padding: 1rem;
+
   max-width: 100%;
   max-height: 100%;
   /* text-align: center; */
@@ -18,13 +18,19 @@
 .App {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .main-content {
-  display: flex;
-  flex-direction: row;
+  /* display: flex; */
+  /* flex-direction: row; */
   height: 80dvh;
   width: 100%;
+
+  display: grid;
+  /* flex-direction: column; */
+  width: 100%;
+  grid-template-columns: 1.5fr 1.5fr 8.5fr;
 }
 
 .page-title {
@@ -36,34 +42,74 @@
 .side-panel {
   height: calc(100% - 75px);
   width: 250px;
-  /* border-right: 1px solid #d9e1e8; */
+
+}
+::-webkit-scrollbar {
+  width: 5px;
 }
 
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #adaaaa;
+}
 .sub-panel {
   padding: 1rem;
-  /* height: calc(100% - 75px); */
-  height: 550px;
+
+  height: 773px;
   width: 202px;
   font-family: Inter;
   border-right: 1px solid #d9e1e8;
+
+}
+
+.toolbar-container {
+  height: 773px;
+  width: calc(100%-202px);
 }
 
 .template-wrapper {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: max-content;
+  /* height: 100%; */
+  /* flex-direction: row; */
   /* height: calc(100% - 75px);
   width: calc(100% - 500px); */
+  margin-top :-73px;
 }
 
 .template-toolbar {
-  height: 75px;
-  width: 100%;
+  height: 40px;
+  width: 95%;
+ 
 }
 
-body{
+@media screen and (min-width: 768px) {
+  .template-toolbar {
+    margin-left: 237px;
+  }
+}
+
+body {
   min-height: 100vh;
-  width: vw;
+  width: 100vw;
   overflow-x: hidden;
   overflow-y: hidden;
+}
+
+
+.preview-grid {
+  border: 1px solid #DDDDDD;
+  position: "relative";
+  left: "300px";
+  top: "-90px"
+}
+
+.logo {
+  margin-left: 33px;
+  margin-top: 10px;
 }

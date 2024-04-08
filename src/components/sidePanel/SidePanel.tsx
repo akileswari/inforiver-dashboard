@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { getIcon } from "../constant/Helper";
-import { ELayouts } from "../../MainComp";
-import LayoutSection from "../layout/Layout";
-
+import { ELayouts } from "../../MainComponent";
+import Toolbar from "../layout/toolbar";
 const SidePanel = ({
   toggleToPreview,
   showSubPanelElements,
@@ -10,23 +9,20 @@ const SidePanel = ({
   toggleToPreview: (value: ELayouts) => void;
   showSubPanelElements: ELayouts;
 }) => {
-  interface MenuLayoutItem {
-    iconName: string;
-    label: string;
-    onClick: () => void;
-  }
-
   const [showLayoutSection, setShowLayoutSection] = useState(false);
-  const [showElements, setshowElements] = useState(false);
+  const [showInsertElementSubPanel, setShowInsertElementSubPanel] = useState(true);
+  const [showToolbar, setShowToolbar] = useState(false);
 
   const toggleLayoutSection = () => {
     setShowLayoutSection(!showLayoutSection);
-    setshowElements(false); 
+    setShowInsertElementSubPanel(true);
+    setShowToolbar(true);
   };
 
-  const toggleInsertElement = () => {
-    setshowElements(!showElements);
-    if (!showElements) setShowLayoutSection(false); 
+  const toggleToPreviewWithToolbar = (value: ELayouts) => {
+    toggleToPreview(value);
+    setShowLayoutSection(false);
+    setShowToolbar(false);
   };
 
   const MenuLayoutItem = ({ iconName, label, onClick }: MenuLayoutItem) => {
@@ -57,6 +53,28 @@ const SidePanel = ({
     );
   };
 
+  const menuItems = [
+    {
+      iconName: "light-chart",
+      label: "Chart",
+      layout: ELayouts.CHART,
+    },
+    {
+      iconName: "light-card",
+      label: "Card",
+      layout: ELayouts.CARD,
+    },
+    {
+      iconName: "light-table",
+      label: "Table",
+      layout: ELayouts.TABLE,
+    },
+    {
+      iconName: "light-notes",
+      label: "Notes",
+      layout: ELayouts.NOTES,
+    },
+  ];
   return (
     <div className="menu">
       <MenuLayoutItem
@@ -67,40 +85,42 @@ const SidePanel = ({
       <MenuLayoutItem
         iconName="light-dropdown-bottom"
         label="Insert element"
-        onClick={toggleInsertElement}
+        onClick={() => setShowInsertElementSubPanel(true)}
       />
 
-      {showLayoutSection && (
-        <LayoutSection  />
-      )}
-
-      {showElements && (
+      {showInsertElementSubPanel && (
         <>
           <RepeatingElements
             className="menu-item"
             iconName="light-chart"
             label="Chart"
-            onClick={() => toggleToPreview(ELayouts.CHART)}
+            onClick={() => toggleToPreviewWithToolbar(ELayouts.CHART)}
           />
 
           <RepeatingElements
             className="menu-item"
             iconName="light-card"
             label="Card"
-            onClick={() => toggleToPreview(ELayouts.CARD)}
+            onClick={() => toggleToPreviewWithToolbar(ELayouts.CARD)}
           />
           <RepeatingElements
             className="menu-item"
             iconName="light-table"
             label="Table"
-            onClick={() => toggleToPreview(ELayouts.TABLE)}
+            onClick={() => toggleToPreviewWithToolbar(ELayouts.TABLE)}
           />
           <RepeatingElements
             className="menu-item"
             iconName="light-notes"
             label="Notes"
-            onClick={() => toggleToPreview(ELayouts.NOTES)}
+            onClick={() => toggleToPreviewWithToolbar(ELayouts.NOTES)}
           />
+
+          {showLayoutSection && (
+            <Toolbar />
+          )}
+
+          {/* {showToolbar && <CustomToolbar />} */}
         </>
       )}
     </div>

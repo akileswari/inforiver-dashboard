@@ -1,17 +1,22 @@
 import React from "react";
 import { scaleBand, scaleLinear } from "d3-scale";
-import XAxis from "../components/Axis/xAxis.tsx";
-import YAxis from "../components/Axis/yAxis.tsx";
-import TextValues from "../components/DataValues/TextValues.tsx";
-
+import XAxis from "../components/axis/xAxis.tsx";
+import YAxis from "../components/axis/yAxis.tsx";
+import TextValues from "../components/dataValues/TextValues.tsx";
+import lightTheme from "../components/Theme/lightTheme.ts";
+import darkTheme from "../components/Theme/darkTheme.ts";
+import { useSelector } from "react-redux";
+import { IThemeColor } from "../components/Theme/typing.ts";
 interface BarChartProps {
   data: { name: string; value: number }[][];
   width: number;
   height: number;
+  theme: IThemeColor;
 }
 
-const BarChart: React.FC<BarChartProps> = ({ data, width, height }) => {
+const BarChart: React.FC<BarChartProps> = ({ data, width, height, theme }) => {
   // Dimensions
+
   const margin = { top: 20, right: 30, bottom: 40, left: 80 };
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
@@ -58,6 +63,7 @@ const BarChart: React.FC<BarChartProps> = ({ data, width, height }) => {
             xScale={xScale}
             yScale={yScale}
             fontSize={"12px"}
+            theme={theme}
           />
         </g>
       ))}
@@ -66,16 +72,26 @@ const BarChart: React.FC<BarChartProps> = ({ data, width, height }) => {
         innerHeight={innerHeight}
         xScale={xScale}
         data={dataset}
-        index={index}
+        // index={index}
+        theme={theme}
       />
     </g>
   ));
 
   return (
-    <svg width={width} height={height}>
+    <g
+      width={width}
+      height={height}
+      style={{ backgroundColor: theme.chart.background }}
+    >
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         {bars}
-        <YAxis margin={margin} width={innerWidth} yScale={yScale} />
+        <YAxis
+          margin={margin}
+          width={innerWidth}
+          yScale={yScale}
+          theme={theme}
+        />
       </g>
       {/* Add labels for x and y axes */}
       <text
@@ -97,7 +113,7 @@ const BarChart: React.FC<BarChartProps> = ({ data, width, height }) => {
       >
         Sales
       </text>
-    </svg>
+    </g>
   );
 };
 

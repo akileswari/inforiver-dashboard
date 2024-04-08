@@ -3,10 +3,11 @@ export const Logo = () => {
    
     <svg
       xmlns="http://www.w3.org/2000/svg"
+      className="logo"
       width="80"
       height="50"
       fill="none"
-      // xmlns:v="https://vecta.io/nano"
+      // xmlns:v="https://vecta.io/nano" 
     >
       <mask id="A" fill="#fff">
         <path d="M2 2.5h76v32H2v-32z" />

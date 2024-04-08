@@ -6,10 +6,15 @@ interface DataLabelProps {
   theme: {
     fontSize: string;
     textColor: string;
-   
   };
 }
-const DataLabel: React.FC<DataLabelProps> = ({ x, y, value, positive, theme }) => {
+const DataLabel: React.FC<DataLabelProps> = ({
+  x,
+  y,
+  value,
+  positive,
+  theme,
+}) => {
   const { fontSize, textColor } = theme;
 
   return (

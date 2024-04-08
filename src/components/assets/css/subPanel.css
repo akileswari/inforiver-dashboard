@@ -63,3 +63,6 @@
   color: black;
   outline: none;
 }
+.chart-icons{
+  overflow-y: auto;
+}
