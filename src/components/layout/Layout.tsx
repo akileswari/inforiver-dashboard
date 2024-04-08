@@ -24,6 +24,8 @@ const LayoutSection = () => {
         shadow={undefined}
         shadowColor={""}
         selectedShadow={""}
+        height={0}
+        width={0}
       />
     </Provider>
   );

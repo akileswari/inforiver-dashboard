@@ -4,7 +4,7 @@ import SubPanel from "./components/SubPanel/SubPanel";
 import Title from "./components/pageTitle/title";
 import InforiverLogo from "./components/pageTitle/InforiverLogo";
 import SidePanel from "./components/sidePanel/SidePanel";
-import TemplateWrapper from "./TemplateBuilder/TemplateWrapper";
+import TemplateWrapper from "./templateBuilder/TemplateWrapper";
 import Toolbar from "./components/layout/toolbar";
 import { undo, redo } from "../src/store/ToolbarSlice";
 
