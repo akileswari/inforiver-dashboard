@@ -2,12 +2,15 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import chartSlicer from "./chartSlicer";
 import toolbarSlice from "./ToolbarSlice";
 import titleSlice from "./titleSlice";
-import ThemeIndicator from "./ThemeIndicator";
+import themeStore from "./themeIndicator";
+
+import gridSlice from "./gridSlice";
 const rootReducer = combineReducers({
+  themeStore: themeStore,
   chartStore: chartSlicer,
   toolbar: toolbarSlice,
-  title : titleSlice,
-  themeStore :ThemeIndicator
+  title: titleSlice,
+  grid: gridSlice,
 });
 
 const store = configureStore({

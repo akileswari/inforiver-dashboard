@@ -1,5 +1,4 @@
 import { ELayouts } from "../../MainComponent";
-import CustomToolbar from "../layout/CustomToolBar";
 import ChartBoxHolder from "./ChartBoxHolder";
 const columnChartIcons = [
   {
@@ -181,10 +180,10 @@ const SubPanel = ({
 }: {
   showSubPanelElements: ELayouts;
 }) => {
-  if (showSubPanelElements !== ELayouts.CHART || showSubPanelElements === null) return null;
+  if (showSubPanelElements !== ELayouts.CHART || showSubPanelElements === null)
+    return null;
   return (
     <div className="sub-panel" style={{ marginTop: "-77px" }}>
-
       {showSubPanelElements === "CHART" && (
         <>
           <p className="charts-text-title">Chart</p>
@@ -213,7 +212,6 @@ const SubPanel = ({
             />
           ))}
         </>
-
       )}
     </div>
   );

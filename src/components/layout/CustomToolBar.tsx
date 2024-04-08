@@ -1,21 +1,32 @@
-
 import "../assets/css/customToolbar.css";
-import { useTheme } from "../Theme/Theme";
 import { getIcon } from "../constant/Helper";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setThemeType } from "../../store/themeIndicator";
 
 const CustomToolbar = () => {
-  const { theme, setTheme } = useTheme(); 
+  const [selectedTheme, setSelectedTheme] = useState("light");
 
-  const handleThemeChange = (event) => {
-    const selectedTheme = event.target.value; 
-    setTheme(selectedTheme); 
+  const dispatch = useDispatch();
+
+  const handleThemeChange = (event: any) => {
+    const selectedTheme = event.target.value;
+    setSelectedTheme(selectedTheme);
+    // dispatch(setThemeType("light"))
+    dispatch(setThemeType(selectedTheme)); // Dispatch the action to update the theme
   };
 
   return (
     <div className="custom-toolbar">
       <div className="custom-item">
         <i className={getIcon("light-theme")}></i>
-        <select value={theme.name} onChange={handleThemeChange} title='Theme'>
+
+        <select
+          value={selectedTheme}
+          onChange={handleThemeChange}
+          title="Theme"
+          style={{ color: "black" }}
+        >
           <option value="light">Light Theme</option>
           <option value="dark">Dark Theme</option>
         </select>
