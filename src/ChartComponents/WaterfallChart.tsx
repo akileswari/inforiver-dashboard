@@ -33,20 +33,12 @@ const WaterfallChart: React.FC<WaterfallChartProps> = ({
   height,
   theme,
 }) => {
-const WaterfallChart: React.FC<WaterfallChartProps> = ({
-  data,
-  width,
-  height,
-  theme,
-}) => {
   const flattenedData = data.flat();
   const total = flattenedData.reduce((acc, entry) => acc + entry.value, 0);
-
 
   const margin = { top: 100, right: 100, bottom: 40, left: 40 };
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
-  // Calculate bar width and xScale
   // Calculate bar width and xScale
   const barPadding = 0.1;
   const categories = flattenedData.map((entry) => entry.name);
@@ -57,7 +49,6 @@ const WaterfallChart: React.FC<WaterfallChartProps> = ({
 
   // yScale
   const yScale = scaleLinear().domain([0, total]).range([innerHeight, 0]);
-  const yScale = scaleLinear().domain([0, total]).range([innerHeight, 0]);
 
   // Generate bars and connector lines
   let cumulativeSum = 0;
@@ -67,17 +58,10 @@ const WaterfallChart: React.FC<WaterfallChartProps> = ({
     const barY =
       value >= 0 ? yScale(cumulativeSum + value) : yScale(cumulativeSum);
     const fill = value >= 0 ? theme.variance.positive : theme.variance.negative;
-    const barY =
-      value >= 0 ? yScale(cumulativeSum + value) : yScale(cumulativeSum);
-    const fill = value >= 0 ? theme.variance.positive : theme.variance.negative;
     cumulativeSum += value;
 
     // Connector lines
     const connectorLineStartX = xScale(name) + xScale.bandwidth() / 2;
-    const connectorLineEndX =
-      index < flattenedData.length - 1
-        ? xScale(flattenedData[index + 1].name) + xScale.bandwidth() / 2
-        : xScale(name) + xScale.bandwidth() / 2;
     const connectorLineEndX =
       index < flattenedData.length - 1
         ? xScale(flattenedData[index + 1].name) + xScale.bandwidth() / 2
@@ -100,16 +84,6 @@ const WaterfallChart: React.FC<WaterfallChartProps> = ({
       ) : null;
 
     // Cumulative text
-    const cumulativeText =
-      index > 0 ? (
-        <DataLabel
-          key={`cumulative-text-${index}`}
-          x={xScale(name) + xScale.bandwidth() / 2}
-          y={barY - 20}
-          value={cumulativeSum}
-          theme={theme}
-        />
-      ) : null;
     const cumulativeText =
       index > 0 ? (
         <DataLabel
@@ -158,12 +132,6 @@ const WaterfallChart: React.FC<WaterfallChartProps> = ({
       {/* Render YAxis component */}
       <YAxis margin={margin} width={innerWidth} yScale={yScale} theme={theme} />
 
-      <XAxis
-        innerHeight={innerHeight}
-        xScale={xScale}
-        data={flattenedData}
-        theme={theme}
-      />
       <XAxis
         innerHeight={innerHeight}
         xScale={xScale}
