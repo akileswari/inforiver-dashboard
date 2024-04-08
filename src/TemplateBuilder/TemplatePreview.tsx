@@ -1,14 +1,13 @@
-// TemplatePreview.tsx
-import React, { useEffect, useRef, useState } from "react";
-import useChartStore from "../store/zustand/Zustand";
 import LineChart from "../chartComponents/LineChart";
 import ClusterLineChart from "../chartComponents/ClusttereLine";
 import { dataSets, lineData } from "../components/dataSets/ChartDatas";
 import BarChart from "../chartComponents/Bar";
 import AreaChart from "../chartComponents/AreaChart";
+// import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import StackedLineChart from "../chartComponents/StackedLineChart";
+import useChartStore from "..//store/zustand/Zustand";
+import LayoutGrid from "../components/layout/layoutGrid";
 import WaterfallChart from "../chartComponents/WaterfallChart";
-import LayoutGrid from "../components/layout/LayoutGrid";
 import { useSelector } from "react-redux";
 import lightTheme from "../components/Theme/lightTheme";
 import darkTheme from "../components/Theme/darkTheme";
@@ -35,9 +34,21 @@ const TemplatePreview = ({
   templateRef: React.MutableRefObject<HTMLDivElement>;
 }) => {
   // const { height, width } = prop;
-
+  const {
+    rows,
+    columns,
+    spacing,
+    margin,
+    strokeColor,
+    stroke,
+    cornerRadius,
+    shadow,
+    shadowColor,
+    selectedShadow,
+  } = useSelector((state: any) => state.toolbar);
   const activeChart = useChartStore((state: any) => state.activeChart);
 
+  const isChartActive = activeChart !== null;
   const SelectedComp = componentIds[activeChart];
 
   const finalData =
@@ -47,9 +58,9 @@ const TemplatePreview = ({
     activeChart === "100stacked-column"
       ? dataSets
       : lineData;
-  const isChartActive = activeChart !== null;
 
   const themeType = useSelector((state: any) => state.themeStore.themeType);
+  console.log(themeType);
 
   const getTheme = (theme: any): any => {
     switch (theme) {
@@ -63,21 +74,8 @@ const TemplatePreview = ({
   };
   const theme = getTheme(themeType);
 
-  const {
-    rows,
-    columns,
-    spacing,
-    margin,
-    strokeColor,
-    stroke,
-    cornerRadius,
-    shadow,
-    shadowColor,
-    selectedShadow,
-  } = useSelector((state: any) => state.toolbar);
-
   return (
-    <div ref={templateRef} className="template-preview preview-grid">
+    <div ref={templateRef} className="template-preview">
       {isChartActive && (
         <svg
           height={templateRef?.current?.clientHeight}
@@ -94,6 +92,7 @@ const TemplatePreview = ({
           )}
         </svg>
       )}
+
       {!isChartActive && (
         <LayoutGrid
           rows={rows}
@@ -106,6 +105,8 @@ const TemplatePreview = ({
           shadow={shadow}
           shadowColor={shadowColor}
           selectedShadow={selectedShadow}
+          height={height}
+          width={width}
         />
       )}
     </div>
