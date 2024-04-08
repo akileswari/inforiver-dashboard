@@ -5,6 +5,7 @@ import "react-grid-layout/css/styles.css";
 import { useGrid } from "../context/Context";
 import { useDispatch } from "react-redux";
 import { setGridItems } from "../../store/gridSlice";
+import TemplatePreview from "../../templateBuilder/TemplatePreview";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -126,6 +127,7 @@ const LayoutGrid: React.FC<GridComponentProps> = ({
       {layout.map((item) => (
         <div
           key={item.i}
+          id={item.i}
           className={`grid-item ${
             selectedGridItems.includes(item.i) ? "selected" : ""
           }`}

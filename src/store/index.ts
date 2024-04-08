@@ -3,6 +3,7 @@ import chartSlicer from "./chartSlicer";
 import toolbarSlice from "./ToolbarSlice";
 import titleSlice from "./titleSlice";
 import themeStore from "./themeIndicator";
+import selectedGrid from "./selectedGrid";
 
 import gridSlice from "./gridSlice";
 const rootReducer = combineReducers({
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   toolbar: toolbarSlice,
   title: titleSlice,
   grid: gridSlice,
+  selectedGrid: selectedGrid,
 });
 
 const store = configureStore({

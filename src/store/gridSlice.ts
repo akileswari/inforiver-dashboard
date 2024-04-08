@@ -1,17 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-   
-    gridItems: [], 
-  };
-  const gridSlice = createSlice({
-    name: "grid",
+  gridItems: [],
+};
+const gridSlice = createSlice({
+  name: "grid",
   initialState,
   reducers: {
-
     setGridItems: (state, action) => {
       state.gridItems = action.payload;
     },
-
   },
 });
 

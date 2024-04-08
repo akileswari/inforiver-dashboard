@@ -3,9 +3,7 @@ import { scaleBand, scaleLinear } from "d3-scale";
 import XAxis from "../components/axis/xAxis.tsx";
 import YAxis from "../components/axis/yAxis.tsx";
 import TextValues from "../components/dataValues/TextValues.tsx";
-import lightTheme from "../components/Theme/lightTheme.ts";
-import darkTheme from "../components/Theme/darkTheme.ts";
-import { useSelector } from "react-redux";
+
 import { IThemeColor } from "../components/Theme/typing.ts";
 interface BarChartProps {
   data: { name: string; value: number }[][];
