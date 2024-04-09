@@ -3,17 +3,30 @@ import "../assets/css/customToolbar.css";
 import { useTheme } from "../Theme/Theme";
 import { getIcon } from "../constant/Helper";
 import { useGrid } from '.././context/Context.js'; 
-import { useDispatch } from 'react-redux';
-import { setGridItems } from '../../store/gridSlice.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { undo, redo, setGridItems } from '../../store/gridSlice.js';
 
 const CustomToolbar = () => {
   const { theme, setTheme } = useTheme(); 
   const dispatch = useDispatch();
-  const {  selectedGridItems, swapGridItems } = useGrid(); 
-
+  const { selectedGridItems, swapGridItems } = useGrid(); 
+  const gridHistory = useSelector((state:any) => state.grid.history);
+  const currentHistoryIndex = useSelector((state:any) => state.grid.currentHistoryIndex);
+  console.log(currentHistoryIndex, "grid history")
+   
   
- 
- 
+
+  const handleUndoClick = () => {
+    if (currentHistoryIndex > 0) {
+      dispatch(undo());
+    }
+  };
+
+  const handleRedoClick = () => {
+    if (currentHistoryIndex < gridHistory.length - 1) {
+      dispatch(redo());
+    }
+  };
 
   const handleThemeChange = (event) => {
     const selectedTheme = event.target.value; 
@@ -21,15 +34,12 @@ const CustomToolbar = () => {
   };
 
   const handleSwapClick = () => {
-  
     if (selectedGridItems && selectedGridItems.length === 2) {
       dispatch(setGridItems([...selectedGridItems]));
     }
   };
 
-
   useEffect(() => {
-    
     if (selectedGridItems.length === 2) {
       console.log(`Swapped grids ${selectedGridItems[0]} and ${selectedGridItems[1]}`);
     }
@@ -56,10 +66,10 @@ const CustomToolbar = () => {
       </div>
       <div className="line"></div>
       <div className="custom-separator"></div>
-      <div className="custom-item" >
+      <div className="custom-item" onClick={handleUndoClick} >
         <i className={getIcon("light-undo")}></i>
       </div>
-      <div className="custom-item" >
+      <div className="custom-item" onClick={handleRedoClick} >
         <i className={getIcon("light-redo")}></i>
       </div>
     </div>

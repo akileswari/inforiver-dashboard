@@ -50,7 +50,9 @@ const LayoutGrid: React.FC<GridComponentProps> = ({
   const { selectedGridItems, setSelectedGridItems } = useGrid(); 
   const [layout, setLayout] = useState<GridItem[]>([]);
   const dispatch = useDispatch();
-  const gridItems = useSelector((state:any) => state.grid.gridItems);
+  const gridItems = useSelector((state:any) => state.grid.gridSlice);
+  console.log("gridItems",gridItems)
+ 
   const templateHeight = height / 150;
   const templateWidth = Math.floor(width / 101);
 console.log(templateHeight, templateWidth);
@@ -120,6 +122,7 @@ console.log(templateHeight, templateWidth);
     dispatch(updateGridItemSize({ itemId, width, height }));
   };
 
+  
   return (
     <ResponsiveGridLayout
       className="layout custom-layout"

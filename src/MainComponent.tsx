@@ -33,7 +33,7 @@ const MainComp = () => {
   return (
     <div className="App">
       <InforiverLogo />
-      <Title title={showSubPanelElements === null ? "Layout" : "Insert element"} /> 
+      <Title title={showSubPanelElements === ELayouts.LAYOUT ? "Layout" : "Insert element"} /> 
       <div className="main-content">
         <SidePanel
           toggleToPreview={toggleToPreview}
