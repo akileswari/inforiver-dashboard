@@ -72,7 +72,6 @@
   font-family: Inter;
   border-right: 1px solid #d9e1e8;
 }
-
 .toolbar-container {
   height: 773px;
   width: 202px;
@@ -97,7 +96,6 @@ body {
   min-height: 100vh;
   width: 100vw;
   overflow-x: hidden;
-  overflow-y: hidden;
 }
 
 .logo {

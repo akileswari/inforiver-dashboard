@@ -6,7 +6,6 @@ import InforiverLogo from "./components/pageTitle/InforiverLogo";
 import SidePanel from "./components/sidePanel/SidePanel";
 import TemplateWrapper from "./templateBuilder/TemplateWrapper";
 import Toolbar from "./components/layout/toolbar";
-import { undo, redo } from "../src/store/ToolbarSlice";
 
 export enum ELayouts {
   CHART = "CHART",
@@ -33,7 +32,9 @@ const MainComp = () => {
     <div className="App">
       <InforiverLogo />
       <Title
-        title={showSubPanelElements === null ? "Layout" : "Insert element"}
+        title={
+          showSubPanelElements === ELayouts.LAYOUT ? "Layout" : "Insert element"
+        }
       />
       <div className="main-content">
         <SidePanel
@@ -44,8 +45,6 @@ const MainComp = () => {
           <Toolbar
             toolpreview={toolPreview}
             showSubPanelElements={showSubPanelElements}
-            undo={undo}
-            redo={redo}
           />
         )}
         {showSubPanelElements === ELayouts.CHART && (

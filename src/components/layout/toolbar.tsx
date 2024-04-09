@@ -14,9 +14,16 @@ import {
   setStrokeColor,
   setShadowColor,
   setSelectedShadow,
+  undo,
+  redo,
 } from "../../store/ToolbarSlice";
+import { ELayouts } from "../../MainComponent";
 
-const Toolbar = () => {
+const Toolbar = ({
+  showSubPanelElements,
+}: {
+  showSubPanelElements: ELayouts;
+}) => {
   const dispatch = useDispatch();
   const rows = useSelector((state: any) => state.toolbar.rows);
   const columns = useSelector((state: any) => state.toolbar.columns);
