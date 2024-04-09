@@ -1,18 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+//integrate griditem
+// 1.grid id , height and width i chart records
+//2. active key
 interface IChartRecords {
   [key: string]: {
     chartType: string;
+    height: number;
+    width: number;
+    gridId: string;
   };
 }
 
 interface ISelectedGrid {
-  selectedGridItem: string;
+  selectedGridItem: string[];
   chartRecords: IChartRecords;
 }
-
+//grid settings we have to store
 const initialState: ISelectedGrid = {
-  selectedGridItem: "",
+  selectedGridItem: [],
   chartRecords: {},
 };
 
@@ -25,7 +30,7 @@ const gridItemsReducer = createSlice({
       state.selectedGridItem = action.payload;
     },
     setChart: (state, action) => {
-      state.chartRecords[action.payload.key] = action.payload.title;
+      state.chartRecords[action.payload.key] = action.payload.activeChart;
     },
     // setThemeType('light');
   },

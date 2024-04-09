@@ -3,7 +3,7 @@ import { getChartIcon } from "../constant/Helper";
 // import { setToggledChartType, setActiveChart } from "../../store/chartSlicer";
 import useChartStore from "../../store/zustand/Zustand";
 import { useGrid } from "../context/Context";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setGridItem, setChart } from "../../store/selectedGrid";
 
 const ChartIcon = ({ className }: { className: string }) => {
@@ -47,24 +47,24 @@ interface IChartBoxHolder {
 
 const ChartBoxHolder = ({ title, chartIcons, logo }: IChartBoxHolder) => {
   const toggle = useChartStore((state: any) => state.chartToggled === title);
-  const selectedChart = useSelector((state: any) => state.selectedGrid);
-  console.log(selectedChart);
 
   const { selectedGridItems } = useGrid();
 
   const setToggledChartType = useChartStore(
     (state: any) => state.setToggledChartType1
   );
+  console.log(setToggledChartType);
 
   const setActiveChart = useChartStore((state: any) => state.setActiveChart1);
+  const activeChart = useChartStore((state: any) => state.activeChart);
+
+  const dispatch = useDispatch();
 
   const toggleCharts = () => {
     setToggledChartType(title);
-    if (selectedGridItems.length > 0) {
-      setGridItem({ title, key: selectedGridItems[0] });
-    }
   };
-  console.log();
+
+  console.log(toggleCharts);
 
   return (
     <div className="column-charts">
@@ -81,10 +81,15 @@ const ChartBoxHolder = ({ title, chartIcons, logo }: IChartBoxHolder) => {
               key={index}
               onClick={() => {
                 console.log(chart.id, "chart.id");
-                selectedGridItems.forEach((item: string) => {
-                  const val = document.getElementById(item);
-                  console.log(val);
-                });
+
+                // if (selectedGridItems.length > 0) {
+                //   const chartRecords = {};
+                //   selectedGridItems.forEach((item: string) => {
+                //     chartRecords[item] = { ActiveChartid};
+                //   });
+
+                //   dispatch(setChart(chartRecords));
+                // }
 
                 return setActiveChart(chart.id);
               }}
