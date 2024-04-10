@@ -1,4 +1,4 @@
-// In your gridSlice.ts file
+
 import { createSlice } from "@reduxjs/toolkit";
 
 interface GridItem {

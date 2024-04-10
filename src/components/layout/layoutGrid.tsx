@@ -4,8 +4,8 @@ import '../assets/css/layoutGrid.css';
 import 'react-grid-layout/css/styles.css';
 import { useGrid } from '../context/Context';
 import { useDispatch, useSelector } from 'react-redux';
-import { setGridItems, setGridItemsSize, updateGridItemSize } from '../../store/gridSlice';
-
+ import { setGridItems,  updateGridItemSize } from '../../store/gridSlice';
+// import { setTestItems,  updateTestItemSize } from '../../store/testSlice';
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 interface GridItem {
@@ -51,27 +51,38 @@ const LayoutGrid: React.FC<GridComponentProps> = ({
   const [layout, setLayout] = useState<GridItem[]>([]);
   const dispatch = useDispatch();
   const gridItems = useSelector((state:any) => state.grid.gridSlice);
-  console.log("gridItems",gridItems)
- 
+ // console.log("gridItems",gridItems)
+
+  const testItems = useSelector((state:any) => state.test.globalItems);
+  //console.log("TestItems",testItems)
+ const globalItems = useSelector((state:any) => state.global);
+ console.log("globalItems",globalItems)
+
   const templateHeight = height / 150;
-  const templateWidth = Math.floor(width / 101);
+  const templateWidth = Math.floor( width / 101);
 console.log(templateHeight, templateWidth);
 
   useLayoutEffect(() => {
     const newLayout: GridItem[] = [];
-    for (let y = 0; y < rows; y++) {
-      for (let x = 0; x < columns; x++) {
-        newLayout.push({
-          i: `${y}-${x}`,
-          x: x * (templateWidth / columns),
-          y: x,
-          w: templateWidth / columns,
-          h: templateHeight / rows
-        });
-      }
-    }
+
+    console.log("testItem....",testItems)
+    testItems.grids.forEach(elem => {
+      console.log("elem",elem)
+      newLayout.push({
+        i: `${elem.y}-${elem.x}`,
+        x: elem.x,
+        y: elem.y,
+        w: elem.width,
+        h: elem.height 
+      });
+
+    });
+    console.log("...",newLayout)
+
+
+    
     setLayout(newLayout);
-  }, [rows, columns]);
+  }, [height, width]);
 
   const getShadowStyle = (): string => {
     switch (selectedShadow) {
