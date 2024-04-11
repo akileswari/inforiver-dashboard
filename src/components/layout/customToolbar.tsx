@@ -5,7 +5,7 @@ import { getIcon } from "../constant/Helper";
 import { useGrid } from ".././context/Context.js";
 import { useDispatch, useSelector } from "react-redux";
 import { undo, redo, setGridItems } from "../../store/gridSlice.js";
-
+import themeIndicator, { setThemeType } from "../../store/themeIndicator";
 const CustomToolbar = () => {
   const { theme, setTheme } = useTheme();
   const dispatch = useDispatch();
@@ -31,6 +31,8 @@ const CustomToolbar = () => {
   const handleThemeChange = (event) => {
     const selectedTheme = event.target.value;
     setTheme(selectedTheme);
+    // setThemeType(selectedTheme);
+    dispatch(setThemeType(selectedTheme));
   };
 
   const handleSwapClick = () => {

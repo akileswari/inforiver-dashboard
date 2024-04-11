@@ -3,9 +3,10 @@ import { WidthProvider, Responsive } from "react-grid-layout";
 import "../assets/css/layoutGrid.css";
 import "react-grid-layout/css/styles.css";
 import { useGrid } from "../context/Context";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setGridItems } from "../../store/gridSlice";
-import TemplatePreview from "../../templateBuilder/TemplatePreview";
+
+import ChartGrid from "../ChartGrid";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -113,10 +114,14 @@ const LayoutGrid: React.FC<GridComponentProps> = ({
     dispatch(setGridItems(selectedGridItems));
     console.log(selectedGridItems);
   }, [dispatch, selectedGridItems]);
+  console.log(layout);
+  const selectedGrid = useSelector((state: any) => state.selectedGrid);
+  const chartRecord = selectedGrid.chartRecords;
+  const gridIds = Object.keys(chartRecord);
 
-  const handleResizeStop = (itemId, width, height) => {
-    dispatch(updateGridItemSize({ itemId, width, height }));
-  };
+  console.log(gridIds, "++");
+
+  console.log(selectedGrid);
 
   return (
     <ResponsiveGridLayout
@@ -126,7 +131,7 @@ const LayoutGrid: React.FC<GridComponentProps> = ({
       containerPadding={[containerPadding, containerPadding]}
       onResizeStop={(layout, oldItem, newItem) => {
         const { w, h } = newItem;
-        dispatch(setGridItemsSize({ itemId: newItem.i, width: w, height: h }));
+        dispatch(setGridItems({ itemId: newItem.i, width: w, height: h }));
         console.log(height, width);
       }}
       isDraggable={false}
@@ -146,11 +151,13 @@ const LayoutGrid: React.FC<GridComponentProps> = ({
             boxShadow: shadow
               ? `${fixedBoxShadow} ${shadowColor}`
               : getShadowStyle(),
-            background: selectedGridItems.includes(item.i)
-              ? "#e6e6e6"
-              : "transparent",
+            background: selectedGridItems.includes(item.i) ? "#e6e6e6" : "",
           }}
-        ></div>
+        >
+          {gridIds.includes(item.i) ? (
+            <ChartGrid componentId={chartRecord[item.i].activeChart} />
+          ) : null}
+        </div>
       ))}
     </ResponsiveGridLayout>
   );

@@ -30,7 +30,7 @@ const gridItemsReducer = createSlice({
       state.selectedGridItem = action.payload;
     },
     setChart: (state, action) => {
-      state.chartRecords[action.payload.key] = action.payload.activeChart;
+      state.chartRecords = { ...state.chartRecords, ...action.payload };
     },
     // setThemeType('light');
   },

@@ -9,9 +9,9 @@
   height: 100%;
   width: 100%;
   margin: 0 auto;
-
   max-width: 100%;
   max-height: 100%;
+  color-scheme: none;
   /* text-align: center; */
 }
 
@@ -104,6 +104,6 @@ body {
 }
 
 .template-preview {
-  overflow-y: scroll;
+  overflow: scroll;
   border: 1px solid #dddddd;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import CustomToolbar from "../components/layout/CustomToolBar";
+import CustomToolbar from "../components/layout/customToolbar";
 interface TemplateToolbarProps {
   selectedGridItems: string[];
   swapGridItems: () => void;

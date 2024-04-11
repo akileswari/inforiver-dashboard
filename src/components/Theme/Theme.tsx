@@ -13,6 +13,7 @@ export const useTheme = (): {
 
   const setTheme = (themeKey: ThemeKey) => {
     setCurrentTheme(themeKey);
+    console.log(themeKey, "==");
   };
 
   const getTheme = (theme: ThemeKey): Theme => {
