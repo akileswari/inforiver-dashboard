@@ -3,9 +3,9 @@ import { SketchPicker } from 'react-color';
 import { useSelector, useDispatch } from 'react-redux';
 import { getIcon } from "../constant/Helper";
 import '../assets/css/toolbar.css';
-import { setColumns, setRows, setSpacing, setMargin, setCornerRadius, setStroke, setShadow, setStrokeColor, setShadowColor, setSelectedShadow, undo, redo } from "../../store/ToolbarSlice";
+import { setColumns, setRows, setSpacing, setMargin, setCornerRadius, setStroke, setShadow, setStrokeColor, setShadowColor, setSelectedShadow } from "../../store/ToolbarSlice";
 import { ELayouts } from "../../MainComponent";
-import { setTestItems, updateTestItemSize } from '../../store/testSlice';
+
 
 const Toolbar = (
 
@@ -34,39 +34,39 @@ const Toolbar = (
   const [showColorPicker1, setShowColorPicker1] = useState(false);
   const [showColorPicker2, setShowColorPicker2] = useState(false);
 
-  const testItems = useSelector((state: any) => state.test.globalItems);
+  //const testItems = useSelector((state: any) => state.test.globalItems);
 
-  const [inputValues, setInputValues] = useState({
-    row: testItems.rows,
-    column: testItems.columns
-  });
+  // const [inputValues, setInputValues] = useState({
+  //   row: testItems.rows,
+  //   column: testItems.columns
+  // });
 
 
-  const handleInputChange = (event) => {
-    const { id, value } = event.target;
-    setInputValues(prevState => ({
-      ...prevState,
-      [id]: value
-    }));
+  // const handleInputChange = (event) => {
+  //   const { id, value } = event.target;
+  //   setInputValues(prevState => ({
+  //     ...prevState,
+  //     [id]: value
+  //   }));
 
 
     
-    const globalItem = {
+  //   const globalItem = {
 
-      columns: inputValues.column,
-      rows: inputValues.row,
-      grids: {
-        i: 0,
-        x: 0,
-        y: 0,
-        width: 0,
-        height: 0,
+  //     columns: inputValues.column,
+  //     rows: inputValues.row,
+  //     grids: {
+  //       i: 0,
+  //       x: 0,
+  //       y: 0,
+  //       width: 0,
+  //       height: 0,
 
-      }
-    }
-    console.log("global", globalItem);
-    setTestItems(globalItem)
-  };
+  //     }
+  //   }
+  //   console.log("global", globalItem);
+  //   setTestItems(globalItem)
+  // };
 
 
   const handleToggleChange = () => {
@@ -168,9 +168,9 @@ const Toolbar = (
               name="row"
               min={1}
               max={7}
-              value={inputValues.row}
+              value={rows}
 
-              onChange={handleInputChange}
+              onChange={handleInputChange1}
             />
           </div>
         </div>
@@ -183,8 +183,8 @@ const Toolbar = (
               name="col"
               min={1}
               max={8}
-              value={inputValues.column}
-              onChange={handleInputChange}
+              value={columns}
+              onChange={handleInputChange2}
             />
           </div>
         </div>
