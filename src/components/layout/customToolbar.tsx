@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import "../assets/css/customToolbar.css";
 import { useTheme } from "../Theme/Theme";
 import { getIcon } from "../constant/Helper";
@@ -7,10 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { undo, redo, setGridItems } from "../../store/gridSlice.js";
 import { setThemeType } from "../../store/themeIndicator";
 import { setDeleteChart } from "../../store/selectedGrid.js";
+import { useEffect } from "react";
 const CustomToolbar = () => {
   const { theme, setTheme } = useTheme();
   const dispatch = useDispatch();
-  const { selectedGridItems, swapGridItems } = useGrid();
+  const { selectedGridItems } = useGrid();
   const gridHistory = useSelector((state: any) => state.grid.history);
   const currentHistoryIndex = useSelector(
     (state: any) => state.grid.currentHistoryIndex
@@ -35,7 +35,7 @@ const CustomToolbar = () => {
     }
   };
 
-  const handleThemeChange = (event) => {
+  const handleThemeChange = (event: any) => {
     const selectedTheme = event.target.value;
     setTheme(selectedTheme);
     // setThemeType(selectedTheme);

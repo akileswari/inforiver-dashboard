@@ -14,8 +14,6 @@ import {
   setStrokeColor,
   setShadowColor,
   setSelectedShadow,
-  undo,
-  redo,
 } from "../../store/ToolbarSlice";
 import { ELayouts } from "../../MainComponent";
 
@@ -39,6 +37,37 @@ const Toolbar = ({
   );
   const [showColorPicker1, setShowColorPicker1] = useState(false);
   const [showColorPicker2, setShowColorPicker2] = useState(false);
+
+  //const testItems = useSelector((state: any) => state.test.globalItems);
+
+  // const [inputValues, setInputValues] = useState({
+  //   row: testItems.rows,
+  //   column: testItems.columns
+  // });
+
+  // const handleInputChange = (event) => {
+  //   const { id, value } = event.target;
+  //   setInputValues(prevState => ({
+  //     ...prevState,
+  //     [id]: value
+  //   }));
+
+  //   const globalItem = {
+
+  //     columns: inputValues.column,
+  //     rows: inputValues.row,
+  //     grids: {
+  //       i: 0,
+  //       x: 0,
+  //       y: 0,
+  //       width: 0,
+  //       height: 0,
+
+  //     }
+  //   }
+  //   console.log("global", globalItem);
+  //   setTestItems(globalItem)
+  // };
 
   const handleToggleChange = () => {
     dispatch(setShadow(!shadow));
@@ -94,6 +123,8 @@ const Toolbar = ({
     setShowColorPicker2(!showColorPicker2);
   };
 
+  const handleTestChange = () => {};
+
   const colorPickerRef1 = useRef(null);
   const colorPickerRef2 = useRef(null);
 
@@ -119,6 +150,8 @@ const Toolbar = ({
     };
   }, []);
 
+  if (showSubPanelElements !== ELayouts.LAYOUT || showSubPanelElements === null)
+    return null;
   return (
     <div className="toolbar-container">
       <div className="gridContainer">

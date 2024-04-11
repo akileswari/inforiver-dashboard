@@ -4,9 +4,12 @@ import "../assets/css/layoutGrid.css";
 import "react-grid-layout/css/styles.css";
 import { useGrid } from "../context/Context";
 import { useDispatch, useSelector } from "react-redux";
-import { setGridItems } from "../../store/gridSlice";
+import {
+  setGridItems,
+  updateGridItemSize,
+  updateGridItems,
+} from "../../store/gridSlice";
 import { setActiveGrid } from "../../store/selectedGrid";
-
 import ChartGrid from "../ChartGrid";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
@@ -52,29 +55,50 @@ const LayoutGrid: React.FC<GridComponentProps> = ({
 }) => {
   const { selectedGridItems, setSelectedGridItems } = useGrid();
   const [layout, setLayout] = useState<GridItem[]>([]);
+  const [gridItemSizes, setGridItemSizes] = useState<{
+    [key: string]: { width: number; height: number };
+  }>({});
   const dispatch = useDispatch();
-  const gridItems = useSelector((state: any) => state.grid.gridSlice);
-  console.log("gridItems", gridItems);
 
+  const gridItems = useSelector((state: any) => state.grid.gridSlice);
+  console.log("allgrid", gridItems);
   const templateHeight = height / 150;
-  const templateWidth = Math.round(width / 117);
-  console.log(templateHeight, templateWidth);
+  const templateWidth = Math.floor(width / 101);
 
   useLayoutEffect(() => {
     const newLayout: GridItem[] = [];
+    const newGridItemSizes: {
+      [key: string]: { width: number; height: number };
+    } = {};
+    const pixelHeight = Math.round((templateHeight / rows) * 150);
+    const pixelWidth = Math.round((templateWidth / columns) * 101);
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < columns; x++) {
+        const gridItemId = `${y}-${x}`;
         newLayout.push({
-          i: `${y}-${x}`,
+          i: gridItemId,
           x: x * (templateWidth / columns),
-          y: x,
+          y: y * (templateHeight / rows),
           w: templateWidth / columns,
           h: templateHeight / rows,
         });
+
+        const existingSize = gridItemSizes[gridItemId];
+        newGridItemSizes[gridItemId] = existingSize
+          ? existingSize
+          : { width: pixelWidth, height: pixelHeight };
+
+        console.log("Pixels", pixelHeight, pixelWidth);
       }
     }
+
     setLayout(newLayout);
-  }, [rows, columns]);
+    dispatch(setGridItems(newLayout));
+    newLayout.forEach((item: GridItem) => {
+      console.log("Grid item width:", item.w);
+      console.log("Grid item height:", item.h);
+    });
+  }, [rows, columns, height, width]);
 
   const getShadowStyle = (): string => {
     switch (selectedShadow) {
@@ -122,8 +146,22 @@ const LayoutGrid: React.FC<GridComponentProps> = ({
   const gridIds = Object.keys(chartRecord);
 
   console.log(gridIds, "++");
+  useEffect(() => {
+    dispatch(updateGridItems(gridItems));
+    console.log("rowcolupdate", gridItems);
+  }, [dispatch, gridItems, rows, columns]);
 
   console.log(selectedGrid);
+
+  const handleResizeStop = (
+    itemId: string,
+    width: number,
+    height: number
+  ): void => {
+    dispatch(updateGridItemSize({ itemId, width, height }));
+  };
+
+  console.log("resize", updateGridItemSize);
 
   return (
     <ResponsiveGridLayout
