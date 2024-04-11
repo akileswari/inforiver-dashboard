@@ -13,11 +13,13 @@ interface IChartRecords {
 
 interface ISelectedGrid {
   selectedGridItem: string[];
+  activeGrid: string;
   chartRecords: IChartRecords;
 }
 //grid settings we have to store
 const initialState: ISelectedGrid = {
   selectedGridItem: [],
+  activeGrid: "",
   chartRecords: {},
 };
 
@@ -29,8 +31,14 @@ const gridItemsReducer = createSlice({
     setGridItem: (state, action) => {
       state.selectedGridItem = action.payload;
     },
+    setActiveGrid: (state, action) => {
+      state.activeGrid = action.payload;
+    },
     setChart: (state, action) => {
       state.chartRecords = { ...state.chartRecords, ...action.payload };
+    },
+    setDeleteChart: (state, action) => {
+      state.chartRecords = { ...action.payload };
     },
     // setThemeType('light');
   },
@@ -38,5 +46,6 @@ const gridItemsReducer = createSlice({
 
 const selectedGridStore = gridItemsReducer;
 
-export const { setGridItem, setChart } = selectedGridStore.actions;
+export const { setGridItem, setChart, setActiveGrid, setDeleteChart } =
+  selectedGridStore.actions;
 export default selectedGridStore.reducer;

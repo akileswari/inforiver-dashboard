@@ -5,7 +5,8 @@ import { getIcon } from "../constant/Helper";
 import { useGrid } from ".././context/Context.js";
 import { useDispatch, useSelector } from "react-redux";
 import { undo, redo, setGridItems } from "../../store/gridSlice.js";
-import themeIndicator, { setThemeType } from "../../store/themeIndicator";
+import { setThemeType } from "../../store/themeIndicator";
+import { setDeleteChart } from "../../store/selectedGrid.js";
 const CustomToolbar = () => {
   const { theme, setTheme } = useTheme();
   const dispatch = useDispatch();
@@ -14,7 +15,13 @@ const CustomToolbar = () => {
   const currentHistoryIndex = useSelector(
     (state: any) => state.grid.currentHistoryIndex
   );
-  console.log(currentHistoryIndex, "grid history");
+  // const currentActiveGrid = useSelector(
+  //   (state: any) => state.selectedGrid.activeGrid
+  // );
+  const gridItem = useSelector((state: any) => state.selectedGrid);
+  const { activeGrid, chartRecords } = gridItem;
+
+  // console.log(currentHistoryIndex, "grid history");
 
   const handleUndoClick = () => {
     if (currentHistoryIndex > 0) {
@@ -69,7 +76,21 @@ const CustomToolbar = () => {
         </button>
       </div>
 
-      <div className="custom-item">
+      <div
+        className="custom-item"
+        onClick={() => {
+          const test = Object.keys(chartRecords);
+          console.log(test, "test");
+
+          const updateChartRecords: any = {};
+          test.forEach((t) => {
+            if (t !== activeGrid) {
+              updateChartRecords[t] = chartRecords[t];
+            }
+          });
+          dispatch(setDeleteChart(updateChartRecords));
+        }}
+      >
         <i className={getIcon("light-delete")}></i>
         <div className="custom-label">Delete</div>
       </div>

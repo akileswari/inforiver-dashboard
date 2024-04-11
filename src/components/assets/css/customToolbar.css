@@ -19,6 +19,7 @@
   gap: 6px;
   align-self: stretch;
   border-radius: 4px;
+  cursor: pointer;
 }
 .line {
   width: var(--Size-20, 1px);

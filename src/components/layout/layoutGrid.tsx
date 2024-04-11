@@ -5,6 +5,7 @@ import "react-grid-layout/css/styles.css";
 import { useGrid } from "../context/Context";
 import { useDispatch, useSelector } from "react-redux";
 import { setGridItems } from "../../store/gridSlice";
+import { setActiveGrid } from "../../store/selectedGrid";
 
 import ChartGrid from "../ChartGrid";
 
@@ -108,6 +109,7 @@ const LayoutGrid: React.FC<GridComponentProps> = ({
         return [...prevSelected, itemId];
       }
     });
+    dispatch(setActiveGrid(itemId));
   };
 
   useEffect(() => {

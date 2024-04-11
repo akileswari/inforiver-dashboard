@@ -1,4 +1,3 @@
-import React from "react";
 import "../assets/css/PageTitle.css";
 
 const Title = ({ title }) => {
