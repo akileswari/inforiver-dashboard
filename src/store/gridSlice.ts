@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 interface GridItem {
   i: string;
   w: number;
@@ -8,6 +9,7 @@ interface GridItem {
   pixelWidth?: number;
   pixelHeight?: number;
 }
+
 interface GridState {
   gridItems: GridItem[];
   history: GridItem[][];
@@ -15,6 +17,7 @@ interface GridState {
   rows: number;
   columns: number;
 }
+
 const initialState: GridState = {
   gridItems: [],
   history: [],
@@ -28,7 +31,6 @@ const gridSlice = createSlice({
   initialState,
   reducers: {
     setGridItems: (state, action: PayloadAction<GridItem[]>) => {
-      //const { rows, columns } = state;
       state.gridItems = action.payload.map((item) => ({
         ...item,
         width: item.w,
@@ -68,12 +70,21 @@ const gridSlice = createSlice({
       if (index !== -1) {
         state.gridItems[index].w = width;
         state.gridItems[index].h = height;
-        const snapshot: GridItem[] = state.gridItems.map((item) => ({
-          ...item,
-        }));
-        state.history.push(snapshot);
+
+        const pixelWidth = Math.floor(width * 101);
+        const pixelHeight = Math.floor(height * 150);
+
+        state.gridItems[index].pixelWidth = pixelWidth;
+        state.gridItems[index].pixelHeight = pixelHeight;
+
+        const resizedItem: GridItem = {
+          ...state.gridItems[index],
+          pixelWidth,
+          pixelHeight,
+        };
+        state.history.push([resizedItem]);
         state.currentHistoryIndex = state.history.length - 1;
-        console.log("resizehistory", history);
+        console.log("Resized grid item:", resizedItem);
       } else {
         console.error("Grid item not found:", itemId);
       }
@@ -82,16 +93,23 @@ const gridSlice = createSlice({
       if (state.currentHistoryIndex > 0) {
         state.currentHistoryIndex -= 1;
         state.gridItems = [...state.history[state.currentHistoryIndex]];
+        console.log("Undo: Reverted to previous state");
+      } else {
+        console.log("Undo: Cannot go back");
       }
     },
     redo: (state) => {
       if (state.currentHistoryIndex < state.history.length - 1) {
         state.currentHistoryIndex += 1;
         state.gridItems = [...state.history[state.currentHistoryIndex]];
+        console.log("Redo: Restored to next state");
+      } else {
+        console.log("Redo: Cannot go forward");
       }
     },
   },
 });
+
 export const { setGridItems, updateGridItems, updateGridItemSize, undo, redo } =
   gridSlice.actions;
 export default gridSlice.reducer;

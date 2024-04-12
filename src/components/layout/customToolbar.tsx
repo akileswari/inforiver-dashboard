@@ -10,8 +10,8 @@ import { useEffect } from "react";
 const CustomToolbar = () => {
   const { theme, setTheme } = useTheme();
   const dispatch = useDispatch();
-  const { selectedGridItems } = useGrid();
-  const gridHistory = useSelector((state: any) => state.grid.history);
+  const { selectedGridItems, swapGridItems } = useGrid();
+  // const gridHistory = useSelector((state: any) => state.grid.history);
   const currentHistoryIndex = useSelector(
     (state: any) => state.grid.currentHistoryIndex
   );
@@ -24,15 +24,11 @@ const CustomToolbar = () => {
   // console.log(currentHistoryIndex, "grid history");
 
   const handleUndoClick = () => {
-    if (currentHistoryIndex > 0) {
-      dispatch(undo());
-    }
+    dispatch(undo());
   };
 
   const handleRedoClick = () => {
-    if (currentHistoryIndex < gridHistory.length - 1) {
-      dispatch(redo());
-    }
+    dispatch(redo());
   };
 
   const handleThemeChange = (event: any) => {
