@@ -10,25 +10,25 @@ const CustomToolbar = () => {
   const { theme, setTheme } = useTheme(); 
   const dispatch = useDispatch();
   const { selectedGridItems, swapGridItems } = useGrid(); 
-  const gridHistory = useSelector((state:any) => state.grid.history);
+  
   const currentHistoryIndex = useSelector((state:any) => state.grid.currentHistoryIndex);
   console.log(currentHistoryIndex, "grid history")
    
   
 
   const handleUndoClick = () => {
-    if (currentHistoryIndex > 0) {
+   
       dispatch(undo());
-    }
+    
   };
 
   const handleRedoClick = () => {
-    if (currentHistoryIndex < gridHistory.length - 1) {
+   
       dispatch(redo());
-    }
+    
   };
 
-  const handleThemeChange = (event) => {
+  const handleThemeChange = (event:any) => {
     const selectedTheme = event.target.value; 
     setTheme(selectedTheme); 
   };
