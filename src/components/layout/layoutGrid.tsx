@@ -4,12 +4,9 @@ import "../assets/css/layoutGrid.css";
 import "react-grid-layout/css/styles.css";
 import { useGrid } from "../context/Context";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setGridItems,
-  updateGridItemSize,
-  updateGridItems,
-} from "../../store/gridSlice";
-import { setActiveGrid } from "../../store/selectedGrid";
+import { setGridItem } from "../../store/gridItems";
+import { updateGridItemSize, updateGridItems } from "../../store/gridSlice";
+import { setActiveGrid } from "../../store/gridItems";
 import ChartGrid from "../ChartGrid";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
@@ -55,12 +52,12 @@ const LayoutGrid: React.FC<GridComponentProps> = ({
 }) => {
   const { selectedGridItems, setSelectedGridItems } = useGrid();
   const [layout, setLayout] = useState<GridItem[]>([]);
-  const [gridItemSizes, setGridItemSizes] = useState<{
+  const [gridItemSizes, setGridItemizes] = useState<{
     [key: string]: { width: number; height: number };
   }>({});
   const dispatch = useDispatch();
 
-  const gridItems = useSelector((state: any) => state.grid.gridSlice);
+  const gridItems = useSelector((state: any) => state.selectedGrid);
   console.log("allgrid", gridItems);
   const templateHeight = height / 150;
   const templateWidth = Math.floor(width / 101);
@@ -93,12 +90,12 @@ const LayoutGrid: React.FC<GridComponentProps> = ({
     }
 
     setLayout(newLayout);
-    dispatch(setGridItems(newLayout));
-    newLayout.forEach((item: GridItem) => {
-      console.log("Grid item width:", item.w);
-      console.log("Grid item height:", item.h);
-    });
-  }, [rows, columns, height, width]);
+    dispatch(setGridItem(newLayout));
+    // newLayout.forEach((item: GridItem) => {
+    //   console.log("Grid item width:", item.w);
+    //   console.log("Grid item height:", item.h);
+    // });
+  }, [rows, columns, height]);
 
   const getShadowStyle = (): string => {
     switch (selectedShadow) {
@@ -136,10 +133,10 @@ const LayoutGrid: React.FC<GridComponentProps> = ({
     dispatch(setActiveGrid(itemId));
   };
 
-  useEffect(() => {
-    dispatch(setGridItems(selectedGridItems));
-    console.log(selectedGridItems);
-  }, [dispatch, selectedGridItems]);
+  // useEffect(() => {
+  //   dispatch(setGridItem(selectedGridItems));
+  //   console.log(selectedGridItems);
+  // }, [dispatch, selectedGridItems]);
   console.log(layout);
   const selectedGrid = useSelector((state: any) => state.selectedGrid);
   const chartRecord = selectedGrid.chartRecords;
@@ -171,7 +168,7 @@ const LayoutGrid: React.FC<GridComponentProps> = ({
       containerPadding={[containerPadding, containerPadding]}
       onResizeStop={(layout, oldItem, newItem) => {
         const { w, h } = newItem;
-        dispatch(setGridItems({ itemId: newItem.i, width: w, height: h }));
+        dispatch(setGridItem({ itemId: newItem.i, width: w, height: h }));
         console.log(height, width);
       }}
       isDraggable={false}

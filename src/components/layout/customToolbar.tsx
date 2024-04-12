@@ -3,18 +3,15 @@ import { useTheme } from "../Theme/Theme";
 import { getIcon } from "../constant/Helper";
 import { useGrid } from ".././context/Context.js";
 import { useDispatch, useSelector } from "react-redux";
-import { undo, redo, setGridItems } from "../../store/gridSlice.js";
+import { undo, redo } from "../../store/gridSlice.js";
 import { setThemeType } from "../../store/themeIndicator";
-import { setDeleteChart } from "../../store/selectedGrid.js";
+import { setDeleteChart } from "../../store/gridItems.js";
 import { useEffect } from "react";
 const CustomToolbar = () => {
   const { theme, setTheme } = useTheme();
   const dispatch = useDispatch();
-  const { selectedGridItems, swapGridItems } = useGrid();
+  const { selectedGridItems } = useGrid();
   // const gridHistory = useSelector((state: any) => state.grid.history);
-  const currentHistoryIndex = useSelector(
-    (state: any) => state.grid.currentHistoryIndex
-  );
   // const currentActiveGrid = useSelector(
   //   (state: any) => state.selectedGrid.activeGrid
   // );
@@ -75,11 +72,11 @@ const CustomToolbar = () => {
       <div
         className="custom-item"
         onClick={() => {
-          const test = Object.keys(chartRecords);
-          console.log(test, "test");
+          const chartRecordsKey = Object.keys(chartRecords);
+          console.log(chartRecordsKey, "chartRecordsKey");
 
           const updateChartRecords: any = {};
-          test.forEach((t) => {
+          chartRecordsKey.forEach((t) => {
             if (t !== activeGrid) {
               updateChartRecords[t] = chartRecords[t];
             }

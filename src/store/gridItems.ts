@@ -1,16 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 //integrate griditem
 // 1.grid id , height and width i chart records
 //2. active key
 interface IChartRecords {
   [key: string]: {
     chartType: string;
-    height: number;
-    width: number;
+    height?: number;
+    width?: number;
     gridId: string;
+    pixelWidth?: any;
+    pixelHeight?: any;
+    w: number;
+    h: number;
   };
 }
-
+//grid-items //grid-settings //undo-redo
 interface ISelectedGrid {
   selectedGridItem: string[];
   activeGrid: string;
@@ -29,8 +33,19 @@ const gridItemsReducer = createSlice({
 
   reducers: {
     setGridItem: (state, action) => {
-      state.selectedGridItem = action.payload;
+      const updatedGrid = [];
+      action.payload.forEach((item) => {
+        updatedGrid.push({
+          id: item.i,
+          width: item.w,
+          height: item.h,
+          pixelWidth: Math.floor(item.w * 101),
+          pixelHeight: Math.floor(item.h * 150),
+        });
+      });
+      state.selectedGridItem = updatedGrid;
     },
+
     setActiveGrid: (state, action) => {
       state.activeGrid = action.payload;
     },

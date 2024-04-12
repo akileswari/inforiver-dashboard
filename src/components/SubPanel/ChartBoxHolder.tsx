@@ -4,7 +4,7 @@ import { getChartIcon } from "../constant/Helper";
 import useChartStore from "../../store/Zustand";
 import { useGrid } from "../context/Context";
 import { useDispatch, useSelector } from "react-redux";
-import { setGridItem, setChart } from "../../store/selectedGrid";
+import { setGridItem, setChart } from "../../store/gridItems";
 
 const ChartIcon = ({ className }: { className: string }) => {
   return (
@@ -56,7 +56,7 @@ const ChartBoxHolder = ({ title, chartIcons, logo }: IChartBoxHolder) => {
   console.log(setToggledChartType);
 
   const setActiveChart = useChartStore((state: any) => state.setActiveChart1);
-  const activeChart = useChartStore((state: any) => state.activeChart);
+  // const activeChart = useChartStore((state: any) => state.activeChart);
 
   const dispatch = useDispatch();
 
@@ -95,7 +95,7 @@ const ChartBoxHolder = ({ title, chartIcons, logo }: IChartBoxHolder) => {
                       };
                     }
                   });
-                  console.log(chartRecords, "//");
+                  // console.log(chartRecords, "//");
 
                   dispatch(setChart(chartRecords));
                 }

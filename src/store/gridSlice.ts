@@ -6,8 +6,6 @@ interface GridItem {
   h: number;
   width?: number;
   height?: number;
-  pixelWidth?: number;
-  pixelHeight?: number;
 }
 
 interface GridState {
@@ -30,16 +28,15 @@ const gridSlice = createSlice({
   name: "grid",
   initialState,
   reducers: {
-    setGridItems: (state, action: PayloadAction<GridItem[]>) => {
-      state.gridItems = action.payload.map((item) => ({
-        ...item,
-        width: item.w,
-        height: item.h,
-        pixelWidth: Math.floor(item.w * 101),
-        pixelHeight: Math.floor(item.h * 150),
-      }));
-      console.log("Updated grid items:", state.gridItems);
-    },
+    // setGridItems: (state, action: PayloadAction<GridItem[]>) => {
+    //   state.gridItems = action.payload.map((item) => ({
+    //     ...item,
+    //     width: item.w,
+    //     height: item.h,
+    //     pixelWidth: Math.floor(item.w * 101),
+    //     pixelHeight: Math.floor(item.h * 150),
+    //   }));
+    // },
     updateGridItems: (state, action: PayloadAction<GridItem[]>) => {
       if (Array.isArray(action.payload)) {
         state.gridItems = action.payload.map((item) => ({
@@ -110,6 +107,6 @@ const gridSlice = createSlice({
   },
 });
 
-export const { setGridItems, updateGridItems, updateGridItemSize, undo, redo } =
+export const { updateGridItems, updateGridItemSize, undo, redo } =
   gridSlice.actions;
 export default gridSlice.reducer;

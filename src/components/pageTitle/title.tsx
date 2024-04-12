@@ -1,6 +1,6 @@
 import "../assets/css/PageTitle.css";
 
-const Title = ({ title }) => {
+const Title = ({ title }: any) => {
   return (
     <div className="container">
       <div className="left-section">
@@ -11,7 +11,14 @@ const Title = ({ title }) => {
       <div className="right-section">
         <div className="button-container">
           <div className="reset-button">
-            <div className="button-text">Reset</div>
+            <div
+              className="button-text"
+              onClick={() => {
+                window.location.reload();
+              }}
+            >
+              Reset
+            </div>
           </div>
           <div className="export-button">
             <div className="button-text">Export Json</div>
