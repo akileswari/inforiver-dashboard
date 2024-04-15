@@ -68,31 +68,31 @@ const toolbarSlice = createSlice({
     setSelectedShadow: (state, action: PayloadAction<string>) => {
       state.selectedShadow = action.payload;
     },
-    saveState: (state) => {
-      state.pastStates.push({ ...state });
-    },
-    undo: (state) => {
-      if (state.pastStates.length > 0) {
-        const lastState = state.pastStates.pop();
-        if (lastState) {
-          state.futureStates.push({ ...state });
-          Object.assign(state, lastState);
-          state.undoCount++;
-          state.redoCount--;
-        }
-      }
-    },
-    redo: (state) => {
-      if (state.futureStates.length > 0) {
-        const nextState = state.futureStates.pop();
-        if (nextState) {
-          state.pastStates.push({ ...state });
-          Object.assign(state, nextState);
-          state.undoCount--;
-          state.redoCount++;
-        }
-      }
-    },
+    // saveState: (state) => {
+    //   state.pastStates.push({ ...state });
+    // },
+    // undo: (state) => {
+    //   if (state.pastStates.length > 0) {
+    //     const lastState = state.pastStates.pop();
+    //     if (lastState) {
+    //       state.futureStates.push({ ...state });
+    //       Object.assign(state, lastState);
+    //       state.undoCount++;
+    //       state.redoCount--;
+    //     }
+    //   }
+    // },
+    // redo: (state) => {
+    //   if (state.futureStates.length > 0) {
+    //     const nextState = state.futureStates.pop();
+    //     if (nextState) {
+    //       state.pastStates.push({ ...state });
+    //       Object.assign(state, nextState);
+    //       state.undoCount--;
+    //       state.redoCount++;
+    //     }
+    //   }
+    // },
   },
 });
 
@@ -107,9 +107,9 @@ export const {
   setStrokeColor,
   setShadowColor,
   setSelectedShadow,
-  saveState,
-  undo,
-  redo,
+  // saveState,
+  // undo,
+  // redo,
 } = toolbarSlice.actions;
 
 export default toolbarSlice.reducer;

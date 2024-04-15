@@ -1,7 +1,11 @@
 import { getChartIcon } from "../constant/Helper";
 // import { useSelector, useDispatch } from "react-redux";
 // import { setToggledChartType, setActiveChart } from "../../store/chartSlicer";
-import useChartStore from "../../store/zustand/Zustand";
+import useChartStore from "../../store/Zustand";
+import { useGrid } from "../context/Context";
+import { useDispatch, useSelector } from "react-redux";
+import { setGridItem, setChart } from "../../store/gridItems";
+
 const ChartIcon = ({ className }: { className: string }) => {
   return (
     <div className="chart-icon-box">
@@ -25,7 +29,7 @@ const ChartTitle = ({
   return (
     <div className="chart-type-title" onClick={toggleCharts}>
       <i className={`${logo} chart-title-logo`}></i>
-      <p className="charts-text">{title}</p>
+      <span className="charts-text">{title}</span>
       <i className={`template-builder light-dropdown-right ${dropDown}`}></i>
     </div>
   );
@@ -44,17 +48,23 @@ interface IChartBoxHolder {
 const ChartBoxHolder = ({ title, chartIcons, logo }: IChartBoxHolder) => {
   const toggle = useChartStore((state: any) => state.chartToggled === title);
 
+  const { selectedGridItems } = useGrid();
+
   const setToggledChartType = useChartStore(
     (state: any) => state.setToggledChartType1
   );
+  console.log(setToggledChartType);
 
   const setActiveChart = useChartStore((state: any) => state.setActiveChart1);
+  // const activeChart = useChartStore((state: any) => state.activeChart);
+
+  const dispatch = useDispatch();
 
   const toggleCharts = () => {
-    // console.log(title, "title");
     setToggledChartType(title);
   };
 
+  const selectedGrid = useSelector((state: any) => state.selectedGrid);
   return (
     <div className="column-charts">
       <ChartTitle
@@ -70,7 +80,25 @@ const ChartBoxHolder = ({ title, chartIcons, logo }: IChartBoxHolder) => {
               key={index}
               onClick={() => {
                 console.log(chart.id, "chart.id");
-                return setActiveChart(chart.id);
+                setActiveChart(chart.id); // if needed null this.
+                if (selectedGridItems.length > 0) {
+                  const chartRecords = {};
+                  selectedGridItems.forEach((item: string) => {
+                    console.log(item, " SG ==");
+
+                    if (!selectedGrid.chartRecords[item] || item === chart.id) {
+                      chartRecords[item] = { activeChart: chart.id };
+                    } else {
+                      chartRecords[item] = {
+                        ...chartRecords[item],
+                        activeChart: chart.id,
+                      };
+                    }
+                  });
+                  // console.log(chartRecords, "//");
+
+                  dispatch(setChart(chartRecords));
+                }
               }}
             >
               <ChartIcon className={chart.className} />

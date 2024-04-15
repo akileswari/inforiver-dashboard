@@ -111,14 +111,6 @@ const StackedBarChart: React.FC<StackedBarChartProps> = ({
   return (
     <g>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
-        <text
-          x={innerWidth / 2}
-          y={-margin.top / 2}
-          fontSize="18px"
-          textAnchor="middle"
-        >
-          Stacked Chart
-        </text>
         <XAxis
           innerHeight={innerHeight}
           xScale={xScale}
