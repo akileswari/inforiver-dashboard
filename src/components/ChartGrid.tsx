@@ -47,14 +47,17 @@ const ChartGrid = (props: IChartGrid) => {
   // );
 
   const structuredData = { ...selectedGrid };
-  const matchedId = structuredData.selectedGridItem
-    .filter((item: any) => item.id === selectedGrid.activeGrid)
-    .map((item: any) => ({
-      pixelHeight: item.pixelHeight,
-      pixelWidth: item.pixelWidth,
-    }));
+  const matchedId = structuredData.selectedGridItem.find(
+    (item: any) => item.id === selectedGrid.activeGrid
+  );
+  const matchedItem = matchedId
+    ? {
+        pixelHeight: matchedId.pixelHeight,
+        pixelWidth: matchedId.pixelWidth,
+      }
+    : null;
 
-  // console.log(matchedId);
+  console.log(matchedItem, "id");
 
   // console.log(selectedGrid);
 
@@ -73,12 +76,17 @@ const ChartGrid = (props: IChartGrid) => {
 
   return (
     <svg
-      height={matchedId.pixelHeight}
-      width={matchedId.pixelWidth}
+      height={matchedItem?.pixelHeight}
+      width={matchedItem?.pixelWidth}
       style={{ backgroundColor: theme.chart.background }}
     >
       {SelectedComp && (
-        <SelectedComp data={finalData} height={200} width={200} theme={theme} />
+        <SelectedComp
+          data={finalData}
+          height={matchedItem?.pixelHeight}
+          width={matchedItem?.pixelWidth}
+          theme={theme}
+        />
       )}
     </svg>
   );

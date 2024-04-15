@@ -91,14 +91,6 @@ const ClusteredBarChart: React.FC<ClusteredBarChartProps> = ({
       style={{ margin: "auto", display: "block" }}
     >
       <g transform={`translate(${margin.left}, ${margin.top})`}>
-        <text
-          x={innerWidth / 2}
-          y={-margin.top / 2}
-          fontSize="18px"
-          textAnchor="middle"
-        >
-          Cluster Chart
-        </text>
         {bars.flat()}
         {yAxisElement}
         {xAxisElement}
